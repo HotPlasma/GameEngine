@@ -69,7 +69,6 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <SourcePath>./src;$(VC_SourcePath);</SourcePath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -81,16 +80,20 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)temp\$(Configuration)\</IntDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;./libraries/SFML-2.4.1/include;./libraries/GLFW/glfw-3.2.1.bin.WIN64/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries/SFML-2.4.1/include;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(SolutionDir)libraries/tinyxml;$(SolutionDir)include;</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./libraries/SFML-2.4.1/lib;./libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries/SFML-2.4.1/lib;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -99,10 +102,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;./libraries/SFML-2.4.1/include;./libraries/GLFW/glfw-3.2.1.bin.WIN64/include;./libraries/tinyxml;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries/SFML-2.4.1/include;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(SolutionDir)libraries/tinyxml;$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>./libraries/SFML-2.4.1/lib;./libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries/SFML-2.4.1/lib;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -113,12 +116,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;./libraries/SFML-2.4.1/include;./libraries/GLFW/glfw-3.2.1.bin.WIN64/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries/SFML-2.4.1/include;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(SolutionDir)libraries/tinyxml;$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>./libraries/SFML-2.4.1/lib;./libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries/SFML-2.4.1/lib;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -129,12 +132,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>./include;./libraries/SFML-2.4.1/include;./libraries/GLFW/glfw-3.2.1.bin.WIN64/include;./libraries/tinyxml;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries/SFML-2.4.1/include;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(SolutionDir)libraries/tinyxml;$(SolutionDir)include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>./libraries/SFML-2.4.1/lib;./libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)libraries/SFML-2.4.1/lib;$(SolutionDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
