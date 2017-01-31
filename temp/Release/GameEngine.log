@@ -1,0 +1,12 @@
+﻿  main.cpp
+src\main.cpp(42): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+src\main.cpp(54): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+src\main.cpp(55): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+src\main.cpp(106): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Generating code
+  23 of 1161 functions ( 2.0%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    16 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  GameEngine.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\GameEngine\GameEngine\bin\Release\GameEngine.exe
+  GameEngine.vcxproj -> C:\Users\egor\Desktop\Projects\Uni Projects\Year 3\Games Programming\GameEngine\GameEngine\bin\Release\GameEngine.pdb (Full PDB)

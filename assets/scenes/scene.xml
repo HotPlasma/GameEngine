@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding = "utf-8"?>
+
+<Scene>
+  <!--List of Objects to be loaded for the room-->
+  <Object>
+    <Name>Deer</Name>
+    <OBJLocation>assets/models/deer.obj</OBJLocation>
+    <TexLocation>assets/textures/deer.bmp</TexLocation>
+    <Translation>50 -15 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>0.3 0.3 0.3</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>0 -5 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>50 -5 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>50 -5 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>0 -5 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Stump</Name>
+    <OBJLocation>assets/models/stump.obj</OBJLocation>
+    <TexLocation>assets/textures/stump.bmp</TexLocation>
+    <Translation>10 -5 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Rock</Name>
+    <OBJLocation> assets/models/Rock.obj</OBJLocation>
+    <TexLocation>assets/textures/Rock.bmp</TexLocation>
+    <Translation>15 -4 25</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>assets/models/skybox.obj</Name>
+    <OBJLocation>assets/models/skybox.obj</OBJLocation>
+    <TexLocation>assets/textures/skybox.bmp</TexLocation>
+    <Translation> 0 0 0</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>FarmHouse</Name>
+    <OBJLocation>assets/models/farmhouse.obj</OBJLocation>
+    <TexLocation>assets/textures/farmhouse.bmp</TexLocation>
+    <Translation>50 -4 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Logs</Name>
+    <OBJLocation>assets/models/logs.obj</OBJLocation>
+    <TexLocation>assets/textures/logs.bmp</TexLocation>
+    <Translation>37 -4 10</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Fence</Name>
+    <OBJLocation>assets/models/fence.obj</OBJLocation>
+    <TexLocation>assets/textures/fence.bmp</TexLocation>
+    <Translation>50 -5 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Tree</Name>
+    <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+    <TexLocation>assets/textures/bark.bmp</TexLocation>
+    <Translation>20 -5 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Tree</Name>
+    <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+    <TexLocation>assets/textures/bark.bmp</TexLocation>
+    <Translation>30 -5 30</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>-40 -10 23</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>40 -10 8</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+
+  <Object>
+    <Name>Battery</Name>
+    <OBJLocation>assets/models/Battery.obj</OBJLocation>
+    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <Translation>0 -10 -60</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>true</Collectable>
+  </Object>
+</Scene>

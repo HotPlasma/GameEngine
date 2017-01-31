@@ -1,0 +1,17 @@
+﻿  World.cpp
+h:\desktop\projects\uni projects\year 3\games programming\gameengine\gameengine\gameengine\src\world.cpp(242): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
+  GLM: perspective function taking degrees as a parameter is deprecated. #define GLM_FORCE_RADIANS before including GLM headers to remove this message.
+  Texture.cpp
+  SceneReader.cpp
+h:\desktop\projects\uni projects\year 3\games programming\gameengine\gameengine\gameengine\src\scenereader.cpp(100): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  ModelReader.cpp
+  Model.cpp
+  main.cpp
+h:\desktop\projects\uni projects\year 3\games programming\gameengine\gameengine\gameengine\src\main.cpp(43): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  gl_core_4_3.cpp
+  Camera.cpp
+  Bitmap.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  GameEngine.vcxproj -> H:\Desktop\Projects\Uni Projects\Year 3\Games Programming\GameEngine\GameEngine\bin\Debug\GameEngine.exe
+  GameEngine.vcxproj -> H:\Desktop\Projects\Uni Projects\Year 3\Games Programming\GameEngine\GameEngine\bin\Debug\GameEngine.pdb (Partial PDB)
