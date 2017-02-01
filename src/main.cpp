@@ -15,6 +15,8 @@ using std::string;
 Scene *scene;
 GLFWwindow *window;
 
+bool g_bWindowFocused = true;
+
 //////////////////////////////////////////////////////////
 ////  Key press callback /////////////////////////////////
 //////////////////////////////////////////////////////////
@@ -23,6 +25,29 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	//if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
 	//	if (scene)
 	//		scene->animate(!(scene->animating()));
+}
+
+//////////////////////////////////////////////////////////
+////  Window focus callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void focus_callback(GLFWwindow *Window, int focused)
+{
+	// If the callback is true
+	if (focused) g_bWindowFocused = true; // Sets global boolean 'focussed' to true
+	// Else the callback is false
+	else g_bWindowFocused = false; // Sets global boolean 'focussed' to false
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse movement callback ////////////////////////////
+//////////////////////////////////////////////////////////
+static void cursor_callback(GLFWwindow *Window, double xPos, double yPos)
+{
+	// If window is focused
+	if (g_bWindowFocused)
+	{
+		scene->GetMousePos(window, sf::Vector2i(xPos, yPos));
+	}
 }
 
 ////////////////////////////////////////////////////////
@@ -34,12 +59,6 @@ void initializeGL() {
 	scene = new World();
 
 	scene->initScene();
-}
-
-// Get mouse position every frame
-static void cursorPositionCallback(GLFWwindow *Window, double xPos, double yPos)
-{
-	scene->GetMousePos(window, sf::Vector2i(xPos, yPos));
 }
 
 void glfwSetWindowPositionCenter(GLFWwindow* window) {
@@ -113,13 +132,16 @@ void glfwSetWindowPositionCenter(GLFWwindow* window) {
 void mainLoop() {
 	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) {
 		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-		scene->update((float)glfwGetTime());
-		scene->render();
+		// If window is focused
+		if (g_bWindowFocused)
+		{
+			scene->update((float)glfwGetTime());
+			scene->render();
+		}
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		// Allows camera view manipulation using mouse
 		glfwSetCursorPos(window, 960, 540);
-		glfwSetCursorPosCallback(window, cursorPositionCallback);
 	}
 }
 
@@ -161,7 +183,11 @@ int main(int argc, char *argv[])
 	}
 	glfwMakeContextCurrent(window);
 	glfwSetWindowPositionCenter(window);
+
+	// Defines callback functions
 	glfwSetKeyCallback(window, key_callback);
+	glfwSetWindowFocusCallback(window, focus_callback);
+	glfwSetCursorPosCallback(window, cursor_callback);
 
 	// Hide mouse position 
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
