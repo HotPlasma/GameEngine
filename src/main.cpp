@@ -15,7 +15,7 @@ using std::string;
 Scene *scene;
 GLFWwindow *window;
 
-bool g_bWindowFocused = true;
+bool g_bWindowFocused; // Stores whether the window is in focus
 
 //////////////////////////////////////////////////////////
 ////  Key press callback /////////////////////////////////
@@ -33,9 +33,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 static void focus_callback(GLFWwindow *Window, int focused)
 {
 	// If the callback is true
-	if (focused) g_bWindowFocused = true; // Sets global boolean 'focussed' to true
+	if (focused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
 	// Else the callback is false
-	else g_bWindowFocused = false; // Sets global boolean 'focussed' to false
+	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
 }
 
 //////////////////////////////////////////////////////////
@@ -51,24 +51,34 @@ static void cursor_callback(GLFWwindow *Window, double xPos, double yPos)
 }
 
 ////////////////////////////////////////////////////////
-//////  Create the scene and initialise ////////////////
+////  Create the scene and initialise //////////////////
 ////////////////////////////////////////////////////////
-void initializeGL() {
+void initializeGL() 
+{
+	// Sets window clear colour
 	gl::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
+	// Gets window width and height
 	int Width, Height;
 	glfwGetWindowSize(window, &Width, &Height);
 
+	// Creates a World scene
 	scene = new World(glm::vec2(Width, Height));
 
+	// Initialises scene
 	scene->initScene();
 }
 
-void glfwSetWindowPositionCenter(GLFWwindow* window) {
-	// Get windows height and width
+////////////////////////////////////////////////////////
+////  Sets the window to center screen /////////////////
+////////////////////////////////////////////////////////
+void glfwSetWindowPositionCenter(GLFWwindow* window) 
+{
+	// Gets window position
 	int WindowX, WindowY;
 	glfwGetWindowPos(window, &WindowX, &WindowY);
 
+	// Gets window width and height
 	int Width, Height;
 	glfwGetWindowSize(window, &Width, &Height);
 
@@ -79,20 +89,18 @@ void glfwSetWindowPositionCenter(GLFWwindow* window) {
 	WindowX += Width;
 	WindowY += Height;
 
-	// Accounts for multiple monitors
-	int CombinedMonitorsLength;
-	GLFWmonitor **MonitorList = glfwGetMonitors(&CombinedMonitorsLength);
+	// Accounting for multiple monitors
+	int numOfMonitors; // Number of monitors
+	GLFWmonitor **MonitorList = glfwGetMonitors(&numOfMonitors); // Sets num of monitors
 
-	if (MonitorList == NULL) {
-		// No monitors detected
-		return;
-	}
+	// If no monitors detected
+	if (MonitorList == NULL) return;
 
 	// Figure out which monitor the window is in
 	GLFWmonitor *WindowOwner = NULL;
 	int WindowOwnerX, WindowOwnerY, WindowOwnerWidth, WindowOwnerHeight;
 
-	for (int i = 0; i < CombinedMonitorsLength; i++) {
+	for (int i = 0; i < numOfMonitors; i++) {
 		// Get the monitor position
 		int MonitorX, MonitorY;
 		glfwGetMonitorPos(MonitorList[i], &MonitorX, &MonitorY);
@@ -130,9 +138,11 @@ void glfwSetWindowPositionCenter(GLFWwindow* window) {
 }
 
 ////////////////////////////////////////////////////////
-/////// Main loop  /////////////////////////////////////
+//// Main loop  ////////////////////////////////////////
 ////////////////////////////////////////////////////////
-void mainLoop() {
+void mainLoop() 
+{
+	// While the window should remain open and escape is not pressed
 	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) 
 	{
 		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
@@ -140,6 +150,7 @@ void mainLoop() {
 		// If window is focused
 		if (g_bWindowFocused)
 		{
+			// Updates and renders the scene
 			scene->update((float)glfwGetTime());
 			scene->render();
 		}
@@ -148,28 +159,25 @@ void mainLoop() {
 		glfwPollEvents();
 
 		// Resets cursor to the center of the window after cursor event
-		if (g_bWindowFocused) glfwSetCursorPos(window, (double)scene->getWindowSize().x*0.5, (double)scene->getWindowSize().y*0.5);
+		if (g_bWindowFocused) glfwSetCursorPos(window, scene->getWindowSize().x*0.5, scene->getWindowSize().y*0.5);
 	}
 }
 
 ///////////////////////////////////////////////////////
-//// resize ///////////////////////////////////////////
+//// Resize scene /////////////////////////////////////
 ///////////////////////////////////////////////////////
-void resizeGL(int w, int h) {
+void resizeGL(int w, int h) 
+{
 	scene->resize(w, h);
 }
 
-
-
 ///////////////////////////////////////////////////////
-///////  Main  ////////////////////////////////////////
+////  Main  ///////////////////////////////////////////
 ///////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
-
-	// Initialize GLFW
+	// Initialises GLFW: If it fails the program exits
 	if (!glfwInit()) exit(EXIT_FAILURE);
-
 
 	// Select OpenGL 4.3 with a forward compatible core profile.
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -179,16 +187,21 @@ int main(int argc, char *argv[])
 	glfwWindowHint(GLFW_RESIZABLE, FALSE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
 
-
-
-	// Open the window
-	string title = "Game Engine";
-	window = glfwCreateWindow(1920, 1080, title.c_str(), NULL, NULL);
-	if (!window) {
+	// Creates a new glfw window
+	window = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
+	// If the window isn't created
+	if (!window) 
+	{
+		// Clean up and abort
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
+
+	// Focusses on the window
 	glfwMakeContextCurrent(window);
+	g_bWindowFocused = true;
+
+	// Sets the window to the center of the screen
 	glfwSetWindowPositionCenter(window);
 
 	// Defines callback functions
@@ -196,29 +209,27 @@ int main(int argc, char *argv[])
 	glfwSetWindowFocusCallback(window, focus_callback);
 	glfwSetCursorPosCallback(window, cursor_callback);
 
-	// Hide mouse position 
+	// Sets the cursor to be hidden
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
-
-
-	// Load the OpenGL functions.
+	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
-
-	if (!didLoad) {
-		//Claen up and abort
+	// If the functions failed to load
+	if (!didLoad) 
+	{
+		// Clean up and abort
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
 
-	// Initialization
+	// Initialisation
 	initializeGL();
 
-	// Enter the main loop
+	// Enters the main loop
 	mainLoop();
 
 	// Close window and terminate GLFW
 	glfwTerminate();
-
 	// Exit program
 	exit(EXIT_SUCCESS);
 }
