@@ -70,7 +70,7 @@
 
   <Object>
     <Name>Rock</Name>
-    <OBJLocation> assets/models/Rock.obj</OBJLocation>
+    <OBJLocation>assets/models/Rock.obj</OBJLocation>
     <TexLocation>assets/textures/Rock.bmp</TexLocation>
     <Translation>15 -4 25</Translation>
     <Rotation>0 0 0</Rotation>
@@ -80,7 +80,7 @@
   </Object>
 
   <Object>
-    <Name>assets/models/skybox.obj</Name>
+    <Name>Skybox</Name>
     <OBJLocation>assets/models/skybox.obj</OBJLocation>
     <TexLocation>assets/textures/skybox.bmp</TexLocation>
     <Translation> 0 0 0</Translation>
