@@ -186,7 +186,7 @@ int main(int argc, char *argv[])
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-	glfwWindowHint(GLFW_RESIZABLE, FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, TRUE);
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
 
 	// Creates a new glfw window
@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
 		glfwTerminate();
 		exit(EXIT_FAILURE);
 	}
-
+	
 	// Focusses on the window
 	glfwMakeContextCurrent(g_pWindow);
 	g_bWindowFocused = true;
