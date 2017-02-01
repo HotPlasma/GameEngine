@@ -11,7 +11,10 @@
 using std::string;
 using std::ifstream;
 
-World::World() { }
+World::World(glm::vec2 windowSize)
+{
+	m_windowSize = windowSize;
+}
 
 void World::initScene()
 {
@@ -226,7 +229,7 @@ void World::update(float t)
 
 
 	 // Allows first person view changing with mouse movement
-	sf::Vector2i WindowOrigin(1920 / 2, 1080 / 2); // Middle of the screen
+	sf::Vector2i WindowOrigin(m_windowSize.x * 0.5, m_windowSize.y * 0.5); // Middle of the screen
 
 	float yAngle = (WindowOrigin - MousePos).x / 1000.0f;
 	float zAngle = (WindowOrigin - MousePos).y / 1000.0f;
@@ -274,9 +277,4 @@ void World::render()
 		
 	}
 
-}
-
-void World::resize(int w, int h)
-{
-	gl::Viewport(0, 0, w, h);
 }

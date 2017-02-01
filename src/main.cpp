@@ -56,7 +56,10 @@ static void cursor_callback(GLFWwindow *Window, double xPos, double yPos)
 void initializeGL() {
 	gl::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
-	scene = new World();
+	int Width, Height;
+	glfwGetWindowSize(window, &Width, &Height);
+
+	scene = new World(glm::vec2(Width, Height));
 
 	scene->initScene();
 }
@@ -130,18 +133,22 @@ void glfwSetWindowPositionCenter(GLFWwindow* window) {
 /////// Main loop  /////////////////////////////////////
 ////////////////////////////////////////////////////////
 void mainLoop() {
-	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) {
+	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) 
+	{
 		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
+
 		// If window is focused
 		if (g_bWindowFocused)
 		{
 			scene->update((float)glfwGetTime());
 			scene->render();
 		}
+
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		// Allows camera view manipulation using mouse
-		glfwSetCursorPos(window, 960, 540);
+
+		// Resets cursor to the center of the window after cursor event
+		if (g_bWindowFocused) glfwSetCursorPos(window, (double)scene->getWindowSize().x*0.5, (double)scene->getWindowSize().y*0.5);
 	}
 }
 

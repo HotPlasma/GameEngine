@@ -12,7 +12,6 @@
 class World : public Scene
 {
 private:
-	int width, height; // Dimentions of window
 	glm::vec3 m_CollectableSpeed; // Speed at which a collectable bounces
 
 	unsigned int m_uiBatteriesCollected = 0; // Batteries that have been collected
@@ -27,13 +26,11 @@ private:
 	SceneReader world; // Reads .xml file in order to create world
 
 public:
-	World();
+	World(glm::vec2 windowSize);
 	void initScene();
 	void GetMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos);
 	void update(float t);
 	void ModelUpdate(int index);
 	void render();
-	void resize(int, int);
-
 };
 #endif  

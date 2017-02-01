@@ -7,26 +7,35 @@ class Scene
 {
 public:
 	Scene() : m_animate(true) { }
-	
-  
-    // Load in all texture and initilise shaders
-    virtual void initScene() = 0;
+
+	glm::vec2 m_windowSize; // Dimensions of window
+
+	// Load in all texture and initilise shaders
+	virtual void initScene() = 0;
 
 	virtual void GetMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos) = 0;
 
 
 	// Run every frame
-    virtual void update( float t ) = 0;
+	virtual void update(float t) = 0;
 
-    // Draw Scene
-    virtual void render() = 0;
+	// Draw Scene
+	virtual void render() = 0;
 
 
 	// Aloow screen to be resized without causing rendering issues
-    virtual void resize(int, int) = 0;
-    
-    void animate( bool value ) { m_animate = value; }
-    bool animating() { return m_animate; }
+	void resize(int w, int h)
+	{
+		m_windowSize.x = w;
+		m_windowSize.y = h;
+
+		gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
+	}
+
+	void animate(bool value) { m_animate = value; }
+	bool animating() { return m_animate; }
+
+	glm::vec2 getWindowSize() { return m_windowSize; }
     
 protected:
 	bool m_animate;
