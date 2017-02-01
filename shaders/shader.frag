@@ -1,13 +1,15 @@
 #version 430
 
-// Binds texture to model based on texture coordinates.
+// Brings in uniform variable for texture
+uniform sampler2D tex; 
 
-uniform sampler2D tex;
-in vec2 texCoord;
-out vec4 FragColour;
+// Is passed texCoord from the vertex shader
+in vec2 texCoord; 
 
+// Passes fragment colour out to GPU
+out vec4 fragColour; 
 
 void main()
 {
-	FragColour = texture(tex,texCoord);
+	fragColour = texture(tex, texCoord);
 }
