@@ -1,13 +1,12 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include "PreHeader.h"
 
-
-#include "Texture.h"
-
-#include "scene.h"
+#include "Scene.h"
 #include "Camera.h"
 #include "SceneReader.h"
+#include "ModelReader.h"
 
 class World : public Scene
 {

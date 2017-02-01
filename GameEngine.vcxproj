@@ -96,7 +96,7 @@
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelReader.h" />
     <ClInclude Include="include\PreHeader.h" />
-    <ClInclude Include="include\scene.h" />
+    <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneReader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\Texture.h" />

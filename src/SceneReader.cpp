@@ -1,4 +1,3 @@
-#include "PreHeader.h"
 #include "SceneReader.h"
 
 SceneReader::SceneReader() {}

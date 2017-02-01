@@ -1,12 +1,4 @@
-#include "PreHeader.h"
-
 #include "World.h"
-
-#include <cstdio>
-#include <cstdlib>
-
-#include "ModelReader.h"
-
 
 using std::string;
 using std::ifstream;

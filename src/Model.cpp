@@ -1,4 +1,3 @@
-#include "PreHeader.h"
 #include "Model.h"
 
 Model::Model()

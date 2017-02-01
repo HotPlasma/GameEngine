@@ -1,4 +1,3 @@
-#include "PreHeader.h"
 #include "ModelReader.h"
 
 ModelReader::ModelReader(string filename)

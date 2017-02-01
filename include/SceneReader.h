@@ -1,10 +1,8 @@
 #pragma once
 
 #include "PreHeader.h"
+
 #include "Model.h"
-#include <vector>
-#include "Texture.h"
-#include <tinyxml2.h>
 
 class SceneReader
 {

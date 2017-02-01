@@ -1,9 +1,8 @@
 #pragma once
 
-#include <string>
+#include "PreHeader.h"
+
 #include "ModelReader.h"
-#include <Bitmap.h>
-#include <Texture.h>
 
 using namespace std;
 

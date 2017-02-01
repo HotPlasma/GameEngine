@@ -2,14 +2,9 @@
 
 #include "PreHeader.h"
 
-
-#include "gl_core_4_3.hpp"
-#include <GLFW/glfw3.h>
-#include "scene.h"
+#include "Scene.h"
 #include "World.h"
-#include <iostream>
 
-#include <string>
 using std::string;
 
 Scene *g_pScene;

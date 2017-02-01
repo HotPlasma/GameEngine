@@ -1,6 +1,7 @@
 #ifndef SCENE_H
 #define SCENE_H
-#include <GLFW/glfw3.h>
+
+#include "PreHeader.h"
 
 // Abstract class in order to set up world
 class Scene

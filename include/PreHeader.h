@@ -11,15 +11,25 @@
 #include "../libraries/glm/glm/gtc/matrix_transform.hpp"
 #include "../libraries/glm/glm/gtc/type_ptr.hpp"
 
+#include "gl_core_4_3.hpp"
+
 #include <SFML\Graphics.hpp>
 #include "gl_core_4_3.hpp"
 #include <GLFW/glfw3.h>
+
+#include <tinyxml2.h>
+
+#include "Texture.h"
+#include "Bitmap.h"
 
 #include <string>
 #include <vector>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
+#include <cstdio>
+#include <cstdlib>
 
 #include <algorithm>
 
