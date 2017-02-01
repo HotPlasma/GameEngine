@@ -12,15 +12,15 @@
 #include <string>
 using std::string;
 
-Scene *scene;
-GLFWwindow *window;
+Scene *g_pScene;
+GLFWwindow *g_pWindow;
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
 //////////////////////////////////////////////////////////
 ////  Key press callback /////////////////////////////////
 //////////////////////////////////////////////////////////
-static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
 	//if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
 	//	if (scene)
@@ -30,10 +30,10 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 //////////////////////////////////////////////////////////
 ////  Window focus callback //////////////////////////////
 //////////////////////////////////////////////////////////
-static void focus_callback(GLFWwindow *Window, int focused)
+static void focus_callback(GLFWwindow *pWindow, int iFocused)
 {
 	// If the callback is true
-	if (focused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
+	if (iFocused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
 	// Else the callback is false
 	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
 }
@@ -41,22 +41,22 @@ static void focus_callback(GLFWwindow *Window, int focused)
 //////////////////////////////////////////////////////////
 ////  Mouse movement callback ////////////////////////////
 //////////////////////////////////////////////////////////
-static void cursor_callback(GLFWwindow *Window, double xPos, double yPos)
+static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 {
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		scene->GetMousePos(window, sf::Vector2i(xPos, yPos));
+		g_pScene->setMousePos(g_pWindow, sf::Vector2i(dX, dY));
 	}
 }
 
 //////////////////////////////////////////////////////////
 //// Window resize callback //////////////////////////////
 //////////////////////////////////////////////////////////
-static void resize_callback(GLFWwindow *Window, int width, int height)
+static void resize_callback(GLFWwindow *pWindow, int iWidth, int iHeight)
 {
 	// Resizes the scene to match the window
-	scene->resize(width, height);
+	g_pScene->resize(iWidth, iHeight);
 }
 
 ////////////////////////////////////////////////////////
@@ -68,81 +68,87 @@ void initializeGL()
 	gl::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
 	// Gets window width and height
-	int Width, Height;
-	glfwGetWindowSize(window, &Width, &Height);
+	sf::Vector2i windowSize;
+	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Creates a World scene
-	scene = new World(glm::vec2(Width, Height));
+	g_pScene = new World(windowSize);
 
 	// Initialises scene
-	scene->initScene();
+	g_pScene->initScene();
 }
 
 ////////////////////////////////////////////////////////
 ////  Sets the window to center screen /////////////////
 ////////////////////////////////////////////////////////
-void glfwSetWindowPositionCenter(GLFWwindow* window) 
+void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 {
 	// Gets window position
-	int WindowX, WindowY;
-	glfwGetWindowPos(window, &WindowX, &WindowY);
+	sf::Vector2i windowPosition;
+	glfwGetWindowPos(pWindow, &windowPosition.x, &windowPosition.y);
 
 	// Gets window width and height
-	int Width, Height;
-	glfwGetWindowSize(window, &Width, &Height);
+	sf::Vector2i windowSize;
+	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Get the distance needed to centre the window
-	Width *= 0.5;
-	Height *= 0.5;
+	windowSize.x *= 0.5;
+	windowSize.y *= 0.5;
 
-	WindowX += Width;
-	WindowY += Height;
+	windowPosition.x += windowSize.x;
+	windowPosition.x += windowSize.y;
 
 	// Accounting for multiple monitors
-	int numOfMonitors; // Number of monitors
-	GLFWmonitor **MonitorList = glfwGetMonitors(&numOfMonitors); // Sets num of monitors
+	int iNumOfMonitors; // Number of monitors
+	GLFWmonitor **apMonitorList = glfwGetMonitors(&iNumOfMonitors); // Sets num of monitors
 
 	// If no monitors detected
-	if (MonitorList == NULL) return;
+	if (apMonitorList == NULL) return;
 
 	// Figure out which monitor the window is in
-	GLFWmonitor *WindowOwner = NULL;
-	int WindowOwnerX, WindowOwnerY, WindowOwnerWidth, WindowOwnerHeight;
+	GLFWmonitor *pWindowOwner = NULL;
+	sf::Vector2i windowOwnerSize;
+	sf::Vector2i windowOwnerPos;
 
-	for (int i = 0; i < numOfMonitors; i++) {
-		// Get the monitor position
-		int MonitorX, MonitorY;
-		glfwGetMonitorPos(MonitorList[i], &MonitorX, &MonitorY);
+	for (int i = 0; i < iNumOfMonitors; i++) {
+		// Gets the monitor position
+		sf::Vector2i monitorPos;
+		glfwGetMonitorPos(apMonitorList[i], &monitorPos.x, &monitorPos.y);
 
 		// Create video mode to get monitors size
-		int MonitorWidth, MonitorHeight;
-		GLFWvidmode *monitor_vidmode = (GLFWvidmode*)glfwGetVideoMode(MonitorList[i]);
+		sf::Vector2i monitorSize;
+		GLFWvidmode *pMonitorVidmode = (GLFWvidmode*)glfwGetVideoMode(apMonitorList[i]);
 
-		if (monitor_vidmode == NULL) {
+		if (pMonitorVidmode == NULL)
+		{
 			// Video mode is required for width and height, so skip this monitor
 			continue;
-
 		}
-		else {
-			MonitorWidth = monitor_vidmode->width;
-			MonitorHeight = monitor_vidmode->height;
+		else 
+		{
+			monitorSize.x = pMonitorVidmode->width;
+			monitorSize.y = pMonitorVidmode->height;
 		}
 
 		// Set the WindowOwner to this monitor if the center of the window is within its bounding box
-		if ((WindowX > MonitorX && WindowX < (MonitorX + MonitorWidth)) && (WindowY > MonitorY && WindowY < (MonitorY + MonitorHeight))) {
-			WindowOwner = MonitorList[i];
+		if ((windowSize.x > monitorPos.x && windowSize.x < (monitorPos.x + monitorSize.x)) &&
+			(windowSize.y > monitorPos.y && windowSize.y < (monitorPos.y + monitorSize.y)))
+		{
+			pWindowOwner = apMonitorList[i];
 
-			WindowOwnerX = MonitorX;
-			WindowOwnerY = MonitorY;
+			windowOwnerPos.x = monitorPos.x;
+			windowOwnerPos.y = monitorPos.y;
 
-			WindowOwnerWidth = MonitorWidth;
-			WindowOwnerHeight = MonitorHeight;
+			windowOwnerSize.x = monitorSize.x;
+			windowOwnerSize.y = monitorSize.y;
 		}
 	}
 
-	if (WindowOwner != NULL) {
+	// If window owner exists
+	if (pWindowOwner != NULL) 
+	{
 		// Set the window position to the center of the monitor which launched the exe
-		glfwSetWindowPos(window, WindowOwnerX + (WindowOwnerWidth * 0.5) - Width, WindowOwnerY + (WindowOwnerHeight * 0.5) - Height);
+		glfwSetWindowPos(pWindow, windowOwnerPos.x + (windowOwnerSize.x * 0.5) - windowSize.x, windowOwnerPos.y + (windowOwnerSize.y * 0.5) - windowSize.y);
 	}
 }
 
@@ -152,7 +158,7 @@ void glfwSetWindowPositionCenter(GLFWwindow* window)
 void mainLoop() 
 {
 	// While the window should remain open and escape is not pressed
-	while (!glfwWindowShouldClose(window) && !glfwGetKey(window, GLFW_KEY_ESCAPE)) 
+	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
 	{
 		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
 
@@ -160,15 +166,15 @@ void mainLoop()
 		if (g_bWindowFocused)
 		{
 			// Updates and renders the scene
-			scene->update((float)glfwGetTime());
-			scene->render();
+			g_pScene->update((float)glfwGetTime());
+			g_pScene->render();
 		}
 
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
 
 		// Resets cursor to the center of the window after cursor event
-		if (g_bWindowFocused) glfwSetCursorPos(window, scene->getWindowSize().x*0.5, scene->getWindowSize().y*0.5);
+		if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
 	}
 }
 
@@ -189,9 +195,9 @@ int main(int argc, char *argv[])
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
 
 	// Creates a new glfw window
-	window = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
+	g_pWindow = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
 	// If the window isn't created
-	if (!window) 
+	if (!g_pWindow)
 	{
 		// Clean up and abort
 		glfwTerminate();
@@ -199,20 +205,20 @@ int main(int argc, char *argv[])
 	}
 
 	// Focusses on the window
-	glfwMakeContextCurrent(window);
+	glfwMakeContextCurrent(g_pWindow);
 	g_bWindowFocused = true;
 
 	// Sets the window to the center of the screen
-	glfwSetWindowPositionCenter(window);
+	glfwSetWindowPositionCenter(g_pWindow);
 
 	// Defines callback functions
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetWindowFocusCallback(window, focus_callback);
-	glfwSetCursorPosCallback(window, cursor_callback);
-	glfwSetWindowSizeCallback(window, resize_callback);
+	glfwSetKeyCallback(g_pWindow, key_callback);
+	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
+	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
+	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
-	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();

@@ -1,27 +1,22 @@
 #include "PreHeader.h"
 #include "SceneReader.h"
 
-SceneReader::SceneReader()
-{
+SceneReader::SceneReader() {}
 
-}
-
-SceneReader::SceneReader(string filename)
+SceneReader::SceneReader(string sFilename)
 {
-	ReadSceneFile(filename); // Send file to be read
+	readSceneFile(sFilename); // Send file to be read
 	//tl = new TextureLoader(); // Create a new textureloader
 }
 
-void SceneReader::ReadSceneFile(string filename)
+void SceneReader::readSceneFile(string sFilename)
 {
-
-	Model Temp; // Temperary model to be pushed into Scene Vector
+	Model temp; // Temperary model to be pushed into Scene Vector
 	string sData; // Current sData being read
-
 
 	tinyxml2::XMLDocument doc; // XML document
 
-	doc.LoadFile(filename.c_str()); // Load document
+	doc.LoadFile(sFilename.c_str()); // Load document
 
 	for (tinyxml2::XMLNode* iNode = doc.FirstChild(); iNode != NULL; iNode = iNode->NextSibling())
 	{
@@ -36,15 +31,14 @@ void SceneReader::ReadSceneFile(string filename)
 						istringstream iss(iNode3->ToElement()->GetText());
 						if (strcmp(iNode3->Value(), "Name") == 0) // Assign name
 						{
-
 							iss >> sData;
-							Temp.SetName(sData);
+							temp.setName(sData);
 						}
 						if (strcmp(iNode3->Value(), "OBJLocation") == 0) // Assign .obj file location
 						{
 
 							iss >> sData;
-							Temp.SetFileLocation(sData);
+							temp.setFileLocation(sData);
 						}
 						if (strcmp(iNode3->Value(), "TexLocation") == 0) // Assign .bmp texture file location
 						{
@@ -53,48 +47,48 @@ void SceneReader::ReadSceneFile(string filename)
 																		// Set texture to end of vector
 																		//	tl->LoadBMP(data, m_textureID[m_textureID.size() - 1], true); 
 
-							Temp.SetTextureLocation(sData);
+							temp.setTextureLocation(sData);
 						}
 						if (strcmp(iNode3->Value(), "Translation") == 0) // Read in 3 values for the position of the model
 						{
-							glm::vec3 Position;
+							glm::vec3 position;
 							iss >> sData;
-							Position.x = stof(sData);
+							position.x = stof(sData);
 							iss >> sData;
-							Position.y = stof(sData);
+							position.y = stof(sData);
 							iss >> sData;
-							Position.z = stof(sData);
-							Temp.SetPosition(Position);
+							position.z = stof(sData);
+							temp.setPosition(position);
 						}
 						if (strcmp(iNode3->Value(), "Rotation") == 0) // Read in 3 values for the rotation of the model
 						{
 
-							glm::vec3 Rotation;
+							glm::vec3 rotation;
 							iss >> sData;
-							Rotation.x = stof(sData);
+							rotation.x = stof(sData);
 							iss >> sData;
-							Rotation.y = stof(sData);
+							rotation.y = stof(sData);
 							iss >> sData;
-							Rotation.z = stof(sData);
-							Temp.SetRotation(Rotation);
+							rotation.z = stof(sData);
+							temp.setRotation(rotation);
 						}
 						if (strcmp(iNode3->Value(), "Scale") == 0) // Read in 3 values for the scale of the model
 						{
 
-							glm::vec3 Scale;
+							glm::vec3 scale;
 							iss >> sData;
-							Scale.x = stof(sData);
+							scale.x = stof(sData);
 							iss >> sData;
-							Scale.y = stof(sData);
+							scale.y = stof(sData);
 							iss >> sData;
-							Scale.z = stof(sData);
-							Temp.SetScale(Scale);
+							scale.z = stof(sData);
+							temp.setScale(scale);
 						}
 						if (strcmp(iNode3->Value(), "Material") == 0) // Assign a material for the model
 						{
 
 							iss >> sData;
-							Temp.SetMaterial(stoi(sData));
+							temp.setMaterial(stoi(sData));
 						}
 						if (strcmp(iNode3->Value(), "Collectable") == 0) // Check if model is a collectable
 						{
@@ -102,18 +96,18 @@ void SceneReader::ReadSceneFile(string filename)
 							iss >> sData;
 							if (sData == "true")
 							{
-								Temp.SetCollectable();
+								temp.setCollectable();
 							}
 						}
 					}
-					ModelList.push_back(Temp); // Push to vector of models 
+					m_modelList.push_back(temp); // Push to vector of models 
 				}
 			}
 		}
 	}
 
-	for (int i = 0; i < ModelList.size(); i++)
+	for (int i = 0; i < m_modelList.size(); i++)
 	{
-		ModelList[i].LoadModel(ModelList[i].GetFileLocation()); // Load in all models to be ready for drawing
+		m_modelList[i].loadModel(m_modelList[i].getFileLocation()); // Load in all models to be ready for drawing
 	}
 }

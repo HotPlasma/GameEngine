@@ -9,67 +9,61 @@ using namespace std;
 
 class Model
 {
-private:
-	string sName; // A moniker for each model
-	string sFileName; // File location of the obj
-	string sTexture; // File location of the texture
-	int ModelMaterial; // Which material the model with have. Different integers are different materials.
-
-	glm::vec3 ModelPosition; // Position of Model
-	glm::vec3 ModelRotation; // Rotation of Model
-	glm::vec3 ModelScale; // Scale of Model
-
-	bool m_bCollectable = false; // is the model a collectable?
-	bool m_bCollected = false; // has the collectable been collected?
-
-	GLuint m_textureID; // ID of the texture
-	ModelReader* m_modelReader; // Model Reader for the render the model
-
-	GLuint programHandle;
-	Texture *gTexture;
-	Bitmap bmp = Bitmap::bitmapFromFile("assets/textures/Default.bmp");;
-
+	private:
+		string m_sName; // A moniker for each model
+		string m_sFileName; // File location of the obj
+		string m_sTexture; // File location of the texture
+		int m_iMaterial; // Which material the model with have. Different integers are different materials.
 	
-
-	GLuint vboHandles[2];
-	GLuint vbo;
-	GLuint vaoHandle;
-
+		glm::vec3 m_position; // Position of Model
+		glm::vec3 m_rotation; // Rotation of Model
+		glm::vec3 m_scale; // Scale of Model
 	
-
-public:
-	Model(); // Constructor
-	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
-	string GetName(); // Returns moniker
-	string GetFileLocation(); // Returns location of obj
-	GLuint GetTextureLocation(); // Returns location of texture
-	glm::vec3 GetPosition(); // Returns rosition of model
-	glm::vec3 GetRotation(); // Returns rotation of model
-	glm::vec3 GetScale(); // Returns scale of model
-	bool CheckIfCollectable(); // Check if a model is a collectable
-	bool GetCollected(); // Check if a collectable has been collected
-	int GetMaterial(); // Returns materialID
-
-	void SetCollectable();
-	void SetCollected(bool Collected); // Set collected or not collected for a collectable
-	void SetName(string newName);
-	void SetTexture(GLuint TextureID); // Set texture ID
-	void SetFileLocation(string NewLocation); // Set obj location
-	void SetTextureLocation(string NewLocation); // Set texture location
-	void SetPosition(glm::vec3 NewPosition); // Set model position
-	void SetRotation(glm::vec3 NewRotation); // Set model rotation
-	void SetScale(glm::vec3 NewScale); // Set model scale
-	void SetMaterial(int MaterialID); // Set model MaterialID
-	void Buffer();
-
-	vector<float> positionData;
-	vector<float> uvData;
-
-	glm::mat4 M;
-
-	void LoadModel(string Model); // Loads in the model to be rendered
-	void DrawModel(bool drawWithNormals, bool drawWithTexture); // Draws model
-
-
+		bool m_bCollectable = false; // is the model a collectable?
+		bool m_bCollected = false; // has the collectable been collected?
+	
+		GLuint m_textureID; // ID of the texture
+		ModelReader* m_pModelReader; // Model Reader for the render the model
+	
+		GLuint m_programHandle;
+		Texture *m_pTexture;
+		Bitmap m_bmp = Bitmap::bitmapFromFile("assets/textures/Default.bmp");;
+	
+		GLuint m_vboHandles[2];
+		GLuint m_vbo;
+		GLuint m_vaoHandle;
+	
+	public:
+		Model(); // Constructor
+		Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
+		string getName() { return m_sName; }; // Returns moniker
+		string getFileLocation() { return m_sFileName; }; // Returns location of obj
+		GLuint getTextureLocation() { return m_textureID; }; // Returns location of texture
+		glm::vec3 getPosition() { return m_position; }; // Returns rosition of model
+		glm::vec3 getRotation() { return m_rotation; }; // Returns rotation of model
+		glm::vec3 getScale() { return m_scale; }; // Returns scale of model
+		bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
+		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
+		int getMaterial() { return m_iMaterial; }; // Returns materialID
+	
+		void setCollectable();
+		void setCollected(bool bCollected); // Set collected or not collected for a collectable
+		void setName(string sNewName);
+		void setTexture(GLuint textureID); // Set texture ID
+		void setFileLocation(string sNewLocation); // Set obj location
+		void setTextureLocation(string sNewLocation); // Set texture location
+		void setPosition(glm::vec3 newPosition); // Set model position
+		void setRotation(glm::vec3 newRotation); // Set model rotation
+		void setScale(glm::vec3 newScale); // Set model scale
+		void setMaterial(int iMaterialID); // Set model MaterialID
+		void buffer();
+	
+		vector<float> m_positionData;
+		vector<float> m_uvData;
+	
+		glm::mat4 m_M;
+	
+		void loadModel(string sModel); // Loads in the model to be rendered
+		void drawModel(); // Draws model
 };
 
