@@ -62,9 +62,6 @@
     <ClInclude Include="include\ModelReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\PreHeader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -81,6 +78,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libraries\tinyxml\tinyxml2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PreHeader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
