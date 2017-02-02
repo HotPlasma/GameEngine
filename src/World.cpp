@@ -181,40 +181,7 @@ void World::linkMe(GLint vertShader, GLint fragShader)
 void World::update(float t)
 {
 
-	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	{
-		if (m_sceneReader.m_modelList.at(i).isCollectable()) // check if collectable
-		{
-			if (!m_sceneReader.m_modelList.at(i).getCollected()) // if collectable then slowly rotate and bob up and down
-			{
-				if (m_sceneReader.m_modelList.at(i).getPosition().y > -7)
-				{
-					m_collectableSpeed = glm::vec3(0, -0.03, 0);
-				}
-				else if (m_sceneReader.m_modelList.at(i).getPosition().y < -10)
-				{
-					m_collectableSpeed = glm::vec3(0, 0.03, 0);
-				}
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed);
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 1, m_sceneReader.m_modelList.at(i).getRotation().z));
-
-				glm::vec3 Distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
-
-				if (sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f)) < 5) // If robot collides with a collectable mark it as collected and stop drawing it
-				{
-					m_sceneReader.m_modelList.at(i).setCollected(true);
-					m_uiBatteriesCollected++;
-				}
-			}
-		}
-	}
-
 	// Creates camera and view using MVP
-
-	// Identity matrix
-
-	// Changing M effects model in scene
-
 
 	 // Allows first person view changing with mouse movement
 	sf::Vector2i windowOrigin(m_windowSize.x * 0.5, m_windowSize.y * 0.5); // Middle of the screen
@@ -240,6 +207,35 @@ void World::update(float t)
 	
 	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
 	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
+
+	// Makes collectables rotate and bounce
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+		if (m_sceneReader.m_modelList.at(i).isCollectable()) // check if collectable
+		{
+			if (!m_sceneReader.m_modelList.at(i).getCollected()) // if collectable then slowly rotate and bob up and down
+			{
+				if (m_sceneReader.m_modelList.at(i).getPosition().y > -6)
+				{
+					m_collectableSpeed = glm::vec3(0, -0.03, 0);
+				}
+				else if (m_sceneReader.m_modelList.at(i).getPosition().y < -8)
+				{
+					m_collectableSpeed = glm::vec3(0, 0.03, 0);
+				}
+				//Set positions & rotations
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed);
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 1, m_sceneReader.m_modelList.at(i).getRotation().z));
+				// Get distance between player and collectable
+				glm::vec3 Distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
+
+				if (sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f)) < 5) // If collision with a collectable mark it as collected and stop drawing it
+				{
+					m_sceneReader.m_modelList.at(i).setCollected(true);
+				}
+			}
+		}
+	}
 }
 
 void World::modelUpdate(int index)
@@ -253,11 +249,16 @@ void World::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
+	
+
 	// Render all models in current scene
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		m_sceneReader.m_modelList.at(i).buffer();
-		modelUpdate(i);
-		gl::DrawArrays(gl::TRIANGLES, 0, m_sceneReader.m_modelList.at(i).m_positionData.size());
+		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
+		{
+			m_sceneReader.m_modelList.at(i).buffer();
+			modelUpdate(i);
+			gl::DrawArrays(gl::TRIANGLES, 0, m_sceneReader.m_modelList.at(i).m_positionData.size());
+		}
 	}
 }

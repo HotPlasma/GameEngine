@@ -12,8 +12,7 @@ class World : public Scene
 {
 	private:
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-	
-		unsigned int m_uiBatteriesCollected = 0; // Batteries that have been collected
+
 	
 		GLuint m_programHandle; // Program context
 		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
