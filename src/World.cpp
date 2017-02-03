@@ -227,9 +227,9 @@ void World::update(float t)
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed);
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 1, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
-				glm::vec3 Distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
+				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
-				if (sqrtf(powf(Distance.x, 2.0f) + powf(Distance.z, 2.0f)) < 5) // If collision with a collectable mark it as collected and stop drawing it
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // If collision with a collectable mark it as collected and stop drawing it
 				{
 					m_sceneReader.m_modelList.at(i).setCollected(true);
 				}
