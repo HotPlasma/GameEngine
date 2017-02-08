@@ -63,6 +63,7 @@ class Model
 		glm::mat4 m_M;
 	
 		void loadModel(string sModel); // Loads in the model to be rendered
-		void drawModel(); // Draws model
+		void initModel(); // Draws model
+		void render();
 };
 

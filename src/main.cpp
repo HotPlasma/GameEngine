@@ -162,6 +162,7 @@ void mainLoop()
 		{
 			// Updates and renders the scene
 			g_pScene->update((float)glfwGetTime());
+			glfwSetTime(0);
 			g_pScene->render();
 		}
 

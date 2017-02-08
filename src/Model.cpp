@@ -90,7 +90,7 @@ void Model::buffer()
 	
 }
 
-void Model::drawModel()
+void Model::initModel()
 {
 	glm::mat4 rotMatrix = { cos(m_rotation.x),0,-sin(m_rotation.x),0,
 		0,1,0,0,
@@ -152,4 +152,38 @@ void Model::drawModel()
 	GLint loc = gl::GetUniformLocation(m_programHandle, "tex");
 
 	gl::Uniform1f(loc, 1);
+}
+
+void Model::render()
+{
+	glm::mat4 xRotMatrix = { cos(m_rotation.x),0,-sin(m_rotation.x),0,
+		0,1,0,0,
+		sin(m_rotation.x),0,cos(m_rotation.x),0,
+		0,0,0,1 };
+
+	glm::mat4 yRotMatrix = { cos(m_rotation.y),0,sin(m_rotation.y),0,
+		0,1,0,0,
+		-sin(m_rotation.y),0,cos(m_rotation.y),0,
+		0,0,0,1 };
+
+	glm::mat4 zRotMatrix = { cos(m_rotation.z),0,-sin(m_rotation.z),0,
+		0,1,0,0,
+		sin(m_rotation.z),0,cos(m_rotation.z),0,
+		0,0,0,1 };
+
+	glm::mat4 rotMatrix = xRotMatrix * yRotMatrix * zRotMatrix;
+
+	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
+		0,m_scale.y,0,0,
+		0,0,m_scale.z,0,
+		0,0,0,1 };
+
+	glm::mat4 transMatrix = { 1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		m_position.x,m_position.y,m_position.z,1 };
+
+	m_M = scaleMatrix * transMatrix * rotMatrix;
+
+	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
 }
