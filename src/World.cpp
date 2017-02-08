@@ -197,7 +197,7 @@ void World::update(float t)
 
 	//std::cout << "X: " << FirstPersonView.GetCameraPos().x << " Y: " << FirstPersonView.GetCameraPos().y << " Z: " << FirstPersonView.GetCameraPos().z << std::endl;
 
-	glm::mat4 P = glm::perspective(60.0f, 1.0f, 1.f, 500.f); // Sets FOV and vision culls
+	glm::mat4 P = glm::perspective(60.0f, (float)m_windowSize.x/m_windowSize.y, 1.f, 500.f); // Sets FOV and vision culls
 
 	// Send data to shader for processing
 
