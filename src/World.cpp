@@ -208,7 +208,6 @@ void World::update(float t)
 	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
 	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
 
-	cout << t << std::endl;
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -217,17 +216,18 @@ void World::update(float t)
 		{
 			if (!m_sceneReader.m_modelList.at(i).getCollected()) // if collectable then slowly rotate and bob up and down
 			{
-				if (m_sceneReader.m_modelList.at(i).getPosition().y > -7)
+				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2)
 				{
-					m_collectableSpeed = glm::vec3(0, -0.2, 0);
+					m_collectableSpeed = glm::vec3(0, -0.03, 0);
 				}
 				
-				else if (m_sceneReader.m_modelList.at(i).getPosition().y < 10)
+				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4)
 				{
-					m_collectableSpeed = glm::vec3(0, 0.2 , 0);
+					m_collectableSpeed = glm::vec3(0, 0.03, 0);
 				}
 				//Set positions & rotations
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed);
+
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 180 * t, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable

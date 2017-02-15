@@ -149,7 +149,7 @@
     <Name>Battery</Name>
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
-    <Translation>-40 -3 23</Translation>
+    <Translation>-40 -5 23</Translation>
     <Rotation>0 90 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
@@ -160,7 +160,7 @@
     <Name>Battery</Name>
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
-    <Translation>25 -3 8</Translation>
+    <Translation>25 -5 8</Translation>
     <Rotation>0 90 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
@@ -171,7 +171,7 @@
     <Name>Battery</Name>
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
-    <Translation>0 -3 -20</Translation>
+    <Translation>0 -5 -20</Translation>
     <Rotation>0 90 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
