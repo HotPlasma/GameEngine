@@ -38,6 +38,16 @@ void Model::setCollected(bool bCollected)
 	m_bCollected = bCollected;
 }
 
+void Model::setAi()
+{
+	m_bAi = true;
+}
+
+void Model::playerCaught(bool playerCaught)
+{
+	m_bplayerCaught = playerCaught;
+}
+
 void Model::setName(string sNewName)
 {
 	m_sName = sNewName;
@@ -92,10 +102,22 @@ void Model::buffer()
 
 void Model::initModel()
 {
-	glm::mat4 rotMatrix = { cos(m_rotation.x),0,-sin(m_rotation.x),0,
+	glm::mat4 xRotMatrix = { cos(glm::radians(m_rotation.x)),0,-sin(glm::radians(m_rotation.x)),0,
 		0,1,0,0,
-		sin(m_rotation.x),0,cos(m_rotation.x),0,
+		sin(glm::radians(m_rotation.x)),0,cos(glm::radians(m_rotation.x)),0,
 		0,0,0,1 };
+
+	glm::mat4 yRotMatrix = { cos(glm::radians(m_rotation.y)),0,sin(glm::radians(m_rotation.y)),0,
+		0,1,0,0,
+		-sin(glm::radians(m_rotation.y)),0,cos(glm::radians(m_rotation.y)),0,
+		0,0,0,1 };
+
+	glm::mat4 zRotMatrix = { cos(glm::radians(m_rotation.z)),0,-sin(glm::radians(m_rotation.z)),0,
+		0,1,0,0,
+		sin(glm::radians(m_rotation.z)),0,cos(glm::radians(m_rotation.z)),0,
+		0,0,0,1 };
+
+	glm::mat4 rotMatrix = xRotMatrix * yRotMatrix * zRotMatrix;
 
 	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
 		0,m_scale.y,0,0,

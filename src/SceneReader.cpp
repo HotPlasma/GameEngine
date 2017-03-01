@@ -167,6 +167,15 @@ void SceneReader::readSceneFile(string sFilename)
 								newModel.setCollectable();
 							}
 						}
+						if (strcmp(iNode3->Value(), "Ai") == 0) // Check if model is Ai controlled
+						{
+
+							iss >> sData;
+							if (sData == "true")
+							{
+								newModel.setAi();
+							}
+						}
 					}
 
 					// Pushes newModel onto the vector of models

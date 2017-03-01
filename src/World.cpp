@@ -207,7 +207,36 @@ void World::update(float t)
 	
 	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
 	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
+	
+	//makes ai move in a straight line
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+		if (m_sceneReader.m_modelList.at(i).isAi()) // check if object has ai
+		{
+			if (m_sceneReader.m_modelList.at(i).getPosition().x >= 5) //if object has ai then move forwards and backwards
+			{
+				m_aiSpeed = glm::vec3(-0.1f, 0, 0);
+			}
+			else if (m_sceneReader.m_modelList.at(i).getPosition().x <= -20)
+			{
 
+				m_aiSpeed = glm::vec3(0.1f, 0, 0);
+			}
+			//Set positions & rotations
+
+			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
+
+			// Get distance between player and collectable
+			glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and ai object
+
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // If collision with obbject stop movement of object
+			{
+				m_aiSpeed = glm::vec3(0, 0, 0);
+				//ai has caught player
+			}
+	
+		}
+	}
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)

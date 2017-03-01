@@ -6,13 +6,14 @@
     <Name>Deer</Name>
     <OBJLocation>assets/models/deer.obj</OBJLocation>
     <TexLocation>assets/textures/deer.bmp</TexLocation>
-    <Translation>50 -15 0</Translation>
+    <Translation>5 -4 40</Translation>
     <Rotation>0 0 0</Rotation>
-    <Scale>0.3 0.3 0.3</Scale>
+    <Scale>1 1 1</Scale>
     <Material>1</Material>
-    <Collectable>true</Collectable>
+    <Collectable>false</Collectable>
+    <Ai>true</Ai>
   </Object>
-
+  
   <Object>
     <Name>GrassyPlane</Name>
     <OBJLocation>assets/models/Plane.obj</OBJLocation>
@@ -22,6 +23,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -33,6 +35,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -44,6 +47,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -55,6 +59,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -66,6 +71,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -77,6 +83,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -88,6 +95,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -99,6 +107,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -110,6 +119,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -121,6 +131,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -132,6 +143,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -143,6 +155,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -154,6 +167,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -165,6 +179,7 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>
+    <Ai>false</Ai>
   </Object>
 
   <Object>
@@ -176,5 +191,6 @@
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>
+    <Ai>false</Ai>
   </Object>
 </Scene>
