@@ -3,6 +3,8 @@
 #include "PreHeader.h"
 
 #include "Scene.h"
+#include <ft2build.h>
+#include FT_FREETYPE_H
 #include "World.h"
 
 using std::string;
