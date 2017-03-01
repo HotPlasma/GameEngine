@@ -10,7 +10,7 @@
     <Rotation>0 0 0</Rotation>
     <Scale>0.3 0.3 0.3</Scale>
     <Material>1</Material>
-    <Collectable>false</Collectable>
+    <Collectable>true</Collectable>
   </Object>
 
   <Object>

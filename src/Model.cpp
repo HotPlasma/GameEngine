@@ -78,9 +78,9 @@ void Model::setMaterial(int iMaterial)
 	m_iMaterial = iMaterial;
 }
 
-void Model::loadModel(string sModel)
+void Model::loadModel()
 {
-	m_pModelReader = new ModelReader(sModel);
+	m_pModelReader = new ModelReader(m_sFileName);
 }
 
 void Model::buffer()
