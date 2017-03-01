@@ -7,7 +7,7 @@
 class Scene
 {
 	public:
-		Scene() : m_animate(true) {}
+		Scene() : m_bAnimate(true) {}
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
@@ -31,13 +31,13 @@ class Scene
 			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
 		}
 	
-		void animate(bool bValue) { m_animate = bValue; }
-		bool animating() { return m_animate; }
+		void animate(bool bValue) { m_bAnimate = bValue; }
+		bool animating() { return m_bAnimate; }
 	
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
-		bool m_animate;
+		bool m_bAnimate;
 };
 
 #endif // SCENE_H
