@@ -12,9 +12,9 @@ class Scene
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
 		// Load in all texture and initilise shaders
-		virtual void initScene() = 0;
+		virtual void initScene(GLFWwindow *pWindow) = 0;
 	
-		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos) = 0;
+		virtual void setMousePos(sf::Vector2i mousepos) = 0;
 	
 		// Run every frame
 		virtual void update(float t) = 0;
