@@ -191,13 +191,16 @@ void World::update(float t)
 
 	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
 
-	glm::mat4 V = glm::lookAt(glm::vec3(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z), // Camera position
-		glm::vec3(m_camera.getView().x, m_camera.getView().y, m_camera.getView().z), // Looking at
-		glm::vec3(0, 1, 0)); // Up
+	glm::mat4 V = glm::lookAt
+	(
+		m_camera.getPosition(), // Camera position
+		m_camera.getView(), // Looking at
+		m_camera.getUp() // Up
+	);
 
 	//std::cout << "X: " << FirstPersonView.GetCameraPos().x << " Y: " << FirstPersonView.GetCameraPos().y << " Z: " << FirstPersonView.GetCameraPos().z << std::endl;
 
-	glm::mat4 P = glm::perspective(60.0f, (float)m_windowSize.x/m_windowSize.y, 1.f, 500.f); // Sets FOV and vision culls
+	glm::mat4 P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x/m_windowSize.y, 1.f, 500.f); // Sets FOV and vision culls
 
 	// Send data to shader for processing
 
