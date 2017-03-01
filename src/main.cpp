@@ -4,6 +4,7 @@
 
 #include "Scene.h"
 #include "World.h"
+#include "Editor.h"
 
 using std::string;
 
@@ -41,7 +42,7 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		g_pScene->setMousePos(g_pWindow, sf::Vector2i(dX, dY));
+		g_pScene->setMousePos(sf::Vector2i(dX, dY));
 	}
 }
 
@@ -67,10 +68,12 @@ void initializeGL()
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Creates a World scene
-	g_pScene = new World(windowSize);
+	//g_pScene = new World(windowSize);
+	// TEMPORARY - Creates an Editor scene
+	g_pScene = new Editor(windowSize);
 
 	// Initialises scene
-	g_pScene->initScene();
+	g_pScene->initScene(g_pWindow);
 }
 
 //////////////////////////////////////////////////////////
@@ -168,9 +171,6 @@ void mainLoop()
 
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
-
-		// Resets cursor to the center of the window after cursor event
-		if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
 	}
 }
 
@@ -212,9 +212,6 @@ int main(int argc, char *argv[])
 	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
-
-	// Sets the cursor to be hidden
-	glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
