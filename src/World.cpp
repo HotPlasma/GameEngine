@@ -208,33 +208,41 @@ void World::update(float t)
 	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
 	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
 	
-	//makes ai move in a straight line
+	// makes ai move towards player
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
+		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
+
 		if (m_sceneReader.m_modelList.at(i).isAi()) // check if object has ai
 		{
-			if (m_sceneReader.m_modelList.at(i).getPosition().x >= 5) //if object has ai then move forwards and backwards
+			//if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) > 50) // if ai object is further than the wander/search range from the player 
+			//{
+			//	move into the wander/search range (so the ai isnt midlessly searching for the player on the other side of the map)
+
+			//}
+			//else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 50) // if ai object is out of range of the player
+			//{
+			//	switch to wander/searching state
+
+			//}
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) > 1) // if ai object has not caught the player (distance value to be changed later)
 			{
-				m_aiSpeed = glm::vec3(-0.1f, 0, 0);
+				//switch to chase state
+				m_aiSpeed = glm::vec3(0.01f, 0, 0.01f) * distance;
+				//add rotation here
+
 			}
-			else if (m_sceneReader.m_modelList.at(i).getPosition().x <= -20)
-			{
-
-				m_aiSpeed = glm::vec3(0.1f, 0, 0);
-			}
-			//Set positions & rotations
-
-			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
-
-			// Get distance between player and collectable
-			glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and ai object
-
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // If collision with obbject stop movement of object
+			else //if player is caught by ai
 			{
 				m_aiSpeed = glm::vec3(0, 0, 0);
-				//ai has caught player
+				//endgame?
+				
 			}
-	
+
+			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
+			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(1).getRotation() = m_aiRotation); //need to figure this out still
+			
+		
 		}
 	}
 

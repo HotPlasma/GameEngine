@@ -13,6 +13,7 @@ class World : public Scene
 	private:
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 		glm::vec3 m_aiSpeed; //ai movement speed
+		glm::vec3 m_aiRotation; //ai rotation
 
 	
 		GLuint m_programHandle; // Program context
