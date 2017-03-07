@@ -54,6 +54,9 @@
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\glslprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Camera.h">
@@ -90,6 +93,9 @@
       <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glslprogram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

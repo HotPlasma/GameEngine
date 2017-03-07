@@ -2,9 +2,11 @@
 
 #include "PreHeader.h"
 
-#include "Scene.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
+
+#include "Scene.h"
+
 #include "World.h"
 
 using std::string;
@@ -181,6 +183,7 @@ void mainLoop()
 //////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
+	
 	//FT_Library ft;
 	//if (FT_Init_FreeType(&ft))
 	//	std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
