@@ -6,6 +6,33 @@ Editor::Editor(const sf::Vector2i kWindowSize)
 {
 	// Assigns input to appropriate member
 	m_windowSize = kWindowSize;
+
+	// TEMPORARY - Need to read in a list of models to use
+	// Creates a tree Model
+	std::shared_ptr<Model> model = std::shared_ptr<Model>(new Model());
+	model->setName("Tree");
+	model->setFileLocation("assets/models/deadtree.obj");
+	model->setTextureLocation("assets/textures/bark.bmp");
+	model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	model->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	model->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	model->setMaterial(1);
+
+	// Populates the ModelSelection member with Models
+	m_pModelSelection.push_back(model);
+
+	// For every Model
+	for (std::shared_ptr<Model> pModel : m_pModelSelection)
+	{
+		// Loads Model so it's ready for drawing
+		pModel->loadModel();
+
+		// Initialises Models
+		pModel->initModel();
+	}
+
+	// Sets the first Model in the selection to selected
+	m_pSelectedModel = m_pModelSelection.front();
 }
 
 // Void: Links vert and frag shaders into a glslprogram
@@ -213,7 +240,11 @@ void Editor::update(const float kfTimeElapsed)
 	// Need a Model to place
 	// Scrolling cycles through available Models?
 
-	// Model at position infront of Camera with a Y of default: 0
+	// Hand position infront of Camera with a Y of default: 0
+	m_handPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	// Sets Model position to hand plus the selected height
+	m_pSelectedModel->setPosition(m_handPosition + glm::vec3(0.0f, m_fSelectionY, 0.0f));
 
 	// LEFT/RIGHT rotate Model?
 	// UP/DOWN translate Model in y axis?
@@ -228,6 +259,16 @@ void Editor::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 	
+	// Renders the Model in hand
+	m_pSelectedModel->buffer();
+
+	// Passes Model transformation data to shader
+	GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
+	gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(m_pSelectedModel->m_M));
+
+	// Renders Model
+	m_pSelectedModel->render();
+
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
@@ -237,7 +278,7 @@ void Editor::render()
 		// Passes Model transformation data to shader
 		GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
 		gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(pModel->m_M));
-
+	
 		// Renders Model
 		pModel->render();
 	}
