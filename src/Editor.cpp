@@ -1,7 +1,5 @@
-#include "Editor.h"
 
-using std::string;
-using std::ifstream;
+#include "Editor.h"
 
 // Constructor
 Editor::Editor(const sf::Vector2i kWindowSize)
@@ -15,7 +13,8 @@ void Editor::linkMe(const GLint kVertShader, const GLint kFragShader)
 {
 	// Create the program object
 	m_programHandle = gl::CreateProgram();
-	if (0 == m_programHandle) {
+	if (0 == m_programHandle)
+	{
 		fprintf(stderr, "Error creating program object.\n");
 		exit(1);
 	}
@@ -30,8 +29,8 @@ void Editor::linkMe(const GLint kVertShader, const GLint kFragShader)
 	// Check for successful linking
 	GLint status;
 	gl::GetProgramiv(m_programHandle, gl::LINK_STATUS, &status);
-	if (FALSE == status) {
-
+	if (FALSE == status) 
+	{
 		fprintf(stderr, "Failed to link shader program!\n");
 
 		GLint logLen;
@@ -72,7 +71,8 @@ void Editor::initScene(GLFWwindow* pWindow)
 
 	// Load contents of file
 	ifstream inFile("shaders/shader.vert");
-	if (!inFile) {
+	if (!inFile) 
+	{
 		fprintf(stderr, "Error opening file: shader/shader.vert\n");
 		exit(1);
 	}
@@ -84,7 +84,8 @@ void Editor::initScene(GLFWwindow* pWindow)
 
 	// Create the shader object
 	GLuint vertShader = gl::CreateShader(gl::VERTEX_SHADER);
-	if (0 == vertShader) {
+	if (0 == vertShader) 
+	{
 		fprintf(stderr, "Error creating vertex shader.\n");
 		exit(EXIT_FAILURE);
 	}
@@ -99,13 +100,15 @@ void Editor::initScene(GLFWwindow* pWindow)
 	// Check compilation status
 	GLint result;
 	gl::GetShaderiv(vertShader, gl::COMPILE_STATUS, &result);
-	if (FALSE == result) {
+	if (FALSE == result) 
+	{
 		fprintf(stderr, "Vertex shader compilation failed!\n");
 
 		GLint logLen;
 		gl::GetShaderiv(vertShader, gl::INFO_LOG_LENGTH, &logLen);
 
-		if (logLen > 0) {
+		if (logLen > 0) 
+		{
 			char * log = (char *)malloc(logLen);
 
 			GLsizei written;
@@ -192,12 +195,7 @@ void Editor::update(const float kfTimeElapsed)
 	m_camera.processUserInput(mouseMovement.x, mouseMovement.y);
 
 	// Defines the View
-	glm::mat4 V = glm::lookAt 
-	(
-		m_camera.getPosition(), // Camera position
-		m_camera.getView(), // Looking at
-		m_camera.getUp() // Up
-	);
+	glm::mat4 V = glm::lookAt( m_camera.getPosition(), m_camera.getView(), m_camera.getUp()); // Position, direction, up
 
 	// Defines the Perspective
 	glm::mat4 P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x / (float)m_windowSize.y, 1.f, 5000.f); // FOV, display aspect ratio and vision culls
