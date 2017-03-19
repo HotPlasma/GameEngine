@@ -2,11 +2,18 @@
 
 #include "PreHeader.h"
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "Scene.h"
+
 #include "World.h"
 #include "Editor.h"
 
 using std::string;
+
+//std::map<GLchar, Character> Characters;
+
 
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
@@ -179,6 +186,65 @@ void mainLoop()
 //////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
+	
+	//// FreeType
+	//FT_Library ft;
+	//// All functions return a value different than 0 whenever an error occurred
+	//if (FT_Init_FreeType(&ft))
+	//	std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+
+	//// Load font as face
+	//FT_Face face;
+	//if (FT_New_Face(ft, "./assets/fonts/DEARBORN.ttf", 0, &face))
+	//	std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+
+	//// Load first 128 characters of ASCII set
+	//for (GLubyte c = 0; c < 128; c++)
+	//{
+	//	// Load character glyph 
+	//	if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+	//	{
+	//		std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+	//		continue;
+	//	}
+	//	// Generate texture
+	//	GLuint texture;
+	//	gl::GenTextures(1, &texture);
+	//	gl::BindTexture(gl::TEXTURE_2D, texture);
+	//	gl::TexImage2D(
+	//		gl::TEXTURE_2D,
+	//		0,
+	//		gl::RED,
+	//		face->glyph->bitmap.width,
+	//		face->glyph->bitmap.rows,
+	//		0,
+	//		gl::RED,
+	//		gl::UNSIGNED_BYTE,
+	//		face->glyph->bitmap.buffer
+	//	);
+	//	// Set texture options
+	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_S, gl::CLAMP_TO_EDGE);
+	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_T, gl::CLAMP_TO_EDGE);
+	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR);
+	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
+	//	//	// Now store character for later use
+	//	//	Character character = {
+	//	//		texture,
+	//	//		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+	//	//		glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+	//	//		face->glyph->advance.x
+	//	//	};
+	//	//	Characters.insert(std::pair<GLchar, Character>(c, character));
+	//	//}
+	//}
+
+
+	////gl::PixelStorei(gl::UNPACK_ALIGNMENT, 1);
+
+	////FT_Done_Face(face);
+	////FT_Done_FreeType(ft);
+
+
 	// Initialises GLFW: If it fails the program exits
 	if (!glfwInit()) exit(EXIT_FAILURE);
 

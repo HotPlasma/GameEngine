@@ -7,10 +7,12 @@
 #include "Camera.h"
 #include "SceneReader.h"
 #include "ModelReader.h"
+#include "glslprogram.h"
 
 class World : public Scene
 {
 	private:
+		GLSLProgram m_WorldShader;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 
 	

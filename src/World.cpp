@@ -10,12 +10,17 @@ World::World(sf::Vector2i windowSize)
 
 void World::initScene(GLFWwindow *pWindow)
 {
+<<<<<<< HEAD
 	// Window pointer added to member
 	m_pWindow = pWindow;
 
 	// Sets the cursor to be hidden
 	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
+=======
+
+	linkMe(1, 2);
+>>>>>>> master
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -23,104 +28,7 @@ void World::initScene(GLFWwindow *pWindow)
 	/////////// Vertex shader //////////////////////////
 	//////////////////////////////////////////////////////
 
-	// Load contents of file
-	ifstream inFile("shaders/shader.vert");
-	if (!inFile) {
-		fprintf(stderr, "Error opening file: shader/shader.vert\n");
-		exit(1);
-	}
-
-	std::stringstream code;
-	code << inFile.rdbuf();
-	inFile.close();
-	string sCodeStr(code.str());
-
-	// Create the shader object
-	GLuint vertShader = gl::CreateShader(gl::VERTEX_SHADER);
-	if (0 == vertShader) {
-		fprintf(stderr, "Error creating vertex shader.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// Load the source code into the shader object
-	const GLchar* codeArray[] = { sCodeStr.c_str() };
-	gl::ShaderSource(vertShader, 1, codeArray, NULL);
-
-	// Compile the shader
-	gl::CompileShader(vertShader);
-
-	// Check compilation status
-	GLint result;
-	gl::GetShaderiv(vertShader, gl::COMPILE_STATUS, &result);
-	if (FALSE == result) {
-		fprintf(stderr, "Vertex shader compilation failed!\n");
-
-		GLint logLen;
-		gl::GetShaderiv(vertShader, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) {
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetShaderInfoLog(vertShader, logLen, &written, log);
-
-			fprintf(stderr, "Shader log: \n%s", log);
-
-			free(log);
-		}
-	}
-
-	//////////////////////////////////////////////////////
-	/////////// Fragment shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	// Load contents of file into shader code here
-	ifstream fragFile("shaders/shader.frag");
-	if (!fragFile) {
-		fprintf(stderr, "Error opening file: shader/shader.frag\n");
-		exit(1);
-	}
-
-	std::stringstream fragCode;
-	fragCode << fragFile.rdbuf();
-	fragFile.close();
-	sCodeStr = fragCode.str();
-
-	// Create the shader object
-	GLuint fragShader = gl::CreateShader(gl::FRAGMENT_SHADER);
-	if (0 == fragShader) {
-		fprintf(stderr, "Error creating fragment shader.\n");
-		exit(1);
-	}
-
-	// Load the source code into the shader object
-	codeArray[0] = sCodeStr.c_str();
-	gl::ShaderSource(fragShader, 1, codeArray, NULL);
-
-	// Compile the shader
-	gl::CompileShader(fragShader);
-
-	// Check compilation status
-	gl::GetShaderiv(fragShader, gl::COMPILE_STATUS, &result);
-	if (FALSE == result) {
-		fprintf(stderr, "Fragment shader compilation failed!\n");
-
-		GLint logLen;
-		gl::GetShaderiv(fragShader, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) {
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetShaderInfoLog(fragShader, logLen, &written, log);
-
-			fprintf(stderr, "Shader log: \n%s", log);
-
-			free(log);
-		}
-	}
-
-	linkMe(vertShader, fragShader);
+	
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
@@ -132,7 +40,6 @@ void World::initScene(GLFWwindow *pWindow)
 		}
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
-
 }
 
 void World::setMousePos(sf::Vector2i mousepos)
@@ -142,6 +49,7 @@ void World::setMousePos(sf::Vector2i mousepos)
 
 void World::linkMe(GLint vertShader, GLint fragShader)
 {
+<<<<<<< HEAD
 	// Create the program object
 	m_programHandle = gl::CreateProgram();
 	if (0 == m_programHandle) {
@@ -176,10 +84,18 @@ void World::linkMe(GLint vertShader, GLint fragShader)
 			
 			free(log);
 		}
+=======
+	try {
+		m_WorldShader.compileShader("Shaders/shader.vert");
+		m_WorldShader.compileShader("Shaders/shader.frag");
+		m_WorldShader.link();
+		m_WorldShader.validate();
+		m_WorldShader.use();
+>>>>>>> master
 	}
-	else 
-	{
-		gl::UseProgram(m_programHandle);
+	catch (GLSLProgramException & e) {
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
 	}
 }
 
@@ -209,13 +125,14 @@ void World::update(float t)
 
 	// Send data to shader for processing
 
-	GLuint viewMatrixID = gl::GetUniformLocation(m_programHandle, "mView");
-	GLuint projectionMatrixID = gl::GetUniformLocation(m_programHandle, "mProjection");
+	//GLuint viewMatrixID = gl::GetUniformLocation(m_programHandle, "mView");
+	//GLuint projectionMatrixID = gl::GetUniformLocation(m_programHandle, "mProjection");
 
 	
-	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
-	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
-
+	//gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
+	m_WorldShader.setUniform("mView", V);
+	//gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
+	m_WorldShader.setUniform("mProjection", P);
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -233,10 +150,10 @@ void World::update(float t)
 				{
 					m_collectableSpeed = glm::vec3(0, 0.03, 0);
 				}
-				//Set positions & rotations
 
+				//Set positions & rotations
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 180 * t, m_sceneReader.m_modelList.at(i).getRotation().z));
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 5 * t, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
@@ -254,8 +171,9 @@ void World::update(float t)
 
 void World::modelUpdate(int index)
 {
-	GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
-	gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(m_sceneReader.m_modelList.at(index).m_M));
+	//GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
+	m_WorldShader.setUniform("mModel", m_sceneReader.m_modelList.at(index).m_M);
+	//gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(m_sceneReader.m_modelList.at(index).m_M));
 }
 
 void World::render()
