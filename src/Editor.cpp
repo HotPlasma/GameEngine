@@ -17,7 +17,18 @@ Editor::Editor(const sf::Vector2i kWindowSize)
 	model->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
 	model->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
 	model->setMaterial(1);
+	// Populates the ModelSelection member with Models
+	m_pModelSelection.push_back(model);
 
+	// Creates a battery Model
+	model = std::shared_ptr<Model>(new Model());
+	model->setName("Stump");
+	model->setFileLocation("assets/models/stump.obj");
+	model->setTextureLocation("assets/textures/stump.bmp");
+	model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	model->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	model->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	model->setMaterial(1);
 	// Populates the ModelSelection member with Models
 	m_pModelSelection.push_back(model);
 
