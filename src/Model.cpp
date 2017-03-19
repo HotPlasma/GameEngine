@@ -92,10 +92,10 @@ void Model::buffer()
 
 void Model::initModel()
 {
-	glm::mat4 rotMatrix = { cos(m_rotation.x),0,-sin(m_rotation.x),0,
-		0,1,0,0,
-		sin(m_rotation.x),0,cos(m_rotation.x),0,
-		0,0,0,1 };
+	glm::mat4 rotMatrix = glm::mat4(1.0f);
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
 
 	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
 		0,m_scale.y,0,0,
@@ -107,7 +107,7 @@ void Model::initModel()
 		0,0,1,0,
 		m_position.x,m_position.y,m_position.z,1 };
 
-	m_M = scaleMatrix * transMatrix * rotMatrix;
+	m_M = transMatrix * rotMatrix * scaleMatrix;
 
 
 	m_positionData = m_pModelReader->getVertices();

@@ -54,6 +54,9 @@
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\glslprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Camera.h">
@@ -92,12 +95,21 @@
     <ClInclude Include="include\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\glslprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader.frag">
       <Filter>Resource Files</Filter>
     </None>
     <None Include="shaders\shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\freetype.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\freetype.frag">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
