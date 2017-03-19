@@ -68,13 +68,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries\freetype-2.7.1\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries\freetype-2.7.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries/\freetype-2.7.1\objs\vc2010\x64\freetype2271d.lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\x64\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -106,6 +106,8 @@
     <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="shaders\freetype.frag" />
+    <None Include="shaders\freetype.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
   </ItemGroup>

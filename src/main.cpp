@@ -11,6 +11,9 @@
 
 using std::string;
 
+//std::map<GLchar, Character> Characters;
+
+
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
 
@@ -184,30 +187,18 @@ void mainLoop()
 int main(int argc, char *argv[])
 {
 	
+	//// FreeType
 	//FT_Library ft;
+	//// All functions return a value different than 0 whenever an error occurred
 	//if (FT_Init_FreeType(&ft))
 	//	std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 
+	//// Load font as face
 	//FT_Face face;
-	//if (FT_New_Face(ft, "assets/fonts/DEARBORN.ttf", 0, &face))
+	//if (FT_New_Face(ft, "./assets/fonts/DEARBORN.ttf", 0, &face))
 	//	std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 
-	//FT_Set_Pixel_Sizes(face, 0, 48);
-
-	//if (FT_Load_Char(face, 'X', FT_LOAD_RENDER))
-	//	std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
-
-	//struct Character {
-	//	GLuint     TextureID;  // ID handle of the glyph texture
-	//	glm::ivec2 Size;       // Size of glyph
-	//	glm::ivec2 Bearing;    // Offset from baseline to left/top of glyph
-	//	GLuint     Advance;    // Offset to advance to next glyph
-	//};
-
-	//std::map<GLchar, Character> Characters;
-
-	//gl::PixelStorei(gl::UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
-
+	//// Load first 128 characters of ASCII set
 	//for (GLubyte c = 0; c < 128; c++)
 	//{
 	//	// Load character glyph 
@@ -236,15 +227,22 @@ int main(int argc, char *argv[])
 	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_T, gl::CLAMP_TO_EDGE);
 	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR);
 	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-	//	// Now store character for later use
-	//	Character character = {
-	//		texture,
-	//		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-	//		glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-	//		face->glyph->advance.x
-	//	};
-	//	Characters.insert(std::pair<GLchar, Character>(c, character));
+	//	//	// Now store character for later use
+	//	//	Character character = {
+	//	//		texture,
+	//	//		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+	//	//		glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+	//	//		face->glyph->advance.x
+	//	//	};
+	//	//	Characters.insert(std::pair<GLchar, Character>(c, character));
+	//	//}
 	//}
+
+
+	////gl::PixelStorei(gl::UNPACK_ALIGNMENT, 1);
+
+	////FT_Done_Face(face);
+	////FT_Done_FreeType(ft);
 
 
 	// Initialises GLFW: If it fails the program exits

@@ -31,7 +31,6 @@ void World::initScene()
 		}
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
-
 }
 
 void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
