@@ -10,6 +10,9 @@ World::World(sf::Vector2i windowSize)
 
 void World::initScene(GLFWwindow *pWindow)
 {
+	// Enables OpenGL depth testing
+	gl::Enable(gl::DEPTH_TEST);
+
 	// Window pointer added to member
 	m_pWindow = pWindow;
 
@@ -34,7 +37,8 @@ void World::linkMe(GLint vertShader, GLint fragShader)
 		m_WorldShader.validate();
 		m_WorldShader.use();
 	}
-	catch (GLSLProgramException & e) {
+	catch (GLSLProgramException & e) 
+	{
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -42,7 +46,6 @@ void World::linkMe(GLint vertShader, GLint fragShader)
 
 void World::update(float t)
 {
-
 	// Creates camera and view using MVP
 
 	// Allows first person view changing with mouse movement

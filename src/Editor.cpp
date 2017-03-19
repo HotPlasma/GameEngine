@@ -49,177 +49,35 @@ Editor::Editor(const sf::Vector2i kWindowSize)
 // Void: Links vert and frag shaders into a glslprogram
 void Editor::linkMe(const GLint kVertShader, const GLint kFragShader)
 {
-	// Create the program object
-	m_programHandle = gl::CreateProgram();
-	if (0 == m_programHandle)
+	try
 	{
-		fprintf(stderr, "Error creating program object.\n");
-		exit(1);
+		m_shader.compileShader("Shaders/shader.vert");
+		m_shader.compileShader("Shaders/shader.frag");
+		m_shader.link();
+		m_shader.validate();
+		m_shader.use();
 	}
-
-	// Attach the shaders to the program object
-	gl::AttachShader(m_programHandle, kVertShader);
-	gl::AttachShader(m_programHandle, kFragShader);
-
-	// Link the program
-	gl::LinkProgram(m_programHandle);
-
-	// Check for successful linking
-	GLint status;
-	gl::GetProgramiv(m_programHandle, gl::LINK_STATUS, &status);
-	if (FALSE == status) 
+	catch (GLSLProgramException & e)
 	{
-		fprintf(stderr, "Failed to link shader program!\n");
-
-		GLint logLen;
-		gl::GetProgramiv(m_programHandle, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) {
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetProgramInfoLog(m_programHandle, logLen, &written, log);
-
-			fprintf(stderr, "Program log: \n%s", log);
-
-			free(log);
-		}
-	}
-	else
-	{
-		gl::UseProgram(m_programHandle);
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
 	}
 }
 
 // Void: Initialises the Editor Scene
 void Editor::initScene(GLFWwindow* pWindow)
 {
+	// Enables OpenGL depth testing
+	gl::Enable(gl::DEPTH_TEST);
+
 	// Window pointer added to member
 	m_pWindow = pWindow;
 
 	// Sets the cursor to be hidden
 	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
-	// Stops rendered models from being transparent
-	gl::Enable(gl::DEPTH_TEST);
-
-	//////////////////////////////////////////////////////
-	/////////// Vertex shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	// Load contents of file
-	ifstream inFile("shaders/shader.vert");
-	if (!inFile) 
-	{
-		fprintf(stderr, "Error opening file: shader/shader.vert\n");
-		exit(1);
-	}
-
-	std::stringstream code;
-	code << inFile.rdbuf();
-	inFile.close();
-	string sCodeStr(code.str());
-
-	// Create the shader object
-	GLuint vertShader = gl::CreateShader(gl::VERTEX_SHADER);
-	if (0 == vertShader) 
-	{
-		fprintf(stderr, "Error creating vertex shader.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	// Load the source code into the shader object
-	const GLchar* codeArray[] = { sCodeStr.c_str() };
-	gl::ShaderSource(vertShader, 1, codeArray, NULL);
-
-	// Compile the shader
-	gl::CompileShader(vertShader);
-
-	// Check compilation status
-	GLint result;
-	gl::GetShaderiv(vertShader, gl::COMPILE_STATUS, &result);
-	if (FALSE == result) 
-	{
-		fprintf(stderr, "Vertex shader compilation failed!\n");
-
-		GLint logLen;
-		gl::GetShaderiv(vertShader, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) 
-		{
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetShaderInfoLog(vertShader, logLen, &written, log);
-
-			fprintf(stderr, "Shader log: \n%s", log);
-
-			free(log);
-		}
-	}
-
-	//////////////////////////////////////////////////////
-	/////////// Fragment shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	// Load contents of file into shader code here
-	ifstream fragFile("shaders/shader.frag");
-	if (!fragFile) {
-		fprintf(stderr, "Error opening file: shader/shader.frag\n");
-		exit(1);
-	}
-
-	std::stringstream fragCode;
-	fragCode << fragFile.rdbuf();
-	fragFile.close();
-	sCodeStr = fragCode.str();
-
-	// Create the shader object
-	GLuint fragShader = gl::CreateShader(gl::FRAGMENT_SHADER);
-	if (0 == fragShader) {
-		fprintf(stderr, "Error creating fragment shader.\n");
-		exit(1);
-	}
-
-	// Load the source code into the shader object
-	codeArray[0] = sCodeStr.c_str();
-	gl::ShaderSource(fragShader, 1, codeArray, NULL);
-
-	// Compile the shader
-	gl::CompileShader(fragShader);
-
-	// Check compilation status
-	gl::GetShaderiv(fragShader, gl::COMPILE_STATUS, &result);
-	if (FALSE == result) {
-		fprintf(stderr, "Fragment shader compilation failed!\n");
-
-		GLint logLen;
-		gl::GetShaderiv(fragShader, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) {
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetShaderInfoLog(fragShader, logLen, &written, log);
-
-			fprintf(stderr, "Shader log: \n%s", log);
-
-			free(log);
-		}
-	}
-
-	linkMe(vertShader, fragShader);
-
-	//m_sceneReader = SceneReader("assets/scenes/Scene.xml");
-
-	//for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	//{
-	//	if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
-	//	{
-	//		m_sceneReader.m_modelList[i].initModel();
-	//	}
-	//	/*Editor.ModelList[i].DrawModel(true, true);*/
-	//}
+	// Links shaders
+	linkMe(1, 2);
 }
 
 // Void: Updates the Editor with elapsed time
@@ -239,11 +97,9 @@ void Editor::update(const float kfTimeElapsed)
 	glm::mat4 P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x / (float)m_windowSize.y, 1.f, 5000.f); // FOV, display aspect ratio and vision culls
 
 	// Passes View and Perspective data to shader
-	GLuint viewMatrixID = gl::GetUniformLocation(m_programHandle, "mView");
-	GLuint projectionMatrixID = gl::GetUniformLocation(m_programHandle, "mProjection");
-	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
-	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
-		
+	m_shader.setUniform("mView", V);
+	m_shader.setUniform("mProjection", P);
+	
 	// Resets cursor to the center of the window after cursor event
 	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
 
@@ -274,8 +130,7 @@ void Editor::render()
 	m_pSelectedModel->buffer();
 
 	// Passes Model transformation data to shader
-	GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
-	gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(m_pSelectedModel->m_M));
+	m_shader.setUniform("mModel", m_pSelectedModel->m_M);
 
 	// Renders Model
 	m_pSelectedModel->render();
@@ -287,8 +142,7 @@ void Editor::render()
 		pModel->buffer();
 		
 		// Passes Model transformation data to shader
-		GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
-		gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(pModel->m_M));
+		m_shader.setUniform("mModel", pModel->m_M);
 	
 		// Renders Model
 		pModel->render();

@@ -7,13 +7,14 @@
 #include "Camera.h"
 #include "Model.h"
 #include "ModelReader.h"
+#include "glslprogram.h"
 
 //!< Scene subclass for creating levels
 class Editor : public Scene
 {
 	private:
-	
-		GLuint m_programHandle; //!< Shader handle context
+
+		GLSLProgram m_shader; //!< Shader program
 		glm::mat4 m_M; //!< Model transformation matrix
 		Camera m_camera; //!< User Camera
 
