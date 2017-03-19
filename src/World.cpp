@@ -10,36 +10,13 @@ World::World(sf::Vector2i windowSize)
 
 void World::initScene(GLFWwindow *pWindow)
 {
-<<<<<<< HEAD
 	// Window pointer added to member
 	m_pWindow = pWindow;
 
 	// Sets the cursor to be hidden
 	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
-=======
-
 	linkMe(1, 2);
->>>>>>> master
-	// Stops rendered models from being transparent
-	gl::Enable(gl::DEPTH_TEST);
-
-	//////////////////////////////////////////////////////
-	/////////// Vertex shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	
-
-	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
-
-	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	{
-		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
-		{
-			m_sceneReader.m_modelList[i].initModel();
-		}
-		/*world.ModelList[i].DrawModel(true, true);*/
-	}
 }
 
 void World::setMousePos(sf::Vector2i mousepos)
@@ -49,49 +26,13 @@ void World::setMousePos(sf::Vector2i mousepos)
 
 void World::linkMe(GLint vertShader, GLint fragShader)
 {
-<<<<<<< HEAD
-	// Create the program object
-	m_programHandle = gl::CreateProgram();
-	if (0 == m_programHandle) {
-		fprintf(stderr, "Error creating program object.\n");
-		exit(1);
-	}
-
-	// Attach the shaders to the program object
-	gl::AttachShader(m_programHandle, vertShader);
-	gl::AttachShader(m_programHandle, fragShader);
-
-	// Link the program
-	gl::LinkProgram(m_programHandle);
-
-	// Check for successful linking
-	GLint status;
-	gl::GetProgramiv(m_programHandle, gl::LINK_STATUS, &status);
-	if (FALSE == status) {
-
-		fprintf(stderr, "Failed to link shader program!\n");
-		
-		GLint logLen;
-		gl::GetProgramiv(m_programHandle, gl::INFO_LOG_LENGTH, &logLen);
-
-		if (logLen > 0) {
-			char * log = (char *)malloc(logLen);
-
-			GLsizei written;
-			gl::GetProgramInfoLog(m_programHandle, logLen, &written, log);
-
-			fprintf(stderr, "Program log: \n%s", log);
-			
-			free(log);
-		}
-=======
-	try {
+	try 
+	{
 		m_WorldShader.compileShader("Shaders/shader.vert");
 		m_WorldShader.compileShader("Shaders/shader.frag");
 		m_WorldShader.link();
 		m_WorldShader.validate();
 		m_WorldShader.use();
->>>>>>> master
 	}
 	catch (GLSLProgramException & e) {
 		cerr << e.what() << endl;
@@ -104,7 +45,7 @@ void World::update(float t)
 
 	// Creates camera and view using MVP
 
-	 // Allows first person view changing with mouse movement
+	// Allows first person view changing with mouse movement
 	sf::Vector2i windowOrigin(m_windowSize.x * 0.5, m_windowSize.y * 0.5); // Middle of the screen
 
 	float fYAngle = (windowOrigin - m_mousePos).x / 1000.0f;
