@@ -108,7 +108,7 @@ void World::update(float t)
 
 				//Set positions & rotations
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 5 * t, m_sceneReader.m_modelList.at(i).getRotation().z));
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + 5, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
