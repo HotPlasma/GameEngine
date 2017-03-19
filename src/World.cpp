@@ -12,7 +12,7 @@ void World::initScene()
 {
 	
 	srand(time(NULL)); //to get true random numbers
-	zRot = rand() % 360 + 1; //for direction ai will move in in the wander state
+	yRot = rand() % 360 + 1; //for direction ai will move in in the wander state
 	
 
 	linkMe(1, 2);
@@ -96,7 +96,7 @@ void World::update(float t)
 	//----AI start-----
 	timer = clock();
 	duration = (clock()) / (double)CLOCKS_PER_SEC;
-	cout << duration << endl;
+	//cout << duration << endl;
 	if (duration % 4 == 0)
 	{
 		searching = false;
@@ -113,7 +113,7 @@ void World::update(float t)
 			{
 				
 				// locate();
-				m_aiRotation = glm::vec3(0, 0, zRot);
+				m_aiRotation = glm::vec3(0, yRot, 0);
 				m_aiSpeed = glm::vec3(0.002f, 0, 0.002f) * distance;
 
 			}
@@ -122,14 +122,14 @@ void World::update(float t)
 				// wander();
 				if (searching == true)
 				{
-					m_aiRotation = glm::vec3(0, 0, zRot);
+					m_aiRotation = glm::vec3(0, yRot, 0);
 					m_aiSpeed = glm::vec3(0, 0, 0); // whatever direction its facing & forward?
 				
 
 				}
 				if (searching == false)
 				{
-					zRot = rand() % 360 + 1;
+					yRot = rand() % 360 + 1;
 					searchTime += 10;
 					searching = true;	
 				}
@@ -138,7 +138,7 @@ void World::update(float t)
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2) // if ai is in chase range
 			{
 				// chase();
-				// m_aiRotation = glm::vec3(0, 0, 0);
+				m_aiRotation = glm::vec3(0, 0, 0);
 				m_aiSpeed = glm::vec3(0.002f, 0, 0.002f) * distance;
 		
 			}

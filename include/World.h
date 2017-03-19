@@ -16,7 +16,7 @@ class World : public Scene
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 		glm::vec3 m_aiSpeed; //ai movement speed
 		glm::vec3 m_aiRotation; //ai rotation
-		float zRot; //amount for random turns of ai in wander state
+		float yRot; //amount for random turns of ai in wander state
 		bool searching = true; 
 		int duration = 0;
 		double searchTime = 50;
