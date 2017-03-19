@@ -6,7 +6,7 @@
     <Name>Deer</Name>
     <OBJLocation>assets/models/deer.obj</OBJLocation>
     <TexLocation>assets/textures/deer.bmp</TexLocation>
-    <Translation>5 -4 40</Translation>
+    <Translation>5 -4 20</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>

@@ -10,6 +10,12 @@ World::World(sf::Vector2i windowSize)
 
 void World::initScene()
 {
+	
+	srand(time(NULL)); //to get true random numbers
+	zRot = rand() % 360 + 1; //for direction ai will move in in the wander state
+	
+
+	
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -207,44 +213,71 @@ void World::update(float t)
 	
 	gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
 	gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
-	
-	// makes ai move towards player
+
+
+	//----AI start-----
+	timer = clock();
+	duration = (clock()) / (double)CLOCKS_PER_SEC;
+	cout << duration << endl;
+	if (duration % 4 == 0)
+	{
+		searching = false;
+	}
+
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
 
+		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
+		
 		if (m_sceneReader.m_modelList.at(i).isAi()) // check if object has ai
 		{
-			//if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) > 50) // if ai object is further than the wander/search range from the player 
-			//{
-			//	move into the wander/search range (so the ai isnt midlessly searching for the player on the other side of the map)
-
-			//}
-			//else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 50) // if ai object is out of range of the player
-			//{
-			//	switch to wander/searching state
-
-			//}
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) > 1) // if ai object has not caught the player (distance value to be changed later)
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the wander range
 			{
-				//switch to chase state
-				m_aiSpeed = glm::vec3(0.01f, 0, 0.01f) * distance;
-				//add rotation here
+				
+				// locate();
+				m_aiRotation = glm::vec3(0, 0, zRot);
+				m_aiSpeed = glm::vec3(0.002f, 0, 0.002f) * distance;
 
 			}
-			else //if player is caught by ai
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
 			{
-				m_aiSpeed = glm::vec3(0, 0, 0);
-				//endgame?
+				// wander();
+				if (searching == true)
+				{
+					m_aiRotation = glm::vec3(0, 0, zRot);
+					m_aiSpeed = glm::vec3(0, 0, 0); // whatever direction its facing & forward?
 				
+
+				}
+				if (searching == false)
+				{
+					zRot = rand() % 360 + 1;
+					searchTime += 10;
+					searching = true;	
+				}
+				
+			}
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2) // if ai is in chase range
+			{
+				// chase();
+				// m_aiRotation = glm::vec3(0, 0, 0);
+				m_aiSpeed = glm::vec3(0.002f, 0, 0.002f) * distance;
+		
+			}
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2) // if ai catches player
+			{
+				// jumpscare?
+				// endGame();
+				m_aiRotation = glm::vec3(0, 0, 0);
+				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
 
 			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
-			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(1).getRotation() = m_aiRotation); //need to figure this out still
-			
-		
+			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() = m_aiRotation);
 		}
 	}
+	//-----AI end-----
+
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)

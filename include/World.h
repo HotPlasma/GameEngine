@@ -14,12 +14,23 @@ class World : public Scene
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 		glm::vec3 m_aiSpeed; //ai movement speed
 		glm::vec3 m_aiRotation; //ai rotation
+		float zRot; //amount for random turns of ai in wander state
+		bool searching = true; 
+		int duration = 0;
+		double searchTime = 50;
+		clock_t timer;
+		float xPos;
+		float zPos;
+	
+
+	
 
 	
 		GLuint m_programHandle; // Program context
 		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
 	
 		void linkMe(GLint vertShader, GLint fragShader); // Connects shaders
+
 	
 		Texture *g_pTexture; // Holds texture
 		Camera m_camera; // Camera which user can control
