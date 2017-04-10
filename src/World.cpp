@@ -8,12 +8,17 @@ World::World(sf::Vector2i windowSize)
 	m_windowSize = windowSize;
 }
 
-void World::initScene()
+
+void World::initScene(Freetype* Overlay)
 {
 
-	linkMe(1, 2);
+	HUD = Overlay; // Get the Heads up display for the scene
+
+	linkShaders();
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
+
+
 
 	//////////////////////////////////////////////////////
 	/////////// Vertex shader //////////////////////////
@@ -39,7 +44,7 @@ void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
 	m_mousePos = mousepos;
 }
 
-void World::linkMe(GLint vertShader, GLint fragShader)
+void World::linkShaders()
 {
 	try {
 		m_WorldShader.compileShader("Shaders/shader.vert");
@@ -47,11 +52,30 @@ void World::linkMe(GLint vertShader, GLint fragShader)
 		m_WorldShader.link();
 		m_WorldShader.validate();
 		m_WorldShader.use();
+
+		// Shader which allows first person camera and textured objects
+		m_FreeType.compileShader("Shaders/freetype.vert");
+		m_FreeType.compileShader("Shaders/freetype.frag");
+		m_FreeType.link();
+		m_FreeType.validate();
 	}
 	catch (GLSLProgramException & e) {
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
+}
+
+void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection)
+{
+	mat4 mv = view * model;
+	shader->setUniform("ModelViewMatrix", mv);
+	shader->setUniform("NormalMatrix",
+		mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	shader->setUniform("MVP", projection * mv);
+	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
+	shader->setUniform("M", model);
+	shader->setUniform("V", view);
+	shader->setUniform("P", projection);
 }
 
 void World::update(float t)
@@ -65,26 +89,22 @@ void World::update(float t)
 	float fYAngle = (windowOrigin - m_mousePos).x / 1000.0f;
 	float fZAngle = (windowOrigin - m_mousePos).y / 1000.0f;
 
-	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
-
-	glm::mat4 V = glm::lookAt(glm::vec3(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z), // Camera position
-		glm::vec3(m_camera.getView().x, m_camera.getView().y, m_camera.getView().z), // Looking at
-		glm::vec3(0, 1, 0)); // Up
-
-	//std::cout << "X: " << FirstPersonView.GetCameraPos().x << " Y: " << FirstPersonView.GetCameraPos().y << " Z: " << FirstPersonView.GetCameraPos().z << std::endl;
-
-	glm::mat4 P = glm::perspective(60.0f, (float)m_windowSize.x/m_windowSize.y, 1.f, 500.f); // Sets FOV and vision culls
-
-	// Send data to shader for processing
-
-	//GLuint viewMatrixID = gl::GetUniformLocation(m_programHandle, "mView");
-	//GLuint projectionMatrixID = gl::GetUniformLocation(m_programHandle, "mProjection");
-
 	
-	//gl::UniformMatrix4fv(viewMatrixID, 1, gl::FALSE_, glm::value_ptr(V));
-	m_WorldShader.setUniform("mView", V);
-	//gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
-	m_WorldShader.setUniform("mProjection", P);
+
+	m_V = glm::lookAt
+	(
+		m_camera.getPosition(), // Camera position
+		m_camera.getView(), // Looking at
+		m_camera.getUp() // Up
+	);
+
+
+	m_P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x/m_windowSize.y, 1.f, 5000.f); // Sets FOV and vision culls
+	//
+	//m_WorldShader.setUniform("mView", m_V);
+	//m_WorldShader.setUniform("mProjection", m_P);
+
+	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -105,7 +125,7 @@ void World::update(float t)
 
 				//Set positions & rotations
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(45, m_sceneReader.m_modelList.at(i).getRotation().y + 5 * t, m_sceneReader.m_modelList.at(i).getRotation().z));
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + 5, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
@@ -119,12 +139,6 @@ void World::update(float t)
 
 }
 
-void World::modelUpdate(int index)
-{
-	//GLuint modelMatrixID = gl::GetUniformLocation(m_programHandle, "mModel");
-	m_WorldShader.setUniform("mModel", m_sceneReader.m_modelList.at(index).m_M);
-	//gl::UniformMatrix4fv(modelMatrixID, 1, gl::FALSE_, glm::value_ptr(m_sceneReader.m_modelList.at(index).m_M));
-}
 
 void World::render()
 {
@@ -132,15 +146,18 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	
-
-	// Render all models in current scene
+	m_WorldShader.use();
+	SetMatices(&m_WorldShader, glm::mat4(1.0f), m_V, m_P);
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList.at(i).buffer();
-			modelUpdate(i);
+			m_WorldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
+	m_FreeType.use();
+	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	HUD->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }

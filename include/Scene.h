@@ -2,17 +2,18 @@
 #define SCENE_H
 
 #include "PreHeader.h"
+#include <Freetype.h>
 
 // Abstract class in order to set up world
 class Scene
 {
 	public:
-		Scene() : m_animate(true) {}
+		Scene() : m_bAnimate(true) {}
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
 		// Load in all texture and initilise shaders
-		virtual void initScene() = 0;
+		virtual void initScene(Freetype* Overlay) = 0;
 	
 		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos) = 0;
 	
@@ -31,13 +32,13 @@ class Scene
 			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
 		}
 	
-		void animate(bool bValue) { m_animate = bValue; }
-		bool animating() { return m_animate; }
+		void animate(bool bValue) { m_bAnimate = bValue; }
+		bool animating() { return m_bAnimate; }
 	
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
-		bool m_animate;
+		bool m_bAnimate;
 };
 
 #endif // SCENE_H

@@ -2,9 +2,12 @@
 
 Camera::Camera()
 {
-	// Sets Pos and View to default values
+	m_fFOV = 90.0f;
+
+	// Sets Pos, View and Up to default values
 	m_position = glm::vec3(1.0f, 1.0f, 1.0);
 	m_view = glm::vec3(0.0f, 1.0f, 0.0f);
+	m_up = glm::vec3(0.0f, 1.0f, 0.0f);
 }
 
 void Camera::processUserInput(float fYAngle, float fZAngle) 
