@@ -45,7 +45,7 @@ class Model
 		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
 		int getMaterial() { return m_iMaterial; }; // Returns materialID
 	
-		void setCollectable();
+		void setCollectable(bool NewSetting);
 		void setCollected(bool bCollected); // Set collected or not collected for a collectable
 		void setName(string sNewName);
 		void setTexture(GLuint textureID); // Set texture ID

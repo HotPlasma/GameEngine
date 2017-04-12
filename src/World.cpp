@@ -36,6 +36,8 @@ void World::initScene(Freetype* Overlay)
 		}
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
+
+	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
 void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
@@ -58,6 +60,12 @@ void World::linkShaders()
 		m_FreeType.compileShader("Shaders/freetype.frag");
 		m_FreeType.link();
 		m_FreeType.validate();
+
+		// Shader which allows first person camera and textured objects
+		m_ImageType.compileShader("Shaders/image.vert");
+		m_ImageType.compileShader("Shaders/image.frag");
+		m_ImageType.link();
+		m_ImageType.validate();
 	}
 	catch (GLSLProgramException & e) {
 		cerr << e.what() << endl;
@@ -157,7 +165,16 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
+	
 	m_FreeType.use();
 	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
 	HUD->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+
+	m_ImageType.use();
+	SetMatices(&m_ImageType, HUD->m_ImagePlane.m_M, m_V, m_P);
+	
+	m_ImageType.setUniform("M", HUD->m_ImagePlane.m_M);
+	m_ImageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	HUD->RenderImage();
+	
 }

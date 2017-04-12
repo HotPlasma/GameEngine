@@ -8,6 +8,10 @@
 #include "../libraries/glm/glm/gtc/matrix_transform.hpp"
 #include "../libraries/glm/glm/gtc/type_ptr.hpp"
 
+#include "Bitmap.h"
+#include "Texture.h"
+#include <ModelReader.h>
+#include <Model.h>
 
 #include <glslprogram.h>
 
@@ -39,6 +43,10 @@ public:
 
 	std::map<GLchar, Character> m_cCharacters; ///< Map of characters of font
 
+	ModelReader* m_pModelReader;
+
+	Model m_ImagePlane;
+
 	////////////////////////////////////////////////////////////
 	/// \brief Loads the characters from a given font into m_cCharacters
 	////////////////////////////////////////////////////////////
@@ -62,6 +70,8 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	void RenderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+	void LoadHUDImage(std::string imageLocation, GLfloat x, GLfloat y, GLfloat rotation, GLfloat scale);
+	void RenderImage();
 };
 
 ////////////////////////////////////////////////////////////

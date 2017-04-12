@@ -118,6 +118,12 @@
     <None Include="shaders\freetype.frag">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="shaders\image.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\image.frag">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\scenes\scene.xml">

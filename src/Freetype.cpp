@@ -13,6 +13,8 @@ Freetype::Freetype()
 
 	// Set size to load glyphs as
 	FT_Set_Pixel_Sizes(m_Face, 0, 25);
+
+	
 }
 
 void Freetype::loadCharacters()
@@ -125,4 +127,25 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 	}
 	gl::BindVertexArray(0);
 	gl::BindTexture(gl::TEXTURE_2D, 0);
+}
+
+void Freetype::LoadHUDImage(std::string imageLocation, GLfloat x, GLfloat y, GLfloat rotation, GLfloat scale)
+{
+	m_ImagePlane = Model("assets/Models/HUDPlane.obj", imageLocation, glm::vec3(x, y, 0), glm::vec3(0, 0, rotation), glm::vec3(scale, scale, 1), 0);
+
+
+	m_ImagePlane.loadModel();
+
+	m_ImagePlane.initModel();
+}
+
+void Freetype::RenderImage()
+{
+
+	//m_pModelReader = new ModelReader("assets/Models/HUDPlane.obj");
+
+	
+	m_ImagePlane.buffer();
+	m_ImagePlane.render();
+
 }

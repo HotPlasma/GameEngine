@@ -110,6 +110,8 @@
   <ItemGroup>
     <None Include="shaders\freetype.frag" />
     <None Include="shaders\freetype.vert" />
+    <None Include="shaders\image.frag" />
+    <None Include="shaders\image.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
   </ItemGroup>

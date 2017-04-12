@@ -28,9 +28,9 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
-void Model::setCollectable()
+void Model::setCollectable(bool NewSetting)
 {
-	m_bCollectable = true;
+	m_bCollectable = NewSetting;
 }
 
 void Model::setCollected(bool bCollected)
@@ -105,7 +105,7 @@ void Model::initModel()
 		0,0,1,0,
 		m_position.x,m_position.y,m_position.z,1 };
 
-	m_M = transMatrix * rotMatrix * scaleMatrix;
+	m_M = scaleMatrix * rotMatrix * transMatrix;
 
 
 	m_positionData = m_pModelReader->getVertices();
@@ -169,7 +169,7 @@ void Model::render()
 		0,0,1,0,
 		m_position.x,m_position.y,m_position.z,1 };
 
-	m_M = scaleMatrix * transMatrix * rotMatrix;
+	m_M = transMatrix  * scaleMatrix * rotMatrix;
 
 	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
 }
