@@ -45,7 +45,7 @@ public:
 
 	ModelReader* m_pModelReader;
 
-	Model m_ImagePlane;
+	vector<Model> m_ImagePlane;
 
 	////////////////////////////////////////////////////////////
 	/// \brief Loads the characters from a given font into m_cCharacters
@@ -70,8 +70,8 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	void RenderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-	void LoadHUDImage(std::string imageLocation, GLfloat x, GLfloat y, GLfloat rotation, GLfloat scale);
-	void RenderImage();
+	void LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale);
+	void RenderImage(int index);
 };
 
 ////////////////////////////////////////////////////////////

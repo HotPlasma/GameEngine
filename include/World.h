@@ -36,7 +36,7 @@ class World : public Scene
 	public:
 		World(sf::Vector2i windowSize);
 		void initScene(Freetype* Overlay);
-		void setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos);
+		void setMousePos(GLFWwindow *GWindow, sf::Vector2i mousepos);
 		void update(float t);
 		void render();
 };

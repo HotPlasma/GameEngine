@@ -129,23 +129,19 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 	gl::BindTexture(gl::TEXTURE_2D, 0);
 }
 
-void Freetype::LoadHUDImage(std::string imageLocation, GLfloat x, GLfloat y, GLfloat rotation, GLfloat scale)
+void Freetype::LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale)
 {
-	m_ImagePlane = Model("assets/Models/HUDPlane.obj", imageLocation, glm::vec3(x, y, 0), glm::vec3(0, 0, rotation), glm::vec3(scale, scale, 1), 0);
+	m_ImagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
 
+	m_ImagePlane.at(m_ImagePlane.size() - 1).loadModel();
 
-	m_ImagePlane.loadModel();
-
-	m_ImagePlane.initModel();
+	m_ImagePlane.at(m_ImagePlane.size() - 1).initModel();
 }
 
-void Freetype::RenderImage()
+void Freetype::RenderImage(int index)
 {
-
-	//m_pModelReader = new ModelReader("assets/Models/HUDPlane.obj");
-
 	
-	m_ImagePlane.buffer();
-	m_ImagePlane.render();
+	m_ImagePlane.at(index).buffer();
+	m_ImagePlane.at(index).render();
 
 }

@@ -19,13 +19,6 @@ void World::initScene(Freetype* Overlay)
 	gl::Enable(gl::DEPTH_TEST);
 
 
-
-	//////////////////////////////////////////////////////
-	/////////// Vertex shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	
-
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -37,7 +30,7 @@ void World::initScene(Freetype* Overlay)
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
-	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
+//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
 void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
@@ -48,7 +41,8 @@ void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
 
 void World::linkShaders()
 {
-	try {
+	try 
+	{
 		m_WorldShader.compileShader("Shaders/shader.vert");
 		m_WorldShader.compileShader("Shaders/shader.frag");
 		m_WorldShader.link();
@@ -67,7 +61,8 @@ void World::linkShaders()
 		m_ImageType.link();
 		m_ImageType.validate();
 	}
-	catch (GLSLProgramException & e) {
+	catch (GLSLProgramException & e)
+	{
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -170,11 +165,10 @@ void World::render()
 	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
 	HUD->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
-	m_ImageType.use();
-	SetMatices(&m_ImageType, HUD->m_ImagePlane.m_M, m_V, m_P);
-	
-	m_ImageType.setUniform("M", HUD->m_ImagePlane.m_M);
-	m_ImageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	HUD->RenderImage();
+	//m_ImageType.use();
+	//
+	//m_ImageType.setUniform("M", HUD->m_ImagePlane.m_M);
+	//m_ImageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	//HUD->RenderImage();
 	
 }

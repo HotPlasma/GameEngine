@@ -85,6 +85,7 @@
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\gl_core_4_3.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelReader.cpp" />
     <ClCompile Include="src\SceneReader.cpp" />
@@ -97,6 +98,7 @@
     <ClInclude Include="include\Freetype.h" />
     <ClInclude Include="include\glslprogram.h" />
     <ClInclude Include="include\gl_core_4_3.hpp" />
+    <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelReader.h" />
     <ClInclude Include="include\PreHeader.h" />

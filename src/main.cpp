@@ -6,7 +6,7 @@
 #include FT_FREETYPE_H
 
 #include "Scene.h"
-
+#include "Menu.h"
 #include "World.h"
 #include <Freetype.h>
 
@@ -14,7 +14,7 @@ using std::string;
 
 //std::map<GLchar, Character> Characters;
 
-
+Menu *g_pMenu;
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
 
@@ -76,11 +76,15 @@ void initializeGL()
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Creates a World scene
-	g_pScene = new World(windowSize);
+	//g_pScene = new World(windowSize);
+
+	g_pScene = new Menu(windowSize);
+
 
 	// Set-up freetype
 	gl::Enable(gl::BLEND);
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
+
 	UserInterface.loadCharacters();
 	UserInterface.setupBuffers();
 	// Gets window width and height
@@ -88,6 +92,7 @@ void initializeGL()
 
 	// Initialises scene
 	g_pScene->initScene(&UserInterface);
+	//g_pMenu->initScene(&UserInterface);
 
 
 }
@@ -189,7 +194,7 @@ void mainLoop()
 		glfwPollEvents();
 
 		// Resets cursor to the center of the window after cursor event
-		if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+	//	if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
 	}
 }
 
@@ -235,7 +240,7 @@ int main(int argc, char *argv[])
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
-	glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	//glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
