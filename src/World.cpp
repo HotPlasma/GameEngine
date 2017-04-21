@@ -3,6 +3,9 @@
 using std::string;
 using std::ifstream;
 
+#define MOVE_VELOCITY 0.01f
+#define ROTATE_VELOCITY 0.001f
+
 World::World(sf::Vector2i windowSize)
 {
 	m_windowSize = windowSize;
@@ -88,32 +91,34 @@ void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projec
 }
 
 void World::update(float fTimeElapsed)
+void World::keyPress(const int kiKey)
 {
+	if (kiKey == GLFW_KEY_A)
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY));
+	}
 
-	// Creates camera and view using MVP
+	if (kiKey == GLFW_KEY_D)
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY));
+	}
+}
 
-	 // Allows first person view changing with mouse movement
-	sf::Vector2i windowOrigin(m_windowSize.x * 0.5, m_windowSize.y * 0.5); // Middle of the screen
+void World::update(float t)
+{
+	double dMousePos[2] = { m_mousePos.x, m_mousePos.y };
+	// Updates the current mouse position
+	glfwGetCursorPos(m_pWindow, &dMousePos[0], &dMousePos[1]);
+	m_mousePos = sf::Vector2f(dMousePos[0], dMousePos[1]);
 
-	float fYAngle = (windowOrigin - m_mousePos).x / 1000.0f;
-	float fZAngle = (windowOrigin - m_mousePos).y / 1000.0f;
+	// Calculates the mouse movement
+	glm::vec2 delta((float)(m_lastMousePos.x - m_mousePos.x), (float)(m_lastMousePos.y - m_mousePos.y));
 
-	
+	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
+	m_camera.move(glm::vec3(delta.x*MOVE_VELOCITY, delta.y*MOVE_VELOCITY, 0.0f));
 
-	m_V = glm::lookAt
-	(
-		m_camera.getPosition(), // Camera position
-		m_camera.getView(), // Looking at
-		m_camera.getUp() // Up
-	);
-
-
-	m_P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x/m_windowSize.y, 1.f, 5000.f); // Sets FOV and vision culls
-	//
-	//m_WorldShader.setUniform("mView", m_V);
-	//m_WorldShader.setUniform("mProjection", m_P);
-
-	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
+	// Store the current cursor position
+	m_lastMousePos = m_mousePos;
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
