@@ -15,7 +15,8 @@ class Scene
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* Overlay) = 0;
 	
-		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos) = 0;
+		virtual void keyPress(const int kiKey) = 0;
+		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2f mousepos) = 0;
 	
 		// Run every frame
 		virtual void update(float t) = 0;
