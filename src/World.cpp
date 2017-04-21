@@ -3,16 +3,19 @@
 using std::string;
 using std::ifstream;
 
+#define MOVE_VELOCITY 0.01f
+#define ROTATE_VELOCITY 0.001f
+
 World::World(sf::Vector2i windowSize)
 {
 	m_windowSize = windowSize;
 }
 
 
-void World::initScene(Freetype* pOverlay)
+void World::initScene(Freetype* Overlay)
 {
 
-	m_pHUD = pOverlay; // Get the Heads up display for the scene
+	HUD = Overlay; // Get the Heads up display for the scene
 
 	linkShaders();
 	// Stops rendered models from being transparent
@@ -38,82 +41,74 @@ void World::initScene(Freetype* pOverlay)
 	}
 }
 
-void World::setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos)
+void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2f mousepos)
 {
-	m_pWindow = pWindow;
+	m_pWindow = Gwindow;
 	m_mousePos = mousepos;
 }
 
 void World::linkShaders()
 {
-	try 
-	{
+	try {
+		m_WorldShader.compileShader("Shaders/shader.vert");
+		m_WorldShader.compileShader("Shaders/shader.frag");
+		m_WorldShader.link();
+		m_WorldShader.validate();
+		m_WorldShader.use();
+
 		// Shader which allows first person camera and textured objects
-		m_worldShader.compileShader("Shaders/shader.vert");
-		m_worldShader.compileShader("Shaders/shader.frag");
-		m_worldShader.link();
-		m_worldShader.validate();
-		m_worldShader.use();
+		m_FreeType.compileShader("Shaders/freetype.vert");
+		m_FreeType.compileShader("Shaders/freetype.frag");
+		m_FreeType.link();
+		m_FreeType.validate();
 	}
 	catch (GLSLProgramException & e) {
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
-
-	try
-	{
-		// Shader which allows heads up display
-		m_freeType.compileShader("Shaders/freetype.vert");
-		m_freeType.compileShader("Shaders/freetype.frag");
-		m_freeType.link();
-		m_freeType.validate();
-	}
-	catch (GLSLProgramException & e) 
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
 }
 
-void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
+void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection)
 {
 	mat4 mv = view * model;
-	pShader->setUniform("ModelViewMatrix", mv);
-	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	pShader->setUniform("MVP", projection * mv);
+	shader->setUniform("ModelViewMatrix", mv);
+	shader->setUniform("NormalMatrix",
+		mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	shader->setUniform("MVP", projection * mv);
 	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	pShader->setUniform("M", model);
-	pShader->setUniform("V", view);
-	pShader->setUniform("P", projection);
+	shader->setUniform("M", model);
+	shader->setUniform("V", view);
+	shader->setUniform("P", projection);
 }
 
-void World::update(float fTimeElapsed)
+void World::keyPress(const int kiKey)
 {
+	if (kiKey == GLFW_KEY_A)
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY));
+	}
 
-	// Creates camera and view using MVP
+	if (kiKey == GLFW_KEY_D)
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY));
+	}
+}
 
-	 // Allows first person view changing with mouse movement
-	sf::Vector2i windowOrigin(m_windowSize.x * 0.5, m_windowSize.y * 0.5); // Middle of the screen
+void World::update(float t)
+{
+	double dMousePos[2] = { m_mousePos.x, m_mousePos.y };
+	// Updates the current mouse position
+	glfwGetCursorPos(m_pWindow, &dMousePos[0], &dMousePos[1]);
+	m_mousePos = sf::Vector2f(dMousePos[0], dMousePos[1]);
 
-	float fYAngle = (windowOrigin - m_mousePos).x / 1000.0f;
-	float fZAngle = (windowOrigin - m_mousePos).y / 1000.0f;
+	// Calculates the mouse movement
+	glm::vec2 delta((float)(m_lastMousePos.x - m_mousePos.x), (float)(m_lastMousePos.y - m_mousePos.y));
 
-	
+	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
+	m_camera.move(glm::vec3(delta.x*MOVE_VELOCITY, delta.y*MOVE_VELOCITY, 0.0f));
 
-	m_V = glm::lookAt
-	(
-		m_camera.getPosition(), // Camera position
-		m_camera.getView(), // Looking at
-		m_camera.getUp() // Up
-	);
-
-
-	m_P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x/m_windowSize.y, 1.f, 5000.f); // Sets FOV and vision culls
-	//
-	//m_WorldShader.setUniform("mView", m_V);
-	//m_WorldShader.setUniform("mProjection", m_P);
-
-	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
+	// Store the current cursor position
+	m_lastMousePos = m_mousePos;
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -155,18 +150,18 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	
-	m_worldShader.use();
-	SetMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
+	m_WorldShader.use();
+	SetMatices(&m_WorldShader, glm::mat4(1.0f), m_V, m_P);
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList.at(i).buffer();
-			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
+			m_WorldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
-	m_freeType.use();
-	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_FreeType.use();
+	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	HUD->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }
