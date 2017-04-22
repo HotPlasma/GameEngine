@@ -83,9 +83,19 @@ void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 project
 
 void World::keyPress(const int kiKey)
 {
+	if (kiKey == GLFW_KEY_W)
+	{
+		m_camera.move(glm::vec3(MOVE_VELOCITY, 0.0f, 0.0f));
+	}
+
 	if (kiKey == GLFW_KEY_A)
 	{
 		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY));
+	}
+
+	if (kiKey == GLFW_KEY_S)
+	{
+		m_camera.move(glm::vec3(-MOVE_VELOCITY, 0.0f, 0.0f));
 	}
 
 	if (kiKey == GLFW_KEY_D)
@@ -96,16 +106,10 @@ void World::keyPress(const int kiKey)
 
 void World::update(float t)
 {
-	double dMousePos[2] = { m_mousePos.x, m_mousePos.y };
-	// Updates the current mouse position
-	glfwGetCursorPos(m_pWindow, &dMousePos[0], &dMousePos[1]);
-	m_mousePos = sf::Vector2f(dMousePos[0], dMousePos[1]);
-
 	// Calculates the mouse movement
-	glm::vec2 delta((float)(m_lastMousePos.x - m_mousePos.x), (float)(m_lastMousePos.y - m_mousePos.y));
+	sf::Vector2f delta(m_lastMousePos - m_mousePos);
 
 	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
-	m_camera.move(glm::vec3(delta.x*MOVE_VELOCITY, delta.y*MOVE_VELOCITY, 0.0f));
 
 	// Store the current cursor position
 	m_lastMousePos = m_mousePos;
