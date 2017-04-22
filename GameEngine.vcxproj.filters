@@ -22,26 +22,38 @@
     <Filter Include="Dependencies\Source Files">
       <UniqueIdentifier>{3afbcb9a-f535-4d05-bdca-1769577bca76}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{dd7cb5dc-97f4-434b-bc5c-df4878eaeedf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Scenes">
+      <UniqueIdentifier>{09f34a63-af8f-41e0-9dff-323a18fb0a43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\UI">
+      <UniqueIdentifier>{3fff548d-7126-4e6a-991d-6c1556b62f02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders\Scene">
+      <UniqueIdentifier>{29ac3a65-89d1-4f84-a12b-53a6ac41fb56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{22bba5aa-2120-4d57-a86e-50ee596d7418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{6fbc7597-880c-4744-bfad-7f1133064778}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\System">
+      <UniqueIdentifier>{6d1e315f-1333-4019-a743-27996b88ab7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{d8b3bce4-07b2-4e5b-80b2-9f57de77fc02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene">
+      <UniqueIdentifier>{be02cf33-198d-4ada-b8ca-a7ad710995b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{67273f8d-e34c-4dc1-b08e-483ab16cead6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ModelReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SceneReader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\World.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Bitmap.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
@@ -54,32 +66,32 @@
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\glslprogram.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Freetype.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Dependencies\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glslprogram.cpp">
+      <Filter>Dependencies\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\World.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneReader.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelReader.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Model.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ModelReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SceneReader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\World.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PreHeader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Bitmap.h">
       <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
@@ -95,33 +107,51 @@
     <ClInclude Include="libraries\tinyxml\tinyxml2.h">
       <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Scene.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Freetype.h">
+      <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\glslprogram.h">
-      <Filter>Header Files</Filter>
+      <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Freetype.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelReader.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scene.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneReader.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\World.h">
+      <Filter>Header Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PreHeader.h">
+      <Filter>Header Files\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader.frag">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
     <None Include="shaders\shader.vert">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="shaders\freetype.vert">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
     <None Include="shaders\freetype.frag">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Shaders\UI</Filter>
+    </None>
+    <None Include="shaders\freetype.vert">
+      <Filter>Resource Files\Shaders\UI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\scenes\scene.xml">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Scenes</Filter>
     </Xml>
   </ItemGroup>
 </Project>
