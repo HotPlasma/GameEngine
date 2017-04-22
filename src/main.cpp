@@ -28,7 +28,7 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
 	// Passes key input to scene
-	//g_pScene->keyPress(iKey);
+	g_pScene->keyPress(iKey);
 }
 
 //////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		//g_pScene->setMousePos(g_pWindow, sf::Vector2f(dX, dY));
+		g_pScene->setMousePos(g_pWindow, sf::Vector2f(dX, dY));
 	}
 }
 
