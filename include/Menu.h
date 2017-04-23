@@ -6,6 +6,7 @@
 #include "ModelReader.h"
 #include "glslprogram.h"
 #include "Freetype.h"
+#include "Button.h"
 
 class Menu : public Scene
 {
@@ -14,6 +15,10 @@ private:
 	GLSLProgram m_ImageType;
 
 	Freetype* UI;
+
+	Button *m_PlayButton;
+	Button *m_EditorButton;
+	Button *m_ExitButton;
 
 	GLuint m_programHandle; // Program context
 	glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale

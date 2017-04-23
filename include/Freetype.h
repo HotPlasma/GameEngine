@@ -38,6 +38,8 @@ public:
 
 	FT_Face m_Face; ///< Font
 
+	bool m_bVisable; ///< Toggles visablity of freetype asset
+
 	GLuint m_VAO; ///< VAO for drawing font
 	GLuint m_VBO; ///< VBO for drawing font
 
@@ -70,7 +72,7 @@ public:
 	///
 	////////////////////////////////////////////////////////////
 	void RenderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-	void LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale);
+	void LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity);
 	void RenderImage(int index);
 };
 

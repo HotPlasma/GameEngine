@@ -80,6 +80,7 @@
   <ItemGroup>
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Bitmap.cpp" />
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Freetype.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
@@ -94,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bitmap.h" />
+    <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Freetype.h" />
     <ClInclude Include="include\glslprogram.h" />

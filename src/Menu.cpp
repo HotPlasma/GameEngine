@@ -22,9 +22,9 @@ void Menu::linkShaders()
 	}
 }
 
-Menu::Menu(sf::Vector2i windowSize)
+Menu::Menu(sf::Vector2i windowSizes)
 {
-	m_windowSize = windowSize;
+	m_windowSize = windowSizes;
 }
 
 void Menu::initScene(Freetype * Overlay)
@@ -35,8 +35,15 @@ void Menu::initScene(Freetype * Overlay)
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
-	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f));
-	UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
+	m_PlayButton = new Button(m_windowSize.x / 2, 700, 0, "assets/UI/Play.png", "assets/UI/PlayHover.png", glm::vec3(147.f, 46.f, 1.f), Overlay);
+
+	m_EditorButton = new Button(m_windowSize.x / 2, 600, 0, "assets/UI/WorldEditor.png", "assets/UI/WorldEditorHover.png", glm::vec3(148.f, 46.f, 1.f), Overlay);
+
+	m_ExitButton = new Button(m_windowSize.x / 2, 400, 0, "assets/UI/Exit.png", "assets/UI/ExitHover.png", glm::vec3(83, 46.f, 1.f), Overlay);
+	
+
+	//UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
+	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
 }
 
 void Menu::setMousePos(GLFWwindow * GWindow, sf::Vector2i mousepos)
@@ -49,6 +56,9 @@ void Menu::update(float t)
 {
 	m_V = mat4(1.0f);
 	m_P = glm::perspective(90.f, (float)m_windowSize.x / m_windowSize.y, 1.f, 5000.f);
+	m_PlayButton->CheckHover(m_mousePos, 0);
+	m_EditorButton->CheckHover(m_mousePos, 2);
+	m_ExitButton->CheckHover(m_mousePos, 4);
 }
 
 void Menu::render()
@@ -56,17 +66,25 @@ void Menu::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
-	/*m_FreeType.use();
-	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	UI->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));*/
+	
 
 	m_ImageType.use();
-
 	for (int i = 0; i < UI->m_ImagePlane.size(); i++)
 	{
 		m_ImageType.setUniform("M", UI->m_ImagePlane.at(i).m_M);
 		m_ImageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-		UI->RenderImage(i);
+		if (UI->m_ImagePlane.at(i).getVisable() == true)
+		{
+			UI->RenderImage(i);
+		}
 	}
+	
+	//m_PlayButton->draw();
+
+	m_FreeType.use();
+	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	UI->RenderText(m_FreeType.getHandle(), "Game Engine", m_windowSize.x / 2, 900, 1.0f, glm::vec3(1.f, 1.f, 1.f));
+
+
 	
 }
