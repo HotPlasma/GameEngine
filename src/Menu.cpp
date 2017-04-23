@@ -85,6 +85,39 @@ void Menu::render()
 	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
 	UI->RenderText(m_FreeType.getHandle(), "Game Engine", m_windowSize.x / 2, 900, 1.0f, glm::vec3(1.f, 1.f, 1.f));
 
-
-	
 }
+
+int Menu::returnMenuChoice()
+{
+	if (m_bClicked) // If clicked
+	{
+		if (m_PlayButton->isActive()) // New World button clicked
+		{
+			WhichState = Play;
+		}
+		else if (m_EditorButton->isActive()) // Load world button clicked
+		{
+			WhichState = Create;
+		}
+		else if (m_ExitButton->isActive()) // Exit button clicked
+		{
+			WhichState = ExitMenu;
+		}
+		m_bClicked = false; // "Unclick" button
+		return WhichState; // Return which button was clicked
+	}
+	return WhichState = None; // If no button clicked return none
+}
+
+void Menu::Click()
+{
+	// To be run if mouse clicked
+	m_bClicked = true;
+}
+
+void Menu::ResetClick()
+{
+	// Set click to false
+	m_bClicked = false;
+}
+

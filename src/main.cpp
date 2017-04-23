@@ -20,6 +20,9 @@ GLFWwindow *g_pWindow;
 
 Freetype UserInterface;
 
+enum g_GameState {MainMenu = 0, Game = 1, Editor = 2, Exit = 3};
+g_GameState g_WhichGameState = MainMenu;
+
 bool g_bWindowFocused; // Stores whether the window is in focus
 
 //////////////////////////////////////////////////////////
@@ -77,8 +80,8 @@ void initializeGL()
 
 	// Creates a World scene
 	//g_pScene = new World(windowSize);
-
-	g_pScene = new Menu(windowSize);
+	g_pMenu = new Menu(windowSize);
+	g_pScene = g_pMenu;
 
 
 	// Set-up freetype
@@ -193,8 +196,41 @@ void mainLoop()
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
 
-		// Resets cursor to the center of the window after cursor event
-	//	if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+		if (g_WhichGameState == MainMenu)
+		{
+			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
+			{
+				{
+					cout << "Clicked" << endl;
+					g_pMenu->Click();
+				}
+			}
+
+			switch (g_pMenu->returnMenuChoice())
+			{
+			case 1:
+				g_pScene = new World(sf::Vector2i(1920,1080));
+				g_pScene->initScene(&UserInterface);
+				g_WhichGameState = Game;
+				break;
+			case 2:
+				g_WhichGameState = Editor;
+				break;
+			case 3:
+				delete g_pScene;
+				glfwTerminate();
+				exit(EXIT_SUCCESS);
+				break;
+
+			}
+		}
+
+		if (g_WhichGameState == Game || g_WhichGameState == Editor)
+		{
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+			// Resets cursor to the center of the window after cursor event
+			if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+		}
 	}
 }
 
@@ -203,7 +239,6 @@ void mainLoop()
 //////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
-
 
 	// Initialises GLFW: If it fails the program exits
 	if (!glfwInit()) exit(EXIT_FAILURE);
@@ -240,7 +275,10 @@ int main(int argc, char *argv[])
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
-	//glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	if (g_WhichGameState == Game || g_WhichGameState == Editor)
+	{
+		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	}
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
