@@ -25,7 +25,6 @@ class World : public Scene
 
 		void SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection);
 	
-		Texture *g_pTexture; // Holds texture
 		Camera m_camera; // Camera which user can control
 		GLFWwindow *m_pWindow; // The window
 		sf::Vector2i m_mousePos; // Holds mouse cursor position
