@@ -15,6 +15,7 @@ class World : public Scene
 	private:
 		GLSLProgram m_worldShader;
 		GLSLProgram m_freeType;
+		GLSLProgram m_imageType;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 		Freetype* m_pHUD;
 	

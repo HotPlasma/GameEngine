@@ -33,6 +33,8 @@ void World::initScene(Freetype* pOverlay)
 		}
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
+
+//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
 void World::setMousePos(sf::Vector2f mousepos)
@@ -51,7 +53,8 @@ void World::linkShaders()
 		m_worldShader.validate();
 		m_worldShader.use();
 	}
-	catch (GLSLProgramException & e) {
+	catch (GLSLProgramException & e)
+	{
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -69,6 +72,22 @@ void World::linkShaders()
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_imageType.compileShader("Shaders/image.vert");
+		m_imageType.compileShader("Shaders/image.frag");
+		m_imageType.link();
+		m_imageType.validate();
+	}
+	catch (GLSLProgramException & e)
+	{
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
 }
 
 void World::setMatrices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
