@@ -164,7 +164,11 @@ void SceneReader::readSceneFile(string sFilename)
 							// If data string contains "true"
 							if (sData == "true")
 							{
-								newModel.setCollectable();
+								newModel.setCollectable(true);
+							}
+							else
+							{
+								newModel.setCollectable(false);
 							}
 						}
 					}

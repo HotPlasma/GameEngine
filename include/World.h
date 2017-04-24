@@ -8,31 +8,32 @@
 #include "SceneReader.h"
 #include "ModelReader.h"
 #include "glslprogram.h"
+#include "Freetype.h"
 
 class World : public Scene
 {
 	private:
-		GLSLProgram m_WorldShader;
+		GLSLProgram m_worldShader;
+		GLSLProgram m_freeType;
+		GLSLProgram m_imageType;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-
+		Freetype* m_pHUD;
 	
 		GLuint m_programHandle; // Program context
 		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
 	
-		void linkMe(GLint vertShader, GLint fragShader); // Connects shaders
+		void linkShaders(); // Connects shaders
+
+		void setMatrices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
 	
-		Texture *g_pTexture; // Holds texture
-		Camera m_camera; // Camera which user can control
-		GLFWwindow *m_pWindow; // The window
-		sf::Vector2i m_mousePos; // Holds mouse cursor position
 		SceneReader m_sceneReader; // Reads .xml file in order to create world
+		glm::mat4 m_V, m_P;
 	
 	public:
-		World(sf::Vector2i windowSize);
-		void initScene(GLFWwindow *pWindow);
-		void setMousePos(sf::Vector2i mousepos);
-		void update(float t);
-		void modelUpdate(int index);
+		World(GLFWwindow *pWindow, sf::Vector2i windowSize);
+		void initScene(Freetype* pOverlay);
+		void setMousePos(sf::Vector2f mousepos);
+		void update(float fTimeElapsed);
 		void render();
 };
 #endif  

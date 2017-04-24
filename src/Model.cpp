@@ -28,9 +28,9 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
-void Model::setCollectable()
+void Model::setCollectable(bool NewSetting)
 {
-	m_bCollectable = true;
+	m_bCollectable = NewSetting;
 }
 
 void Model::setCollected(bool bCollected)
@@ -51,6 +51,11 @@ void Model::setFileLocation(string sNewLocation)
 void  Model::setTextureLocation(string sNewLocation)
 {
 	m_sTexture = sNewLocation;
+}
+
+void Model::setVisable(bool Visability)
+{
+	m_bVisable = Visability;
 }
 
 void  Model::setPosition(glm::vec3 newPosition)
@@ -93,9 +98,7 @@ void Model::buffer()
 void Model::initModel()
 {
 	glm::mat4 rotMatrix = glm::mat4(1.0f);
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
+	
 
 	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
 		0,m_scale.y,0,0,
@@ -107,7 +110,7 @@ void Model::initModel()
 		0,0,1,0,
 		m_position.x,m_position.y,m_position.z,1 };
 
-	m_M = transMatrix * rotMatrix * scaleMatrix;
+	m_M = scaleMatrix * rotMatrix * transMatrix;
 
 
 	m_positionData = m_pModelReader->getVertices();
@@ -156,22 +159,10 @@ void Model::initModel()
 
 void Model::render()
 {
-	glm::mat4 xRotMatrix = { cos(m_rotation.x),0,-sin(m_rotation.x),0,
-		0,1,0,0,
-		sin(m_rotation.x),0,cos(m_rotation.x),0,
-		0,0,0,1 };
-
-	glm::mat4 yRotMatrix = { cos(m_rotation.y),0,sin(m_rotation.y),0,
-		0,1,0,0,
-		-sin(m_rotation.y),0,cos(m_rotation.y),0,
-		0,0,0,1 };
-
-	glm::mat4 zRotMatrix = { cos(m_rotation.z),0,-sin(m_rotation.z),0,
-		0,1,0,0,
-		sin(m_rotation.z),0,cos(m_rotation.z),0,
-		0,0,0,1 };
-
-	glm::mat4 rotMatrix = xRotMatrix * yRotMatrix * zRotMatrix;
+	glm::mat4 rotMatrix = glm::mat4(1.0f);
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
 
 	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
 		0,m_scale.y,0,0,
@@ -183,7 +174,7 @@ void Model::render()
 		0,0,1,0,
 		m_position.x,m_position.y,m_position.z,1 };
 
-	m_M = scaleMatrix * transMatrix * rotMatrix;
+	m_M = transMatrix  * scaleMatrix * rotMatrix;
 
 	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
 }

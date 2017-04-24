@@ -10,7 +10,7 @@
     <Rotation>0 0 0</Rotation>
     <Scale>0.3 0.3 0.3</Scale>
     <Material>1</Material>
-    <Collectable>true</Collectable>
+    <Collectable>false</Collectable>
   </Object>
 
   <Object>
@@ -150,7 +150,7 @@
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
     <Translation>-40 -5 23</Translation>
-    <Rotation>0 90 0</Rotation>
+    <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>
@@ -161,7 +161,7 @@
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
     <Translation>25 -5 8</Translation>
-    <Rotation>0 90 0</Rotation>
+    <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>
@@ -172,7 +172,7 @@
     <OBJLocation>assets/models/Battery.obj</OBJLocation>
     <TexLocation>assets/textures/Battery.bmp</TexLocation>
     <Translation>0 -5 -20</Translation>
-    <Rotation>0 90 0</Rotation>
+    <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>true</Collectable>

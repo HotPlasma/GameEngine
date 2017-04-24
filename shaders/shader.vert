@@ -1,21 +1,32 @@
 #version 430
 
-// Brings in vertex position and texture coordinates from GPU
-layout (location=0) in vec3 vertexPosition;
+in vec4 vertPosition;
+
+// Vertex positions and texture coordinates
+
+layout (location=0) in vec3 VertexPosition;
 layout (location=1) in vec2 fragTexCoord;
 
-// Brings in uniform variables for MVP matrices
-uniform mat4 mModel;        // Matrix to convert to world coordinate system
-uniform mat4 mView;         // Matrix to convert into camera coordinate system
-uniform mat4 mProjection;   // Matrix to convert to normalised screen coordinates
+out vec2 texCoord;
 
-// Passes texture coordinate to fragment shader
-out vec2 texCoord; 
+// Create explorable scene using MVP 
+
+
+uniform mat4 M;        // Matrix to convert to world 
+   // Coordinate system
+uniform mat4 V;         // Matrix to convert into 
+   // Camera coordinate system
+uniform mat4 P;   // Matrix to convert to 
+   // Normalised screen 
+   // Coordinates
+
+in vec3  vertColour;
+out vec3 Colour;
 
 void main()
 {
-	texCoord = fragTexCoord;
-	
-	// Transform from local to world to camera to NDCs
-	gl_Position = mProjection * mView * mModel * vec4(vertexPosition, 1.0f);
+texCoord = fragTexCoord;
+
+//Transform from local to world to camera to NDCs
+gl_Position = P * V * M * vertPosition;
 }

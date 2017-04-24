@@ -6,17 +6,23 @@
 #include FT_FREETYPE_H
 
 #include "Scene.h"
-
+#include "Menu.h"
 #include "World.h"
 #include "Editor.h"
+#include <Freetype.h>
 
 using std::string;
 
 //std::map<GLchar, Character> Characters;
 
-
+Menu *g_pMenu;
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
+
+Freetype UserInterface;
+
+enum g_GameState {MainMenu = 0, Game = 1, Editor = 2, Exit = 3};
+g_GameState g_WhichGameState = MainMenu;
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
@@ -25,9 +31,7 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	//if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
-	//	if (scene)
-	//		scene->animate(!(scene->animating()));
+	// Nothing
 }
 
 //////////////////////////////////////////////////////////
@@ -49,7 +53,7 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		g_pScene->setMousePos(sf::Vector2i(dX, dY));
+		g_pScene->setMousePos(sf::Vector2f(dX, dY));
 	}
 }
 
@@ -70,17 +74,23 @@ void initializeGL()
 	// Sets window clear colour
 	gl::ClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 
-	// Gets window width and height
 	sf::Vector2i windowSize;
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Creates a World scene
 	//g_pScene = new World(windowSize);
-	// TEMPORARY - Creates an Editor scene
-	g_pScene = new Editor(windowSize);
+	g_pMenu = new Menu(g_pWindow, windowSize);
+	g_pScene = g_pMenu;
 
+	// Set-up freetype
+	gl::Enable(gl::BLEND);
+	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
+
+	UserInterface.loadCharacters();
+	UserInterface.setupBuffers();
+	
 	// Initialises scene
-	g_pScene->initScene(g_pWindow);
+	g_pScene->initScene(&UserInterface);
 }
 
 //////////////////////////////////////////////////////////
@@ -162,11 +172,12 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 //////////////////////////////////////////////////////////
 void mainLoop() 
 {
+	// Sets the cursor position to center screen for tracking
+	glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+
 	// While the window should remain open and escape is not pressed
 	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
 	{
-		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-
 		// If window is focused
 		if (g_bWindowFocused)
 		{
@@ -175,9 +186,45 @@ void mainLoop()
 			glfwSetTime(0);
 			g_pScene->render();
 		}
-
+		
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
+    
+		if (g_WhichGameState == MainMenu)
+		{
+			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
+			{
+				{
+					cout << "Clicked" << endl;
+					g_pMenu->Click();
+				}
+			}
+
+			switch (g_pMenu->returnMenuChoice())
+			{
+			case 1:
+				g_pScene = new World(g_pWindow, sf::Vector2i(1920,1080));
+				g_pScene->initScene(&UserInterface);
+				g_WhichGameState = Game;
+				break;
+			case 2:
+				g_WhichGameState = Editor;
+				break;
+			case 3:
+				delete g_pScene;
+				glfwTerminate();
+				exit(EXIT_SUCCESS);
+				break;
+
+			}
+		}
+
+		if (g_WhichGameState == Game || g_WhichGameState == Editor)
+		{
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+			// Resets cursor to the center of the window after cursor event
+			if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+		}
 	}
 }
 
@@ -186,65 +233,6 @@ void mainLoop()
 //////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
-	
-	//// FreeType
-	//FT_Library ft;
-	//// All functions return a value different than 0 whenever an error occurred
-	//if (FT_Init_FreeType(&ft))
-	//	std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
-
-	//// Load font as face
-	//FT_Face face;
-	//if (FT_New_Face(ft, "./assets/fonts/DEARBORN.ttf", 0, &face))
-	//	std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
-
-	//// Load first 128 characters of ASCII set
-	//for (GLubyte c = 0; c < 128; c++)
-	//{
-	//	// Load character glyph 
-	//	if (FT_Load_Char(face, c, FT_LOAD_RENDER))
-	//	{
-	//		std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
-	//		continue;
-	//	}
-	//	// Generate texture
-	//	GLuint texture;
-	//	gl::GenTextures(1, &texture);
-	//	gl::BindTexture(gl::TEXTURE_2D, texture);
-	//	gl::TexImage2D(
-	//		gl::TEXTURE_2D,
-	//		0,
-	//		gl::RED,
-	//		face->glyph->bitmap.width,
-	//		face->glyph->bitmap.rows,
-	//		0,
-	//		gl::RED,
-	//		gl::UNSIGNED_BYTE,
-	//		face->glyph->bitmap.buffer
-	//	);
-	//	// Set texture options
-	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_S, gl::CLAMP_TO_EDGE);
-	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_T, gl::CLAMP_TO_EDGE);
-	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MIN_FILTER, gl::LINEAR);
-	//	gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_MAG_FILTER, gl::LINEAR);
-	//	//	// Now store character for later use
-	//	//	Character character = {
-	//	//		texture,
-	//	//		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-	//	//		glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-	//	//		face->glyph->advance.x
-	//	//	};
-	//	//	Characters.insert(std::pair<GLchar, Character>(c, character));
-	//	//}
-	//}
-
-
-	////gl::PixelStorei(gl::UNPACK_ALIGNMENT, 1);
-
-	////FT_Done_Face(face);
-	////FT_Done_FreeType(ft);
-
-
 	// Initialises GLFW: If it fails the program exits
 	if (!glfwInit()) exit(EXIT_FAILURE);
 
@@ -258,6 +246,7 @@ int main(int argc, char *argv[])
 
 	// Creates a new glfw window
 	g_pWindow = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
+	
 	// If the window isn't created
 	if (!g_pWindow)
 	{
@@ -278,6 +267,12 @@ int main(int argc, char *argv[])
 	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
+
+	// Sets the cursor to be hidden
+	if (g_WhichGameState == Game || g_WhichGameState == Editor)
+	{
+		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+	}
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
