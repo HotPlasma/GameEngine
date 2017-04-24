@@ -11,23 +11,13 @@ World::World(sf::Vector2i windowSize)
 	m_windowSize = windowSize;
 }
 
-
 void World::initScene(Freetype* pOverlay)
 {
-
 	m_pHUD = pOverlay; // Get the Heads up display for the scene
 
 	linkShaders();
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
-
-
-
-	//////////////////////////////////////////////////////
-	/////////// Vertex shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
@@ -41,7 +31,7 @@ void World::initScene(Freetype* pOverlay)
 	}
 }
 
-void World::setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos)
+void World::setMousePos(GLFWwindow *pWindow, sf::Vector2f mousepos)
 {
 	m_pWindow = pWindow;
 	m_mousePos = mousepos;
@@ -49,7 +39,7 @@ void World::setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos)
 
 void World::linkShaders()
 {
-	try 
+	try
 	{
 		// Shader which allows first person camera and textured objects
 		m_worldShader.compileShader("Shaders/shader.vert");
@@ -63,28 +53,22 @@ void World::linkShaders()
 		exit(EXIT_FAILURE);
 	}
 
-void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection)
-{
-	mat4 mv = view * model;
-	shader->setUniform("ModelViewMatrix", mv);
-	shader->setUniform("NormalMatrix",
-		mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	shader->setUniform("MVP", projection * mv);
-	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	shader->setUniform("M", model);
-	shader->setUniform("V", view);
-	shader->setUniform("P", projection);
-}
-
-void World::keyPress(const int kiKey)
-{
-	if (kiKey == GLFW_KEY_W)
+	try
 	{
-		m_camera.move(glm::vec3(MOVE_VELOCITY, 0.0f, 0.0f));
+		// Shader which allows heads up display
+		m_freeType.compileShader("Shaders/freetype.vert");
+		m_freeType.compileShader("Shaders/freetype.frag");
+		m_freeType.link();
+		m_freeType.validate();
+		m_freeType.use();
+	}
+	catch (GLSLProgramException & e) {
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
 	}
 }
 
-void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
+void World::setMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
 {
 	mat4 mv = view * model;
 	pShader->setUniform("ModelViewMatrix", mv);
@@ -96,7 +80,6 @@ void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projec
 	pShader->setUniform("P", projection);
 }
 
-void World::update(float fTimeElapsed)
 void World::keyPress(const int kiKey)
 {
 	if (kiKey == GLFW_KEY_W)
@@ -120,7 +103,7 @@ void World::keyPress(const int kiKey)
 	}
 }
 
-void World::update(float t)
+void World::update(float fTimeElapsed)
 {
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_lastMousePos - m_mousePos);
@@ -160,18 +143,15 @@ void World::update(float t)
 			}
 		}
 	}
-
 }
-
 
 void World::render()
 {
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
-	
 	m_worldShader.use();
-	SetMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
+	setMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
