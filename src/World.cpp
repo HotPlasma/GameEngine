@@ -102,7 +102,6 @@ void World::update(float t)
 	{
 		searching = false;
 	}
-
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 
@@ -120,6 +119,7 @@ void World::update(float t)
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
 			{
+				cout << "wandering" << endl;
 				// wander();
 				if (searching == true)
 				{
@@ -135,6 +135,7 @@ void World::update(float t)
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2) // if ai is in chase range
 			{
+				cout << "chasing" << endl;
 				// chase();
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
@@ -146,9 +147,9 @@ void World::update(float t)
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
 				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
-
 			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() = m_aiRotation);
+			
 		}
 	}
 

@@ -22,6 +22,7 @@ class World : public Scene
 		clock_t timer;
 		float xPos;
 		float zPos;
+		mat4 movement;
 	
 
 	
