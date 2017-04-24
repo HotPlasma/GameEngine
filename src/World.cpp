@@ -86,8 +86,6 @@ void World::linkShaders()
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
-
-
 }
 
 void World::setMatrices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
