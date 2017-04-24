@@ -35,6 +35,9 @@ private:
 
 	bool m_bClicked;
 
+	sf::SoundBuffer MenuTheme;
+
+
 public:
 	Menu(sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);

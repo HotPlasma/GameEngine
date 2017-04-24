@@ -292,6 +292,7 @@ int main(int argc, char *argv[])
 
 	// Initialisation
 	initializeGL();
+	
 
 	// Enters the main loop
 	mainLoop();

@@ -12,6 +12,8 @@ class Scene
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
+		sf::Sound Music;
+
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* pOverlay) = 0;
 	

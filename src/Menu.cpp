@@ -41,6 +41,10 @@ void Menu::initScene(Freetype * Overlay)
 
 	m_ExitButton = new Button(m_windowSize.x / 2, 400, 0, "assets/UI/Exit.png", "assets/UI/ExitHover.png", glm::vec3(83, 46.f, 1.f), Overlay);
 	
+	if (!MenuTheme.loadFromFile("assets/sounds/MainMenu.wav"));
+	{
+
+	}
 
 	//UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
 	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
@@ -54,6 +58,13 @@ void Menu::setMousePos(GLFWwindow * GWindow, sf::Vector2i mousepos)
 
 void Menu::update(float t)
 {
+	if (Music.getStatus() != sf::Sound::Playing)
+	{
+		Music.setBuffer(MenuTheme);
+		Music.setVolume(100);
+		Music.play();
+	}
+
 	m_V = mat4(1.0f);
 	m_P = glm::perspective(90.f, (float)m_windowSize.x / m_windowSize.y, 1.f, 5000.f);
 	m_PlayButton->CheckHover(m_mousePos, 0);
