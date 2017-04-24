@@ -19,7 +19,6 @@ class World : public Scene
 		float yRot; //amount for random turns of ai in wander state
 		bool searching = true; 
 		int duration = 0;
-		double searchTime = 50;
 		clock_t timer;
 		float xPos;
 		float zPos;

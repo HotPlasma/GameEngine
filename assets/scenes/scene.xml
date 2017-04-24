@@ -2,6 +2,7 @@
 
 <Scene>
   <!--List of Objects to be loaded for the room-->
+ 
   <Object>
     <Name>Deer</Name>
     <OBJLocation>assets/models/deer.obj</OBJLocation>
@@ -12,7 +13,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>true</Ai>
-
   </Object>
   
   <Object>
