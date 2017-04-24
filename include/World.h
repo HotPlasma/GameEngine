@@ -14,7 +14,7 @@ class World : public Scene
 	private:
 		GLSLProgram m_WorldShader;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-		glm::vec3 m_aiSpeed; //ai movement speed
+		glm::vec3 m_aiMovement; //ai movement speed
 		glm::vec3 m_aiRotation; //ai rotation
 		float yRot; //amount for random turns of ai in wander state
 		bool searching = true; 
@@ -23,6 +23,7 @@ class World : public Scene
 		clock_t timer;
 		float xPos;
 		float zPos;
+		mat4 movement;
 	
 
 	
