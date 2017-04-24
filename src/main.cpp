@@ -21,7 +21,7 @@ GLFWwindow *g_pWindow;
 
 Freetype UserInterface;
 
-enum g_GameState {MainMenu = 0, Game = 1, Editor = 2, Exit = 3};
+enum g_GameState {MainMenu = 0, Game = 1, LevelEditor = 2, Exit = 3};
 g_GameState g_WhichGameState = MainMenu;
 
 bool g_bWindowFocused; // Stores whether the window is in focus
@@ -208,7 +208,9 @@ void mainLoop()
 				g_WhichGameState = Game;
 				break;
 			case 2:
-				g_WhichGameState = Editor;
+				g_pScene = new Editor(g_pWindow, sf::Vector2i(1920, 1080));
+				g_pScene->initScene(&UserInterface);
+				g_WhichGameState = LevelEditor;
 				break;
 			case 3:
 				delete g_pScene;
@@ -219,7 +221,7 @@ void mainLoop()
 			}
 		}
 
-		if (g_WhichGameState == Game || g_WhichGameState == Editor)
+		if (g_WhichGameState == Game || g_WhichGameState == LevelEditor)
 		{
 			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 			// Resets cursor to the center of the window after cursor event
@@ -269,7 +271,7 @@ int main(int argc, char *argv[])
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
-	if (g_WhichGameState == Game || g_WhichGameState == Editor)
+	if (g_WhichGameState == Game || g_WhichGameState == LevelEditor)
 	{
 		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	}

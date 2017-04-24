@@ -1,11 +1,18 @@
 
 #include "Editor.h"
 
+#define MOVE_VELOCITY 50.0f
+#define ROTATE_VELOCITY 0.0025f
+
 // Constructor
-Editor::Editor(const sf::Vector2i kWindowSize)
+Editor::Editor(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
-	// Assigns input to appropriate member
-	m_windowSize = kWindowSize;
+	// Sets members with input
+	m_pWindow = pWindow;
+	m_windowSize = windowSize;
+
+	// Updates Camera aspect ratio
+	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
 
 	// TEMPORARY - Need to read in a list of models to use
 	// Creates a tree Model
@@ -47,15 +54,44 @@ Editor::Editor(const sf::Vector2i kWindowSize)
 }
 
 // Void: Links vert and frag shaders into a glslprogram
-void Editor::linkMe(const GLint kVertShader, const GLint kFragShader)
+void Editor::linkShaders()
 {
 	try
 	{
-		m_shader.compileShader("Shaders/shader.vert");
-		m_shader.compileShader("Shaders/shader.frag");
-		m_shader.link();
-		m_shader.validate();
-		m_shader.use();
+		// Shader which allows first person camera and textured objects
+		m_worldShader.compileShader("Shaders/shader.vert");
+		m_worldShader.compileShader("Shaders/shader.frag");
+		m_worldShader.link();
+		m_worldShader.validate();
+		m_worldShader.use();
+	}
+	catch (GLSLProgramException & e)
+	{
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_freeType.compileShader("Shaders/freetype.vert");
+		m_freeType.compileShader("Shaders/freetype.frag");
+		m_freeType.link();
+		m_freeType.validate();
+		m_freeType.use();
+	}
+	catch (GLSLProgramException & e) {
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_imageType.compileShader("Shaders/image.vert");
+		m_imageType.compileShader("Shaders/image.frag");
+		m_imageType.link();
+		m_imageType.validate();
 	}
 	catch (GLSLProgramException & e)
 	{
@@ -65,50 +101,51 @@ void Editor::linkMe(const GLint kVertShader, const GLint kFragShader)
 }
 
 // Void: Initialises the Editor Scene
-void Editor::initScene(GLFWwindow* pWindow)
+void Editor::initScene(Freetype* pOverlay)
 {
+	m_pHUD = pOverlay; // Get the Heads up display for the scene
+
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
 
-	// Window pointer added to member
-	m_pWindow = pWindow;
-
-	// Sets the cursor to be hidden
-	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
-	// Links shaders
-	linkMe(1, 2);
+	linkShaders();
 }
 
 // Void: Updates the Editor with elapsed time
 void Editor::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
-	// Defines angular offset of mouse position from the window center
-	sf::Vector2f mouseMovement((((float)m_windowSize.x * 0.5f) - (float)m_mousePos.x) / 1000.0f, (((float)m_windowSize.y * 0.5f) - (float)m_mousePos.y) / 1000.0f);
+	// Calculates the mouse movement
+	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
 
-	// Updates the camera with user input
-	m_camera.processUserInput(mouseMovement.x, mouseMovement.y);
+	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
 
-	// Defines the View
-	glm::mat4 V = glm::lookAt( m_camera.getPosition(), m_camera.getView(), m_camera.getUp()); // Position, direction, up
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY*kfTimeElapsed));
+	}
 
-	// Defines the Perspective
-	glm::mat4 P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x / (float)m_windowSize.y, 1.f, 5000.f); // FOV, display aspect ratio and vision culls
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_camera.move(glm::vec3(-MOVE_VELOCITY*kfTimeElapsed, 0.0f, 0.0f));
+	}
 
-	// Passes View and Perspective data to shader
-	m_shader.setUniform("mView", V);
-	m_shader.setUniform("mProjection", P);
-	
-	// Resets cursor to the center of the window after cursor event
-	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_camera.move(glm::vec3(MOVE_VELOCITY*kfTimeElapsed, 0.0f, 0.0f));
+	}
 
 	/////////////////// MODEL PROCESSING ///////////////////
 	// Need a Model to place
 	// Scrolling cycles through available Models?
 
 	// Hand position infront of Camera with a Y of default: 0
-	m_handPosition = glm::vec3(0.0f, 0.0f, 0.0f);
+	m_handPosition = glm::vec3(m_camera.getView()[3][0], m_camera.getView()[3][1], m_camera.getView()[3][2]);
 
 	// Sets Model position to hand plus the selected height
 	m_pSelectedModel->setPosition(m_handPosition + glm::vec3(0.0f, m_fSelectionY, 0.0f));
@@ -125,12 +162,25 @@ void Editor::render()
 {
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
-	
+
+	// Activates use of shader
+	m_worldShader.use();
+
+	glm::mat4 model = glm::mat4(1.0);
+	mat4 mv = m_camera.getView() * model;
+	m_worldShader.setUniform("ModelViewMatrix", mv);
+	m_worldShader.setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	m_worldShader.setUniform("MVP", m_camera.getProjection() * mv);
+	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
+	m_worldShader.setUniform("M", model);
+	m_worldShader.setUniform("V", m_camera.getView());
+	m_worldShader.setUniform("P", m_camera.getProjection());
+
 	// Renders the Model in hand
 	m_pSelectedModel->buffer();
 
 	// Passes Model transformation data to shader
-	m_shader.setUniform("mModel", m_pSelectedModel->m_M);
+	m_worldShader.setUniform("M", m_pSelectedModel->m_M);
 
 	// Renders Model
 	m_pSelectedModel->render();
@@ -142,9 +192,13 @@ void Editor::render()
 		pModel->buffer();
 		
 		// Passes Model transformation data to shader
-		m_shader.setUniform("mModel", pModel->m_M);
+		m_worldShader.setUniform("M", pModel->m_M);
 	
 		// Renders Model
 		pModel->render();
 	}
+
+	m_freeType.use();
+	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }

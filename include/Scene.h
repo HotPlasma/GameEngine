@@ -41,8 +41,14 @@ class Scene
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
+		GLSLProgram m_worldShader;
+		GLSLProgram m_freeType;
+		GLSLProgram m_imageType;
+
 		bool m_bAnimate;
 		Camera m_camera; // Camera which user can control
+
+		Freetype* m_pHUD;
 
 		GLFWwindow *m_pWindow; // The window
 		sf::Vector2f m_mousePos; // Holds mouse cursor position
