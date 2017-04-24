@@ -75,16 +75,49 @@ void World::linkShaders()
 	}
 }
 
-void World::setLightParamaters(GLSLProgram *pShader)
+void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
 	vec3 worldLight = vec3(200.0f, 70.0f, -80.0f);
+	pShader->setUniform("lightCutOff", glm::cos(glm::radians(50.0f)));
+	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(56.0f)));
+	pShader->setUniform("spotlightDriection", 0.0, -0.7, 0.0);
+
 
 	pShader->setUniform("Ia", 0.5f, 0.5f, 0.5f);
 	//pShader->setUniform("Id", 0.0f, 0.0f, 0.8f);
 	//pShader->setUniform("Is", 0.6f, 0.6f, 0.6f);
 	//pShader->setUniform("Rd", 0.6f, 0.6f, 0.6f);
 	//pShader->setUniform("Rs", 0.9f, 0.9f, 0.9f);
-	pShader->setUniform("lightPosition", worldLight);
+	pShader->setUniform("lightPosition", m_camera.getPosition());
+
+	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
+	{
+		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+		m_worldShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
+		m_worldShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
+		m_worldShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
+	}
+	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
+	{
+		m_worldShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
+		m_worldShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
+		m_worldShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
+		m_worldShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
+	}
+	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
+	{
+		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+		m_worldShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
+		m_worldShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
+		m_worldShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
+	}
+	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
+	{
+		m_worldShader.setUniform("Id", 0.0f, 0.0f, 0.0f);
+		m_worldShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
+		m_worldShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
+		m_worldShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
+	}
 }
 
 void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
@@ -119,12 +152,20 @@ void World::update(float fTimeElapsed)
 		m_camera.getUp() // Up
 	);
 
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
+		{
+			setLightParamaters(&m_worldShader, i);
+		}
+	}
 
 	m_P = glm::perspective(m_camera.getFOV(), (float)m_windowSize.x/m_windowSize.y, 1.f, 5000.f); // Sets FOV and vision culls
 	//
 	//m_WorldShader.setUniform("mView", m_V);
 	//m_WorldShader.setUniform("mProjection", m_P);
 
+	
 	m_camera.processUserInput(fYAngle, fZAngle); // Send mouse position data to be processed in order to move camera
 
 	// Makes collectables rotate and bounce
@@ -168,41 +209,13 @@ void World::render()
 
 	
 	m_worldShader.use();
-	setLightParamaters(&m_worldShader);
 	SetMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList.at(i).buffer(&m_worldShader);
-			if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
-			{
-				m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-				m_worldShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-				m_worldShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-				m_worldShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
-			}
-			else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
-			{
-				m_worldShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-				m_worldShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-				m_worldShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-				m_worldShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
-			}
-			else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
-			{
-				m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-				m_worldShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-				m_worldShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-				m_worldShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
-			}
-			else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
-			{
-				m_worldShader.setUniform("Id", 0.0f, 0.0f, 0.0f);
-				m_worldShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-				m_worldShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-				m_worldShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
-			}
+			setLightParamaters(&m_worldShader, i);
 			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
 			m_sceneReader.m_modelList.at(i).render();
 		}
