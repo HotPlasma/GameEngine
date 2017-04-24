@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Menu.h"
 #include "World.h"
+#include "Editor.h"
 #include <Freetype.h>
 
 using std::string;
@@ -188,7 +189,7 @@ void mainLoop()
 		
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
-
+    
 		if (g_WhichGameState == MainMenu)
 		{
 			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))

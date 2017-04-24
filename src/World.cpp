@@ -58,7 +58,7 @@ void World::linkShaders()
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
-
+  
 	try
 	{
 		// Shader which allows heads up display
