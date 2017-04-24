@@ -183,7 +183,7 @@ void mainLoop()
 			glfwSetTime(0);
 			g_pScene->render();
 		}
-
+		
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
 

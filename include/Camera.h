@@ -26,8 +26,11 @@ class Camera // Class Designed to hold my camera positions and navigate it on us
 		glm::vec3 getPosition() { return m_position; }; // Returns Camera Pos
 		void setPosition(const glm::vec3 kPosition) { m_position = kPosition; }; // Sets Camera Pos
 
+		float getAspectRatio() { return m_fAspectRatio; }; // Returns Camera aspect ratio
+		void setAspectRatio(const float kfAS) { m_fAspectRatio = kfAS; }; // Sets Camera aspect ratio
+
 		float getFOV() { return m_fFOV; }; // Returns Camera FOV
-		void setFOV(const float kfFOV) { m_fFOV = kfFOV; }; // Sets Camera FOV
+		void setFOV(const float kfFOV) { m_fFOV = glm::radians(kfFOV); }; // Sets Camera FOV
 
 		glm::mat4 getView() { return m_view; }; // Returns Camera View
 		glm::mat4 getProjection() { return m_projection; }; // Returns Camera Projection

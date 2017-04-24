@@ -8,11 +8,11 @@ const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
 Camera::Camera()
 {
 	m_fFOV = 90.0f;
-	m_fNear = 0.0f;
+	m_fNear = 1.0f;
 	m_fFar = 1000.0f;
 
 	// Sets Position default value
-	m_position = glm::vec3(0.0f, 1.0f, 0.0);
+	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
 glm::quat fromAxisAngle(glm::vec3 axis, float angle)
@@ -49,6 +49,9 @@ void Camera::move(const glm::vec3 kDisplacement)
 
 void Camera::updateView()
 {
+	// Sets camera projection
+	m_projection = glm::perspective(m_fFOV, m_fAspectRatio, m_fNear, m_fFar);
+
 	// Construct the view matrix from orientation quaternion and position vector
 
 	// First get the matrix from the 'orientaation' Quaternion
@@ -64,5 +67,4 @@ void Camera::updateView()
 	m_view[3][0] = -glm::dot(m_xAxis, m_position); //Translation x
 	m_view[3][1] = -glm::dot(m_yAxis, m_position); //Translation y
 	m_view[3][2] = -glm::dot(m_zAxis, m_position); //Translation z
-
 }

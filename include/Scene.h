@@ -2,6 +2,7 @@
 #define SCENE_H
 
 #include "PreHeader.h"
+#include "Camera.h"
 #include <Freetype.h>
 
 // Abstract class in order to set up world
@@ -31,6 +32,7 @@ class Scene
 			m_windowSize.y = iHeight;
 	
 			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
+			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
 		}
 	
 		void animate(bool bValue) { m_bAnimate = bValue; }
@@ -40,6 +42,7 @@ class Scene
 	    
 	protected:
 		bool m_bAnimate;
+		Camera m_camera; // Camera which user can control
 };
 
 #endif // SCENE_H

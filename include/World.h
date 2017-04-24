@@ -23,13 +23,11 @@ class World : public Scene
 	
 		void linkShaders(); // Connects shaders
 
-		void setMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
+		void setMatrices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
 	
-		Camera m_camera; // Camera which user can control
 		GLFWwindow *m_pWindow; // The window
 
 		sf::Vector2f m_mousePos; // Holds mouse cursor position
-		sf::Vector2f m_lastMousePos; // Holds previous mouse cursor position
 
 		SceneReader m_sceneReader; // Reads .xml file in order to create world
 		glm::mat4 m_V, m_P;

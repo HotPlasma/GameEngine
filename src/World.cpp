@@ -3,12 +3,14 @@
 using std::string;
 using std::ifstream;
 
-#define MOVE_VELOCITY 0.01f
-#define ROTATE_VELOCITY 0.001f
+#define MOVE_VELOCITY 50.0f
+#define ROTATE_VELOCITY 0.0025f
 
 World::World(sf::Vector2i windowSize)
 {
 	m_windowSize = windowSize;
+
+	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
 }
 
 void World::initScene(Freetype* pOverlay)
@@ -68,7 +70,7 @@ void World::linkShaders()
 	}
 }
 
-void World::setMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
+void World::setMatrices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
 {
 	mat4 mv = view * model;
 	pShader->setUniform("ModelViewMatrix", mv);
@@ -82,36 +84,53 @@ void World::setMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projec
 
 void World::keyPress(const int kiKey)
 {
-	if (kiKey == GLFW_KEY_W)
-	{
-		m_camera.move(glm::vec3(MOVE_VELOCITY, 0.0f, 0.0f));
-	}
-
-	if (kiKey == GLFW_KEY_A)
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY));
-	}
-
-	if (kiKey == GLFW_KEY_S)
-	{
-		m_camera.move(glm::vec3(-MOVE_VELOCITY, 0.0f, 0.0f));
-	}
-
-	if (kiKey == GLFW_KEY_D)
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY));
-	}
+	//if (kiKey == GLFW_KEY_W)
+	//{
+	//	m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY));
+	//}
+	//
+	//if (kiKey == GLFW_KEY_A)
+	//{
+	//	m_camera.move(glm::vec3(-MOVE_VELOCITY, 0.0f, 0.0f));
+	//}
+	//
+	//if (kiKey == GLFW_KEY_S)
+	//{
+	//	m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY));
+	//}
+	//
+	//if (kiKey == GLFW_KEY_D)
+	//{
+	//	m_camera.move(glm::vec3(MOVE_VELOCITY, 0.0f, 0.0f));
+	//}
 }
 
 void World::update(float fTimeElapsed)
 {
 	// Calculates the mouse movement
-	sf::Vector2f delta(m_lastMousePos - m_mousePos);
+	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
 
 	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
-
-	// Store the current cursor position
-	m_lastMousePos = m_mousePos;
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY*fTimeElapsed));
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_camera.move(glm::vec3(-MOVE_VELOCITY*fTimeElapsed, 0.0f, 0.0f));
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY*fTimeElapsed));
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_camera.move(glm::vec3(MOVE_VELOCITY*fTimeElapsed, 0.0f, 0.0f));
+	}
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -151,7 +170,7 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	m_worldShader.use();
-	setMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
+	setMatices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
@@ -161,7 +180,7 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
-	m_freeType.use();
+	/*m_freeType.use();
 	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));*/
 }
