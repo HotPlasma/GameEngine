@@ -13,21 +13,21 @@ class Scene
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
 		// Load in all texture and initilise shaders
-		virtual void initScene(Freetype* Overlay) = 0;
+		virtual void initScene(Freetype* pOverlay) = 0;
 	
 		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos) = 0;
 	
 		// Run every frame
-		virtual void update(float t) = 0;
+		virtual void update(float fTimeElapsed) = 0;
 	
 		// Draw Scene
 		virtual void render() = 0;
 	
 		// Aloow screen to be resized without causing rendering issues
-		void resize(int w, int h)
+		void resize(int iWidth, int iHeight)
 		{
-			m_windowSize.x = w;
-			m_windowSize.y = h;
+			m_windowSize.x = iWidth;
+			m_windowSize.y = iHeight;
 	
 			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
 		}
