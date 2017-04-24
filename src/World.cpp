@@ -19,13 +19,6 @@ void World::initScene(Freetype* pOverlay)
 	gl::Enable(gl::DEPTH_TEST);
 
 
-
-	//////////////////////////////////////////////////////
-	/////////// Vertex shader //////////////////////////
-	//////////////////////////////////////////////////////
-
-	
-
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -36,6 +29,8 @@ void World::initScene(Freetype* pOverlay)
 		}
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
+
+//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
 void World::setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos)
@@ -55,7 +50,8 @@ void World::linkShaders()
 		m_worldShader.validate();
 		m_worldShader.use();
 	}
-	catch (GLSLProgramException & e) {
+	catch (GLSLProgramException & e)
+	{
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -73,6 +69,22 @@ void World::linkShaders()
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_imageType.compileShader("Shaders/image.vert");
+		m_imageType.compileShader("Shaders/image.frag");
+		m_imageType.link();
+		m_imageType.validate();
+	}
+	catch (GLSLProgramException & e)
+	{
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
 }
 
 void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
