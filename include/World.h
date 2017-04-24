@@ -13,14 +13,9 @@
 class World : public Scene
 {
 	private:
-<<<<<<< HEAD
-		GLSLProgram m_WorldShader;
-		GLSLProgram m_FreeType;
-		GLSLProgram m_ImageType;
-=======
 		GLSLProgram m_worldShader;
 		GLSLProgram m_freeType;
->>>>>>> master
+		GLSLProgram m_imageType;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
 		Freetype* m_pHUD;
 	
@@ -39,15 +34,9 @@ class World : public Scene
 	
 	public:
 		World(sf::Vector2i windowSize);
-<<<<<<< HEAD
-		void initScene(Freetype* Overlay);
-		void setMousePos(GLFWwindow *GWindow, sf::Vector2i mousepos);
-		void update(float t);
-=======
 		void initScene(Freetype* pOverlay);
 		void setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos);
 		void update(float fTimeElapsed);
->>>>>>> master
 		void render();
 };
 #endif  

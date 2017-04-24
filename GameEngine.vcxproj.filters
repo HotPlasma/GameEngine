@@ -161,10 +161,10 @@
       <Filter>Resource Files\Shaders\UI</Filter>
     </None>
     <None Include="shaders\image.vert">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Shaders\UI</Filter>
     </None>
     <None Include="shaders\image.frag">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Shaders\UI</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

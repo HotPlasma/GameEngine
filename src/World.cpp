@@ -69,6 +69,22 @@ void World::linkShaders()
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_imageType.compileShader("Shaders/image.vert");
+		m_imageType.compileShader("Shaders/image.frag");
+		m_imageType.link();
+		m_imageType.validate();
+	}
+	catch (GLSLProgramException & e)
+	{
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
+
+
 }
 
 void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
