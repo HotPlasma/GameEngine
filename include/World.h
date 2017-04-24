@@ -23,6 +23,7 @@ class World : public Scene
 	
 		void linkShaders(); // Connects shaders
 
+		void setLightParamaters(GLSLProgram * pShader);
 		void SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection);
 	
 		Texture *g_pTexture; // Holds texture
