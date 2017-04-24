@@ -33,11 +33,10 @@ class World : public Scene
 		glm::mat4 m_V, m_P;
 	
 	public:
-		World(sf::Vector2i windowSize);
+		World(GLFWwindow *pWindow, sf::Vector2i windowSize);
 		void initScene(Freetype* pOverlay);
-		void keyPress(const int kiKey);
-		void setMousePos(GLFWwindow *pWindow, sf::Vector2f mousepos);
-		void update(float t);
+		void setMousePos(sf::Vector2f mousepos);
+		void update(float fTimeElapsed);
 		void render();
 };
 #endif  

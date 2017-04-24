@@ -10,14 +10,14 @@ class Scene
 {
 	public:
 		Scene() : m_bAnimate(true) {}
+		Scene(GLFWwindow *pWindow) {};
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* pOverlay) = 0;
 	
-		virtual void keyPress(const int kiKey) = 0;
-		virtual void setMousePos(GLFWwindow *Gwindow, sf::Vector2f mousepos) = 0;
+		virtual void setMousePos(sf::Vector2f mousepos) = 0;
 	
 		// Run every frame
 		virtual void update(float fTimeElapsed) = 0;

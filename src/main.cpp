@@ -27,8 +27,7 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	// Passes key input to scene
-	g_pScene->keyPress(iKey);
+	// Nothing
 }
 
 //////////////////////////////////////////////////////////
@@ -50,7 +49,7 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		g_pScene->setMousePos(g_pWindow, sf::Vector2f(dX, dY));
+		g_pScene->setMousePos(sf::Vector2f(dX, dY));
 	}
 }
 
@@ -75,20 +74,16 @@ void initializeGL()
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Creates a World scene
-	g_pScene = new World(windowSize);
+	g_pScene = new World(g_pWindow, windowSize);
 
 	// Set-up freetype
 	gl::Enable(gl::BLEND);
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 	UserInterface.loadCharacters();
 	UserInterface.setupBuffers();
-	// Gets window width and height
 	
-
 	// Initialises scene
 	g_pScene->initScene(&UserInterface);
-
-
 }
 
 //////////////////////////////////////////////////////////
@@ -170,11 +165,12 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 //////////////////////////////////////////////////////////
 void mainLoop() 
 {
+	// Sets the cursor position to center screen for tracking
+	glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+
 	// While the window should remain open and escape is not pressed
 	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
 	{
-		//GLUtils::checkForOpenGLError(__FILE__,__LINE__);
-
 		// If window is focused
 		if (g_bWindowFocused)
 		{
@@ -197,8 +193,6 @@ void mainLoop()
 //////////////////////////////////////////////////////////
 int main(int argc, char *argv[])
 {
-
-
 	// Initialises GLFW: If it fails the program exits
 	if (!glfwInit()) exit(EXIT_FAILURE);
 
@@ -212,6 +206,7 @@ int main(int argc, char *argv[])
 
 	// Creates a new glfw window
 	g_pWindow = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
+	
 	// If the window isn't created
 	if (!g_pWindow)
 	{
