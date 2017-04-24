@@ -1,68 +1,70 @@
 #include "Camera.h"
 
+// World coordinate System Axes
+const glm::vec3 WORLDX = glm::vec3(1, 0, 0);
+const glm::vec3 WORLDY = glm::vec3(0, 1, 0);
+const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
+
 Camera::Camera()
 {
 	m_fFOV = 90.0f;
+	m_fNear = 1.0f;
+	m_fFar = 1000.0f;
 
-	// Sets Pos, View and Up to default values
-	m_position = glm::vec3(1.0f, 1.0f, 1.0);
-	m_view = glm::vec3(0.0f, 1.0f, 0.0f);
-	m_up = glm::vec3(0.0f, 1.0f, 0.0f);
+	// Sets Position default value
+	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
 }
 
-void Camera::processUserInput(float fYAngle, float fZAngle) 
+glm::quat fromAxisAngle(glm::vec3 axis, float angle)
 {
-	glm::vec3 viewVec = m_view - m_position;
-	
-	// Allows looking around with the mouse
-	m_view.x = m_position.x + (float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z;
-	m_view.y += fZAngle * 2.0f; // Allows looking up/down in the y axis
-	m_view.z = m_position.z + (float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z;
-	
-	float fMovementSpeed = 0.1f; // Fraction which limits movement speed
-	
-							// Sprint functionality
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RShift))
-	{
-		fMovementSpeed = 0.5;
-	}
-	else
-	{
-		fMovementSpeed = 0.1;
-	}
+	glm::quat rotation;
 
-	// Forwards movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		m_position.x += ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_position.z += ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_view.x += ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_view.z += ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-	}
-	// Backwards movement
-	 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		 m_position.x -= ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		 m_position.z -= ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		 m_view.x -= ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z)* fMovementSpeed;
-		 m_view.z -= ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-	}
-	
-	 // Strafing right movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		m_position.z += ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_position.x -= ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_view.z += ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z)* fMovementSpeed;
-		m_view.x -= ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-	}
+	// Applies the angle to each axis multiplied by the axis vec3 for 1/0
+	rotation.w = cos(angle / 2);
+	rotation.x = sin(angle / 2) * axis.x;
+	rotation.y = sin(angle / 2) * axis.y;
+	rotation.z = sin(angle / 2) * axis.z;
 
-	// Strafing left movement
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		m_position.z -= ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_position.x += ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-		m_view.z -= ((float)cosf(-fYAngle) * viewVec.x - sinf(-fYAngle) * viewVec.z)* fMovementSpeed;
-		m_view.x += ((float)sinf(-fYAngle) * viewVec.x + cosf(-fYAngle) * viewVec.z) * fMovementSpeed;
-	}
+	return rotation;
+}
+
+void Camera::rotate(const float kfYaw, const float kfPitch)
+{
+	m_orientation = glm::normalize(fromAxisAngle(WORLDX, kfPitch) * m_orientation);
+
+	m_orientation = glm::normalize(m_orientation * fromAxisAngle(WORLDY, kfYaw));
+
+	updateView();
+}
+
+void Camera::move(const glm::vec3 kDisplacement)
+{
+	m_position += m_xAxis * kDisplacement.x;
+	m_position += m_yAxis * -kDisplacement.y;
+	m_position += m_zAxis * kDisplacement.z;
+
+	// Now call updateView()
+	updateView();
+}
+
+void Camera::updateView()
+{
+	// Sets camera projection
+	m_projection = glm::perspective(m_fFOV, m_fAspectRatio, m_fNear, m_fFar);
+
+	// Construct the view matrix from orientation quaternion and position vector
+
+	// First get the matrix from the 'orientaation' Quaternion
+	// This deals with the rotation and scale part of the view matrix
+	m_view = glm::mat4_cast(m_orientation); // Rotation and Scale
+
+	// Extract the camera coordinate axes from this matrix
+	m_xAxis = glm::vec3(m_view[0][0], m_view[1][0], m_view[2][0]);
+	m_yAxis = glm::vec3(m_view[0][1], m_view[1][1], m_view[2][1]);
+	m_zAxis = glm::vec3(m_view[0][2], m_view[1][2], m_view[2][2]);
+
+	// And use this and current camera position to set the translate part of the view matrix
+	m_view[3][0] = -glm::dot(m_xAxis, m_position); //Translation x
+	m_view[3][1] = -glm::dot(m_yAxis, m_position); //Translation y
+	m_view[3][2] = -glm::dot(m_zAxis, m_position); //Translation z
 }
