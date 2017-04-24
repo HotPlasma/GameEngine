@@ -63,24 +63,37 @@ void World::linkShaders()
 		exit(EXIT_FAILURE);
 	}
 
-	try
-	{
-		// Shader which allows heads up display
-		m_freeType.compileShader("Shaders/freetype.vert");
-		m_freeType.compileShader("Shaders/freetype.frag");
-		m_freeType.link();
-		m_freeType.validate();
-	}
-	catch (GLSLProgramException & e) 
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
+void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection)
+{
+	mat4 mv = view * model;
+	shader->setUniform("ModelViewMatrix", mv);
+	shader->setUniform("NormalMatrix",
+		mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	shader->setUniform("MVP", projection * mv);
+	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
+	shader->setUniform("M", model);
+	shader->setUniform("V", view);
+	shader->setUniform("P", projection);
+}
 
-	if (kiKey == GLFW_KEY_D)
+void World::keyPress(const int kiKey)
+{
+	if (kiKey == GLFW_KEY_W)
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY));
+		m_camera.move(glm::vec3(MOVE_VELOCITY, 0.0f, 0.0f));
 	}
+}
+
+void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
+{
+	mat4 mv = view * model;
+	pShader->setUniform("ModelViewMatrix", mv);
+	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	pShader->setUniform("MVP", projection * mv);
+	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
+	pShader->setUniform("M", model);
+	pShader->setUniform("V", view);
+	pShader->setUniform("P", projection);
 }
 
 void World::update(float fTimeElapsed)
