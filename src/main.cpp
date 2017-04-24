@@ -78,7 +78,7 @@ void initializeGL()
 
 	// Creates a World scene
 	//g_pScene = new World(windowSize);
-	g_pMenu = new Menu(windowSize);
+	g_pMenu = new Menu(g_pWindow, windowSize);
 	g_pScene = g_pMenu;
 
 	// Set-up freetype
@@ -202,7 +202,7 @@ void mainLoop()
 			switch (g_pMenu->returnMenuChoice())
 			{
 			case 1:
-				g_pScene = new World(sf::Vector2i(1920,1080));
+				g_pScene = new World(g_pWindow, sf::Vector2i(1920,1080));
 				g_pScene->initScene(&UserInterface);
 				g_WhichGameState = Game;
 				break;

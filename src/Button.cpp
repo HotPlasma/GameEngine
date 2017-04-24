@@ -25,7 +25,7 @@ void Button::ChangeTexture(int iNewTextureID)
 	
 }
 
-void Button::CheckHover(sf::Vector2i MousePos, int index)
+void Button::CheckHover(sf::Vector2f MousePos, int index)
 {
 	
 	MousePos.y = 1080 - MousePos.y; // Origins mouse at top-left instead of bottom left.

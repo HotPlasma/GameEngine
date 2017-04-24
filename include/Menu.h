@@ -25,9 +25,6 @@ private:
 
 	void linkShaders(); // Connects shaders
 
-	Texture *g_pTexture; // Holds texture
-	GLFWwindow *m_pWindow; // The window
-	sf::Vector2i m_mousePos; // Holds mouse cursor position
 	glm::mat4 m_V, m_P;
 
 	enum State { None = 0, Play = 1, Create = 2, ExitMenu = 3 }; // Enum used for knowing which button is clicked
@@ -36,9 +33,9 @@ private:
 	bool m_bClicked;
 
 public:
-	Menu(sf::Vector2i windowSize);
+	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);
-	void setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos);
+	void setMousePos(sf::Vector2f mousepos);
 	void update(float t);
 	void render();
 	int returnMenuChoice();

@@ -26,10 +26,6 @@ class World : public Scene
 
 		void setMatrices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
 	
-		GLFWwindow *m_pWindow; // The window
-
-		sf::Vector2f m_mousePos; // Holds mouse cursor position
-
 		SceneReader m_sceneReader; // Reads .xml file in order to create world
 		glm::mat4 m_V, m_P;
 	

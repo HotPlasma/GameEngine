@@ -43,6 +43,9 @@ class Scene
 	protected:
 		bool m_bAnimate;
 		Camera m_camera; // Camera which user can control
+
+		GLFWwindow *m_pWindow; // The window
+		sf::Vector2f m_mousePos; // Holds mouse cursor position
 };
 
 #endif // SCENE_H

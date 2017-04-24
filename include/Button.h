@@ -70,7 +70,7 @@ public:
 	///
 	///
 	////////////////////////////////////////////////////////////
-	void CheckHover(sf::Vector2i MousePos, int index);
+	void CheckHover(sf::Vector2f MousePos, int index);
 
 	////////////////////////////////////////////////////////////
 	/// \brief Allows class to draw drawables to the screen
