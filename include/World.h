@@ -13,17 +13,17 @@
 class World : public Scene
 {
 	private:
-		GLSLProgram m_WorldShader;
-		GLSLProgram m_FreeType;
+		GLSLProgram m_worldShader;
+		GLSLProgram m_freeType;
 		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-		Freetype* HUD;
+		Freetype* m_pHUD;
 	
 		GLuint m_programHandle; // Program context
 		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
 	
 		void linkShaders(); // Connects shaders
 
-		void SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
+		void SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection);
 	
 		Texture *g_pTexture; // Holds texture
 		Camera m_camera; // Camera which user can control
@@ -34,9 +34,9 @@ class World : public Scene
 	
 	public:
 		World(sf::Vector2i windowSize);
-		void initScene(Freetype* Overlay);
+		void initScene(Freetype* pOverlay);
 		void setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos);
-		void update(float t);
+		void update(float fTimeElapsed);
 		void render();
 };
 #endif  

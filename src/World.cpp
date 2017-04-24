@@ -9,10 +9,10 @@ World::World(sf::Vector2i windowSize)
 }
 
 
-void World::initScene(Freetype* Overlay)
+void World::initScene(Freetype* pOverlay)
 {
 
-	HUD = Overlay; // Get the Heads up display for the scene
+	m_pHUD = pOverlay; // Get the Heads up display for the scene
 
 	linkShaders();
 	// Stops rendered models from being transparent
@@ -38,47 +38,56 @@ void World::initScene(Freetype* Overlay)
 	}
 }
 
-void World::setMousePos(GLFWwindow *Gwindow, sf::Vector2i mousepos)
+void World::setMousePos(GLFWwindow *pWindow, sf::Vector2i mousepos)
 {
-	m_pWindow = Gwindow;
+	m_pWindow = pWindow;
 	m_mousePos = mousepos;
 }
 
 void World::linkShaders()
 {
-	try {
-		m_WorldShader.compileShader("Shaders/shader.vert");
-		m_WorldShader.compileShader("Shaders/shader.frag");
-		m_WorldShader.link();
-		m_WorldShader.validate();
-		m_WorldShader.use();
-
+	try 
+	{
 		// Shader which allows first person camera and textured objects
-		m_FreeType.compileShader("Shaders/freetype.vert");
-		m_FreeType.compileShader("Shaders/freetype.frag");
-		m_FreeType.link();
-		m_FreeType.validate();
+		m_worldShader.compileShader("Shaders/shader.vert");
+		m_worldShader.compileShader("Shaders/shader.frag");
+		m_worldShader.link();
+		m_worldShader.validate();
+		m_worldShader.use();
 	}
 	catch (GLSLProgramException & e) {
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
+
+	try
+	{
+		// Shader which allows heads up display
+		m_freeType.compileShader("Shaders/freetype.vert");
+		m_freeType.compileShader("Shaders/freetype.frag");
+		m_freeType.link();
+		m_freeType.validate();
+	}
+	catch (GLSLProgramException & e) 
+	{
+		cerr << e.what() << endl;
+		exit(EXIT_FAILURE);
+	}
 }
 
-void World::SetMatices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection)
+void World::SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
 {
 	mat4 mv = view * model;
-	shader->setUniform("ModelViewMatrix", mv);
-	shader->setUniform("NormalMatrix",
-		mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	shader->setUniform("MVP", projection * mv);
+	pShader->setUniform("ModelViewMatrix", mv);
+	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	pShader->setUniform("MVP", projection * mv);
 	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	shader->setUniform("M", model);
-	shader->setUniform("V", view);
-	shader->setUniform("P", projection);
+	pShader->setUniform("M", model);
+	pShader->setUniform("V", view);
+	pShader->setUniform("P", projection);
 }
 
-void World::update(float t)
+void World::update(float fTimeElapsed)
 {
 
 	// Creates camera and view using MVP
@@ -146,18 +155,18 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	
-	m_WorldShader.use();
-	SetMatices(&m_WorldShader, glm::mat4(1.0f), m_V, m_P);
+	m_worldShader.use();
+	SetMatices(&m_worldShader, glm::mat4(1.0f), m_V, m_P);
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList.at(i).buffer();
-			m_WorldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
+			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
-	m_FreeType.use();
-	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	HUD->RenderText(m_FreeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_freeType.use();
+	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }
