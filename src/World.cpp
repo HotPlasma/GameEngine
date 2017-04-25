@@ -112,24 +112,25 @@ void World::update(const float kfTimeElapsed)
 		{
 			if (!m_sceneReader.m_modelList.at(i).getCollected()) // if collectable then slowly rotate and bob up and down
 			{
-				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2)
-				{
-					m_collectableSpeed = glm::vec3(0, -COLLECTABLE_SPEED*kfTimeElapsed, 0);
-				}
-				
-				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4)
-				{
-					m_collectableSpeed = glm::vec3(0, COLLECTABLE_SPEED*kfTimeElapsed, 0);
-				}
+				// Defines vector for collectable displacement
+				glm::vec3 collectableMovement(0.0f, 0.0f, 0.0f);
+
+				// Move collectable down
+				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2) collectableMovement = glm::vec3(0, -COLLECTABLE_SPEED*kfTimeElapsed, 0);
+				// Move collectable up
+				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4) collectableMovement = glm::vec3(0, COLLECTABLE_SPEED*kfTimeElapsed, 0);
 
 				//Set positions & rotations
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + collectableMovement);
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
+				
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
-				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // If collision with a collectable mark it as collected and stop drawing it
+				// If collision with a collectable
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 				{
+					// Marks it as collected
 					m_sceneReader.m_modelList.at(i).setCollected(true);
 				}
 			}
@@ -147,7 +148,8 @@ void World::render()
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
+		// Draw all items that are not collected
+		if (!m_sceneReader.m_modelList.at(i).getCollected())
 		{
 			m_sceneReader.m_modelList.at(i).buffer();
 			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
