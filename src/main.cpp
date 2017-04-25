@@ -290,6 +290,9 @@ int main(int argc, char *argv[])
 	// Initialisation
 	initializeGL();
 
+	// Resets elapsed time before mainloop begins
+	glfwSetTime(0);
+
 	// Enters the main loop
 	mainLoop();
 

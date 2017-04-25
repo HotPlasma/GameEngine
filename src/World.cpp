@@ -4,7 +4,7 @@ using std::string;
 using std::ifstream;
 
 #define COLLECTABLE_ROTATION 90.0f
-#define COLLECTABLE_SPEED 12.5f
+#define COLLECTABLE_SPEED 7.5f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -102,28 +102,44 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 
 void World::update(const float kfTimeElapsed)
 {
+	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Updates Camera with user input
 	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
 
-	// Makes collectables rotate and bounce
+	/////////////////// COLLECTABLE BOBBING ///////////////////
+	// If collectables are moving up and offset is greater than upper bound
+	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
+	{
+		// Move collectable down
+		m_collectGoingUp = false;
+	}
+
+	// If collectables are moving down and offset is less than lower bound
+	if (!m_collectGoingUp && m_collectYOffset <= m_collectBounds.lower())
+	{
+		// Move collectable up
+		m_collectGoingUp = true;
+	}
+
+	// Increments offset up or down
+	if (m_collectGoingUp) { m_collectYOffset += COLLECTABLE_SPEED*kfTimeElapsed; }
+	else if (!m_collectGoingUp) { m_collectYOffset -= COLLECTABLE_SPEED*kfTimeElapsed; }
+
+	// Clamps offset to bounds
+	m_collectYOffset = glm::clamp(m_collectYOffset, m_collectBounds.lower(), m_collectBounds.upper());
+
+	// For all Models
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		if (m_sceneReader.m_modelList.at(i).isCollectable()) // check if collectable
+		// If collectable
+		if (m_sceneReader.m_modelList.at(i).isCollectable())
 		{
-			if (!m_sceneReader.m_modelList.at(i).getCollected()) // if collectable then slowly rotate and bob up and down
+			// If not collected
+			if (!m_sceneReader.m_modelList.at(i).getCollected())
 			{
-				// Defines vector for collectable displacement
-				glm::vec3 collectableMovement(0.0f, 0.0f, 0.0f);
-
-				// Move collectable down
-				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2) collectableMovement = glm::vec3(0, -COLLECTABLE_SPEED*kfTimeElapsed, 0);
-				// Move collectable up
-				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4) collectableMovement = glm::vec3(0, COLLECTABLE_SPEED*kfTimeElapsed, 0);
-
-				//Set positions & rotations
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + collectableMovement);
+				// Rotates collectable
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
 				
 				// Get distance between player and collectable
@@ -150,11 +166,29 @@ void World::render()
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		// Draw all items that are not collected
+		// Defines a transformation matrix that does nothing
+		glm::mat4 transMat(1.0f);
+
+		// If Model is collectable
+		if (m_sceneReader.m_modelList.at(i).isCollectable())
+		{
+			// Adds the Yoffset to the transformation matrix
+			transMat = glm::mat4(
+				1, 0, 0, 0,
+				0, 1, 0, 0,
+				0, 0, 1, 0,
+				0, m_collectYOffset, 0, 1 
+			);
+		}
+
+		// If Model is not collected
 		if (!m_sceneReader.m_modelList.at(i).getCollected())
 		{
+			// Buffers the Model
 			m_sceneReader.m_modelList.at(i).buffer();
-			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M);
+			// Sets the Model transformation matrix
+			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
+			// Renders the Model
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}

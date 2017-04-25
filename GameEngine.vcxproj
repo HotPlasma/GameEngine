@@ -110,6 +110,7 @@
     <ClInclude Include="include\SceneReader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="include\World.h" />
     <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>
