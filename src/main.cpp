@@ -201,7 +201,6 @@ void mainLoop()
 			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
 			{
 				{
-					cout << "Clicked" << endl;
 					g_pMenu->Click();
 				}
 			}
@@ -217,6 +216,8 @@ void mainLoop()
 				g_WhichGameState = Editor;
 				break;
 			case 3:
+				break;
+			case 4:
 				delete g_pScene;
 				glfwTerminate();
 				exit(EXIT_SUCCESS);
