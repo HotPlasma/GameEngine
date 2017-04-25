@@ -19,10 +19,10 @@ Menu *g_pMenu;
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
 
-Freetype UserInterface;
+Freetype userInterface;
 
-enum g_GameState {MainMenu = 0, Game = 1, LevelEditor = 2, Exit = 3};
-g_GameState g_WhichGameState = MainMenu;
+enum GameState { MainMenu, Game, LevelEditor, Exit };
+GameState g_gameState = MainMenu;
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
@@ -86,11 +86,11 @@ void initializeGL()
 	gl::Enable(gl::BLEND);
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 
-	UserInterface.loadCharacters();
-	UserInterface.setupBuffers();
+	userInterface.loadCharacters();
+	userInterface.setupBuffers();
 	
 	// Initialises scene
-	g_pScene->initScene(&UserInterface);
+	g_pScene->initScene(&userInterface);
 }
 
 //////////////////////////////////////////////////////////
@@ -191,7 +191,7 @@ void mainLoop()
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
     
-		if (g_WhichGameState == MainMenu)
+		if (g_gameState == MainMenu)
 		{
 			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
 			{
@@ -204,13 +204,13 @@ void mainLoop()
 			{
 			case 1:
 				g_pScene = new World(g_pWindow, sf::Vector2i(1920,1080));
-				g_pScene->initScene(&UserInterface);
-				g_WhichGameState = Game;
+				g_pScene->initScene(&userInterface);
+				g_gameState = Game;
 				break;
 			case 2:
 				g_pScene = new Editor(g_pWindow, sf::Vector2i(1920, 1080));
-				g_pScene->initScene(&UserInterface);
-				g_WhichGameState = LevelEditor;
+				g_pScene->initScene(&userInterface);
+				g_gameState = LevelEditor;
 				break;
 			case 3:
 				break;
@@ -223,7 +223,7 @@ void mainLoop()
 			}
 		}
 
-		if (g_WhichGameState == Game || g_WhichGameState == LevelEditor)
+		if (g_gameState == Game || g_gameState == LevelEditor)
 		{
 			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 			// Resets cursor to the center of the window after cursor event
@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
-	if (g_WhichGameState == Game || g_WhichGameState == LevelEditor)
+	if (g_gameState == Game || g_gameState == LevelEditor)
 	{
 		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	}
