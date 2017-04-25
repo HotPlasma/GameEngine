@@ -104,6 +104,8 @@ void World::update(const float kfTimeElapsed)
 {
 	// Updates Camera with user input
 	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
+	// Sticks the camera to y 0.0
+	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
