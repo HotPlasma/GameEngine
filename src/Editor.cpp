@@ -58,7 +58,7 @@ void Editor::linkShaders()
 {
 	try
 	{
-		// Shader which allows first person camera and textured objects
+		// Shader which allows first person camera and textured object rendering
 		m_worldShader.compileShader("Shaders/shader.vert");
 		m_worldShader.compileShader("Shaders/shader.frag");
 		m_worldShader.link();
@@ -73,7 +73,7 @@ void Editor::linkShaders()
 
 	try
 	{
-		// Shader which allows heads up display
+		// Shader which allows heads up display rendering
 		m_freeType.compileShader("Shaders/freetype.vert");
 		m_freeType.compileShader("Shaders/freetype.frag");
 		m_freeType.link();
@@ -87,7 +87,7 @@ void Editor::linkShaders()
 
 	try
 	{
-		// Shader which allows heads up display
+		// Shader which allows for image rendering
 		m_imageType.compileShader("Shaders/image.vert");
 		m_imageType.compileShader("Shaders/image.frag");
 		m_imageType.link();
@@ -103,7 +103,8 @@ void Editor::linkShaders()
 // Void: Initialises the Editor Scene
 void Editor::initScene(Freetype* pOverlay)
 {
-	m_pHUD = pOverlay; // Get the Heads up display for the scene
+	// Get the Heads up display for the scene
+	m_pHUD = pOverlay;
 
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
@@ -115,30 +116,7 @@ void Editor::initScene(Freetype* pOverlay)
 void Editor::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
-	// Calculates the mouse movement
-	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
-
-	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY*kfTimeElapsed));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		m_camera.move(glm::vec3(-MOVE_VELOCITY*kfTimeElapsed, 0.0f, 0.0f));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY*kfTimeElapsed));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		m_camera.move(glm::vec3(MOVE_VELOCITY*kfTimeElapsed, 0.0f, 0.0f));
-	}
+	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
 
 	/////////////////// MODEL PROCESSING ///////////////////
 	// Need a Model to place

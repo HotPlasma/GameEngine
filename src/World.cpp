@@ -5,8 +5,6 @@ using std::ifstream;
 
 #define COLLECTABLE_ROTATION 90.0f
 #define COLLECTABLE_SPEED 12.5f
-#define CAMERA_ROTATION 0.0025f
-#define CAMERA_SPEED 50.0f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -90,44 +88,22 @@ void World::linkShaders()
 	}
 }
 
-void World::setMatrices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection)
+void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
 {
-	mat4 mv = view * model;
+	mat4 mv = kView * kModel;
 	pShader->setUniform("ModelViewMatrix", mv);
 	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	pShader->setUniform("MVP", projection * mv);
-	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	pShader->setUniform("M", model);
-	pShader->setUniform("V", view);
-	pShader->setUniform("P", projection);
+	pShader->setUniform("MVP", kProjection * mv);
+	mat3 normMat = glm::transpose(glm::inverse(mat3(kModel)));
+	pShader->setUniform("M", kModel);
+	pShader->setUniform("V", kView);
+	pShader->setUniform("P", kProjection);
 }
 
-void World::update(float fTimeElapsed)
+void World::update(const float kfTimeElapsed)
 {
-	// Calculates the mouse movement
-	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
-
-	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*fTimeElapsed));
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		m_camera.move(glm::vec3(-CAMERA_SPEED*fTimeElapsed, 0.0f, 0.0f));
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*fTimeElapsed));
-	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		m_camera.move(glm::vec3(CAMERA_SPEED*fTimeElapsed, 0.0f, 0.0f));
-	}
+	// Updates Camera with user input
+	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -138,17 +114,17 @@ void World::update(float fTimeElapsed)
 			{
 				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2)
 				{
-					m_collectableSpeed = glm::vec3(0, -COLLECTABLE_SPEED*fTimeElapsed, 0);
+					m_collectableSpeed = glm::vec3(0, -COLLECTABLE_SPEED*kfTimeElapsed, 0);
 				}
 				
 				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4)
 				{
-					m_collectableSpeed = glm::vec3(0, COLLECTABLE_SPEED*fTimeElapsed, 0);
+					m_collectableSpeed = glm::vec3(0, COLLECTABLE_SPEED*kfTimeElapsed, 0);
 				}
 
 				//Set positions & rotations
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*fTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
@@ -166,6 +142,7 @@ void World::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
+	// WORLD
 	m_worldShader.use();
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -177,6 +154,8 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
+
+	// HUD
 	m_freeType.use();
 	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
 	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));

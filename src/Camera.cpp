@@ -1,5 +1,8 @@
 #include "Camera.h"
 
+#define CAMERA_ROTATION 0.0025f
+#define CAMERA_SPEED 50.0f
+
 // World coordinate System Axes
 const glm::vec3 WORLDX = glm::vec3(1, 0, 0);
 const glm::vec3 WORLDY = glm::vec3(0, 1, 0);
@@ -67,4 +70,32 @@ void Camera::updateView()
 	m_view[3][0] = -glm::dot(m_xAxis, m_position); //Translation x
 	m_view[3][1] = -glm::dot(m_yAxis, m_position); //Translation y
 	m_view[3][2] = -glm::dot(m_zAxis, m_position); //Translation z
+}
+
+void Camera::processInput(const float kfTimeElapsed, const sf::Vector2f kMousePos, const sf::Vector2i kWindowSize)
+{
+	// Calculates the mouse movement
+	sf::Vector2f delta(kMousePos - sf::Vector2f(kWindowSize.x * 0.5f, kWindowSize.y * 0.5f));
+
+	rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
 }

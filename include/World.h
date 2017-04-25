@@ -13,23 +13,20 @@
 class World : public Scene
 {
 	private:
-		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-		
-		GLuint m_programHandle; // Program context
-		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
-	
-		void linkShaders(); // Connects shaders
 
-		void setMatrices(GLSLProgram * shader, mat4 model, mat4 view, mat4 projection);
-	
 		SceneReader m_sceneReader; // Reads .xml file in order to create world
-		glm::mat4 m_V, m_P;
+
+		void linkShaders(); // Connects shaders
+		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 	
 	public:
-		World(GLFWwindow *pWindow, sf::Vector2i windowSize);
+
+		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+
 		void initScene(Freetype* pOverlay);
-		void setMousePos(sf::Vector2f mousepos);
-		void update(float fTimeElapsed);
+		void update(const float kfTimeElapsed);
 		void render();
+
+		void setMousePos(const sf::Vector2f kMousePos);
 };
 #endif  
