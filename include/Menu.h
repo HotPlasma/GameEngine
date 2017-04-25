@@ -18,6 +18,7 @@ private:
 
 	Button *m_PlayButton;
 	Button *m_EditorButton;
+	Button *m_OptionsButton;
 	Button *m_ExitButton;
 
 	GLuint m_programHandle; // Program context
@@ -27,10 +28,13 @@ private:
 
 	glm::mat4 m_V, m_P;
 
-	enum State { None = 0, Play = 1, Create = 2, ExitMenu = 3 }; // Enum used for knowing which button is clicked
+	enum State { None = 0, Play = 1, Create = 2, Options = 3, ExitMenu = 4 }; // Enum used for knowing which button is clicked
 	State WhichState; // Instance of State enum
 
 	bool m_bClicked;
+
+	sf::SoundBuffer MenuTheme;
+
 
 public:
 	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);

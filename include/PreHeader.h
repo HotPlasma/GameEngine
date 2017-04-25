@@ -15,6 +15,7 @@
 #include "gl_core_4_3.hpp"
 
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "gl_core_4_3.hpp"
 #include <GLFW/glfw3.h>
 

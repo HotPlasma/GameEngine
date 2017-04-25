@@ -158,6 +158,9 @@
     <ClInclude Include="include\Editor.h">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utilities.h">
+      <Filter>Header Files\System</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader.frag">
