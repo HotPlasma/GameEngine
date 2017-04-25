@@ -22,8 +22,9 @@ void Menu::linkShaders()
 	}
 }
 
-Menu::Menu(sf::Vector2i windowSizes)
+Menu::Menu(GLFWwindow *pWindow, sf::Vector2i windowSizes)
 {
+	m_pWindow = pWindow;
 	m_windowSize = windowSizes;
 }
 
@@ -52,9 +53,8 @@ void Menu::initScene(Freetype * Overlay)
 	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
 }
 
-void Menu::setMousePos(GLFWwindow * GWindow, sf::Vector2i mousepos)
+void Menu::setMousePos(sf::Vector2f mousepos)
 {
-	m_pWindow = GWindow;
 	m_mousePos = mousepos;
 }
 

@@ -52,6 +52,12 @@
     <Filter Include="Source Files\System">
       <UniqueIdentifier>{67273f8d-e34c-4dc1-b08e-483ab16cead6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\UI">
+      <UniqueIdentifier>{3b424c0b-ede9-4133-8a77-865fa0749082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\UI">
+      <UniqueIdentifier>{f5af0001-281c-4158-911e-072dcba9d0e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bitmap.cpp">
@@ -91,10 +97,13 @@
       <Filter>Source Files\System</Filter>
     </ClCompile>
     <ClCompile Include="src\Menu.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scene\UI</Filter>
     </ClCompile>
     <ClCompile Include="src\Button.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor.cpp">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +149,14 @@
     <ClInclude Include="include\PreHeader.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
-    <ClInclude Include="include\Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Button.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
+      <Filter>Header Files\Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Editor.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
