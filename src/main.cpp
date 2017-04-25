@@ -183,10 +183,11 @@ void mainLoop()
 		{
 			// Updates and renders the scene
 			g_pScene->update((float)glfwGetTime());
-			glfwSetTime(0);
 			g_pScene->render();
 		}
-		
+
+		// Resets elapsed time
+		glfwSetTime(0);
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
     

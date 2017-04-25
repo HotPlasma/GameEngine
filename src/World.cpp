@@ -3,8 +3,10 @@
 using std::string;
 using std::ifstream;
 
-#define MOVE_VELOCITY 50.0f
-#define ROTATE_VELOCITY 0.0025f
+#define COLLECTABLE_ROTATION 90.0f
+#define COLLECTABLE_SPEED 12.5f
+#define CAMERA_ROTATION 0.0025f
+#define CAMERA_SPEED 50.0f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -105,26 +107,26 @@ void World::update(float fTimeElapsed)
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
 
-	m_camera.rotate(delta.x*ROTATE_VELOCITY, delta.y*ROTATE_VELOCITY);
+	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -MOVE_VELOCITY*fTimeElapsed));
+		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*fTimeElapsed));
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		m_camera.move(glm::vec3(-MOVE_VELOCITY*fTimeElapsed, 0.0f, 0.0f));
+		m_camera.move(glm::vec3(-CAMERA_SPEED*fTimeElapsed, 0.0f, 0.0f));
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, MOVE_VELOCITY*fTimeElapsed));
+		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*fTimeElapsed));
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		m_camera.move(glm::vec3(MOVE_VELOCITY*fTimeElapsed, 0.0f, 0.0f));
+		m_camera.move(glm::vec3(CAMERA_SPEED*fTimeElapsed, 0.0f, 0.0f));
 	}
 
 	// Makes collectables rotate and bounce
@@ -136,17 +138,17 @@ void World::update(float fTimeElapsed)
 			{
 				if (m_sceneReader.m_modelList.at(i).getPosition().y >= -2)
 				{
-					m_collectableSpeed = glm::vec3(0, -0.03, 0);
+					m_collectableSpeed = glm::vec3(0, -COLLECTABLE_SPEED*fTimeElapsed, 0);
 				}
 				
 				else if (m_sceneReader.m_modelList.at(i).getPosition().y <= -4)
 				{
-					m_collectableSpeed = glm::vec3(0, 0.03, 0);
+					m_collectableSpeed = glm::vec3(0, COLLECTABLE_SPEED*fTimeElapsed, 0);
 				}
 
 				//Set positions & rotations
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
-				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + 5, m_sceneReader.m_modelList.at(i).getRotation().z));
+				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*fTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
