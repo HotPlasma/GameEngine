@@ -40,8 +40,14 @@ void Menu::initScene(Freetype * Overlay)
 
 	m_EditorButton = new Button(m_windowSize.x / 2, 600, 0, "assets/UI/WorldEditor.png", "assets/UI/WorldEditorHover.png", glm::vec3(148.f, 46.f, 1.f), Overlay);
 
+	m_OptionsButton = new Button(m_windowSize.x / 2, 500, 0, "assets/UI/Options.png", "assets/UI/OptionsHover.png", glm::vec3(126.f, 46.f, 1.f), Overlay);
+
 	m_ExitButton = new Button(m_windowSize.x / 2, 400, 0, "assets/UI/Exit.png", "assets/UI/ExitHover.png", glm::vec3(83, 46.f, 1.f), Overlay);
 	
+	if (!MenuTheme.loadFromFile("assets/sounds/MainMenu.wav"));
+	{
+
+	}
 
 	//UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
 	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
@@ -54,11 +60,19 @@ void Menu::setMousePos(sf::Vector2f mousepos)
 
 void Menu::update(float t)
 {
+	if (Music.getStatus() != sf::Sound::Playing)
+	{
+		Music.setBuffer(MenuTheme);
+		Music.setVolume(40);
+		Music.play();
+	}
+
 	m_V = mat4(1.0f);
 	m_P = glm::perspective(90.f, (float)m_windowSize.x / m_windowSize.y, 1.f, 5000.f);
 	m_PlayButton->CheckHover(m_mousePos, 0);
 	m_EditorButton->CheckHover(m_mousePos, 2);
-	m_ExitButton->CheckHover(m_mousePos, 4);
+	m_OptionsButton->CheckHover(m_mousePos, 4);
+	m_ExitButton->CheckHover(m_mousePos, 6);
 }
 
 void Menu::render()
@@ -99,11 +113,16 @@ int Menu::returnMenuChoice()
 		{
 			WhichState = Create;
 		}
+		else if (m_OptionsButton->isActive()) // Exit button clicked
+		{
+			WhichState = Options;
+		}
 		else if (m_ExitButton->isActive()) // Exit button clicked
 		{
 			WhichState = ExitMenu;
 		}
 		m_bClicked = false; // "Unclick" button
+		Music.stop();
 		return WhichState; // Return which button was clicked
 	}
 	return WhichState = None; // If no button clicked return none

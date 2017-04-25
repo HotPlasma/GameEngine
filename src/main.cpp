@@ -196,7 +196,6 @@ void mainLoop()
 			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
 			{
 				{
-					cout << "Clicked" << endl;
 					g_pMenu->Click();
 				}
 			}
@@ -214,6 +213,8 @@ void mainLoop()
 				g_WhichGameState = LevelEditor;
 				break;
 			case 3:
+				break;
+			case 4:
 				delete g_pScene;
 				glfwTerminate();
 				exit(EXIT_SUCCESS);
@@ -289,6 +290,7 @@ int main(int argc, char *argv[])
 
 	// Initialisation
 	initializeGL();
+	
 
 	// Resets elapsed time before mainloop begins
 	glfwSetTime(0);
