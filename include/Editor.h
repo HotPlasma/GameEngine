@@ -27,6 +27,8 @@ class Editor : public Scene
 		Editor(GLFWwindow *pWindow, sf::Vector2i windowSize); //!< Constructor
 
 		void initScene(Freetype* pOverlay); //!< Initialises the Editor Scene
+
+		void keyPress(const int kiKey); //!< Called on keyPress event
 		void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 		void render(); //!< Renders the Editor to display
 

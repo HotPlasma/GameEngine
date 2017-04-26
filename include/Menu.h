@@ -40,6 +40,7 @@ public:
 	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);
 	void setMousePos(sf::Vector2f mousepos);
+	void keyPress(const int kiKey) {}
 	void update(float t);
 	void render();
 	int returnMenuChoice();

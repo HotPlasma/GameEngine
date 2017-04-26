@@ -31,7 +31,10 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	// Nothing
+	if (iAction == GLFW_PRESS)
+	{
+		g_pScene->keyPress(iKey);
+	}
 }
 
 //////////////////////////////////////////////////////////

@@ -6,6 +6,9 @@ using std::ifstream;
 #define COLLECTABLE_ROTATION 90.0f
 #define COLLECTABLE_SPEED 7.5f
 
+#define CAMERA_ROTATION 0.0025f
+#define CAMERA_SPEED 50.0f
+
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
 	m_pWindow = pWindow;
@@ -103,8 +106,31 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 void World::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
-	// Updates Camera with user input
-	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
+	// Calculates the mouse movement
+	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
+
+	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
 

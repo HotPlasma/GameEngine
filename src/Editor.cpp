@@ -1,8 +1,10 @@
 
 #include "Editor.h"
 
-#define MOVE_VELOCITY 50.0f
-#define ROTATE_VELOCITY 0.0025f
+#define HAND_SPEED 25.0f
+
+#define CAMERA_ROTATION 0.0025f
+#define CAMERA_SPEED 50.0f
 
 // Constructor
 Editor::Editor(GLFWwindow *pWindow, sf::Vector2i windowSize)
@@ -27,7 +29,7 @@ Editor::Editor(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	// Populates the ModelSelection member with Models
 	m_pModelSelection.push_back(model);
 
-	// Creates a battery Model
+	// Creates a stump Model
 	model = std::shared_ptr<Model>(new Model());
 	model->setName("Stump");
 	model->setFileLocation("assets/models/stump.obj");
@@ -112,27 +114,168 @@ void Editor::initScene(Freetype* pOverlay)
 	linkShaders();
 }
 
+void Editor::keyPress(const int kiKey)
+{
+	// Left click locks Model into position
+	// Model is added to vector of placed Models? Later saved to XML
+	if (kiKey == GLFW_KEY_SPACE)
+	{
+		m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
+		if (!m_pModels.empty())
+		{
+			m_pModels.back()->setRotation(glm::vec3(0.5f, 0.5f, 0.5f));
+		}
+	}
+}
+
 // Void: Updates the Editor with elapsed time
 void Editor::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
-	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
+	// Calculates the mouse movement
+	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
+
+	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	//{
+	//	m_camera.move(glm::vec3(0.0f, -CAMERA_SPEED*kfTimeElapsed, 0.0f));
+	//}
+	//
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl))
+	//{
+	//	m_camera.move(glm::vec3(0.0f, CAMERA_SPEED*kfTimeElapsed, 0.0f));
+	//}
 
 	/////////////////// MODEL PROCESSING ///////////////////
 	// Need a Model to place
 	// Scrolling cycles through available Models?
-
+	
+	// direction unit vector * distance to plane
+	// distance to plane is the 10,0 to 0,10
+	// two triangles with trig and shit
+	//
+	//glm::vec2 hypotenuse;
+	//
+	//
+	//float distance = Utils::magnitude(m_camera.getView() - m_camera.getPosition());
+	//
+	// Ray out of camera towards where cam is looking?
+	//glm::vec4 result = glm::vec4(m_camera.getPosition(), 1.0) * P;
+	//
+	// Unit vector of the view direction
+	//glm::vec3 viewUnitVec = 
+	//
+	//std::cout 
+	//	<< "\nm_camera.getView()[3][0] " << m_camera.getView()[3][0]
+	//	<< "\nm_camera.getView()[3][1] " << m_camera.getView()[3][1]
+	//	<< "\nm_camera.getView()[3][2] " << m_camera.getView()[3][2]
+	//	<< "\n"						   
+	//	<< "\nm_camera.getView()[2][0] " << m_camera.getView()[2][0]
+	//	<< "\nm_camera.getView()[2][1] " << m_camera.getView()[2][1]
+	//	<< "\nm_camera.getView()[2][2] " << m_camera.getView()[2][2]
+	//	<< "\n"						   
+	//	<< "\nm_camera.getView()[1][0] " << m_camera.getView()[1][0]
+	//	<< "\nm_camera.getView()[1][1] " << m_camera.getView()[1][1]
+	//	<< "\nm_camera.getView()[1][2] " << m_camera.getView()[1][2]
+	//	<< "\n"						   
+	//	<< "\nm_camera.getView()[0][0] " << m_camera.getView()[0][0]
+	//	<< "\nm_camera.getView()[0][1] " << m_camera.getView()[0][1]
+	//	<< "\nm_camera.getView()[0][2] " << m_camera.getView()[0][2]
+	//<< std::endl;
+	//
+	//std::cout
+	//	<< "\nm_camera.getView()[3][0] " << m_camera.getView()[3][0]
+	//	<< "\nm_camera.getView()[3][1] " << m_camera.getView()[3][1]
+	//	<< "\nm_camera.getView()[3][2] " << m_camera.getView()[3][2]
+	//	<< "\n"
+	//	<< "\nm_camera.getPosition().x " << m_camera.getPosition().x
+	//	<< "\nm_camera.getPosition().y " << m_camera.getPosition().y
+	//	<< "\nm_camera.getPosition().z " << m_camera.getPosition().z
+	//	<< "\n"
+	//	<< "\nm_camera.getView()[2][0] - m_camera.getPosition().x " << m_camera.getView()[2][0] - m_camera.getPosition().x
+	//	<< "\nm_camera.getView()[2][1] - m_camera.getPosition().y " << m_camera.getView()[2][1] - m_camera.getPosition().y
+	//	<< "\nm_camera.getView()[2][2] - m_camera.getPosition().z " << m_camera.getView()[2][2] - m_camera.getPosition().z
+	//	<< "\n"
+	//	<< "\nglm::degrees(m_camera.getView()[2][0] - m_camera.getPosition().x) " << glm::degrees(m_camera.getView()[2][0] - m_camera.getPosition().x)
+	//	<< "\nglm::degrees(m_camera.getView()[2][1] - m_camera.getPosition().y) " << glm::degrees(m_camera.getView()[2][1] - m_camera.getPosition().y)
+	//	<< "\nglm::degrees(m_camera.getView()[2][2] - m_camera.getPosition().z) " << glm::degrees(m_camera.getView()[2][2] - m_camera.getPosition().z)
+	//<< std::endl;
+	//
+	//std::cout
+	//	<< "\nm_camera.getDirection().x " << m_camera.getDirection().x
+	//	<< "\nm_camera.getDirection().y " << m_camera.getDirection().y
+	//	<< "\nm_camera.getDirection().z " << m_camera.getDirection().z
+	//	<< "\n"																							  
+	//<< std::endl;
+	//
+	//glm::vec3 camView(m_camera.getDirection());
+	//
+	//float Theta = acos(glm::dot(camView, glm::vec3(0.0f, -1.0f, 0.0f)));
+	//float ThetaDegrees = glm::degrees(Theta);
+	//
+	////float Theta = viewUnitVec.y;
+	//float Phi = acos(glm::dot(camView, glm::vec3(0.0f, -1.0f, 0.0f)));
+	//
+	//float B = m_camera.getPosition().y * -tanf(Theta);
+	////float A = B * cosf(Theta);
+	////float C = B * sinf(Theta);
+	////float L = m_camera.getPosition().y / cosf(Theta);
+	//float L = m_camera.getPosition().y / cosf(Theta);
+	//
+	//// Hand position 
+	//m_handPosition = camView * L;
+	////m_handPosition = glm::vec3(A, 0.0, B);
+	//
 	// Hand position infront of Camera with a Y of default: 0
-	m_handPosition = glm::vec3(m_camera.getView()[3][0], m_camera.getView()[3][1], m_camera.getView()[3][2]);
+	//m_handPosition = glm::vec3(m_camera.getView()[3][0], m_camera.getView()[3][1], m_camera.getView()[3][2]);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+	{
+		m_handPosition += glm::vec3(0.0f, 0.0f, -HAND_SPEED*kfTimeElapsed);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	{
+		m_handPosition += glm::vec3(-HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+	{
+		m_handPosition += glm::vec3(0.0f, 0.0f, HAND_SPEED*kfTimeElapsed);
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+	{
+		m_handPosition += glm::vec3(HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+	}
 
 	// Sets Model position to hand plus the selected height
 	m_pSelectedModel->setPosition(m_handPosition + glm::vec3(0.0f, m_fSelectionY, 0.0f));
+	//m_pSelectedModel->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
 
 	// LEFT/RIGHT rotate Model?
 	// UP/DOWN translate Model in y axis?
-
-	// Left click locks Model into position
-	// Model is added to vector of placed Models? Later saved to XML
 }
 
 // Void: Renders the Editor to display

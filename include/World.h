@@ -29,6 +29,8 @@ class World : public Scene
 		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
 
 		void initScene(Freetype* pOverlay);
+
+		void keyPress(const int kiKey) {}
 		void update(const float kfTimeElapsed);
 		void render();
 
