@@ -36,6 +36,10 @@ class Camera // Class Designed to hold my camera positions and navigate it on us
 		glm::mat4 getProjection() { return m_projection; }; // Returns Camera Projection
 		glm::vec3 getDirection(); // Returns the Camera direction
 
+		glm::vec3 getXAxis() { return m_xAxis; }
+		glm::vec3 getYAxis() { return m_yAxis; }
+		glm::vec3 getZAxis() { return m_zAxis; }
+
 		void updateView(); // Updates Camera
 
 		void rotate(const float kfYaw, const float kfPitch); // Rotates camera

@@ -1,6 +1,7 @@
 
 #include "Editor.h"
 
+#define HAND_ROTATION 180.0f
 #define HAND_SPEED 25.0f
 
 #define CAMERA_ROTATION 0.0025f
@@ -114,17 +115,14 @@ void Editor::initScene(Freetype* pOverlay)
 	linkShaders();
 }
 
+// Void: Called on keyPress event
 void Editor::keyPress(const int kiKey)
 {
-	// Left click locks Model into position
-	// Model is added to vector of placed Models? Later saved to XML
-	if (kiKey == GLFW_KEY_SPACE)
+	// If Enter key is pressed
+	if (kiKey == GLFW_KEY_ENTER)
 	{
+		// Model is added to a vector of placed Models
 		m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
-		if (!m_pModels.empty())
-		{
-			m_pModels.back()->setRotation(glm::vec3(0.5f, 0.5f, 0.5f));
-		}
 	}
 }
 
@@ -134,43 +132,52 @@ void Editor::update(const float kfTimeElapsed)
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
-
+	// Applies movement of mouse to Camera rotation
 	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
 
+	// If W key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
+		// Move in the Z axis 
 		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-	}
-
+	// If S key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
+		// Move in the Z axis 
 		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
 	}
 
+	// If A key is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		// Move in the X axis 
+		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+	// If D key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
+		// Move in the X axis 
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-	//{
-	//	m_camera.move(glm::vec3(0.0f, -CAMERA_SPEED*kfTimeElapsed, 0.0f));
-	//}
-	//
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LControl))
-	//{
-	//	m_camera.move(glm::vec3(0.0f, CAMERA_SPEED*kfTimeElapsed, 0.0f));
-	//}
+	// If Spacebar is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	{
+		// Move in the Y axis 
+		m_camera.move(glm::vec3(0.0f, -CAMERA_SPEED*kfTimeElapsed, 0.0f));
+	}
+	// If LShift is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+	{
+		// Move in the Y axis 
+		m_camera.move(glm::vec3(0.0f, CAMERA_SPEED*kfTimeElapsed, 0.0f));
+	}
 
 	/////////////////// MODEL PROCESSING ///////////////////
-	// Need a Model to place
-	// Scrolling cycles through available Models?
 	
+	// Scrolling cycles through available Models?
+	//
 	// direction unit vector * distance to plane
 	// distance to plane is the 10,0 to 0,10
 	// two triangles with trig and shit
@@ -250,32 +257,58 @@ void Editor::update(const float kfTimeElapsed)
 	// Hand position infront of Camera with a Y of default: 0
 	//m_handPosition = glm::vec3(m_camera.getView()[3][0], m_camera.getView()[3][1], m_camera.getView()[3][2]);
 
+	// TEMPORARY KEYBOARD CONTROLS
+	// If Up arrow key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
 	{
-		m_handPosition += glm::vec3(0.0f, 0.0f, -HAND_SPEED*kfTimeElapsed);
+		m_handPosition += m_camera.getZAxis() * glm::vec3(0.0f, 0.0f, -HAND_SPEED*kfTimeElapsed);
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-	{
-		m_handPosition += glm::vec3(-HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
-	}
-
+	// If Down arrow key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
 	{
-		m_handPosition += glm::vec3(0.0f, 0.0f, HAND_SPEED*kfTimeElapsed);
+		m_handPosition += m_camera.getZAxis() * glm::vec3(0.0f, 0.0f, HAND_SPEED*kfTimeElapsed);
 	}
-
+	// If Left arrow key is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	{
+		m_handPosition += m_camera.getXAxis() * glm::vec3(-HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+	}
+	// If Right arrow key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
 	{
-		m_handPosition += glm::vec3(HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+		m_handPosition += m_camera.getXAxis() * glm::vec3(HAND_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+	}
+	// If PageUp key is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::PageUp))
+	{
+		m_handPosition += m_camera.getYAxis() * glm::vec3(0.0f, HAND_SPEED*kfTimeElapsed, 0.0f);
+	}
+	// If PageDown key is pressed
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::PageDown))
+	{
+		m_handPosition += m_camera.getYAxis() * glm::vec3(0.0f, -HAND_SPEED*kfTimeElapsed, 0.0f);
 	}
 
-	// Sets Model position to hand plus the selected height
-	m_pSelectedModel->setPosition(m_handPosition + glm::vec3(0.0f, m_fSelectionY, 0.0f));
-	//m_pSelectedModel->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	// If Left mouse button is pressed
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+	{
+		m_handRotation += glm::vec3(0.0f, -HAND_ROTATION*kfTimeElapsed, 0.0f);
+	}
+	// If Right mouse button is pressed
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Right))
+	{
+		m_handRotation += glm::vec3(0.0f, HAND_ROTATION*kfTimeElapsed, 0.0f);
+	}
 
-	// LEFT/RIGHT rotate Model?
-	// UP/DOWN translate Model in y axis?
+	//// Sets Model position to hand position
+	m_pSelectedModel->setPosition(m_handPosition);
+	//// Sets Model rotation to hand position
+	m_pSelectedModel->setRotation(m_handRotation);
+
+	////m_pSelectedModel->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	//
+	//// LEFT/RIGHT rotate Model?
+	//// UP/DOWN translate Model in y axis?
 }
 
 // Void: Renders the Editor to display
@@ -320,6 +353,7 @@ void Editor::render()
 	}
 
 	m_freeType.use();
-	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
+	std::string sText; sText += "Model Position: x("; sText += std::to_string(m_handPosition.x); sText += ") y("; sText += std::to_string(m_handPosition.y); sText += ") z("; sText += std::to_string(m_handPosition.z); sText += ")";
+	m_pHUD->RenderText(m_freeType.getHandle(), sText, 100.f, 100.f, 1.0f, glm::vec3(0.7, 0.3f, 0.3f));
 }

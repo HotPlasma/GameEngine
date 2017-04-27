@@ -16,7 +16,10 @@ class Editor : public Scene
 		std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
 		glm::vec3 m_handPosition; //!< User's 'hand' position
-		float m_fSelectionY; //!< Position of selection in the Y axis
+		glm::vec3 m_handRotation; //!< User's 'hand' rotation
+
+		//float m_fSelectionY; //!< Position of selection in the Y axis
+
 		std::vector<std::shared_ptr<Model>> m_pModelSelection; //!< Models available to be placed
 		std::shared_ptr<Model> m_pSelectedModel; //!< Model in the user's 'hand'
 
