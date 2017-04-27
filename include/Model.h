@@ -4,6 +4,7 @@
 
 #include "ModelReader.h"
 
+
 using namespace std;
 
 class Model
@@ -33,6 +34,7 @@ class Model
 		GLuint m_vboHandles[2];
 		GLuint m_vbo;
 		GLuint m_vaoHandle;
+
 	
 	public:
 		Model(); // Constructor

@@ -10,6 +10,7 @@
 #include "glslprogram.h"
 #include "Freetype.h"
 #include "Utilities.h"
+#include "reactphysics3d.h"
 
 class World : public Scene
 {
@@ -23,6 +24,8 @@ class World : public Scene
 
 		void linkShaders(); // Connects shaders
 		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
+
+		rp3d::CollisionWorld m_CollisonWorld;
 	
 	public:
 

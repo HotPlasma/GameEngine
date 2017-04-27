@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 #define CAMERA_ROTATION 0.0025f
-#define CAMERA_SPEED 50.0f
+#define CAMERA_SPEED 900.0f
 
 // World coordinate System Axes
 const glm::vec3 WORLDX = glm::vec3(1, 0, 0);

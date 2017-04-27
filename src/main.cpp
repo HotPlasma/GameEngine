@@ -187,9 +187,10 @@ void mainLoop()
 		}
 
 		// Resets elapsed time
-		glfwSetTime(0);
+		
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
+		glfwSetTime(0);
     
 		if (g_gameState == MainMenu)
 		{
