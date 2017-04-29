@@ -188,6 +188,7 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// WORLD
+	// Activates World shader
 	m_worldShader.use();
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -219,8 +220,10 @@ void World::render()
 		}
 	}
 
-	// HUD
+	// Activates FreeType shader
 	m_freeType.use();
-	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	// Configures projection
+	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
+	// Renders placeholder text to HUD
+	m_pHUD->RenderText(m_freeType.getHandle(), "Placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }

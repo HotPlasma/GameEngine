@@ -243,9 +243,10 @@ void Editor::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
-	// Activates use of shader
+	// Activates World shader
 	m_worldShader.use();
 
+	// Configures shader
 	glm::mat4 model = glm::mat4(1.0);
 	mat4 mv = m_camera.getView() * model;
 	m_worldShader.setUniform("ModelViewMatrix", mv);
