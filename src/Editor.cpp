@@ -153,7 +153,7 @@ void Editor::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
-	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
+	sf::Vector2f delta(m_mousePos - m_lastMousePos);
 
 	// If LMButton is down
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
@@ -224,6 +224,9 @@ void Editor::update(const float kfTimeElapsed)
 	m_pSelectedModel->setPosition(m_handPosition);
 	//// Sets Model rotation to hand position
 	m_pSelectedModel->setRotation(m_handRotation);
+
+	// Sets last cursor position
+	m_lastMousePos = m_mousePos;
 }
 
 // Void: Renders the Editor to display

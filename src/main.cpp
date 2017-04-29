@@ -189,6 +189,13 @@ void mainLoop()
 	// While the window should remain open and escape is not pressed
 	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
 	{
+		// If GameState is 'Game' - Sets the cursor to be hidden
+		if (g_gameState == Game)
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		// Else - Cursor visible
+		else
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
 		// If window is focused
 		if (g_bWindowFocused)
 		{
@@ -234,9 +241,9 @@ void mainLoop()
 			}
 		}
 
-		if (g_gameState == Game || g_gameState == LevelEditor)
+		// If GameState is 'Game' - Sets the cursor to screen center
+		if (g_gameState == Game)
 		{
-			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 			// Resets cursor to the center of the window after cursor event
 			if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
 		}
@@ -283,12 +290,6 @@ int main(int argc, char *argv[])
 	glfwSetScrollCallback(g_pWindow, scroll_callback);
 	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
-
-	// Sets the cursor to be hidden
-	if (g_gameState == Game || g_gameState == LevelEditor)
-	{
-		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-	}
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
