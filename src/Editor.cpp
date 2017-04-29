@@ -207,26 +207,26 @@ void Editor::update(const float kfTimeElapsed)
 	/////////////////// X ///////////////////
 	// If Up arrow is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-		m_handRotation += m_camera.getXAxis() * glm::vec3(-HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
+		m_handRotation += glm::vec3(-HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
 	// If Down arrow is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-		m_handRotation += m_camera.getXAxis() * glm::vec3(HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
+		m_handRotation += glm::vec3(HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
 
 	/////////////////// Y ///////////////////
 	// If Q key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-		m_handRotation += m_camera.getYAxis() * glm::vec3(0.0f, -HAND_ROTATION*kfTimeElapsed, 0.0f);
+		m_handRotation += glm::vec3(0.0f, -HAND_ROTATION*kfTimeElapsed, 0.0f);
 	// If E key is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
-		m_handRotation += m_camera.getYAxis() * glm::vec3(0.0f, HAND_ROTATION*kfTimeElapsed, 0.0f);
+		m_handRotation += glm::vec3(0.0f, HAND_ROTATION*kfTimeElapsed, 0.0f);
 
 	/////////////////// Z ///////////////////
 	// If Left arrow is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-		m_handRotation += m_camera.getXAxis() * glm::vec3(0.0f, 0.0f, -HAND_ROTATION*kfTimeElapsed);
+		m_handRotation += glm::vec3(0.0f, 0.0f, HAND_ROTATION*kfTimeElapsed);
 	// If Right arrow is pressed
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		m_handRotation += m_camera.getXAxis() * glm::vec3(0.0f, 0.0f, HAND_ROTATION*kfTimeElapsed);
+		m_handRotation += glm::vec3(0.0f, 0.0f, -HAND_ROTATION*kfTimeElapsed);
 
 	//// Sets Model position to hand position
 	m_pSelectedModel->setPosition(m_handPosition);
