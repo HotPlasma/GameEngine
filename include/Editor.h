@@ -13,6 +13,9 @@
 class Editor : public Scene
 {
 	private:
+		
+		std::string m_sFilepath = "assets/scenes/editorScene.xml"; //!< Scene file path
+
 		std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
 		glm::vec3 m_handPosition; //!< User's 'hand' position
@@ -30,6 +33,8 @@ class Editor : public Scene
 		Editor(GLFWwindow *pWindow, sf::Vector2i windowSize); //!< Constructor
 
 		void initScene(Freetype* pOverlay); //!< Initialises the Editor Scene
+
+		void save(); //!< Saves the Scene to XML file
 
 		void keyPress(const int kiKey); //!< Called on keyPress event
 		void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time

@@ -124,6 +124,13 @@ void Editor::keyPress(const int kiKey)
 		// Model is added to a vector of placed Models
 		m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
 	}
+
+	// If F5 key is pressed
+	if (kiKey == GLFW_KEY_F5)
+	{
+		// Saves Scene to file
+		save();
+	}
 }
 
 // Void: Updates the Editor with elapsed time
@@ -356,4 +363,95 @@ void Editor::render()
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
 	std::string sText; sText += "Model Position: x("; sText += std::to_string(m_handPosition.x); sText += ") y("; sText += std::to_string(m_handPosition.y); sText += ") z("; sText += std::to_string(m_handPosition.z); sText += ")";
 	m_pHUD->RenderText(m_freeType.getHandle(), sText, 100.f, 100.f, 1.0f, glm::vec3(0.7, 0.3f, 0.3f));
+}
+
+// Void: Saves the Scene to XML file
+void Editor::save()
+{
+	std::cerr << "[EDITOR] Saving to file..." << std::endl;
+
+	// Defines new XML Document
+	tinyxml2::XMLDocument document;
+
+	// Creates an XML declaration
+	//tinyxml2::XMLDeclaration* declaration = new tinyxml2::XMLDeclaration("1.0", "", "");
+
+	// Creates <Scene> within the document
+	tinyxml2::XMLNode* pScene = document.NewElement("Scene");
+	document.InsertFirstChild(pScene);
+
+	// For all Models in the Editor
+	for (std::shared_ptr<Model> pModel : m_pModels)
+	{
+		// Defines new element for <Object>
+		tinyxml2::XMLNode* pObject = document.NewElement("Object");
+		pScene->InsertEndChild(pObject);
+
+		// Defines new element for <Name>
+		tinyxml2::XMLElement* pName = document.NewElement("Name");
+		// Sets <Name> value to the Model name
+		pName->SetText(pModel->getName().c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pName);
+
+		// Defines new element for <OBJLocation>
+		tinyxml2::XMLElement* pObjLoc = document.NewElement("OBJLocation");
+		// Sets <OBJLocation> value to the Model file location
+		pObjLoc->SetText(pModel->getFileLocation().c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pObjLoc);
+
+		// Defines new element for <TexLocation>
+		tinyxml2::XMLElement* pTexLoc = document.NewElement("TexLocation");
+		// Sets <TexLocation> value to the Model texture location
+		pTexLoc->SetText(pModel->getTexFileLocation().c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pTexLoc);
+
+		// Defines new element for <Translation>
+		tinyxml2::XMLElement* pTrans = document.NewElement("Translation");
+		// Defines string for Translation data
+		std::string sTData = std::to_string(pModel->getPosition().x); sTData += " "; sTData += std::to_string(pModel->getPosition().y); sTData += " "; sTData += std::to_string(pModel->getPosition().z);
+		// Sets <Translation> value to the Model position
+		pTrans->SetText(sTData.c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pTrans);
+
+		// Defines new element for <Rotation>
+		tinyxml2::XMLElement* pRot = document.NewElement("Rotation");
+		// Defines string for Rotation data
+		std::string sRData = std::to_string(pModel->getRotation().x); sRData += " "; sRData += std::to_string(pModel->getRotation().y); sRData += " "; sRData += std::to_string(pModel->getRotation().z);
+		// Sets <Rotation> value to Model rotation
+		pRot->SetText(sRData.c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pRot);
+
+		// Defines new element for <Scale>
+		tinyxml2::XMLElement* pScale = document.NewElement("Scale");
+		// Defines string for Scale data
+		std::string sSData = std::to_string(pModel->getScale().x); sSData += " "; sSData += std::to_string(pModel->getScale().y); sSData += " "; sSData += std::to_string(pModel->getScale().z);
+		// Sets <Scale> value to the Model scale
+		pScale->SetText(sSData.c_str());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pScale);
+
+		// Defines new element for <Material>
+		tinyxml2::XMLElement* pMaterial = document.NewElement("Material");
+		// Sets <Material> value to Model scale
+		pMaterial->SetText(pModel->getMaterial());
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pMaterial);
+
+		// Defines new element for <Collectable>
+		tinyxml2::XMLElement* pCollectable = document.NewElement("Collectable");
+		// Sets <Collectable> value to Model name
+		pCollectable->SetText(int(pModel->isCollectable()));
+		// Inserts element into <Object>
+		pObject->InsertEndChild(pCollectable);
+	}
+
+	// Saves the document
+	document.SaveFile(m_sFilepath.c_str());
+
+	std::cerr << "[EDITOR] File saved." << std::endl;
 }

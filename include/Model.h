@@ -39,6 +39,7 @@ class Model
 		Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
 		string getName() { return m_sName; }; // Returns moniker
 		string getFileLocation() { return m_sFileName; }; // Returns location of obj
+		string getTexFileLocation() { return m_sTexture; }; // Returns file location of texture
 		GLuint getTextureLocation() { return m_textureID; }; // Returns location of texture
 		glm::vec3 getPosition() { return m_position; }; // Returns rosition of model
 		glm::vec3 getRotation() { return m_rotation; }; // Returns rotation of model
