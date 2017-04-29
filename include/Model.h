@@ -21,7 +21,7 @@ class Model
 		bool m_bCollectable = false; // is the model a collectable?
 		bool m_bCollected = false; // has the collectable been collected?
 
-		bool m_bVisable = true; // is the model visable
+		bool m_bVisible = true; // is the model visable
 	
 		GLuint m_textureID; // ID of the texture
 		ModelReader* m_pModelReader; // Model Reader for the render the model
@@ -46,7 +46,7 @@ class Model
 		glm::vec3 getScale() { return m_scale; }; // Returns scale of model
 		bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
 		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
-		bool getVisable() { return m_bVisable; }; // Check if a collectable has been collected
+		bool getVisable() { return m_bVisible; }; // Check if a collectable has been collected
 		int getMaterial() { return m_iMaterial; }; // Returns materialID
 	
 		void setCollectable(bool NewSetting);
