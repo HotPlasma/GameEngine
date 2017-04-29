@@ -9,7 +9,8 @@
 class Scene
 {
 	public:
-		Scene() : m_bAnimate(true) {}
+
+		Scene() {}
 		Scene(GLFWwindow *pWindow) {};
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
@@ -21,6 +22,11 @@ class Scene
 	
 		virtual void setMousePos(sf::Vector2f mousepos) = 0;
 	
+		// Called on keyPress event
+		virtual void keyPress(const int kiKey) = 0;
+		// Called on mouseScroll event
+		virtual void mouseScroll(const double kdDelta) = 0;
+
 		// Run every frame
 		virtual void update(float fTimeElapsed) = 0;
 	
@@ -37,17 +43,14 @@ class Scene
 			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
 		}
 	
-		void animate(bool bValue) { m_bAnimate = bValue; }
-		bool animating() { return m_bAnimate; }
-	
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
+
 		GLSLProgram m_worldShader;
 		GLSLProgram m_freeType;
 		GLSLProgram m_imageType;
 
-		bool m_bAnimate;
 		Camera m_camera; // Camera which user can control
 
 		Freetype* m_pHUD;
