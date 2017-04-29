@@ -445,7 +445,7 @@ void Editor::save()
 		// Defines new element for <Collectable>
 		tinyxml2::XMLElement* pCollectable = document.NewElement("Collectable");
 		// Sets <Collectable> value to Model name
-		pCollectable->SetText(int(pModel->isCollectable()));
+		pCollectable->SetText(pModel->isCollectable());
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pCollectable);
 	}
