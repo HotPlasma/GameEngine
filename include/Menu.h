@@ -41,6 +41,7 @@ public:
 	void initScene(Freetype* Overlay);
 	void setMousePos(sf::Vector2f mousepos);
 	void keyPress(const int kiKey) {}
+	void mouseScroll(const double kdDelta) {}
 	void update(float t);
 	void render();
 	int returnMenuChoice();

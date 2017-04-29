@@ -24,6 +24,8 @@ class Scene
 	
 		// Called on keyPress event
 		virtual void keyPress(const int kiKey) = 0;
+		// Called on mouseScroll event
+		virtual void mouseScroll(const double kdDelta) = 0;
 
 		// Run every frame
 		virtual void update(float fTimeElapsed) = 0;

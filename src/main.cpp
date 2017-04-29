@@ -38,17 +38,6 @@ static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iActi
 }
 
 //////////////////////////////////////////////////////////
-////  Window focus callback //////////////////////////////
-//////////////////////////////////////////////////////////
-static void focus_callback(GLFWwindow *pWindow, int iFocused)
-{
-	// If the callback is true
-	if (iFocused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
-	// Else the callback is false
-	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
-}
-
-//////////////////////////////////////////////////////////
 ////  Mouse movement callback ////////////////////////////
 //////////////////////////////////////////////////////////
 static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
@@ -58,6 +47,25 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	{
 		g_pScene->setMousePos(sf::Vector2f(dX, dY));
 	}
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse scroll callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
+{
+	g_pScene->mouseScroll(dY);
+}
+
+//////////////////////////////////////////////////////////
+////  Window focus callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void focus_callback(GLFWwindow *pWindow, int iFocused)
+{
+	// If the callback is true
+	if (iFocused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
+	// Else the callback is false
+	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
 }
 
 //////////////////////////////////////////////////////////
@@ -271,8 +279,9 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
-	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
+	glfwSetScrollCallback(g_pWindow, scroll_callback);
+	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
 
 	// Sets the cursor to be hidden
