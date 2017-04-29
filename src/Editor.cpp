@@ -133,6 +133,14 @@ void Editor::keyPress(const int kiKey)
 		m_handRotation = glm::vec3(0.0f, 0.0f, 0.0f);
 	}
 
+	// TEMPORARY
+	// If 1 key is pressed
+	if (kiKey == GLFW_KEY_1)
+		m_pSelectedModel = m_pModelSelection.at(0);
+	// If 2 key is pressed
+	if (kiKey == GLFW_KEY_2)
+		m_pSelectedModel = m_pModelSelection.at(1);
+
 	// If F5 key is pressed
 	if (kiKey == GLFW_KEY_F5)
 	{
