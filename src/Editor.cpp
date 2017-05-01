@@ -116,41 +116,51 @@ void Editor::initScene(Freetype* pOverlay)
 	linkShaders();
 }
 
-// Void: Called on keyPress event
-void Editor::keyPress(const int kiKey)
+// Void: Called on key input event
+void Editor::input_key(const int kiKey, const int kiAction)
 {
-	// If Spacebar is pressed
-	if (kiKey == GLFW_KEY_SPACE)
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
 	{
-		// Model is added to a vector of placed Models
-		m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
-	}
+		// If Spacebar is pressed
+		if (kiKey == GLFW_KEY_SPACE)
+		{
+			// Model is added to a vector of placed Models
+			m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
+		}
 
-	// If R key is pressed
-	if (kiKey == GLFW_KEY_R)
-	{
-		// Resets the hand rotation vector
-		m_handRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	}
+		// If R key is pressed
+		if (kiKey == GLFW_KEY_R)
+		{
+			// Resets the hand rotation vector
+			m_handRotation = glm::vec3(0.0f, 0.0f, 0.0f);
+		}
 
-	// TEMPORARY
-	// If 1 key is pressed
-	if (kiKey == GLFW_KEY_1)
-		m_pSelectedModel = m_pModelSelection.at(0);
-	// If 2 key is pressed
-	if (kiKey == GLFW_KEY_2)
-		m_pSelectedModel = m_pModelSelection.at(1);
+		// TEMPORARY
+		// If 1 key is pressed
+		if (kiKey == GLFW_KEY_1)
+			m_pSelectedModel = m_pModelSelection.at(0);
+		// If 2 key is pressed
+		if (kiKey == GLFW_KEY_2)
+			m_pSelectedModel = m_pModelSelection.at(1);
 
-	// If F5 key is pressed
-	if (kiKey == GLFW_KEY_F5)
-	{
-		// Saves Scene to file
-		save();
+		// If F5 key is pressed
+		if (kiKey == GLFW_KEY_F5)
+		{
+			// Saves Scene to file
+			save();
+		}
 	}
 }
 
-// Void: Called on mouseScroll event
-void Editor::mouseScroll(const double kdDelta)
+// Void: Called on mouseButton input event
+void Editor::input_button(const int kiButton, const int kiAction)
+{
+	// Nothing Currently
+}
+
+// Void: Called on mouseScroll input event
+void Editor::input_scroll(const double kdDelta)
 {
 	// Move in the Z axis 
 	m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_ZOOM*kdDelta));

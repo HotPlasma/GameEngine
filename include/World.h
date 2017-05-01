@@ -30,8 +30,9 @@ class World : public Scene
 
 		void initScene(Freetype* pOverlay);
 
-		void keyPress(const int kiKey) {}
-		void mouseScroll(const double kdDelta) {}
+		void input_key(const int kiKey, const int kiAction) = 0;
+		void input_button(const int kiButton, const int kiAction) = 0;
+		void input_scroll(const double kdDelta) = 0;
 
 		void update(const float kfTimeElapsed);
 		void render();

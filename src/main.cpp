@@ -31,10 +31,23 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	if (iAction == GLFW_PRESS)
-	{
-		g_pScene->keyPress(iKey);
-	}
+	g_pScene->input_key(iKey, iAction);
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse button callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void button_callback(GLFWwindow* pWindow, int iButton, int iAction, int iMods)
+{
+	g_pScene->input_button(iButton, iAction);
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse scroll callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
+{
+	g_pScene->input_scroll(dY);
 }
 
 //////////////////////////////////////////////////////////
@@ -47,14 +60,6 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	{
 		g_pScene->setMousePos(sf::Vector2f(dX, dY));
 	}
-}
-
-//////////////////////////////////////////////////////////
-////  Mouse scroll callback //////////////////////////////
-//////////////////////////////////////////////////////////
-static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
-{
-	g_pScene->mouseScroll(dY);
 }
 
 //////////////////////////////////////////////////////////
@@ -286,6 +291,7 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
+	glfwSetMouseButtonCallback(g_pWindow, button_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetScrollCallback(g_pWindow, scroll_callback);
 	glfwSetWindowFocusCallback(g_pWindow, focus_callback);

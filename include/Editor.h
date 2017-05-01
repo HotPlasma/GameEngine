@@ -36,8 +36,9 @@ class Editor : public Scene
 
 		void save(); //!< Saves the Scene to XML file
 
-		void keyPress(const int kiKey); //!< Called on keyPress event
-		void mouseScroll(const double kdDelta); //!< Called on mouseScroll event
+		void input_key(const int kiKey, const int kiAction); //!< Called on key input event
+		void input_button(const int kiButton, const int kiAction); //!< Called on mouseButton input event
+		void input_scroll(const double kdDelta); //!< Called on mouseScroll input event
 
 		void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 		void render(); //!< Renders the Editor to display
