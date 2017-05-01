@@ -7,9 +7,17 @@ const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
 
 Camera::Camera()
 {
-	m_fFOV = 90.0f;
-	m_fNear = 1.0f;
-	m_fFar = 1000.0f;
+	// Sets axis to world
+	m_xAxis = WORLDX;
+	m_yAxis = WORLDY;
+	m_zAxis = WORLDZ;
+
+	// Sets orientation to 
+	m_orientation = glm::quat(1.0, 0.0, 0.0, 0.0); 
+
+	m_fFOV = 90.0f; // Camera Field of View
+	m_fNear = 1.0f; // Near culling distance
+	m_fFar = 1000.0f; // Far culling distance
 
 	// Sets Position default value
 	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
