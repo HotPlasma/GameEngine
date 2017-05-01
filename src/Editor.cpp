@@ -57,53 +57,6 @@ Editor::Editor(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_pSelectedModel = m_pModelSelection.front();
 }
 
-// Void: Links vert and frag shaders into a glslprogram
-void Editor::linkShaders()
-{
-	try
-	{
-		// Shader which allows first person camera and textured object rendering
-		m_worldShader.compileShader("Shaders/shader.vert");
-		m_worldShader.compileShader("Shaders/shader.frag");
-		m_worldShader.link();
-		m_worldShader.validate();
-		m_worldShader.use();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-
-	try
-	{
-		// Shader which allows heads up display rendering
-		m_freeType.compileShader("Shaders/freetype.vert");
-		m_freeType.compileShader("Shaders/freetype.frag");
-		m_freeType.link();
-		m_freeType.validate();
-		m_freeType.use();
-	}
-	catch (GLSLProgramException & e) {
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-
-	try
-	{
-		// Shader which allows for image rendering
-		m_imageType.compileShader("Shaders/image.vert");
-		m_imageType.compileShader("Shaders/image.frag");
-		m_imageType.link();
-		m_imageType.validate();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 // Void: Initialises the Editor Scene
 void Editor::initScene(Freetype* pOverlay)
 {

@@ -40,57 +40,6 @@ void World::initScene(Freetype* pOverlay)
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
-void World::setMousePos(sf::Vector2f mousepos)
-{
-	m_mousePos = mousepos;
-}
-
-void World::linkShaders()
-{
-	try
-	{
-		// Shader which allows first person camera and textured objects
-		m_worldShader.compileShader("Shaders/shader.vert");
-		m_worldShader.compileShader("Shaders/shader.frag");
-		m_worldShader.link();
-		m_worldShader.validate();
-		m_worldShader.use();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-  
-	try
-	{
-		// Shader which allows heads up display
-		m_freeType.compileShader("Shaders/freetype.vert");
-		m_freeType.compileShader("Shaders/freetype.frag");
-		m_freeType.link();
-		m_freeType.validate();
-		m_freeType.use();
-	}
-	catch (GLSLProgramException & e) {
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-
-	try
-	{
-		// Shader which allows heads up display
-		m_imageType.compileShader("Shaders/image.vert");
-		m_imageType.compileShader("Shaders/image.frag");
-		m_imageType.link();
-		m_imageType.validate();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
 {
 	mat4 mv = kView * kModel;

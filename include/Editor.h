@@ -26,8 +26,6 @@ class Editor : public Scene
 		std::vector<std::shared_ptr<Model>> m_pModelSelection; //!< Models available to be placed
 		std::shared_ptr<Model> m_pSelectedModel; //!< Model in the user's 'hand'
 
-		void linkShaders(); //!< Links vert and frag shaders into a glslprogram
-	
 	public:
 	
 		Editor(GLFWwindow *pWindow, sf::Vector2i windowSize); //!< Constructor
@@ -41,7 +39,5 @@ class Editor : public Scene
 
 		void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 		void render(); //!< Renders the Editor to display
-
-		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; } //!< Sets Mouse position
 };
 #endif  
