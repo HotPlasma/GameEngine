@@ -41,9 +41,9 @@ public:
 	void initScene(Freetype* Overlay);
 	void setMousePos(sf::Vector2f mousepos);
 
-	void input_key(const int kiKey, const int kiAction) = 0;
-	void input_button(const int kiButton, const int kiAction) = 0;
-	void input_scroll(const double kdDelta) = 0;
+	void input_key(const int kiKey, const int kiAction) {}
+	void input_button(const int kiButton, const int kiAction) {}
+	void input_scroll(const double kdDelta) {}
 
 	void update(float t);
 	void render();

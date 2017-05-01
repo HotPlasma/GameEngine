@@ -9,28 +9,37 @@
 #include "ModelReader.h"
 #include "glslprogram.h"
 
+struct Selection
+{
+	// Transformation members
+	glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f); //!< Selection position
+	glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, 0.0f); //!< Selection rotation
+	glm::vec3 m_scale = glm::vec3(1.0f, 1.0f, 1.0f); //!< Selection scale
+
+	std::shared_ptr<Model> m_pModel; //!< Selection Model
+};
+
 //!< Scene subclass for creating levels
 class Editor : public Scene
 {
 	private:
 		
-		std::string m_sFilepath = "assets/scenes/editorScene.xml"; //!< Scene file path
+		std::string m_sFilepath = "assets/scenes/editorScene.xml"; //!< Scene file path TEMPORARY default
 
 		std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
-		glm::vec3 m_handPosition; //!< User's 'hand' position
-		glm::vec3 m_handRotation; //!< User's 'hand' rotation
+		Selection m_selection; //!< User's 'hand'
 
 		sf::Vector2f m_lastMousePos; //!< Last cursor position
 
-		std::vector<std::shared_ptr<Model>> m_pModelSelection; //!< Models available to be placed
-		std::shared_ptr<Model> m_pSelectedModel; //!< Model in the user's 'hand'
+		enum TransformationMode { TRANSLATION, ROTATION, SCALE }; //!< Enum for which transformation mode the Editor is in
+		TransformationMode m_transformMode; //!< Editor's current transformation mode
 
 		void linkShaders(); //!< Links vert and frag shaders into a glslprogram
 	
 	public:
 	
-		Editor(GLFWwindow *pWindow, sf::Vector2i windowSize); //!< Constructor
+		Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize); //!< Constructor
 
 		void initScene(Freetype* pOverlay); //!< Initialises the Editor Scene
 
