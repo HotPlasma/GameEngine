@@ -5,9 +5,9 @@
 #define ROTATION_SPEED 180.0f
 #define SCALE_SPEED 5.0f
 
-#define CAMERA_ROTATION 0.0025f
+#define CAMERA_ROTATION 0.0015f
 #define CAMERA_SPEED 0.01f
-#define CAMERA_ZOOM 5.0f
+#define CAMERA_ZOOM 3.5f
 
 // Constructor
 Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
@@ -18,6 +18,9 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 
 	// Updates Camera aspect ratio
 	m_camera.setAspectRatio((float)kWindowSize.x / kWindowSize.y);
+
+	// Sets Camera initital position 
+	m_camera.setPosition(glm::vec3( 0.0f, 15.0f, 40.0f));
 
 	// TEMPORARY - Need to read in a list of models to use
 	// Creates a tree Model
@@ -36,7 +39,7 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 	m_selection.m_pModel = pModel;
 
 	// Sets default transformation mode
-	m_transformMode = TRANSLATION;
+	m_transformMode = TRANSLATE;
 }
 
 // Void: Links vert and frag shaders into a glslprogram
@@ -114,8 +117,26 @@ void Editor::input_key(const int kiKey, const int kiAction)
 		// If R key is pressed
 		if (kiKey == GLFW_KEY_R)
 		{
-			// Resets the hand rotation vector
-			m_selection.m_rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+			// If mode is Translate
+			if (m_transformMode == TRANSLATE)
+			{
+				// Resets the hand position vector
+				m_selection.m_position = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+
+			// If mode is Rotate
+			else if (m_transformMode == ROTATE)
+			{
+				// Resets the hand rotation vector
+				m_selection.m_rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
+
+			// If mode is Scale
+			else if (m_transformMode == SCALE)
+			{
+				// Resets the hand scale vector
+				m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			}
 		}
 
 		// If F5 key is pressed
@@ -126,8 +147,8 @@ void Editor::input_key(const int kiKey, const int kiAction)
 		}
 
 		// TEMPORARY - Transformation mode switching until menu added
-		if (kiKey == GLFW_KEY_1) m_transformMode = TRANSLATION;
-		if (kiKey == GLFW_KEY_2) m_transformMode = ROTATION;
+		if (kiKey == GLFW_KEY_1) m_transformMode = TRANSLATE;
+		if (kiKey == GLFW_KEY_2) m_transformMode = ROTATE;
 		if (kiKey == GLFW_KEY_3) m_transformMode = SCALE;
 	}
 }
@@ -168,7 +189,7 @@ void Editor::update(const float kfTimeElapsed)
 
 	/////////////////// MODEL MANIPULAITON ///////////////////
 	/////////////////// TRANSLATION ///////////////////
-	if (m_transformMode == TRANSLATION)
+	if (m_transformMode == TRANSLATE)
 	{
 		/////////////////// X ///////////////////
 		// If A key is pressed
@@ -196,7 +217,7 @@ void Editor::update(const float kfTimeElapsed)
 	}
 
 	/////////////////// ROTATION ///////////////////
-	if (m_transformMode == ROTATION)
+	if (m_transformMode == ROTATE)
 	{
 		/////////////////// X ///////////////////
 		// If W key is pressed
@@ -235,12 +256,12 @@ void Editor::update(const float kfTimeElapsed)
 			m_selection.m_scale += glm::vec3(SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
 
 		/////////////////// Y ///////////////////
-		// If Q key is pressed
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-			m_selection.m_scale += glm::vec3(0.0f, -SCALE_SPEED*kfTimeElapsed, 0.0f);
-		// If E key is pressed
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+		// If Spacebar is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 			m_selection.m_scale += glm::vec3(0.0f, SCALE_SPEED*kfTimeElapsed, 0.0f);
+		// If LShift is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+			m_selection.m_scale += glm::vec3(0.0f, -SCALE_SPEED*kfTimeElapsed, 0.0f);
 
 		/////////////////// Z ///////////////////
 		// If A key is pressed

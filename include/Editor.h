@@ -32,7 +32,7 @@ class Editor : public Scene
 
 		sf::Vector2f m_lastMousePos; //!< Last cursor position
 
-		enum TransformationMode { TRANSLATION, ROTATION, SCALE }; //!< Enum for which transformation mode the Editor is in
+		enum TransformationMode { TRANSLATE, ROTATE, SCALE }; //!< Enum for which transformation mode the Editor is in
 		TransformationMode m_transformMode; //!< Editor's current transformation mode
 
 		void linkShaders(); //!< Links vert and frag shaders into a glslprogram
