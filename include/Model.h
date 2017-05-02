@@ -21,6 +21,7 @@ class Model
 		bool m_bCollectable = false; // is the model a collectable?
 		bool m_bCollected = false; // has the collectable been collected?
 		bool m_bAi = false; //does the object use ai?
+		bool m_bCollidable;
 		bool m_bplayerCaught = false; //has the ai caught the player?
 	
 		GLuint m_textureID; // ID of the texture
@@ -47,11 +48,13 @@ class Model
 		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
 		bool isAi() { return m_bAi; }; //check if object uses ai
 		bool isPlayerCaught() { return m_bplayerCaught; };
+		bool isCollidable() { return m_bCollidable; };
 		int getMaterial() { return m_iMaterial; }; // Returns materialID
 	
 		void setCollectable();
 		void setCollected(bool bCollected); // Set collected or not collected for a collectable
 		void setAi();
+		void setCollidable();
 		void playerCaught(bool playerCaught);
 		void setName(string sNewName);
 		void setTexture(GLuint textureID); // Set texture ID
