@@ -184,6 +184,10 @@ void World::update(const float kfTimeElapsed)
 			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
 		{
 			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
+			//glm::vec3 Distance(m_Player.getPosition() - m_sceneReader.m_modelList.at(j).getPosition());
+			//glm::vec3 Penetration(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left 
+			
+			//)
 		}
 	}
 	
