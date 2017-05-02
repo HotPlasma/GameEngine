@@ -9,32 +9,31 @@
 #include "ModelReader.h"
 #include "glslprogram.h"
 #include "Freetype.h"
+#include "Utilities.h"
 
 class World : public Scene
 {
 	private:
-		GLSLProgram m_worldShader;
-		GLSLProgram m_freeType;
-		GLSLProgram m_imageType;
-		glm::vec3 m_collectableSpeed; // Speed at which a collectable bounces
-		Freetype* m_pHUD;
-	
-		GLuint m_programHandle; // Program context
-		glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
-	
-		void linkShaders(); // Connects shaders
-
+  
 		void setLightParamaters(GLSLProgram * pShader, int i);
-		void SetMatices(GLSLProgram * pShader, mat4 model, mat4 view, mat4 projection);
+		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 	
 		SceneReader m_sceneReader; // Reads .xml file in order to create world
-		glm::mat4 m_V, m_P;
+
+		bool m_collectGoingUp = true; // Whether collectables are moving up
+		float m_collectYOffset = 0.0f; // Y axis offset for collectables
+		Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 	
 	public:
-		World(GLFWwindow *pWindow, sf::Vector2i windowSize);
+
+		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+
 		void initScene(Freetype* pOverlay);
-		void setMousePos(sf::Vector2f mousepos);
-		void update(float fTimeElapsed);
+
+		void keyPress(const int kiKey) {}
+		void mouseScroll(const double kdDelta) {}
+
+		void update(const float kfTimeElapsed);
 		void render();
 };
 #endif  

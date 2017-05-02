@@ -55,7 +55,7 @@ void  Model::setTextureLocation(string sNewLocation)
 
 void Model::setVisable(bool Visability)
 {
-	m_bVisable = Visability;
+	m_bVisible = Visability;
 }
 
 void  Model::setPosition(glm::vec3 newPosition)

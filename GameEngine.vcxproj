@@ -57,8 +57,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries\freetype-2.7.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries/\freetype-2.7.1\objs\vc2010\x64\freetype2271d.lib;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -74,7 +74,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-audio.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -82,8 +82,8 @@
     <ClCompile Include="src\Bitmap.cpp" />
     <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\Freetype.cpp" />
     <ClCompile Include="src\Editor.cpp" />
+    <ClCompile Include="src\Freetype.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\gl_core_4_3.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -99,6 +99,7 @@
     <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\Editor.h" />
+    <ClInclude Include="include\Freetype.h" />
     <ClInclude Include="include\glslprogram.h" />
     <ClInclude Include="include\gl_core_4_3.hpp" />
     <ClInclude Include="include\Menu.h" />
@@ -109,6 +110,7 @@
     <ClInclude Include="include\SceneReader.h" />
     <ClInclude Include="include\stb_image.h" />
     <ClInclude Include="include\Texture.h" />
+    <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="include\World.h" />
     <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>

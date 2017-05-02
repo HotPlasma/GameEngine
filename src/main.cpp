@@ -19,10 +19,10 @@ Menu *g_pMenu;
 Scene *g_pScene;
 GLFWwindow *g_pWindow;
 
-Freetype UserInterface;
+Freetype userInterface;
 
-enum g_GameState {MainMenu = 0, Game = 1, Editor = 2, Exit = 3};
-g_GameState g_WhichGameState = MainMenu;
+enum GameState { MainMenu, Game, LevelEditor, Exit };
+GameState g_gameState = MainMenu;
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
@@ -31,18 +31,10 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	// Nothing
-}
-
-//////////////////////////////////////////////////////////
-////  Window focus callback //////////////////////////////
-//////////////////////////////////////////////////////////
-static void focus_callback(GLFWwindow *pWindow, int iFocused)
-{
-	// If the callback is true
-	if (iFocused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
-	// Else the callback is false
-	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
+	if (iAction == GLFW_PRESS)
+	{
+		g_pScene->keyPress(iKey);
+	}
 }
 
 //////////////////////////////////////////////////////////
@@ -55,6 +47,25 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	{
 		g_pScene->setMousePos(sf::Vector2f(dX, dY));
 	}
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse scroll callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
+{
+	g_pScene->mouseScroll(dY);
+}
+
+//////////////////////////////////////////////////////////
+////  Window focus callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void focus_callback(GLFWwindow *pWindow, int iFocused)
+{
+	// If the callback is true
+	if (iFocused) g_bWindowFocused = true; // Sets global boolean 'focused' to true
+	// Else the callback is false
+	else g_bWindowFocused = false; // Sets global boolean 'focused' to false
 }
 
 //////////////////////////////////////////////////////////
@@ -86,11 +97,11 @@ void initializeGL()
 	gl::Enable(gl::BLEND);
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 
-	UserInterface.loadCharacters();
-	UserInterface.setupBuffers();
+	userInterface.loadCharacters();
+	userInterface.setupBuffers();
 	
 	// Initialises scene
-	g_pScene->initScene(&UserInterface);
+	g_pScene->initScene(&userInterface);
 }
 
 //////////////////////////////////////////////////////////
@@ -178,24 +189,31 @@ void mainLoop()
 	// While the window should remain open and escape is not pressed
 	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
 	{
+		// If GameState is 'Game' - Sets the cursor to be hidden
+		if (g_gameState == Game)
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		// Else - Cursor visible
+		else
+			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
 		// If window is focused
 		if (g_bWindowFocused)
 		{
 			// Updates and renders the scene
 			g_pScene->update((float)glfwGetTime());
-			glfwSetTime(0);
 			g_pScene->render();
 		}
-		
+
+		// Resets elapsed time
+		glfwSetTime(0);
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
     
-		if (g_WhichGameState == MainMenu)
+		if (g_gameState == MainMenu)
 		{
 			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
 			{
 				{
-					cout << "Clicked" << endl;
 					g_pMenu->Click();
 				}
 			}
@@ -204,13 +222,17 @@ void mainLoop()
 			{
 			case 1:
 				g_pScene = new World(g_pWindow, sf::Vector2i(1920,1080));
-				g_pScene->initScene(&UserInterface);
-				g_WhichGameState = Game;
+				g_pScene->initScene(&userInterface);
+				g_gameState = Game;
 				break;
 			case 2:
-				g_WhichGameState = Editor;
+				g_pScene = new Editor(g_pWindow, sf::Vector2i(1920, 1080));
+				g_pScene->initScene(&userInterface);
+				g_gameState = LevelEditor;
 				break;
 			case 3:
+				break;
+			case 4:
 				delete g_pScene;
 				glfwTerminate();
 				exit(EXIT_SUCCESS);
@@ -219,9 +241,9 @@ void mainLoop()
 			}
 		}
 
-		if (g_WhichGameState == Game || g_WhichGameState == Editor)
+		// If GameState is 'Game' - Sets the cursor to screen center
+		if (g_gameState == Game)
 		{
-			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 			// Resets cursor to the center of the window after cursor event
 			if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
 		}
@@ -264,15 +286,10 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
-	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
+	glfwSetScrollCallback(g_pWindow, scroll_callback);
+	glfwSetWindowFocusCallback(g_pWindow, focus_callback);
 	glfwSetWindowSizeCallback(g_pWindow, resize_callback);
-
-	// Sets the cursor to be hidden
-	if (g_WhichGameState == Game || g_WhichGameState == Editor)
-	{
-		glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-	}
 
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
@@ -286,6 +303,10 @@ int main(int argc, char *argv[])
 
 	// Initialisation
 	initializeGL();
+	
+
+	// Resets elapsed time before mainloop begins
+	glfwSetTime(0);
 
 	// Enters the main loop
 	mainLoop();

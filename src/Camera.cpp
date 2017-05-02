@@ -7,9 +7,17 @@ const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
 
 Camera::Camera()
 {
-	m_fFOV = 90.0f;
-	m_fNear = 1.0f;
-	m_fFar = 1000.0f;
+	// Sets axis to world
+	m_xAxis = WORLDX;
+	m_yAxis = WORLDY;
+	m_zAxis = WORLDZ;
+
+	// Sets orientation to 
+	m_orientation = glm::quat(1.0, 0.0, 0.0, 0.0); 
+
+	m_fFOV = 90.0f; // Camera Field of View
+	m_fNear = 1.0f; // Near culling distance
+	m_fFar = 1000.0f; // Far culling distance
 
 	// Sets Position default value
 	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -31,7 +39,6 @@ glm::quat fromAxisAngle(glm::vec3 axis, float angle)
 void Camera::rotate(const float kfYaw, const float kfPitch)
 {
 	m_orientation = glm::normalize(fromAxisAngle(WORLDX, kfPitch) * m_orientation);
-
 	m_orientation = glm::normalize(m_orientation * fromAxisAngle(WORLDY, kfYaw));
 
 	updateView();
@@ -67,4 +74,10 @@ void Camera::updateView()
 	m_view[3][0] = -glm::dot(m_xAxis, m_position); //Translation x
 	m_view[3][1] = -glm::dot(m_yAxis, m_position); //Translation y
 	m_view[3][2] = -glm::dot(m_zAxis, m_position); //Translation z
+}
+
+glm::vec3 Camera::getDirection()
+{
+	// WRONG
+	return glm::vec3(m_orientation.x, m_orientation.y, m_orientation.z);
 }
