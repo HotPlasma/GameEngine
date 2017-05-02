@@ -4,10 +4,10 @@ using std::string;
 using std::ifstream;
 
 #define COLLECTABLE_ROTATION 90.0f
-#define COLLECTABLE_SPEED 7.5f
+#define COLLECTABLE_SPEED 1.5f
 
 #define CAMERA_ROTATION 0.0025f
-#define CAMERA_SPEED 50.0f
+#define CAMERA_SPEED 15.0f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
