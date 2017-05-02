@@ -40,51 +40,6 @@ void World::initScene(Freetype* pOverlay)
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
-void World::setLightParamaters(GLSLProgram *pShader, int i)
-{
-	vec3 worldLight = vec3(200.0f, 70.0f, -80.0f);
-	pShader->setUniform("lightCutOff", glm::cos(glm::radians(50.0f)));
-	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(56.0f)));
-	pShader->setUniform("spotlightDriection", 0.0, -0.7, 0.0);
-
-
-	pShader->setUniform("Ia", 0.5f, 0.5f, 0.5f);
-	//pShader->setUniform("Id", 0.0f, 0.0f, 0.8f);
-	//pShader->setUniform("Is", 0.6f, 0.6f, 0.6f);
-	//pShader->setUniform("Rd", 0.6f, 0.6f, 0.6f);
-	//pShader->setUniform("Rs", 0.9f, 0.9f, 0.9f);
-	pShader->setUniform("lightPosition", m_camera.getPosition());
-
-	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
-	{
-		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-		m_worldShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-		m_worldShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
-	{
-		m_worldShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-		m_worldShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-		m_worldShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
-	{
-		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-		m_worldShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-		m_worldShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
-	{
-		m_worldShader.setUniform("Id", 0.0f, 0.0f, 0.0f);
-		m_worldShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-		m_worldShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-		m_worldShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
-	}
-}
-
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
 {
 	mat4 mv = kView * kModel;
@@ -207,8 +162,6 @@ void World::render()
 		{
 			// Buffers the Model
 			m_sceneReader.m_modelList.at(i).buffer();
-      // Configures lighting
-			setLightParamaters(&m_worldShader, i);
 			// Sets the Model transformation matrix
 			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
 			// Renders the Model
