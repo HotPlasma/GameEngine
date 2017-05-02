@@ -72,9 +72,6 @@
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Freetype.cpp">
-      <Filter>Dependencies\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\glslprogram.cpp">
       <Filter>Dependencies\Source Files</Filter>
     </ClCompile>
@@ -105,6 +102,9 @@
     <ClCompile Include="src\Menu.cpp">
       <Filter>Source Files\Scene\UI</Filter>
     </ClCompile>
+    <ClCompile Include="src\Freetype.cpp">
+      <Filter>Source Files\Scene\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bitmap.h">
@@ -120,9 +120,6 @@
       <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libraries\tinyxml\tinyxml2.h">
-      <Filter>Dependencies\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Freetype.h">
       <Filter>Dependencies\Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\glslprogram.h">
@@ -159,6 +156,9 @@
       <Filter>Header Files\System</Filter>
     </ClInclude>
     <ClInclude Include="include\Menu.h">
+      <Filter>Header Files\Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Freetype.h">
       <Filter>Header Files\Scene\UI</Filter>
     </ClInclude>
   </ItemGroup>

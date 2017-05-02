@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <iostream>
@@ -20,14 +19,14 @@ private:
 public:
 
 	// Default constructor
-	Button(); 
+	Button() {};
 
 	// Overloaded constructer which contructs a button from a X position, Y position, Texture ID and a TextureLoader
-	Button(float fX, float fY, string ButtonLoc, string ButtonHoverLoc, vec3 scale, Freetype *Overlay);
+	Button(const float kfX, const float kfY, const string ksLoc, const string ksHoverLoc, const vec3 kScale, Freetype *pOverlay);
 
 	// Checks if the button is being hovered over
-	bool mouseOver(const sf::Vector2f kMousePos);
+	bool mouseOver(sf::Vector2f mousePos, const float kfWindowYSize);
 
 	// Draws the button
-	void render();
+	void render(GLSLProgram* pShader, const sf::Vector2i kWindowSize);
 };

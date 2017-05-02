@@ -35,7 +35,6 @@ private:
 
 	sf::SoundBuffer MenuTheme;
 
-
 public:
 	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);

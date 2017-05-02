@@ -100,10 +100,10 @@ void Editor::initScene(Freetype* pOverlay)
 	gl::Enable(gl::DEPTH_TEST);
 
 	// Defines HUD buttons
-	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, 0, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, 0, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, 0, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, 0, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
 
 	linkShaders();
 }
@@ -155,25 +155,25 @@ void Editor::input_button(const int kiButton, const int kiAction)
 	if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
 	{
 		// If TranslateMode button is clicked
-		if (m_buttons.m_pTranslateMode->isActive())
+		if (m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y))
 		{
 			// Mode switched to Translate
 			m_transformMode = TRANSLATE;
 		}
 		// If RotateMode button is clicked
-		if (m_buttons.m_pRotateMode->isActive())
+		if (m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y))
 		{
 			// Mode switched to Rotate
 			m_transformMode = ROTATE;
 		}
 		// If ScaleMode button is clicked
-		if (m_buttons.m_pScaleMode->isActive())
+		if (m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y))
 		{
 			// Mode switched to Scale
 			m_transformMode = SCALE;
 		}
 		// If Save button is clicked
-		if (m_buttons.m_pSave->isActive())
+		if (m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y))
 		{
 			// Saves Scene to file
 			save();
@@ -305,10 +305,10 @@ void Editor::update(const float kfTimeElapsed)
 	m_lastMousePos = m_mousePos;
 
 	// Checks whether buttons are hovered
-	m_buttons.m_pTranslateMode->CheckHover(m_mousePos, 9);
-	m_buttons.m_pRotateMode->CheckHover(m_mousePos, 11);
-	m_buttons.m_pScaleMode->CheckHover(m_mousePos, 13);
-	m_buttons.m_pSave->CheckHover(m_mousePos, 15);
+	m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y);
 }
 
 // Void: Renders the Editor to display
@@ -353,17 +353,11 @@ void Editor::render()
 		pModel->render();
 	}
 
-	// TEMPORARY - Messy way of not drawing main menu UI and only editor UI
-	m_imageType.use();
-	for (int i = 9; i < m_pHUD->m_ImagePlane.size(); i++)
-	{
-		m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(i).m_M);
-		m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-		if (m_pHUD->m_ImagePlane.at(i).getVisable() == true)
-		{
-			m_pHUD->RenderImage(i);
-		}
-	}
+	// Draws HUD buttons
+	m_buttons.m_pTranslateMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pRotateMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pScaleMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pSave->render(&m_imageType, m_windowSize);
 
 	// Activates FreeType shader
 	m_freeType.use();
