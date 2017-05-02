@@ -88,10 +88,11 @@ void Model::loadModel()
 	m_pModelReader = new ModelReader(m_sFileName);
 }
 
-void Model::buffer()
+void Model::buffer(GLSLProgram * pShader)
 {
 	gl::BindVertexArray(m_vaoHandle);
 	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
+	//pShader->setUniform("tex", m_pTexture);
 	
 }
 
@@ -114,35 +115,44 @@ void Model::initModel()
 
 
 	m_positionData = m_pModelReader->getVertices();
+	m_vertexNormalData = m_pModelReader->getNormals();
 	m_uvData = m_pModelReader->getTextureCoordinates();
 
 
-	gl::GenBuffers(2, m_vboHandles);
-	GLuint positionBufferHandle = m_vboHandles[0];
-	GLuint uvBufferHandle = m_vboHandles[1];
 
+	gl::GenBuffers(3, m_vboHandles);
+	GLuint positionBufferHandle = m_vboHandles[0];
+	GLuint vertexBufferHandle = m_vboHandles[1];
+	GLuint uvBufferHandle = m_vboHandles[2];
+	
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, positionBufferHandle);
 	gl::BufferData(gl::ARRAY_BUFFER, m_positionData.size() * sizeof(float), m_positionData.data(), gl::STATIC_DRAW);
 
+	gl::BindBuffer(gl::ARRAY_BUFFER, vertexBufferHandle);
+	gl::BufferData(gl::ARRAY_BUFFER, m_vertexNormalData.size() * sizeof(float), m_vertexNormalData.data(), gl::STATIC_DRAW);
+
 	gl::BindBuffer(gl::ARRAY_BUFFER, uvBufferHandle);
 	gl::BufferData(gl::ARRAY_BUFFER, m_uvData.size() * sizeof(float), m_uvData.data(), gl::STATIC_DRAW);
-
 
 
 	// Create and set-up the vertex array object
 	gl::GenVertexArrays(1, &m_vaoHandle);
 	gl::BindVertexArray(m_vaoHandle);
 
-	gl::EnableVertexAttribArray(0);  // Vertex position
-	gl::EnableVertexAttribArray(1);  // Vertex color
+	gl::EnableVertexAttribArray(0);		// Vertex position
+	gl::EnableVertexAttribArray(1);		// Vertex normal
+	gl::EnableVertexAttribArray(2);		// Vertex color
+	
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, positionBufferHandle);
 	gl::VertexAttribPointer(0, 3, gl::FLOAT, FALSE, 0, (GLubyte *)NULL);
 
+	gl::BindBuffer(gl::ARRAY_BUFFER, vertexBufferHandle);
+	gl::VertexAttribPointer(1, 3, gl::FLOAT, FALSE, 0, (GLubyte *)NULL);
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, uvBufferHandle);
-	gl::VertexAttribPointer(1, 2, gl::FLOAT, FALSE, 0, (GLubyte *)NULL);
+	gl::VertexAttribPointer(2, 2, gl::FLOAT, FALSE, 0, (GLubyte *)NULL);
 
 	gl::BindVertexArray(m_vaoHandle);
 

@@ -9,7 +9,7 @@
     <Translation>50 -15 0</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>0.3 0.3 0.3</Scale>
-    <Material>1</Material>
+    <Material>3</Material>
     <Collectable>false</Collectable>
   </Object>
 
@@ -86,7 +86,7 @@
     <Translation> 0 0 0</Translation>
     <Rotation>0 90 0</Rotation>
     <Scale>1 1 1</Scale>
-    <Material>1</Material>
+    <Material>4</Material>
     <Collectable>false</Collectable>
   </Object>
 
@@ -119,7 +119,7 @@
     <Translation>50 -5 50</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
-    <Material>1</Material>
+    <Material>2</Material>
     <Collectable>false</Collectable>
   </Object>
 
@@ -152,7 +152,7 @@
     <Translation>-40 -5 23</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
-    <Material>1</Material>
+    <Material>2</Material>
     <Collectable>true</Collectable>
   </Object>
 
@@ -163,7 +163,7 @@
     <Translation>25 -5 8</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
-    <Material>1</Material>
+    <Material>2</Material>
     <Collectable>true</Collectable>
   </Object>
 
@@ -174,7 +174,7 @@
     <Translation>0 -5 -20</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
-    <Material>1</Material>
+    <Material>2</Material>
     <Collectable>true</Collectable>
   </Object>
 </Scene>

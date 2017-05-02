@@ -3,6 +3,7 @@
 #include "PreHeader.h"
 
 #include "ModelReader.h"
+#include "glslprogram.h"
 
 using namespace std;
 
@@ -60,10 +61,11 @@ class Model
 		void setRotation(glm::vec3 newRotation); // Set model rotation
 		void setScale(glm::vec3 newScale); // Set model scale
 		void setMaterial(int iMaterialID); // Set model MaterialID
-		void buffer();
+		void buffer(GLSLProgram * pShader);
 	
 		vector<float> m_positionData;
 		vector<float> m_uvData;
+		vector<float> m_vertexNormalData;
 	
 		glm::mat4 m_M;
 	
