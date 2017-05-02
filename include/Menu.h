@@ -12,8 +12,6 @@
 class Menu : public Scene
 {
 private:
-	GLSLProgram m_FreeType;
-	GLSLProgram m_ImageType;
 
 	Freetype* UI;
 
@@ -25,8 +23,6 @@ private:
 	GLuint m_programHandle; // Program context
 	glm::mat4 m_M; // Allows manipulation of each models position, rotation and scale
 
-	void linkShaders(); // Connects shaders
-
 	glm::mat4 m_V, m_P;
 
 	enum State { None = 0, Play = 1, Create = 2, Options = 3, ExitMenu = 4 }; // Enum used for knowing which button is clicked
@@ -36,11 +32,11 @@ private:
 
 	sf::SoundBuffer MenuTheme;
 
-
 public:
 	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);
-	void setMousePos(sf::Vector2f mousepos);
+	void keyPress(const int kiKey) {}
+	void mouseScroll(const double kdDelta) {}
 	void update(float t);
 	void render();
 	int returnMenuChoice();

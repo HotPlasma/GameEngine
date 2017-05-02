@@ -4,7 +4,10 @@ using std::string;
 using std::ifstream;
 
 #define COLLECTABLE_ROTATION 90.0f
-#define COLLECTABLE_SPEED 7.5f
+#define COLLECTABLE_SPEED 1.5f
+
+#define CAMERA_ROTATION 0.0025f
+#define CAMERA_SPEED 15.0f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -69,57 +72,6 @@ void World::initScene(Freetype* pOverlay)
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
-void World::setMousePos(sf::Vector2f mousepos)
-{
-	m_mousePos = mousepos;
-}
-
-void World::linkShaders()
-{
-	try
-	{
-		// Shader which allows first person camera and textured objects
-		m_worldShader.compileShader("Shaders/shader.vert");
-		m_worldShader.compileShader("Shaders/shader.frag");
-		m_worldShader.link();
-		m_worldShader.validate();
-		m_worldShader.use();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-  
-	try
-	{
-		// Shader which allows heads up display
-		m_freeType.compileShader("Shaders/freetype.vert");
-		m_freeType.compileShader("Shaders/freetype.frag");
-		m_freeType.link();
-		m_freeType.validate();
-		m_freeType.use();
-	}
-	catch (GLSLProgramException & e) {
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-
-	try
-	{
-		// Shader which allows heads up display
-		m_imageType.compileShader("Shaders/image.vert");
-		m_imageType.compileShader("Shaders/image.frag");
-		m_imageType.link();
-		m_imageType.validate();
-	}
-	catch (GLSLProgramException & e)
-	{
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
 {
 	mat4 mv = kView * kModel;
@@ -135,8 +87,31 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 void World::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
-	// Updates Camera with user input
-	m_camera.processInput(kfTimeElapsed, m_mousePos, m_windowSize);
+	// Calculates the mouse movement
+	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
+
+	m_camera.rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
+		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+	{
+		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
+		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+	}
+
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
 
@@ -220,6 +195,7 @@ void World::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// WORLD
+	// Activates World shader
 	m_worldShader.use();
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 
@@ -256,10 +232,11 @@ void World::render()
 		}
 	}
 
+	// Activates FreeType shader
 
-
-	// HUD
 	m_freeType.use();
-	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Collectable Collected", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	// Configures projection
+	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
+	// Renders placeholder text to HUD
+	m_pHUD->RenderText(m_freeType.getHandle(), "Placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }

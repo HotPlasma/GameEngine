@@ -1,27 +1,5 @@
 #include "..\include\Menu.h"
 
-void Menu::linkShaders()
-{
-	try 
-	{
-		// Shader which allows first person camera and textured objects
-		m_FreeType.compileShader("Shaders/freetype.vert");
-		m_FreeType.compileShader("Shaders/freetype.frag");
-		m_FreeType.link();
-		m_FreeType.validate();
-
-		// Shader which allows first person camera and textured objects
-		m_ImageType.compileShader("Shaders/image.vert");
-		m_ImageType.compileShader("Shaders/image.frag");
-		m_ImageType.link();
-		m_ImageType.validate();
-	}
-	catch (GLSLProgramException & e) {
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 Menu::Menu(GLFWwindow *pWindow, sf::Vector2i windowSizes)
 {
 	m_pWindow = pWindow;
@@ -53,11 +31,6 @@ void Menu::initScene(Freetype * Overlay)
 	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
 }
 
-void Menu::setMousePos(sf::Vector2f mousepos)
-{
-	m_mousePos = mousepos;
-}
-
 void Menu::update(float t)
 {
 	if (Music.getStatus() != sf::Sound::Playing)
@@ -80,12 +53,12 @@ void Menu::render()
 	// Check depth and clear last frame
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
-	
-	m_ImageType.use();
+
+	m_imageType.use();
 	for (int i = 0; i < UI->m_ImagePlane.size(); i++)
 	{
-		m_ImageType.setUniform("M", UI->m_ImagePlane.at(i).m_M);
-		m_ImageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+		m_imageType.setUniform("M", UI->m_ImagePlane.at(i).m_M);
+		m_imageType.setUniform("P", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
 		if (UI->m_ImagePlane.at(i).getVisable() == true)
 		{
 			UI->RenderImage(i);
@@ -94,9 +67,9 @@ void Menu::render()
 	
 	//m_PlayButton->draw();
 
-	m_FreeType.use();
-	m_FreeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
-	UI->RenderText(m_FreeType.getHandle(), "Game Engine", m_windowSize.x / 2, 900, 1.0f, glm::vec3(1.f, 1.f, 1.f));
+	m_freeType.use();
+	m_freeType.setUniform("projection", glm::ortho(0.0f, 1920.0f, 0.f, 1080.f));
+	UI->RenderText(m_freeType.getHandle(), "Game Engine", m_windowSize.x / 2, 900, 1.0f, glm::vec3(1.f, 1.f, 1.f));
 
 }
 

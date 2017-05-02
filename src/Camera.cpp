@@ -1,7 +1,7 @@
 #include "Camera.h"
 
 #define CAMERA_ROTATION 0.0025f
-#define CAMERA_SPEED 900.0f
+#define CAMERA_SPEED 15.0f
 
 // World coordinate System Axes
 const glm::vec3 WORLDX = glm::vec3(1, 0, 0);
@@ -10,9 +10,17 @@ const glm::vec3 WORLDZ = glm::vec3(0, 0, 1);
 
 Camera::Camera()
 {
-	m_fFOV = 90.0f;
-	m_fNear = 1.0f;
-	m_fFar = 1000.0f;
+	// Sets axis to world
+	m_xAxis = WORLDX;
+	m_yAxis = WORLDY;
+	m_zAxis = WORLDZ;
+
+	// Sets orientation to 
+	m_orientation = glm::quat(1.0, 0.0, 0.0, 0.0); 
+
+	m_fFOV = 90.0f; // Camera Field of View
+	m_fNear = 1.0f; // Near culling distance
+	m_fFar = 1000.0f; // Far culling distance
 
 	// Sets Position default value
 	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -34,7 +42,6 @@ glm::quat fromAxisAngle(glm::vec3 axis, float angle)
 void Camera::rotate(const float kfYaw, const float kfPitch)
 {
 	m_orientation = glm::normalize(fromAxisAngle(WORLDX, kfPitch) * m_orientation);
-
 	m_orientation = glm::normalize(m_orientation * fromAxisAngle(WORLDY, kfYaw));
 
 	updateView();
@@ -72,30 +79,8 @@ void Camera::updateView()
 	m_view[3][2] = -glm::dot(m_zAxis, m_position); //Translation z
 }
 
-void Camera::processInput(const float kfTimeElapsed, const sf::Vector2f kMousePos, const sf::Vector2i kWindowSize)
+glm::vec3 Camera::getDirection()
 {
-	// Calculates the mouse movement
-	sf::Vector2f delta(kMousePos - sf::Vector2f(kWindowSize.x * 0.5f, kWindowSize.y * 0.5f));
-
-	rotate(delta.x*CAMERA_ROTATION, delta.y*CAMERA_ROTATION);
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
-	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-	}
+	// WRONG
+	return glm::vec3(m_orientation.x, m_orientation.y, m_orientation.z);
 }

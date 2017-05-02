@@ -38,7 +38,7 @@ public:
 
 	FT_Face m_Face; ///< Font
 
-	bool m_bVisable; ///< Toggles visablity of freetype asset
+	bool m_bVisible; ///< Toggles visablity of freetype asset
 
 	GLuint m_VAO; ///< VAO for drawing font
 	GLuint m_VBO; ///< VBO for drawing font

@@ -9,7 +9,8 @@
 class Scene
 {
 	public:
-		Scene() : m_bAnimate(true) {}
+
+		Scene() {}
 		Scene(GLFWwindow *pWindow) {};
 	
 		sf::Vector2i m_windowSize; // Dimensions of window
@@ -19,15 +20,18 @@ class Scene
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* pOverlay) = 0;
 	
-		virtual void setMousePos(sf::Vector2f mousepos) = 0;
-	
+		// Called on keyPress event
+		virtual void keyPress(const int kiKey) = 0;
+		// Called on mouseScroll event
+		virtual void mouseScroll(const double kdDelta) = 0;
+
 		// Run every frame
 		virtual void update(float fTimeElapsed) = 0;
 	
 		// Draw Scene
 		virtual void render() = 0;
 	
-		// Aloow screen to be resized without causing rendering issues
+		// Allow screen to be resized without causing rendering issues
 		void resize(int iWidth, int iHeight)
 		{
 			m_windowSize.x = iWidth;
@@ -37,23 +41,70 @@ class Scene
 			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
 		}
 	
-		void animate(bool bValue) { m_bAnimate = bValue; }
-		bool animating() { return m_bAnimate; }
-	
+		// Used to update cursor position
+		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
+
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
+
 		GLSLProgram m_worldShader;
 		GLSLProgram m_freeType;
 		GLSLProgram m_imageType;
 
-		bool m_bAnimate;
 		Camera m_camera; // Camera which user can control
 
 		Freetype* m_pHUD;
 
 		GLFWwindow *m_pWindow; // The window
 		sf::Vector2f m_mousePos; // Holds mouse cursor position
+
+		// Links vert and frag shaders into a glslprogram
+		void linkShaders()
+		{
+			try
+			{
+				// Shader which allows first person camera and textured object rendering
+				m_worldShader.compileShader("Shaders/shader.vert");
+				m_worldShader.compileShader("Shaders/shader.frag");
+				m_worldShader.link();
+				m_worldShader.validate();
+				m_worldShader.use();
+			}
+			catch (GLSLProgramException & e)
+			{
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			try
+			{
+				// Shader which allows heads up display rendering
+				m_freeType.compileShader("Shaders/freetype.vert");
+				m_freeType.compileShader("Shaders/freetype.frag");
+				m_freeType.link();
+				m_freeType.validate();
+				m_freeType.use();
+			}
+			catch (GLSLProgramException & e) {
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			try
+			{
+				// Shader which allows for image rendering
+				m_imageType.compileShader("Shaders/image.vert");
+				m_imageType.compileShader("Shaders/image.frag");
+				m_imageType.link();
+				m_imageType.validate();
+			}
+			catch (GLSLProgramException & e)
+			{
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+		}
 };
 
 #endif // SCENE_H

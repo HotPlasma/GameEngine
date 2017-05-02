@@ -22,7 +22,6 @@ class World : public Scene
 		float m_collectYOffset = 0.0f; // Y axis offset for collectables
 		Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 
-		void linkShaders(); // Connects shaders
 		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
 		rp3d::CollisionWorld m_CollisonWorld;
@@ -39,9 +38,11 @@ class World : public Scene
 		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
 
 		void initScene(Freetype* pOverlay);
+
+		void keyPress(const int kiKey) {}
+		void mouseScroll(const double kdDelta) {}
+
 		void update(const float kfTimeElapsed);
 		void render();
-
-		void setMousePos(const sf::Vector2f kMousePos);
 };
 #endif  
