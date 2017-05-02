@@ -4,8 +4,20 @@
 
 #include "ModelReader.h"
 
+#include "reactphysics3d.h"
 
 using namespace std;
+
+
+struct CollisionBox
+{
+	float front;
+	float back;
+	float left;
+	float right;
+	float top;
+	float bottom;
+};
 
 class Model
 {
@@ -26,7 +38,7 @@ class Model
 	
 		GLuint m_textureID; // ID of the texture
 		ModelReader* m_pModelReader; // Model Reader for the render the model
-	
+
 		GLuint m_programHandle;
 		Texture *m_pTexture;
 		Bitmap m_bmp = Bitmap::bitmapFromFile("assets/textures/Default.bmp");;
@@ -35,7 +47,10 @@ class Model
 		GLuint m_vbo;
 		GLuint m_vaoHandle;
 
-	
+		glm::vec3 m_BoundingBox;
+
+
+
 	public:
 		Model(); // Constructor
 		Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
@@ -45,6 +60,7 @@ class Model
 		glm::vec3 getPosition() { return m_position; }; // Returns rosition of model
 		glm::vec3 getRotation() { return m_rotation; }; // Returns rotation of model
 		glm::vec3 getScale() { return m_scale; }; // Returns scale of model
+		glm::vec3 getCollisionMesh() { return m_BoundingBox; };
 		bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
 		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
 		bool getVisable() { return m_bVisable; }; // Check if a collectable has been collected
@@ -62,7 +78,7 @@ class Model
 		void setScale(glm::vec3 newScale); // Set model scale
 		void setMaterial(int iMaterialID); // Set model MaterialID
 		void buffer();
-	
+		CollisionBox getCollisionBox();
 		vector<float> m_positionData;
 		vector<float> m_uvData;
 	
@@ -70,6 +86,7 @@ class Model
 	
 		void loadModel(); // Loads in the model to be rendered
 		void initModel(); // Draws model
+	
 		void render();
 };
 

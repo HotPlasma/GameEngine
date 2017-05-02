@@ -8,6 +8,7 @@
 #include "Freetype.h"
 #include "Button.h"
 
+
 class Menu : public Scene
 {
 private:
@@ -45,4 +46,5 @@ public:
 	int returnMenuChoice();
 	void Click();
 	void ResetClick();
+
 };

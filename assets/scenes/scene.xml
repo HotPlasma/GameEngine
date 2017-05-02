@@ -2,13 +2,14 @@
 
 <Scene>
   <!--List of Objects to be loaded for the room-->
+
   <Object>
-    <Name>Deer</Name>
-    <OBJLocation>assets/models/deer.obj</OBJLocation>
-    <TexLocation>assets/textures/deer.bmp</TexLocation>
-    <Translation>50 -15 0</Translation>
-    <Rotation>0 0 0</Rotation>
-    <Scale>0.3 0.3 0.3</Scale>
+    <Name>Skybox</Name>
+    <OBJLocation>assets/models/skybox.obj</OBJLocation>
+    <TexLocation>assets/textures/skybox.bmp</TexLocation>
+    <Translation> 0 0 0</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
   </Object>
@@ -58,6 +59,17 @@
   </Object>
 
   <Object>
+    <Name>Deer</Name>
+    <OBJLocation>assets/models/deer.obj</OBJLocation>
+    <TexLocation>assets/textures/deer.bmp</TexLocation>
+    <Translation>50 -15 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>0.3 0.3 0.3</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+  </Object>
+
+  <Object>
     <Name>Stump</Name>
     <OBJLocation>assets/models/stump.obj</OBJLocation>
     <TexLocation>assets/textures/stump.bmp</TexLocation>
@@ -74,17 +86,6 @@
     <TexLocation>assets/textures/Rock.bmp</TexLocation>
     <Translation>15 -4 25</Translation>
     <Rotation>0 0 0</Rotation>
-    <Scale>1 1 1</Scale>
-    <Material>1</Material>
-    <Collectable>false</Collectable>
-  </Object>
-
-  <Object>
-    <Name>Skybox</Name>
-    <OBJLocation>assets/models/skybox.obj</OBJLocation>
-    <TexLocation>assets/textures/skybox.bmp</TexLocation>
-    <Translation> 0 0 0</Translation>
-    <Rotation>0 90 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>

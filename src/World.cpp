@@ -25,6 +25,8 @@ void World::initScene(Freetype* pOverlay)
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
+	m_Player = Model("assets/models/Player.obj", "", glm::vec3(10, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
+
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
@@ -34,6 +36,36 @@ void World::initScene(Freetype* pOverlay)
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
+	m_Player.loadModel();
+	m_Player.initModel();
+	m_Player.setVisable(true);
+
+	//// Initial position and orientation of the collision body
+	//rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
+	//rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
+	//rp3d::Transform transform(initPosition, initOrientation);
+	//// Create a collision body in the world
+
+	//CameraBody = m_CollisonWorld.createCollisionBody(transform);
+
+	//rp3d::CylinderShape cylinderShape(1.0, 3.0);
+
+	//CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
+
+	//for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	//{
+
+	//	rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
+	//	ModelBodies.resize(ModelBodies.size() + 1);
+	//	ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
+	//	ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
+	//}
+
+	//m_CollisonWorld.testCollision(CameraBody, CameraCallback);
+
+	
+
+	//m_CollisonWorld.
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
@@ -108,6 +140,16 @@ void World::update(const float kfTimeElapsed)
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
 
+//	CameraBody->setTransform(rp3d::Transform(rp3d::Vector3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z), rp3d::Quaternion::identity()));
+
+	//rp3d::Vector3 position(m_camera.getPosition().x, 0, m_camera.getPosition().z);
+	//rp3d::Quaternion orientation = rp3d::Quaternion::identity();
+	//rp3d::Transform newTransform(position, orientation);
+	// Move the collision body
+	//CameraBody->setTransform(newTransform);
+	
+	
+
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
@@ -154,6 +196,22 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
+	
+	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5, m_camera.getPosition().z));
+
+	for (int j = 5; j < m_sceneReader.m_modelList.size(); j++)
+	{
+		if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
+			m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
+			m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
+			m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
+			m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
+			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+		{
+			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
+		}
+	}
+	
 }
 
 void World::render()
@@ -164,6 +222,11 @@ void World::render()
 	// WORLD
 	m_worldShader.use();
 	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
+
+	m_Player.buffer();
+	m_worldShader.setUniform("M", m_Player.m_M);
+	//m_Player.render();
+
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
@@ -192,6 +255,8 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render();
 		}
 	}
+
+
 
 	// HUD
 	m_freeType.use();

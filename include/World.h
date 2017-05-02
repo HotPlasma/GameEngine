@@ -26,6 +26,13 @@ class World : public Scene
 		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
 		rp3d::CollisionWorld m_CollisonWorld;
+
+		rp3d::CollisionBody * CameraBody;
+
+		Model m_Player;
+
+		vector<rp3d::CollisionBody*> ModelBodies;
+		rp3d::CollisionCallback * CameraCallback;
 	
 	public:
 

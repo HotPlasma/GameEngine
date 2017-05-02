@@ -81,7 +81,6 @@ void Menu::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	
-
 	m_ImageType.use();
 	for (int i = 0; i < UI->m_ImagePlane.size(); i++)
 	{
@@ -139,4 +138,5 @@ void Menu::ResetClick()
 	// Set click to false
 	m_bClicked = false;
 }
+
 
