@@ -80,11 +80,14 @@
   <ItemGroup>
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp" />
     <ClCompile Include="src\Bitmap.cpp" />
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Freetype.cpp" />
+    <ClCompile Include="src\Editor.cpp" />
     <ClCompile Include="src\glslprogram.cpp" />
     <ClCompile Include="src\gl_core_4_3.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelReader.cpp" />
     <ClCompile Include="src\SceneReader.cpp" />
@@ -93,10 +96,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bitmap.h" />
+    <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Camera.h" />
-    <ClInclude Include="include\Freetype.h" />
+    <ClInclude Include="include\Editor.h" />
     <ClInclude Include="include\glslprogram.h" />
     <ClInclude Include="include\gl_core_4_3.hpp" />
+    <ClInclude Include="include\Menu.h" />
     <ClInclude Include="include\Model.h" />
     <ClInclude Include="include\ModelReader.h" />
     <ClInclude Include="include\PreHeader.h" />
@@ -110,6 +115,8 @@
   <ItemGroup>
     <None Include="shaders\freetype.frag" />
     <None Include="shaders\freetype.vert" />
+    <None Include="shaders\image.frag" />
+    <None Include="shaders\image.vert" />
     <None Include="shaders\shader.frag" />
     <None Include="shaders\shader.vert" />
   </ItemGroup>

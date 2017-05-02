@@ -52,19 +52,48 @@
     <Filter Include="Source Files\System">
       <UniqueIdentifier>{67273f8d-e34c-4dc1-b08e-483ab16cead6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Scene\UI">
+      <UniqueIdentifier>{3b424c0b-ede9-4133-8a77-865fa0749082}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Scene\UI">
+      <UniqueIdentifier>{f5af0001-281c-4158-911e-072dcba9d0e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Bitmap.cpp">
       <Filter>Dependencies\Source Files</Filter>
+    <ClCompile Include="src\Bitmap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Editor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\gl_core_4_3.cpp">
-      <Filter>Dependencies\Source Files</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\glslprogram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModelReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneReader.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Texture.cpp">
-      <Filter>Dependencies\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="libraries\tinyxml\tinyxml2.cpp">
-      <Filter>Dependencies\Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Freetype.cpp">
       <Filter>Dependencies\Source Files</Filter>
@@ -90,19 +119,52 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files\System</Filter>
     </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source Files\Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source Files\Scene\UI</Filter>
+    <ClCompile Include="src\World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Bitmap.h">
       <Filter>Dependencies\Header Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Editor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\gl_core_4_3.hpp">
-      <Filter>Dependencies\Header Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\glslprogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Model.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ModelReader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PreHeader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneReader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\stb_image.h">
-      <Filter>Dependencies\Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Texture.h">
-      <Filter>Dependencies\Header Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libraries\tinyxml\tinyxml2.h">
       <Filter>Dependencies\Header Files</Filter>
@@ -134,6 +196,12 @@
     <ClInclude Include="include\PreHeader.h">
       <Filter>Header Files\System</Filter>
     </ClInclude>
+    <ClInclude Include="include\Button.h">
+      <Filter>Header Files\Scene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
+      <Filter>Header Files\Scene\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\shader.frag">
@@ -148,6 +216,44 @@
     <None Include="shaders\freetype.vert">
       <Filter>Resource Files\Shaders\UI</Filter>
     </None>
+    <None Include="shaders\image.vert">
+      <Filter>Resource Files\Shaders\UI</Filter>
+    </None>
+    <None Include="shaders\image.frag">
+      <Filter>Resource Files\Shaders\UI</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\World.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\freetype.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\freetype.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\shader.frag">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="shaders\shader.vert">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Dependencies">
+      <UniqueIdentifier>{4b0a7fa4-1b63-4e82-a119-9739ad4e5302}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{75d7ec11-872e-4b27-ac37-1fd7a7765c79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{2dcc823a-e5aa-4f34-a757-f25dd2682557}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{02a3c967-e98a-4b2f-9edb-7b047cf68dc7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\scenes\scene.xml">

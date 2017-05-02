@@ -29,6 +29,8 @@
 #include <fstream>
 #include <sstream>
 
+#include <memory>
+
 #include <cstdio>
 #include <cstdlib>
 
