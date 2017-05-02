@@ -100,9 +100,9 @@ void Editor::initScene(Freetype* pOverlay)
 	gl::Enable(gl::DEPTH_TEST);
 
 	// Defines HUD buttons
-	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
 	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
 
 	linkShaders();

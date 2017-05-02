@@ -24,6 +24,12 @@ public:
 	// Overloaded constructer which contructs a button from a X position, Y position, Texture ID and a TextureLoader
 	Button(const float kfX, const float kfY, const string ksLoc, const string ksHoverLoc, const vec3 kScale, Freetype *pOverlay);
 
+	// Sets Texture index
+	void setTextureIndex(const unsigned int kuiIndex) { m_uiTextureIndex = kuiIndex; }
+	unsigned int getTextureIndex() { return m_uiTextureIndex; }
+	void setHoverTextureIndex(const unsigned int kuiIndex) { m_uiHoverTextureIndex = kuiIndex; }
+	unsigned int getHoverTextureIndex() { return m_uiHoverTextureIndex; }
+
 	// Checks if the button is being hovered over
 	bool mouseOver(sf::Vector2f mousePos, const float kfWindowYSize);
 
