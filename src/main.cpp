@@ -205,7 +205,7 @@ void mainLoop()
 		if (g_bWindowFocused)
 		{
 			// Updates and renders the scene
-			g_pScene->update((float)glfwGetTime());
+			g_pScene->update((float)glfwGetTime() * 100.0f);
 			g_pScene->render();
 		}
 

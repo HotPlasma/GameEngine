@@ -69,7 +69,8 @@ void Editor::linkShaders()
 		m_freeType.validate();
 		m_freeType.use();
 	}
-	catch (GLSLProgramException & e) {
+	catch (GLSLProgramException & e) 
+	{
 		cerr << e.what() << endl;
 		exit(EXIT_FAILURE);
 	}
@@ -97,6 +98,12 @@ void Editor::initScene(Freetype* pOverlay)
 
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
+
+	// Defines HUD buttons
+	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, 0, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, 0, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, 0, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleTicked.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, 0, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
 
 	linkShaders();
 }
@@ -138,25 +145,40 @@ void Editor::input_key(const int kiKey, const int kiAction)
 				m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
 			}
 		}
-
-		// If F5 key is pressed
-		if (kiKey == GLFW_KEY_F5)
-		{
-			// Saves Scene to file
-			save();
-		}
-
-		// TEMPORARY - Transformation mode switching until menu added
-		if (kiKey == GLFW_KEY_1) m_transformMode = TRANSLATE;
-		if (kiKey == GLFW_KEY_2) m_transformMode = ROTATE;
-		if (kiKey == GLFW_KEY_3) m_transformMode = SCALE;
 	}
 }
 
 // Void: Called on mouseButton input event
 void Editor::input_button(const int kiButton, const int kiAction)
 {
-	// Nothing Currently
+	// If left mouse button is clicked
+	if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		// If TranslateMode button is clicked
+		if (m_buttons.m_pTranslateMode->isActive())
+		{
+			// Mode switched to Translate
+			m_transformMode = TRANSLATE;
+		}
+		// If RotateMode button is clicked
+		if (m_buttons.m_pRotateMode->isActive())
+		{
+			// Mode switched to Rotate
+			m_transformMode = ROTATE;
+		}
+		// If ScaleMode button is clicked
+		if (m_buttons.m_pScaleMode->isActive())
+		{
+			// Mode switched to Scale
+			m_transformMode = SCALE;
+		}
+		// If Save button is clicked
+		if (m_buttons.m_pSave->isActive())
+		{
+			// Saves Scene to file
+			save();
+		}
+	}
 }
 
 // Void: Called on mouseScroll input event
@@ -281,6 +303,12 @@ void Editor::update(const float kfTimeElapsed)
 
 	// Sets last cursor position
 	m_lastMousePos = m_mousePos;
+
+	// Checks whether buttons are hovered
+	m_buttons.m_pTranslateMode->CheckHover(m_mousePos, 9);
+	m_buttons.m_pRotateMode->CheckHover(m_mousePos, 11);
+	m_buttons.m_pScaleMode->CheckHover(m_mousePos, 13);
+	m_buttons.m_pSave->CheckHover(m_mousePos, 15);
 }
 
 // Void: Renders the Editor to display
@@ -323,6 +351,18 @@ void Editor::render()
 	
 		// Renders Model
 		pModel->render();
+	}
+
+	// TEMPORARY - Messy way of not drawing main menu UI and only editor UI
+	m_imageType.use();
+	for (int i = 9; i < m_pHUD->m_ImagePlane.size(); i++)
+	{
+		m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(i).m_M);
+		m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
+		if (m_pHUD->m_ImagePlane.at(i).getVisable() == true)
+		{
+			m_pHUD->RenderImage(i);
+		}
 	}
 
 	// Activates FreeType shader

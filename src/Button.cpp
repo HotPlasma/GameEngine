@@ -20,9 +20,18 @@ void Button::SetProperties(float fX, float fY, int iTextureID, string ButtonLoc,
 	m_bActive = true;
 }
 
-void Button::ChangeTexture(int iNewTextureID)
+void Button::ChangeTexture(int index)
 {
-	
+	if (m_ButtonSprite->m_ImagePlane.at(index).getVisable() == true)
+	{
+		m_ButtonSprite->m_ImagePlane.at(index + 1).setVisable(true);
+		m_ButtonSprite->m_ImagePlane.at(index).setVisable(false);
+	}
+	else
+	{
+		m_ButtonSprite->m_ImagePlane.at(index + 1).setVisable(false);
+		m_ButtonSprite->m_ImagePlane.at(index).setVisable(true);
+	}
 }
 
 void Button::CheckHover(sf::Vector2f MousePos, int index)

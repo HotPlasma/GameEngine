@@ -8,6 +8,7 @@
 #include "Model.h"
 #include "ModelReader.h"
 #include "glslprogram.h"
+#include "Button.h"
 
 struct Selection
 {
@@ -17,6 +18,16 @@ struct Selection
 	glm::vec3 m_scale = glm::vec3(1.0f, 1.0f, 1.0f); //!< Selection scale
 
 	std::shared_ptr<Model> m_pModel; //!< Selection Model
+};
+
+struct EditorHUD
+{
+	// Buttons for transformation mode switching
+	std::shared_ptr<Button> m_pTranslateMode; //!< Translate mode button
+	std::shared_ptr<Button> m_pRotateMode; //!< Rotate mode button
+	std::shared_ptr<Button> m_pScaleMode; //!< Scale mode button
+
+	std::shared_ptr<Button> m_pSave; //!< Button to save Scene to file
 };
 
 //!< Scene subclass for creating levels
@@ -34,6 +45,8 @@ class Editor : public Scene
 
 		enum TransformationMode { TRANSLATE, ROTATE, SCALE }; //!< Enum for which transformation mode the Editor is in
 		TransformationMode m_transformMode; //!< Editor's current transformation mode
+
+		EditorHUD m_buttons; //!< Editor option buttons
 
 		void linkShaders(); //!< Links vert and frag shaders into a glslprogram
 	
