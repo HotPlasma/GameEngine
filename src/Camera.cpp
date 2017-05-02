@@ -78,6 +78,10 @@ void Camera::updateView()
 
 glm::vec3 Camera::getDirection()
 {
-	// WRONG
-	return glm::vec3(m_orientation.x, m_orientation.y, m_orientation.z);
+	glm::vec3 eulerFromQuat;
+	eulerFromQuat = glm::eulerAngles(m_orientation);
+
+	glm::vec3 cameraLookAt = glm::vec3(glm::acos(glm::radians(eulerFromQuat.x)), glm::asin(glm::radians(eulerFromQuat.y)), glm::acos(glm::radians(eulerFromQuat.z)));
+
+	return cameraLookAt;
 }

@@ -37,23 +37,20 @@ void World::initScene(Freetype* pOverlay)
 		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
-//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
+	//m_pHUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", vec3(500.0f, 500.0f, 0.0f), 0.0f, vec3(1.0f, 1.0f, 1.0f), TRUE);
 }
 
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
-	vec3 worldLight = vec3(200.0f, 70.0f, -80.0f);
+	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 20.0f, 10.0f, 0.0f);
 	pShader->setUniform("lightCutOff", glm::cos(glm::radians(50.0f)));
 	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(56.0f)));
-	pShader->setUniform("spotlightDriection", 0.0, -0.7, 0.0);
+	pShader->setUniform("spotlightDriection", 0.0f, -0.1f, 0.0f /*m_camera.getDirection()*/);
 
+	//set the ambient lighting for the scene
+	pShader->setUniform("Ia", 0.2f, 0.2f, 0.2f);
 
-	pShader->setUniform("Ia", 0.5f, 0.5f, 0.5f);
-	//pShader->setUniform("Id", 0.0f, 0.0f, 0.8f);
-	//pShader->setUniform("Is", 0.6f, 0.6f, 0.6f);
-	//pShader->setUniform("Rd", 0.6f, 0.6f, 0.6f);
-	//pShader->setUniform("Rs", 0.9f, 0.9f, 0.9f);
-	pShader->setUniform("lightPosition", m_camera.getPosition());
+	pShader->setUniform("lightPosition", /*m_camera.getPosition()*/worldLight);
 
 	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
 	{
@@ -78,7 +75,7 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 	}
 	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
 	{
-		m_worldShader.setUniform("Id", 0.0f, 0.0f, 0.0f);
+		m_worldShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
 		m_worldShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
 		m_worldShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
 		m_worldShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);

@@ -88,7 +88,7 @@ void Model::loadModel()
 	m_pModelReader = new ModelReader(m_sFileName);
 }
 
-void Model::buffer(GLSLProgram * pShader)
+void Model::buffer()
 {
 	gl::BindVertexArray(m_vaoHandle);
 	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());

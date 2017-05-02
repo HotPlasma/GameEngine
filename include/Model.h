@@ -61,7 +61,7 @@ class Model
 		void setRotation(glm::vec3 newRotation); // Set model rotation
 		void setScale(glm::vec3 newScale); // Set model scale
 		void setMaterial(int iMaterialID); // Set model MaterialID
-		void buffer(GLSLProgram * pShader);
+		void buffer();
 	
 		vector<float> m_positionData;
 		vector<float> m_uvData;
