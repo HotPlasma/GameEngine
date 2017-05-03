@@ -54,14 +54,14 @@ void Menu::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// Draws HUD buttons
-	m_PlayButton->render(&m_ImageType, m_windowSize);
-	m_EditorButton->render(&m_ImageType, m_windowSize);
-	m_OptionsButton->render(&m_ImageType, m_windowSize);
-	m_ExitButton->render(&m_ImageType, m_windowSize);
+	m_PlayButton->render(&m_imageType, m_windowSize);
+	m_EditorButton->render(&m_imageType, m_windowSize);
+	m_OptionsButton->render(&m_imageType, m_windowSize);
+	m_ExitButton->render(&m_imageType, m_windowSize);
 	
 	//Draws Background		
-	m_ImageType.setUniform("M", UI->m_ImagePlane.at(8).m_M);
-	m_ImageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
+	m_imageType.setUniform("M", UI->m_ImagePlane.at(8).m_M);
+	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
 	UI->RenderImage(8);
 }
 
