@@ -1,60 +1,45 @@
 
 #include "Editor.h"
 
-#define HAND_ROTATION 180.0f
-#define HAND_SPEED 25.0f
+#define POSITION_SPEED 25.0f
+#define ROTATION_SPEED 180.0f
+#define SCALE_SPEED 5.0f
 
-#define CAMERA_ROTATION 0.0025f
+#define CAMERA_ROTATION 0.0015f
 #define CAMERA_SPEED 0.01f
-#define CAMERA_ZOOM 5.0f
+#define CAMERA_ZOOM 3.5f
 
 // Constructor
-Editor::Editor(GLFWwindow *pWindow, sf::Vector2i windowSize)
+Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 {
 	// Sets members with input
 	m_pWindow = pWindow;
-	m_windowSize = windowSize;
+	m_windowSize = kWindowSize;
 
 	// Updates Camera aspect ratio
-	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
+	m_camera.setAspectRatio((float)kWindowSize.x / kWindowSize.y);
+
+	// Sets Camera initital position 
+	m_camera.setPosition(glm::vec3( 0.0f, 15.0f, 40.0f));
 
 	// TEMPORARY - Need to read in a list of models to use
 	// Creates a tree Model
-	std::shared_ptr<Model> model = std::shared_ptr<Model>(new Model());
-	model->setName("Tree");
-	model->setFileLocation("assets/models/deadtree.obj");
-	model->setTextureLocation("assets/textures/bark.bmp");
-	model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	model->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
-	model->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	model->setMaterial(1);
-	// Populates the ModelSelection member with Models
-	m_pModelSelection.push_back(model);
+	std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
+	pModel->setName("Tree");
+	pModel->setFileLocation("assets/models/deadtree.obj");
+	pModel->setTextureLocation("assets/textures/bark.bmp");
+	pModel->setMaterial(1);
 
-	// Creates a stump Model
-	model = std::shared_ptr<Model>(new Model());
-	model->setName("Stump");
-	model->setFileLocation("assets/models/stump.obj");
-	model->setTextureLocation("assets/textures/stump.bmp");
-	model->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
-	model->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
-	model->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
-	model->setMaterial(1);
-	// Populates the ModelSelection member with Models
-	m_pModelSelection.push_back(model);
-
-	// For every Model
-	for (std::shared_ptr<Model> pModel : m_pModelSelection)
-	{
-		// Loads Model so it's ready for drawing
-		pModel->loadModel();
-
-		// Initialises Models
-		pModel->initModel();
-	}
-
+	// Loads Model so it's ready for drawing
+	pModel->loadModel();
+	// Initialises Model
+	pModel->initModel();
+	
 	// Sets the first Model in the selection to selected
-	m_pSelectedModel = m_pModelSelection.front();
+	m_selection.m_pModel = pModel;
+
+	// Sets default transformation mode
+	m_transformMode = TRANSLATE;
 }
 
 // Void: Initialises the Editor Scene
@@ -66,44 +51,90 @@ void Editor::initScene(Freetype* pOverlay)
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
 
+	// Defines HUD buttons
+	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.30f, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.24f, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.18f, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+
 	linkShaders();
 }
 
-// Void: Called on keyPress event
-void Editor::keyPress(const int kiKey)
+// Void: Called on key input event
+void Editor::input_key(const int kiKey, const int kiAction)
 {
-	// If Spacebar is pressed
-	if (kiKey == GLFW_KEY_SPACE)
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
 	{
-		// Model is added to a vector of placed Models
-		m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_pSelectedModel.get())));
-	}
+		// If Enter is pressed
+		if (kiKey == GLFW_KEY_ENTER)
+		{
+			// Model is added to a vector of placed Models
+			m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_selection.m_pModel.get())));
+		}
 
-	// If R key is pressed
-	if (kiKey == GLFW_KEY_R)
-	{
-		// Resets the hand rotation vector
-		m_handRotation = glm::vec3(0.0f, 0.0f, 0.0f);
-	}
+		// If R key is pressed
+		if (kiKey == GLFW_KEY_R)
+		{
+			// If mode is Translate
+			if (m_transformMode == TRANSLATE)
+			{
+				// Resets the hand position vector
+				m_selection.m_position = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
 
-	// TEMPORARY
-	// If 1 key is pressed
-	if (kiKey == GLFW_KEY_1)
-		m_pSelectedModel = m_pModelSelection.at(0);
-	// If 2 key is pressed
-	if (kiKey == GLFW_KEY_2)
-		m_pSelectedModel = m_pModelSelection.at(1);
+			// If mode is Rotate
+			else if (m_transformMode == ROTATE)
+			{
+				// Resets the hand rotation vector
+				m_selection.m_rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+			}
 
-	// If F5 key is pressed
-	if (kiKey == GLFW_KEY_F5)
-	{
-		// Saves Scene to file
-		save();
+			// If mode is Scale
+			else if (m_transformMode == SCALE)
+			{
+				// Resets the hand scale vector
+				m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
+			}
+		}
 	}
 }
 
-// Void: Called on mouseScroll event
-void Editor::mouseScroll(const double kdDelta)
+// Void: Called on mouseButton input event
+void Editor::input_button(const int kiButton, const int kiAction)
+{
+	// If left mouse button is clicked
+	if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		// If TranslateMode button is clicked
+		if (m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y))
+		{
+			// Mode switched to Translate
+			m_transformMode = TRANSLATE;
+		}
+		// If RotateMode button is clicked
+		if (m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y))
+		{
+			// Mode switched to Rotate
+			m_transformMode = ROTATE;
+		}
+		// If ScaleMode button is clicked
+		if (m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y))
+		{
+			// Mode switched to Scale
+			m_transformMode = SCALE;
+		}
+		// If Save button is clicked
+		if (m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y))
+		{
+			// Saves Scene to file
+			save();
+		}
+	}
+}
+
+// Void: Called on mouseScroll input event
+void Editor::input_scroll(const double kdDelta)
 {
 	// Move in the Z axis 
 	m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_ZOOM*kdDelta));
@@ -132,62 +163,104 @@ void Editor::update(const float kfTimeElapsed)
 
 	/////////////////// MODEL MANIPULAITON ///////////////////
 	/////////////////// TRANSLATION ///////////////////
-	/////////////////// X ///////////////////
-	// If A key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-		m_handPosition += m_camera.getXAxis() * glm::vec3(-HAND_SPEED*kfTimeElapsed, 0.0f, -HAND_SPEED*kfTimeElapsed);
-	// If D key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-		m_handPosition += m_camera.getXAxis() * glm::vec3(HAND_SPEED*kfTimeElapsed, 0.0f, HAND_SPEED*kfTimeElapsed);
+	if (m_transformMode == TRANSLATE)
+	{
+		/////////////////// X ///////////////////
+		// If A key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			m_selection.m_position += m_camera.getXAxis() * glm::vec3(-POSITION_SPEED*kfTimeElapsed, 0.0f, -POSITION_SPEED*kfTimeElapsed);
+		// If D key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			m_selection.m_position += m_camera.getXAxis() * glm::vec3(POSITION_SPEED*kfTimeElapsed, 0.0f, POSITION_SPEED*kfTimeElapsed);
 
-	/////////////////// Y ///////////////////
-	// If PageUp key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::PageUp))
-		m_handPosition += m_camera.getYAxis() * glm::vec3(0.0f, HAND_SPEED*kfTimeElapsed, 0.0f);
-	// If PageDown key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::PageDown))
-		m_handPosition += m_camera.getYAxis() * glm::vec3(0.0f, -HAND_SPEED*kfTimeElapsed, 0.0f);
+		/////////////////// Y ///////////////////
+		// If Spacebar is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+			m_selection.m_position += m_camera.getYAxis() * glm::vec3(0.0f, POSITION_SPEED*kfTimeElapsed, 0.0f);
+		// If LShift is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+			m_selection.m_position += m_camera.getYAxis() * glm::vec3(0.0f, -POSITION_SPEED*kfTimeElapsed, 0.0f);
 
-	/////////////////// Z ///////////////////
-	// If W key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) 
-		m_handPosition += m_camera.getZAxis() * glm::vec3(-HAND_SPEED*kfTimeElapsed, 0.0f, -HAND_SPEED*kfTimeElapsed);
-	// If S key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-		m_handPosition += m_camera.getZAxis() * glm::vec3(HAND_SPEED*kfTimeElapsed, 0.0f, HAND_SPEED*kfTimeElapsed);
+		/////////////////// Z ///////////////////
+		// If W key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			m_selection.m_position += m_camera.getZAxis() * glm::vec3(-POSITION_SPEED*kfTimeElapsed, 0.0f, -POSITION_SPEED*kfTimeElapsed);
+		// If S key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			m_selection.m_position += m_camera.getZAxis() * glm::vec3(POSITION_SPEED*kfTimeElapsed, 0.0f, POSITION_SPEED*kfTimeElapsed);
+	}
 
 	/////////////////// ROTATION ///////////////////
-	/////////////////// X ///////////////////
-	// If Up arrow is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
-		m_handRotation += glm::vec3(-HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
-	// If Down arrow is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
-		m_handRotation += glm::vec3(HAND_ROTATION*kfTimeElapsed, 0.0f, 0.0f);
+	if (m_transformMode == ROTATE)
+	{
+		/////////////////// X ///////////////////
+		// If W key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			m_selection.m_rotation += glm::vec3(-ROTATION_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+		// If S key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			m_selection.m_rotation += glm::vec3(ROTATION_SPEED*kfTimeElapsed, 0.0f, 0.0f);
 
-	/////////////////// Y ///////////////////
-	// If Q key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
-		m_handRotation += glm::vec3(0.0f, -HAND_ROTATION*kfTimeElapsed, 0.0f);
-	// If E key is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
-		m_handRotation += glm::vec3(0.0f, HAND_ROTATION*kfTimeElapsed, 0.0f);
+		/////////////////// Y ///////////////////
+		// If Q key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Q))
+			m_selection.m_rotation += glm::vec3(0.0f, -ROTATION_SPEED*kfTimeElapsed, 0.0f);
+		// If E key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+			m_selection.m_rotation += glm::vec3(0.0f, ROTATION_SPEED*kfTimeElapsed, 0.0f);
 
-	/////////////////// Z ///////////////////
-	// If Left arrow is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
-		m_handRotation += glm::vec3(0.0f, 0.0f, HAND_ROTATION*kfTimeElapsed);
-	// If Right arrow is pressed
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
-		m_handRotation += glm::vec3(0.0f, 0.0f, -HAND_ROTATION*kfTimeElapsed);
+		/////////////////// Z ///////////////////
+		// If A key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			m_selection.m_rotation += glm::vec3(0.0f, 0.0f, -ROTATION_SPEED*kfTimeElapsed);
+		// If D key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			m_selection.m_rotation += glm::vec3(0.0f, 0.0f, ROTATION_SPEED*kfTimeElapsed);
+	}
 
-	//// Sets Model position to hand position
-	m_pSelectedModel->setPosition(m_handPosition);
-	//// Sets Model rotation to hand position
-	m_pSelectedModel->setRotation(m_handRotation);
+	/////////////////// SCALE ///////////////////
+	if (m_transformMode == SCALE)
+	{
+		/////////////////// X ///////////////////
+		// If W key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
+			m_selection.m_scale += glm::vec3(-SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+		// If S key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
+			m_selection.m_scale += glm::vec3(SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+
+		/////////////////// Y ///////////////////
+		// If Spacebar is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+			m_selection.m_scale += glm::vec3(0.0f, SCALE_SPEED*kfTimeElapsed, 0.0f);
+		// If LShift is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+			m_selection.m_scale += glm::vec3(0.0f, -SCALE_SPEED*kfTimeElapsed, 0.0f);
+
+		/////////////////// Z ///////////////////
+		// If A key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+			m_selection.m_scale += glm::vec3(0.0f, 0.0f, -SCALE_SPEED*kfTimeElapsed);
+		// If D key is pressed
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+			m_selection.m_scale += glm::vec3(0.0f, 0.0f, SCALE_SPEED*kfTimeElapsed);
+	}
+
+	//// Sets Model position to selection value
+	m_selection.m_pModel->setPosition(m_selection.m_position);
+	//// Sets Model rotation to selection value
+	m_selection.m_pModel->setRotation(m_selection.m_rotation);
+	//// Sets Model scale to selection value
+	m_selection.m_pModel->setScale(m_selection.m_scale);
 
 	// Sets last cursor position
 	m_lastMousePos = m_mousePos;
+
+	// Checks whether buttons are hovered
+	m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y);
 }
 
 // Void: Renders the Editor to display
@@ -199,7 +272,7 @@ void Editor::render()
 	// Activates World shader
 	m_worldShader.use();
 
-	// Configures shader
+	// Sets shader MVP
 	glm::mat4 model = glm::mat4(1.0);
 	mat4 mv = m_camera.getView() * model;
 	m_worldShader.setUniform("ModelViewMatrix", mv);
@@ -211,13 +284,13 @@ void Editor::render()
 	m_worldShader.setUniform("P", m_camera.getProjection());
 
 	// Renders the Model in hand
-	m_pSelectedModel->buffer();
+	m_selection.m_pModel->buffer();
 
 	// Passes Model transformation data to shader
-	m_worldShader.setUniform("M", m_pSelectedModel->m_M);
+	m_worldShader.setUniform("M", m_selection.m_pModel->m_M);
 
 	// Renders Model
-	m_pSelectedModel->render();
+	m_selection.m_pModel->render();
 
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
@@ -232,20 +305,31 @@ void Editor::render()
 		pModel->render();
 	}
 
+	// Draws HUD buttons
+	m_buttons.m_pTranslateMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pRotateMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pScaleMode->render(&m_imageType, m_windowSize);
+	m_buttons.m_pSave->render(&m_imageType, m_windowSize);
+
 	// Activates FreeType shader
 	m_freeType.use();
 	// Configures projection
-	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
+	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.0f, float(m_windowSize.y)));
 
 	// Defines position string
-	std::string sPos; sPos += "Model Position: x("; sPos += std::to_string(m_handPosition.x); sPos += ") y("; sPos += std::to_string(m_handPosition.y); sPos += ") z("; sPos += std::to_string(m_handPosition.z); sPos += ")";
+	std::string sPos; sPos += "Model Position: x("; sPos += std::to_string(m_selection.m_position.x); sPos += ") y("; sPos += std::to_string(m_selection.m_position.y); sPos += ") z("; sPos += std::to_string(m_selection.m_position.z); sPos += ")";
 	// Outputs position string to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), sPos, 100.f, 100.f, 1.0f, glm::vec3(0.7, 0.3f, 0.3f));
+	m_pHUD->RenderText(m_freeType.getHandle(), sPos, 25.f, 100.f, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
-	// Defines position string
-	std::string sRot; sRot += "Model Rotation: x("; sRot += std::to_string(m_handRotation.x); sRot += ") y("; sRot += std::to_string(m_handRotation.y); sRot += ") z("; sRot += std::to_string(m_handRotation.z); sRot += ")";
-	// Outputs position string to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), sRot, 100.f, 75.f, 1.0f, glm::vec3(0.3, 0.7f, 0.3f));
+	// Defines rotation string
+	std::string sRot; sRot += "Model Rotation: x("; sRot += std::to_string(m_selection.m_rotation.x); sRot += ") y("; sRot += std::to_string(m_selection.m_rotation.y); sRot += ") z("; sRot += std::to_string(m_selection.m_rotation.z); sRot += ")";
+	// Outputs rotation string to HUD
+	m_pHUD->RenderText(m_freeType.getHandle(), sRot, 25.f, 75.f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+
+	// Defines scale string
+	std::string sScale; sScale += "Model Scale: x("; sScale += std::to_string(m_selection.m_scale.x); sScale += ") y("; sScale += std::to_string(m_selection.m_scale.y); sScale += ") z("; sScale += std::to_string(m_selection.m_scale.z); sScale += ")";
+	// Outputs scale string to HUD
+	m_pHUD->RenderText(m_freeType.getHandle(), sScale, 25.f, 50.f, 1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 // Void: Saves the Scene to XML file
