@@ -119,8 +119,10 @@
     <None Include="shaders\freetype.vert" />
     <None Include="shaders\image.frag" />
     <None Include="shaders\image.vert" />
-    <None Include="shaders\shader.frag" />
-    <None Include="shaders\shader.vert" />
+    <None Include="shaders\phong.frag" />
+    <None Include="shaders\phong.vert" />
+    <None Include="shaders\spotlight.frag" />
+    <None Include="shaders\spotlight.vert" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\scenes\scene.xml">

@@ -197,24 +197,24 @@ void Editor::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// Activates World shader
-	m_worldShader.use();
+	m_spotlightShader.use();
 
 	// Configures shader
 	glm::mat4 model = glm::mat4(1.0);
 	mat4 mv = m_camera.getView() * model;
-	m_worldShader.setUniform("ModelViewMatrix", mv);
-	m_worldShader.setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	m_worldShader.setUniform("MVP", m_camera.getProjection() * mv);
+	m_spotlightShader.setUniform("ModelViewMatrix", mv);
+	m_spotlightShader.setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
+	m_spotlightShader.setUniform("MVP", m_camera.getProjection() * mv);
 	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	m_worldShader.setUniform("M", model);
-	m_worldShader.setUniform("V", m_camera.getView());
-	m_worldShader.setUniform("P", m_camera.getProjection());
+	m_spotlightShader.setUniform("M", model);
+	m_spotlightShader.setUniform("V", m_camera.getView());
+	m_spotlightShader.setUniform("P", m_camera.getProjection());
 
 	// Renders the Model in hand
 	m_pSelectedModel->buffer();
 
 	// Passes Model transformation data to shader
-	m_worldShader.setUniform("M", m_pSelectedModel->m_M);
+	m_spotlightShader.setUniform("M", m_pSelectedModel->m_M);
 
 	// Renders Model
 	m_pSelectedModel->render();
@@ -226,7 +226,7 @@ void Editor::render()
 		pModel->buffer();
 		
 		// Passes Model transformation data to shader
-		m_worldShader.setUniform("M", pModel->m_M);
+		m_spotlightShader.setUniform("M", pModel->m_M);
 	
 		// Renders Model
 		pModel->render();

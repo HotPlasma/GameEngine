@@ -54,31 +54,31 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 
 	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
 	{
-		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-		m_worldShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-		m_worldShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
+		m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+		m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
+		m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
+		m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
 	}
 	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
 	{
-		m_worldShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-		m_worldShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-		m_worldShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
+		m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
+		m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
+		m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
+		m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
 	}
 	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
 	{
-		m_worldShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_worldShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-		m_worldShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-		m_worldShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
+		m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+		m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
+		m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
+		m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
 	}
 	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
 	{
-		m_worldShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
-		m_worldShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-		m_worldShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-		m_worldShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
+		m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
+		m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
+		m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
+		m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
 	}
 }
 
@@ -180,8 +180,8 @@ void World::render()
 
 	// WORLD
 	// Activates World shader
-	m_worldShader.use();
-	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
+	m_spotlightShader.use();
+	setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
@@ -205,9 +205,9 @@ void World::render()
 			// Buffers the Model
 			m_sceneReader.m_modelList.at(i).buffer();
       // Configures lighting
-			setLightParamaters(&m_worldShader, i);
+			setLightParamaters(&m_spotlightShader, i);
 			// Sets the Model transformation matrix
-			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
+			m_spotlightShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
 			// Renders the Model
 			m_sceneReader.m_modelList.at(i).render();
 		}

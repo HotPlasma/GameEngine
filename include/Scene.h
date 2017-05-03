@@ -48,7 +48,8 @@ class Scene
 	    
 	protected:
 
-		GLSLProgram m_worldShader;
+		GLSLProgram m_phongShader;
+		GLSLProgram m_spotlightShader;
 		GLSLProgram m_freeType;
 		GLSLProgram m_imageType;
 
@@ -65,11 +66,26 @@ class Scene
 			try
 			{
 				// Shader which allows first person camera and textured object rendering
-				m_worldShader.compileShader("Shaders/shader.vert");
-				m_worldShader.compileShader("Shaders/shader.frag");
-				m_worldShader.link();
-				m_worldShader.validate();
-				m_worldShader.use();
+				m_phongShader.compileShader("Shaders/phong.vert");
+				m_phongShader.compileShader("Shaders/phong.frag");
+				m_phongShader.link();
+				m_phongShader.validate();
+				m_phongShader.use();
+			}
+			catch (GLSLProgramException & e)
+			{
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			try
+			{
+				// Shader which allows first person camera and textured object rendering
+				m_spotlightShader.compileShader("Shaders/spotlight.vert");
+				m_spotlightShader.compileShader("Shaders/spotlight.frag");
+				m_spotlightShader.link();
+				m_spotlightShader.validate();
+				m_spotlightShader.use();
 			}
 			catch (GLSLProgramException & e)
 			{
