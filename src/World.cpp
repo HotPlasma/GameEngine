@@ -184,10 +184,35 @@ void World::update(const float kfTimeElapsed)
 			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
 		{
 			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
-			//glm::vec3 Distance(m_Player.getPosition() - m_sceneReader.m_modelList.at(j).getPosition());
-			//glm::vec3 Penetration(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left 
 			
-			//)
+			glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
+			Distance = glm::normalize(Distance);
+			//Diff in X to move out
+
+			glm::vec3 Diff(
+				abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
+				abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top )),
+				abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
+			);
+
+			if (Diff.x <= Diff.y && Diff.x <= Diff.z)
+			{
+				//Set pos in x by doing Diff * (unitVect(Distance))
+				m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
+			}
+			else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
+			{
+				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
+			}
+			else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
+			{
+				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
+			}
+
+			//m_camera.setPosition(m_Player.getPosition());
 		}
 	}
 	
@@ -205,8 +230,8 @@ void World::render()
 
 	m_Player.buffer();
 	m_worldShader.setUniform("M", m_Player.m_M);
+	
 	//m_Player.render();
-
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
