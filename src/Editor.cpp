@@ -274,12 +274,14 @@ void Editor::update(const float kfTimeElapsed)
 			m_selection.m_scale += glm::vec3(0.0f, 0.0f, SCALE_SPEED*kfTimeElapsed);
 	}
 
-	//// Sets Model position to selection value
+	// Sets Model position to selection value
 	m_selection.m_pModel->setPosition(m_selection.m_position);
-	//// Sets Model rotation to selection value
+	// Sets Model rotation to selection value
 	m_selection.m_pModel->setRotation(m_selection.m_rotation);
-	//// Sets Model scale to selection value
+	// Sets Model scale to selection value
 	m_selection.m_pModel->setScale(m_selection.m_scale);
+	// Sets Model material to selection value
+	m_selection.m_pModel->setMaterial(m_selection.m_uiMaterial);
 
 	// Sets last cursor position
 	m_lastMousePos = m_mousePos;

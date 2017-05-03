@@ -21,6 +21,8 @@ struct Selection
 	glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, 0.0f); //!< Selection rotation
 	glm::vec3 m_scale = glm::vec3(1.0f, 1.0f, 1.0f); //!< Selection scale
 
+	unsigned int m_uiMaterial = 1; //!< Model material preset
+
 	std::shared_ptr<Model> m_pModel; //!< Selection Model
 };
 
