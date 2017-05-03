@@ -198,19 +198,21 @@ void World::update(const float kfTimeElapsed)
 					m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
 			);
 
-			if (Diff.x <= Diff.y && Diff.x <= Diff.z)
-			{
-				//Set pos in x by doing Diff * (unitVect(Distance))
-				m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
-			}
-			else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
-			{
-				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
-			}
-			else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
-			{
-				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
-			}
+			//if (Diff.x <= Diff.y && Diff.x <= Diff.z)
+			//{
+			//	//Set pos in x by doing Diff * (unitVect(Distance))
+			//	m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
+			//}
+			//else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
+			//{
+			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
+			//}
+			//else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
+			//{
+			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
+			//}
+
+
 
 			//m_camera.setPosition(m_Player.getPosition());
 		}

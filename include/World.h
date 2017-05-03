@@ -11,6 +11,7 @@
 #include "Freetype.h"
 #include "Utilities.h"
 #include "reactphysics3d.h"
+#include "btBulletCollisionCommon.h"
 
 class World : public Scene
 {
@@ -32,6 +33,8 @@ class World : public Scene
 
 		vector<rp3d::CollisionBody*> ModelBodies;
 		rp3d::CollisionCallback * CameraCallback;
+
+		btBoxShape * box = new btBoxShape(btVector3(1, 1, 1));
 	
 	public:
 
