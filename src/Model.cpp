@@ -105,6 +105,8 @@ CollisionBox Model::getCollisionBox()
 	newBox.front = m_position.z - (m_BoundingBox.z / 2);
 	newBox.back = m_position.z + (m_BoundingBox.z / 2);
 
+	newBox.max = m_BoundBoxMax;
+	newBox.min = m_BoundBoxMin;
 	
 	return newBox;
 }
@@ -173,47 +175,44 @@ void Model::initModel()
 
 	}
 
-	glm::vec3 max(-999999.0f, -999999.0f, -999999.0f);
-	glm::vec3 min(999999.0f, 999999.0f, 999999.0f);
+	m_BoundBoxMax = glm::vec3(-999999.0f, -999999.0f, -999999.0f);
+	m_BoundBoxMin = glm::vec3(999999.0f, 999999.0f, 999999.0f);
 
 	for (int i = 0; i < m_positionData.size(); i+=3)
 	{
-		if (m_positionData.at(i) > max.x)
+		if (m_positionData.at(i) > m_BoundBoxMax.x)
 		{
-			max.x = m_positionData.at(i);
+			m_BoundBoxMax.x = m_positionData.at(i);
 		}
 
-		if (m_positionData.at(i + 1) > max.y)
+		if (m_positionData.at(i + 1) > m_BoundBoxMax.y)
 		{
-			max.y = m_positionData.at(i+1);
+			m_BoundBoxMax.y = m_positionData.at(i+1);
 		}
 
-		if (m_positionData.at(i + 2) > max.z)
+		if (m_positionData.at(i + 2) > m_BoundBoxMax.z)
 		{
-			max.z = m_positionData.at(i+2);
+			m_BoundBoxMax.z = m_positionData.at(i+2);
 		}
 
-		if (m_positionData.at(i) < min.x)
+		if (m_positionData.at(i) < m_BoundBoxMin.x)
 		{
-			min.x = m_positionData.at(i);
+			m_BoundBoxMin.x = m_positionData.at(i);
 		}
 
-		if (m_positionData.at(i + 1) < min.y)
+		if (m_positionData.at(i + 1) < m_BoundBoxMin.y)
 		{
-			min.y = m_positionData.at(i + 1);
+			m_BoundBoxMin.y = m_positionData.at(i + 1);
 		}
 
-		if (m_positionData.at(i + 2) < min.z)
+		if (m_positionData.at(i + 2) < m_BoundBoxMin.z)
 		{
-			min.z = m_positionData.at(i + 2);
+			m_BoundBoxMin.z = m_positionData.at(i + 2);
 		}
 	}
 
-	m_BoundingBox = glm::vec3(max - min);
+	m_BoundingBox = glm::vec3(m_BoundBoxMax - m_BoundBoxMin);
 
-	cout << max.x << max.y << max.z << endl;
-
-	cout << min.x << min.y << min.z << endl;
 }
 
 //rp3d::ConvexMeshShape Model::getCollisionMesh()

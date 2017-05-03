@@ -17,6 +17,9 @@ struct CollisionBox
 	float right;
 	float top;
 	float bottom;
+
+	glm::vec3 max;
+	glm::vec3 min;
 };
 
 class Model
@@ -49,7 +52,8 @@ class Model
 
 		glm::vec3 m_BoundingBox;
 
-
+		glm::vec3 m_BoundBoxMax;
+		glm::vec3 m_BoundBoxMin;
 
 	public:
 		Model(); // Constructor

@@ -28,7 +28,7 @@ void World::initScene(Freetype* pOverlay)
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
-	m_Player = Model("assets/models/Player.obj", "", glm::vec3(10, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
+	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(10, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -66,7 +66,50 @@ void World::initScene(Freetype* pOverlay)
 
 	//m_CollisonWorld.testCollision(CameraBody, CameraCallback);
 
-	
+	broadphase = new btDbvtBroadphase();
+
+	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
+	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+
+	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
+
+	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+
+	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+
+	dynamicsWorld->setGravity(btVector3(0, -9.81, 0));
+
+	btCollisionShape* boxCollisionShape = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().max.x, m_sceneReader.m_modelList.at(6).getCollisionBox().max.y, m_sceneReader.m_modelList.at(6).getCollisionBox().max.z));
+
+	btDefaultMotionState* motionstate = new btDefaultMotionState(btTransform(
+		btQuaternion(m_sceneReader.m_modelList.at(6).getRotation().x , m_sceneReader.m_modelList.at(6).getRotation().y, m_sceneReader.m_modelList.at(6).getRotation().z, 1),
+		btVector3(m_sceneReader.m_modelList.at(6).getPosition().x, m_sceneReader.m_modelList.at(6).getPosition().y, m_sceneReader.m_modelList.at(6).getPosition().z)
+		));
+
+	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
+		0,                  // mass, in kg. 0 -> Static object, will never move.
+		motionstate,
+		boxCollisionShape,  // collision shape of body
+		btVector3(0, 0, 0)    // local inertia
+		);
+	rigidBody = new btRigidBody(rigidBodyCI);
+
+	btCollisionShape* PlayerCollisionShape = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().max.x, m_sceneReader.m_modelList.at(6).getCollisionBox().max.y, m_sceneReader.m_modelList.at(6).getCollisionBox().max.z));
+
+	btDefaultMotionState* PlayerMotionstate = new btDefaultMotionState(btTransform(
+		btQuaternion(m_Player.getRotation().x, m_Player.getRotation().y, m_Player.getRotation().z, 1),
+		btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z)
+		));
+
+	btRigidBody::btRigidBodyConstructionInfo PlayerBody(
+		20,                  // mass, in kg. 0 -> Static object, will never move.
+		PlayerMotionstate,
+		PlayerCollisionShape,  // collision shape of body
+		btVector3(0, 0, 0)    // local inertia
+		);
+	CameraRigidBody = new btRigidBody(PlayerBody);
+
+	dynamicsWorld->addRigidBody(CameraRigidBody);
 
 	//m_CollisonWorld.
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
@@ -172,50 +215,60 @@ void World::update(const float kfTimeElapsed)
 		}
 	}
 	
+
 	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5, m_camera.getPosition().z));
 
-	for (int j = 5; j < m_sceneReader.m_modelList.size(); j++)
+	//for (int j = 5; j < m_sceneReader.m_modelList.size(); j++)
+	//{
+	//	if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
+	//		m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
+	//		m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
+	//		m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
+	//		m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
+	//		m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+	//	{
+	//		cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
+	//		
+	//		glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
+	//		Distance = glm::normalize(Distance);
+	//		//Diff in X to move out
+
+	//		glm::vec3 Diff(
+	//			abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
+	//				m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
+	//			abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
+	//				m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top )),
+	//			abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
+	//				m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
+	//		);
+
+	//		//if (Diff.x <= Diff.y && Diff.x <= Diff.z)
+	//		//{
+	//		//	//Set pos in x by doing Diff * (unitVect(Distance))
+	//		//	m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
+	//		//}
+	//		//else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
+	//		//{
+	//		//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
+	//		//}
+	//		//else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
+	//		//{
+	//		//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
+	//		//}
+
+
+
+	//		//m_camera.setPosition(m_Player.getPosition());
+	//	}
+	//}
+
+	if (CameraRigidBody->checkCollideWith(rigidBody))
 	{
-		if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
-			m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
-			m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
-			m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
-			m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
-			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
-		{
-			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
-			
-			glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
-			Distance = glm::normalize(Distance);
-			//Diff in X to move out
-
-			glm::vec3 Diff(
-				abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
-					m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
-				abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
-					m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top )),
-				abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
-					m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
-			);
-
-			//if (Diff.x <= Diff.y && Diff.x <= Diff.z)
-			//{
-			//	//Set pos in x by doing Diff * (unitVect(Distance))
-			//	m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
-			//}
-			//else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
-			//{
-			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
-			//}
-			//else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
-			//{
-			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
-			//}
-
-
-
-			//m_camera.setPosition(m_Player.getPosition());
-		}
+		std::cout << "Colliding" << std::endl;
+	}
+	else
+	{
+		std::cout << "Not Colliding" << std::endl;
 	}
 	
 }

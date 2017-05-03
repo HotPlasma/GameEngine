@@ -11,7 +11,8 @@
 #include "Freetype.h"
 #include "Utilities.h"
 #include "reactphysics3d.h"
-#include "btBulletCollisionCommon.h"
+#include "btBulletDynamicsCommon.h"
+#include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
 
 class World : public Scene
 {
@@ -25,16 +26,19 @@ class World : public Scene
 
 		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
-		rp3d::CollisionWorld m_CollisonWorld;
+	/*	rp3d::CollisionWorld m_CollisonWorld;
 
-		rp3d::CollisionBody * CameraBody;
+		rp3d::CollisionBody * CameraBody;*/
 
 		Model m_Player;
 
-		vector<rp3d::CollisionBody*> ModelBodies;
-		rp3d::CollisionCallback * CameraCallback;
+		//vector<rp3d::CollisionBody*> ModelBodies;
+		//rp3d::CollisionCallback * CameraCallback;
 
-		btBoxShape * box = new btBoxShape(btVector3(1, 1, 1));
+		btBroadphaseInterface* broadphase;
+
+		btRigidBody *CameraRigidBody;
+		btRigidBody *rigidBody;
 	
 	public:
 
