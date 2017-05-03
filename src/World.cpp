@@ -133,7 +133,7 @@ void World::update(float t)
 				}
 			}
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2) // if ai is in chase range
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2.8f) // if ai is in chase range
 			{
 				cout << "chasing" << endl;
 				// chase();
@@ -141,7 +141,7 @@ void World::update(float t)
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2) // if ai catches player
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2.8f) // if ai catches player
 			{
 				// player has been caught
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
@@ -153,6 +153,19 @@ void World::update(float t)
 		}
 	}
 
+
+	//collision section
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+		if (m_sceneReader.m_modelList.at(i).isCollidable()) // check if collidable
+		{
+			//m_collidableRotation = glm::vec3(0, -0.05, 0); //test to make sure collidables worked 
+			                                              //(now just need to take the distance from the ai and the collidables and stop them from collding- 
+			                                              //possibly the same with the camera and collidables...)
+		}
+		//m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() + m_collidableRotation);
+		//everything besides the collectables and the ai object
+	}
 
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)

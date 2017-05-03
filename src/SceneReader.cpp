@@ -176,6 +176,15 @@ void SceneReader::readSceneFile(string sFilename)
 								newModel.setAi();
 							}
 						}
+						if (strcmp(iNode3->Value(), "Collidable") == 0) // Check if model needs collisions
+						{
+
+							iss >> sData;
+							if (sData == "true")
+							{
+								newModel.setCollidable();
+							}
+						}
 					}
 
 					// Pushes newModel onto the vector of models
