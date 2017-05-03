@@ -43,11 +43,6 @@ void Model::setAi()
 	m_bAi = true;
 }
 
-void Model::setCollidable()
-{
-	m_bCollidable = true;
-}
-
 void Model::playerCaught(bool playerCaught)
 {
 	m_bplayerCaught = playerCaught;
