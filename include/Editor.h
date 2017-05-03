@@ -28,9 +28,11 @@ struct Selection
 
 struct EditorHUD
 {
+	std::shared_ptr<Button> m_pModel; //!< Model selection
+
 	// Buttons for Object properties
-	std::shared_ptr<Button> m_pCollectable; //!< Collectable toggle
-	std::shared_ptr<Button> m_pAI; //!< AI toggle
+	std::shared_ptr<ToggleButton> m_pCollectable; //!< Collectable toggle
+	std::shared_ptr<ToggleButton> m_pAI; //!< AI toggle
 
 	// Buttons for transformation mode switching
 	std::shared_ptr<Button> m_pTranslateMode; //!< Translate mode button

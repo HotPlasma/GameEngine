@@ -1,16 +1,16 @@
 #include "Button.h"
 
-Button::Button(const float kfX, const float kfY, const string ksLoc, const string ksHoverLoc, const vec3 kScale, Freetype *pOverlay)
+Button::Button(const glm::vec2 kPosition, const string ksLoc, const string ksHoverLoc, const vec3 kScale, Freetype *pOverlay)
 {
 	m_pHUD = pOverlay;
 
 	m_uiTextureIndex = m_pHUD->m_ImagePlane.size();
-	m_pHUD->LoadHUDImage(ksLoc, vec3(kfX, kfY, 1), 0, kScale, false);
+	m_pHUD->LoadHUDImage(ksLoc, vec3(kPosition, 1), 0, kScale, false);
 
 	m_uiHoverTextureIndex = m_pHUD->m_ImagePlane.size();
-	m_pHUD->LoadHUDImage(ksHoverLoc, vec3(kfX, kfY, 1), 0, kScale, false);
+	m_pHUD->LoadHUDImage(ksHoverLoc, vec3(kPosition, 1), 0, kScale, false);
 
-	m_position = vec2(kfX, kfY);
+	m_position = kPosition;
 	m_scale = vec2(kScale);
 }
 

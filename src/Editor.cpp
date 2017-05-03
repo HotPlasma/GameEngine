@@ -51,13 +51,118 @@ void Editor::initScene(Freetype* pOverlay)
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
 
+	// Defines button sizing
+	glm::vec2 buttonSize_Small(200.0f, 50.0f);
+	glm::vec2 buttonSize_Big(200.0f, 200.0f);
+	float buttonPosX = m_windowSize.x*0.006f;
+
 	// Defines HUD buttons
-	m_buttons.m_pCollectable = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.466f + 56.0f*0.5f, "assets/UI/Editor/CollectableFalse.png", "assets/UI/Editor/CollectableTrue.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pAI = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.406f + 56.0f*0.5f, "assets/UI/Editor/AIFalse.png", "assets/UI/Editor/AITrue.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pTranslateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.266f + 56.0f*0.5f, "assets/UI/Editor/Translation.png", "assets/UI/Editor/TranslationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pRotateMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.206f + 56.0f*0.5f, "assets/UI/Editor/Rotation.png", "assets/UI/Editor/RotationHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pScaleMode = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.146f + 56.0f*0.5f, "assets/UI/Editor/Scale.png", "assets/UI/Editor/ScaleHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
-	m_buttons.m_pSave = std::shared_ptr<Button>(new Button(m_windowSize.x*0.006f + 211.0f*0.5f, m_windowSize.y*0.006f + 56.0f*0.5f, "assets/UI/Editor/SaveScene.png", "assets/UI/Editor/SaveSceneHover.png", glm::vec3(211.0f, 56.0f, 1.0f), pOverlay));
+	// Model selection button
+	m_buttons.m_pModel = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Big.x*0.5f, m_windowSize.y*0.606f + buttonSize_Big.y*0.5f),
+			"assets/UI/Editor/Model.png",
+			"assets/UI/Editor/ModelHover.png",
+			glm::vec3(buttonSize_Big, 1.0f),
+			pOverlay
+		)
+	);
+	
+	m_buttons.m_pCollectable = std::shared_ptr<ToggleButton>
+	(
+		new ToggleButton
+		(
+			std::shared_ptr<Button>(new Button
+			(
+				glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.466f + buttonSize_Small.y*0.5f),
+				"assets/UI/Editor/CollectableTrue.png",
+				"assets/UI/Editor/CollectableTrueHover.png",
+				glm::vec3(buttonSize_Small, 1.0f),
+				pOverlay
+			)),
+			std::shared_ptr<Button>(new Button
+			(
+				glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.466f + buttonSize_Small.y*0.5f),
+				"assets/UI/Editor/CollectableFalse.png",
+				"assets/UI/Editor/CollectableFalseHover.png",
+				glm::vec3(buttonSize_Small, 1.0f),
+				pOverlay
+			))
+		)
+	);
+
+	m_buttons.m_pAI = std::shared_ptr<ToggleButton>
+	(
+		new ToggleButton
+		(
+			std::shared_ptr<Button>(new Button
+			(
+				glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.406f + buttonSize_Small.y*0.5f),
+				"assets/UI/Editor/AITrue.png",
+				"assets/UI/Editor/AITrueHover.png",
+				glm::vec3(buttonSize_Small, 1.0f),
+				pOverlay
+			)),
+			std::shared_ptr<Button>(new Button
+			(
+				glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.406f + buttonSize_Small.y*0.5f),
+				"assets/UI/Editor/AIFalse.png",
+				"assets/UI/Editor/AIFalseHover.png",
+				glm::vec3(buttonSize_Small, 1.0f),
+				pOverlay
+			))
+		)
+	);
+
+	m_buttons.m_pTranslateMode = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.266f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/Translate.png", 
+			"assets/UI/Editor/TranslateHover.png", 
+			glm::vec3(buttonSize_Small, 1.0f), 
+			pOverlay
+		)
+	);
+
+	m_buttons.m_pRotateMode = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.206f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/Rotate.png", 
+			"assets/UI/Editor/RotateHover.png", 
+			glm::vec3(buttonSize_Small, 1.0f), 
+			pOverlay
+		)
+	);
+	
+	m_buttons.m_pScaleMode = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.146f + buttonSize_Small.y*0.5f), 
+			"assets/UI/Editor/Scale.png",
+			"assets/UI/Editor/ScaleHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+	
+	m_buttons.m_pSave = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.006f + buttonSize_Small.y*0.5f), 
+			"assets/UI/Editor/Save.png", 
+			"assets/UI/Editor/SaveHover.png", 
+			glm::vec3(buttonSize_Small, 1.0f), 
+			pOverlay
+		)
+	);
 
 	linkShaders();
 }
@@ -111,48 +216,52 @@ void Editor::input_button(const int kiButton, const int kiAction)
 		// If left mouse button is clicked
 		if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
 		{
+			// If Model button is clicked
+			if (m_buttons.m_pModel->mouseOver(m_mousePos, (float)m_windowSize.y))
+			{
+				// Enter Model selection menu
+			}
+
 			// If Collectable button is clicked
-			if (m_buttons.m_pCollectable->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pCollectable->getActive()->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Toggle Collectable
 				m_selection.m_bCollectable = !m_selection.m_bCollectable;
 
-				// Switches standard and hover texture indices
-				unsigned int uiTextureIndex = m_buttons.m_pCollectable->getTextureIndex();
-				m_buttons.m_pCollectable->setTextureIndex(m_buttons.m_pCollectable->getHoverTextureIndex());
-				m_buttons.m_pCollectable->setHoverTextureIndex(uiTextureIndex);
+				// Toggles button
+				m_buttons.m_pCollectable->toggle();
 			}
 			// If AI button is clicked
-			if (m_buttons.m_pAI->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pAI->getActive()->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Toggle AI
 				m_selection.m_bAI = !m_selection.m_bAI;
 
-				// Switches standard and hover texture indices
-				unsigned int uiTextureIndex = m_buttons.m_pAI->getTextureIndex();
-				m_buttons.m_pAI->setTextureIndex(m_buttons.m_pAI->getHoverTextureIndex());
-				m_buttons.m_pAI->setHoverTextureIndex(uiTextureIndex);
+				// Toggles button
+				m_buttons.m_pAI->toggle();
 			}
+
 			// If TranslateMode button is clicked
-			if (m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pTranslateMode->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Mode switched to Translate
 				m_transformMode = TRANSLATE;
 			}
 			// If RotateMode button is clicked
-			if (m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pRotateMode->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Mode switched to Rotate
 				m_transformMode = ROTATE;
 			}
 			// If ScaleMode button is clicked
-			if (m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pScaleMode->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Mode switched to Scale
 				m_transformMode = SCALE;
 			}
+
 			// If Save button is clicked
-			if (m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y))
+			if (m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
 				// Saves Scene to file
 				save();
@@ -287,12 +396,13 @@ void Editor::update(const float kfTimeElapsed)
 	m_lastMousePos = m_mousePos;
 
 	// Checks whether buttons are hovered
-	m_buttons.m_pCollectable->mouseOver(m_mousePos, m_windowSize.y);
-	m_buttons.m_pAI->mouseOver(m_mousePos, m_windowSize.y);
-	m_buttons.m_pTranslateMode->mouseOver(m_mousePos, m_windowSize.y);
-	m_buttons.m_pRotateMode->mouseOver(m_mousePos, m_windowSize.y);
-	m_buttons.m_pScaleMode->mouseOver(m_mousePos, m_windowSize.y);
-	m_buttons.m_pSave->mouseOver(m_mousePos, m_windowSize.y);
+	m_buttons.m_pModel->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pCollectable->getActive()->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pAI->getActive()->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pTranslateMode->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pRotateMode->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pScaleMode->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y);
 }
 
 // Void: Renders the Editor to display
@@ -338,8 +448,9 @@ void Editor::render()
 	}
 
 	// Draws HUD buttons
-	m_buttons.m_pCollectable->render(&m_imageType, m_windowSize);
-	m_buttons.m_pAI->render(&m_imageType, m_windowSize);
+	m_buttons.m_pModel->render(&m_imageType, m_windowSize);
+	m_buttons.m_pCollectable->getActive()->render(&m_imageType, m_windowSize);
+	m_buttons.m_pAI->getActive()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pTranslateMode->render(&m_imageType, m_windowSize);
 	m_buttons.m_pRotateMode->render(&m_imageType, m_windowSize);
 	m_buttons.m_pScaleMode->render(&m_imageType, m_windowSize);
@@ -451,11 +562,11 @@ void Editor::save()
 		pObject->InsertEndChild(pCollectable);
 
 		// Defines new element for <AI>
-		tinyxml2::XMLElement* pCollectable = document.NewElement("AI");
+		tinyxml2::XMLElement* pAI = document.NewElement("AI");
 		// Sets <AI> value to selection AI setting
-		pCollectable->SetText(m_selection.m_bAI);
+		pAI->SetText(m_selection.m_bAI);
 		// Inserts element into <Object>
-		pObject->InsertEndChild(pCollectable);
+		pObject->InsertEndChild(pAI);
 	}
 
 	// Saves the document

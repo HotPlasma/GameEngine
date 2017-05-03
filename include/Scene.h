@@ -28,7 +28,7 @@ class Scene
 		virtual void input_scroll(const double kdDelta) = 0;
 
 		// Run every frame
-		virtual void update(float fTimeElapsed) = 0;
+		virtual void update(const float kfTimeElapsed) = 0;
 	
 		// Draw Scene
 		virtual void render() = 0;
