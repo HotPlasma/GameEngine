@@ -42,15 +42,15 @@ void World::initScene(Freetype* pOverlay)
 
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
-	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 20.0f, 10.0f, 0.0f);
-	pShader->setUniform("lightCutOff", glm::cos(glm::radians(50.0f)));
-	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(56.0f)));
-	pShader->setUniform("spotlightDriection", 0.0f, -0.1f, 0.0f /*m_camera.getDirection()*/);
+	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 10.0f, 15.0f, 0.0f);
+	pShader->setUniform("lightCutOff", glm::cos(glm::radians(40.0f)));
+	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(46.0f)));
+	pShader->setUniform("spotlightDriection", /*-0.1f, -1.0f, 0.0f*/ m_camera.getDirection());
 
 	//set the ambient lighting for the scene
-	pShader->setUniform("Ia", 0.2f, 0.2f, 0.2f);
+	pShader->setUniform("Ia", 0.3f, 0.3f, 0.3f);
 
-	pShader->setUniform("lightPosition", /*m_camera.getPosition()*/worldLight);
+	pShader->setUniform("lightPosition", m_camera.getPosition() /*worldLight*/);
 
 	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
 	{

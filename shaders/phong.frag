@@ -27,6 +27,7 @@ void main()
 	vec3 colour = texture(tex, vs_out.TextureCoord).rgb;						//Stores the colour of the textured pixel to be shaded
 	vec3 lightVector = normalize(vs_out.LightPosition - vs_out.VertexPosition);	//Calculate the light vector
 	
+	//SPOTLIGHT CALCULATION
 	float theta = dot(lightVector, normalize(-spotlightDirection));
 	float epsilon = lightCutOff - lightOuterCutOff;
 	float intensity = clamp((theta - lightOuterCutOff) / epsilon, 0.0, 1.0);
@@ -34,8 +35,6 @@ void main()
 	//AMBIENT LIGHTING
 	vec4 ambient = vec4((Ia * colour), 1.0);
 
-	if(theta > lightOuterCutOff)
-	{
 		//ATTENUATION
 		float d = length(vs_out.LightPosition - vs_out.VertexPosition);				//Calculate distance to light source for attenuation
 		float attenuation = 1 - pow((d/400), 2);
@@ -53,10 +52,5 @@ void main()
 		lightVector, normalize(vs_out.N))), normalize(vs_out.VertexPosition)), 0.0), Sre);
 		specular *= attenuation;
 
-		FragColour = ambient + diffuse + specular;
-	}
-	else
-	{
-		FragColour = ambient;
-	}
+		FragColour = ambient + (intensity * (diffuse + specular));
 }

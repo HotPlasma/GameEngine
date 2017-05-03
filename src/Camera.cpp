@@ -78,6 +78,7 @@ void Camera::updateView()
 
 glm::vec3 Camera::getDirection()
 {
+	//Extract camera orientation and convert to Euler angles
 	glm::vec3 eulerFromQuat;
 	eulerFromQuat = glm::eulerAngles(m_orientation);
 
