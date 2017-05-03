@@ -12,6 +12,10 @@
 
 struct Selection
 {
+	// Object properties
+	bool m_bCollectable = false;
+	bool m_bAI = false;
+
 	// Transformation members
 	glm::vec3 m_position = glm::vec3(0.0f, 0.0f, 0.0f); //!< Selection position
 	glm::vec3 m_rotation = glm::vec3(0.0f, 0.0f, 0.0f); //!< Selection rotation
@@ -22,6 +26,10 @@ struct Selection
 
 struct EditorHUD
 {
+	// Buttons for Object properties
+	std::shared_ptr<Button> m_pCollectable; //!< Collectable toggle
+	std::shared_ptr<Button> m_pAI; //!< AI toggle
+
 	// Buttons for transformation mode switching
 	std::shared_ptr<Button> m_pTranslateMode; //!< Translate mode button
 	std::shared_ptr<Button> m_pRotateMode; //!< Rotate mode button
