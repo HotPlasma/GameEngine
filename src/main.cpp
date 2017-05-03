@@ -24,6 +24,9 @@ Freetype userInterface;
 enum GameState { MainMenu, Game, LevelEditor, Exit };
 GameState g_gameState = MainMenu;
 
+float g_fCurrentTime = 0.f;
+float g_fPreviousTime = 0.f;
+
 bool g_bWindowFocused; // Stores whether the window is in focus
 
 //////////////////////////////////////////////////////////
@@ -204,13 +207,13 @@ void mainLoop()
 		// If window is focused
 		if (g_bWindowFocused)
 		{
+			g_fPreviousTime = g_fCurrentTime;
+			g_fCurrentTime = (float)glfwGetTime();
 			// Updates and renders the scene
-			g_pScene->update((float)glfwGetTime() * 100.0f);
+			g_pScene->update(g_fCurrentTime - g_fPreviousTime);
 			g_pScene->render();
 		}
 
-		// Resets elapsed time
-		glfwSetTime(0);
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
     

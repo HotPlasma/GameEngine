@@ -48,8 +48,6 @@ class Editor : public Scene
 
 		EditorHUD m_buttons; //!< Editor option buttons
 
-		void linkShaders(); //!< Links vert and frag shaders into a glslprogram
-	
 	public:
 	
 		Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize); //!< Constructor
@@ -64,7 +62,5 @@ class Editor : public Scene
 
 		void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 		void render(); //!< Renders the Editor to display
-
-		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; } //!< Sets Mouse position
 };
 #endif  

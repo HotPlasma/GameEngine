@@ -1,27 +1,5 @@
 #include "..\include\Menu.h"
 
-void Menu::linkShaders()
-{
-	try 
-	{
-		// Shader which allows first person camera and textured objects
-		m_FreeType.compileShader("Shaders/freetype.vert");
-		m_FreeType.compileShader("Shaders/freetype.frag");
-		m_FreeType.link();
-		m_FreeType.validate();
-
-		// Shader which allows first person camera and textured objects
-		m_ImageType.compileShader("Shaders/image.vert");
-		m_ImageType.compileShader("Shaders/image.frag");
-		m_ImageType.link();
-		m_ImageType.validate();
-	}
-	catch (GLSLProgramException & e) {
-		cerr << e.what() << endl;
-		exit(EXIT_FAILURE);
-	}
-}
-
 Menu::Menu(GLFWwindow *pWindow, sf::Vector2i windowSizes)
 {
 	m_pWindow = pWindow;
@@ -51,11 +29,6 @@ void Menu::initScene(Freetype * Overlay)
 
 	//UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
 	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(1920,1080,1.f), true);
-}
-
-void Menu::setMousePos(sf::Vector2f mousepos)
-{
-	m_mousePos = mousepos;
 }
 
 void Menu::update(float t)

@@ -35,7 +35,7 @@ class Scene
 		// Draw Scene
 		virtual void render() = 0;
 	
-		// Aloow screen to be resized without causing rendering issues
+		// Allow screen to be resized without causing rendering issues
 		void resize(int iWidth, int iHeight)
 		{
 			m_windowSize.x = iWidth;
@@ -45,6 +45,9 @@ class Scene
 			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
 		}
 	
+		// Used to update cursor position
+		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
+
 		sf::Vector2i getWindowSize() { return m_windowSize; }
 	    
 	protected:
@@ -59,6 +62,53 @@ class Scene
 
 		GLFWwindow *m_pWindow; // The window
 		sf::Vector2f m_mousePos; // Holds mouse cursor position
+
+		// Links vert and frag shaders into a glslprogram
+		void linkShaders()
+		{
+			try
+			{
+				// Shader which allows first person camera and textured object rendering
+				m_worldShader.compileShader("Shaders/shader.vert");
+				m_worldShader.compileShader("Shaders/shader.frag");
+				m_worldShader.link();
+				m_worldShader.validate();
+				m_worldShader.use();
+			}
+			catch (GLSLProgramException & e)
+			{
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			try
+			{
+				// Shader which allows heads up display rendering
+				m_freeType.compileShader("Shaders/freetype.vert");
+				m_freeType.compileShader("Shaders/freetype.frag");
+				m_freeType.link();
+				m_freeType.validate();
+				m_freeType.use();
+			}
+			catch (GLSLProgramException & e) {
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+
+			try
+			{
+				// Shader which allows for image rendering
+				m_imageType.compileShader("Shaders/image.vert");
+				m_imageType.compileShader("Shaders/image.frag");
+				m_imageType.link();
+				m_imageType.validate();
+			}
+			catch (GLSLProgramException & e)
+			{
+				cerr << e.what() << endl;
+				exit(EXIT_FAILURE);
+			}
+		}
 };
 
 #endif // SCENE_H
