@@ -37,8 +37,16 @@ class World : public Scene
 
 		btBroadphaseInterface* broadphase;
 
+		btDynamicsWorld * m_dynamicWorld;
+		btDispatcher * m_dispatcher;
+		btCollisionConfiguration * m_collisionCofig; 
+		btBroadphaseInterface * m_broadphase;
+		btConstraintSolver * m_constraintSolver;
+
 		btRigidBody *CameraRigidBody;
 		btRigidBody *rigidBody;
+
+		vector<btRigidBody*> m_CollisionBodies;
 	
 	public:
 

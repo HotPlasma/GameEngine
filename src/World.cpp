@@ -43,73 +43,67 @@ void World::initScene(Freetype* pOverlay)
 	m_Player.initModel();
 	m_Player.setVisable(true);
 
-	//// Initial position and orientation of the collision body
-	//rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
-	//rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
-	//rp3d::Transform transform(initPosition, initOrientation);
-	//// Create a collision body in the world
+	//Physics
+	m_collisionCofig = new btDefaultCollisionConfiguration();
+	m_dispatcher = new btCollisionDispatcher(m_collisionCofig);
+	m_broadphase = new btDbvtBroadphase();
+	m_constraintSolver = new btSequentialImpulseConstraintSolver();
 
-	//CameraBody = m_CollisonWorld.createCollisionBody(transform);
+	m_dynamicWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
+	m_dynamicWorld->setGravity(btVector3(0, -10, 0));
 
-	//rp3d::CylinderShape cylinderShape(1.0, 3.0);
+	btTransform t(btQuaternion(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
 
-	//CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
+	btBoxShape *  box = new btBoxShape(btVector3(m_Player.getCollisionBox().boundingBox.x, m_Player.getCollisionBox().boundingBox.y, m_Player.getCollisionBox().boundingBox.z));
+	btMotionState * motion = new btDefaultMotionState(t);
 
-	//for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	//{
+	btRigidBody::btRigidBodyConstructionInfo info(0, motion, box);
 
-	//	rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
-	//	ModelBodies.resize(ModelBodies.size() + 1);
-	//	ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
-	//	ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
-	//}
+	btRigidBody * body = new btRigidBody(info);
 
-	//m_CollisonWorld.testCollision(CameraBody, CameraCallback);
+	m_dynamicWorld->addRigidBody(body);
 
-	broadphase = new btDbvtBroadphase();
+	m_CollisionBodies.push_back(body);
 
-	btDefaultCollisionConfiguration* collisionConfiguration = new btDefaultCollisionConfiguration();
-	btCollisionDispatcher* dispatcher = new btCollisionDispatcher(collisionConfiguration);
+	btTransform t2(btQuaternion(m_sceneReader.m_modelList.at(6).getPosition().x, m_sceneReader.m_modelList.at(6).getPosition().y, m_sceneReader.m_modelList.at(6).getPosition().z));
 
-	btGImpactCollisionAlgorithm::registerAlgorithm(dispatcher);
+	btBoxShape *  box2 = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.x, m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.y, m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.z));
+	btMotionState * motion2 = new btDefaultMotionState(t2);
 
-	btSequentialImpulseConstraintSolver* solver = new btSequentialImpulseConstraintSolver;
+	btRigidBody::btRigidBodyConstructionInfo info2(0, motion2, box2);
 
-	btDiscreteDynamicsWorld* dynamicsWorld = new btDiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+	btRigidBody * body2 = new btRigidBody(info2);
 
-	dynamicsWorld->setGravity(btVector3(0, -9.81, 0));
 
-	btCollisionShape* boxCollisionShape = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().max.x, m_sceneReader.m_modelList.at(6).getCollisionBox().max.y, m_sceneReader.m_modelList.at(6).getCollisionBox().max.z));
+	m_dynamicWorld->addRigidBody(body2);
 
-	btDefaultMotionState* motionstate = new btDefaultMotionState(btTransform(
-		btQuaternion(m_sceneReader.m_modelList.at(6).getRotation().x , m_sceneReader.m_modelList.at(6).getRotation().y, m_sceneReader.m_modelList.at(6).getRotation().z, 1),
-		btVector3(m_sceneReader.m_modelList.at(6).getPosition().x, m_sceneReader.m_modelList.at(6).getPosition().y, m_sceneReader.m_modelList.at(6).getPosition().z)
-		));
+	m_CollisionBodies.push_back(body2);
 
-	btRigidBody::btRigidBodyConstructionInfo rigidBodyCI(
-		0,                  // mass, in kg. 0 -> Static object, will never move.
-		motionstate,
-		boxCollisionShape,  // collision shape of body
-		btVector3(0, 0, 0)    // local inertia
-		);
-	rigidBody = new btRigidBody(rigidBodyCI);
+	// Initial position and orientation of the collision body
+	rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
+	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
+	rp3d::Transform transform(initPosition, initOrientation);
+	// Create a collision body in the world
 
-	btCollisionShape* PlayerCollisionShape = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().max.x, m_sceneReader.m_modelList.at(6).getCollisionBox().max.y, m_sceneReader.m_modelList.at(6).getCollisionBox().max.z));
+	CameraBody = m_CollisonWorld.createCollisionBody(transform);
 
-	btDefaultMotionState* PlayerMotionstate = new btDefaultMotionState(btTransform(
-		btQuaternion(m_Player.getRotation().x, m_Player.getRotation().y, m_Player.getRotation().z, 1),
-		btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z)
-		));
+	rp3d::CylinderShape cylinderShape(1.0, 3.0);
 
-	btRigidBody::btRigidBodyConstructionInfo PlayerBody(
-		20,                  // mass, in kg. 0 -> Static object, will never move.
-		PlayerMotionstate,
-		PlayerCollisionShape,  // collision shape of body
-		btVector3(0, 0, 0)    // local inertia
-		);
-	CameraRigidBody = new btRigidBody(PlayerBody);
+	CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
 
-	dynamicsWorld->addRigidBody(CameraRigidBody);
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+
+		rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
+		ModelBodies.resize(ModelBodies.size() + 1);
+		ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
+		ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
+	}
+
+	m_CollisonWorld.testCollision(CameraBody, CameraCallback);
+
+	
+
 
 	//m_CollisonWorld.
 //	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
@@ -262,15 +256,16 @@ void World::update(const float kfTimeElapsed)
 	//	}
 	//}
 
-	if (CameraRigidBody->checkCollideWith(rigidBody))
+	/*if (m_CollisionBodies[0->checkCollideWith(rigidBody))
 	{
 		std::cout << "Colliding" << std::endl;
 	}
 	else
 	{
 		std::cout << "Not Colliding" << std::endl;
-	}
+	}*/
 	
+	m_dynamicWorld->stepsimulation(kftimeelapsed);
 }
 
 void World::render()

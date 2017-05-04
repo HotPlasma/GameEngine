@@ -107,6 +107,8 @@ CollisionBox Model::getCollisionBox()
 
 	newBox.max = m_BoundBoxMax;
 	newBox.min = m_BoundBoxMin;
+
+	newBox.boundingBox;
 	
 	return newBox;
 }

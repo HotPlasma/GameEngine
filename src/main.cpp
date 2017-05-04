@@ -184,7 +184,7 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 //////////////////////////////////////////////////////////
 //// Main loop  //////////////////////////////////////////
 //////////////////////////////////////////////////////////
-void mainLoop() 
+void mainLoop()
 {
 	// Sets the cursor position to center screen for tracking
 	glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
