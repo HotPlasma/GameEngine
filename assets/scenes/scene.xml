@@ -26,6 +26,54 @@
     <Collectable>false</Collectable>
     <Ai>false</Ai>
   </Object>
+
+  <Object>
+    <Name>Gravestone</Name>
+    <OBJLocation>assets/models/gravestone1.obj</OBJLocation>
+    <TexLocation>assets/textures/gravestone1.bmp</TexLocation>
+    <Translation>20 -5 -20</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>Gravestone2</Name>
+    <OBJLocation>assets/models/gravestone2.obj</OBJLocation>
+    <TexLocation>assets/textures/gravestone2.bmp</TexLocation>
+    <Translation>15 -5 -20</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>Skull</Name>
+    <OBJLocation>assets/models/skull.obj</OBJLocation>
+    <TexLocation>assets/textures/skull.bmp</TexLocation>
+    <Translation>10 0 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>Pumpkin</Name>
+    <OBJLocation>assets/models/pumpkin.obj</OBJLocation>
+    <TexLocation>assets/textures/pumpkin.bmp</TexLocation>
+    <Translation>5 -4 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
   
   <Object>
     <Name>GrassyPlane</Name>
@@ -76,6 +124,55 @@
   </Object>
 
   <Object>
+    <Name>LongGrass</Name>
+    <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+    <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+    <Translation>0 -4 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>LongGrass</Name>
+    <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+    <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+    <Translation>-20 -4 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+
+  <Object>
+    <Name>LongGrass2</Name>
+    <OBJLocation>assets/models/longgrass2.obj</OBJLocation>
+    <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+    <Translation>0 -4 0</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>LongGrass3</Name>
+    <OBJLocation>assets/models/longgrass3.obj</OBJLocation>
+    <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+    <Translation>-20 -5 0</Translation>
+    <Rotation>0 90 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
     <Name>Stump</Name>
     <OBJLocation>assets/models/stump.obj</OBJLocation>
     <TexLocation>assets/textures/stump.bmp</TexLocation>
@@ -117,6 +214,18 @@
     <TexLocation>assets/textures/farmhouse.bmp</TexLocation>
     <Translation>50 -4 0</Translation>
     <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>House</Name>
+    <OBJLocation>assets/models/house.obj</OBJLocation>
+    <TexLocation>assets/textures/house.bmp</TexLocation>
+    <Translation>-17 -4.6 60</Translation>
+    <Rotation>0 180 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
