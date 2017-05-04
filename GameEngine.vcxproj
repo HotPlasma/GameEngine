@@ -91,6 +91,7 @@
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelReader.cpp" />
     <ClCompile Include="src\SceneReader.cpp" />
+    <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
@@ -109,6 +110,7 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneReader.h" />
     <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\TextBox.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="include\World.h" />

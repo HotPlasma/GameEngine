@@ -13,27 +13,27 @@
 
 class World : public Scene
 {
-	private:
+private:
 
-		SceneReader m_sceneReader; // Reads .xml file in order to create world
+	SceneReader m_sceneReader; // Reads .xml file in order to create world
 
-		bool m_collectGoingUp = true; // Whether collectables are moving up
-		float m_collectYOffset = 0.0f; // Y axis offset for collectables
-		Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
+	bool m_collectGoingUp = true; // Whether collectables are moving up
+	float m_collectYOffset = 0.0f; // Y axis offset for collectables
+	Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 
-		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
-	
-	public:
+	void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
-		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+public:
 
-		void initScene(Freetype* pOverlay);
+	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
 
-		void input_key(const int kiKey, const int kiAction) {}
-		void input_button(const int kiButton, const int kiAction) {}
-		void input_scroll(const double kdDelta) {}
+	void initScene(Freetype* pOverlay);
 
-		void update(const float kfTimeElapsed);
-		void render();
+	void input_key(const int kiKey, const int kiAction) {}
+	void input_button(const int kiButton, const int kiAction) {}
+	void input_scroll(const double kdDelta) {}
+
+	void update(const float kfTimeElapsed);
+	void render();
 };
 #endif  
