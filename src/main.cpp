@@ -61,7 +61,7 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		g_pScene->setMousePos(sf::Vector2f(dX, dY));
+		g_pScene->setMousePos(sf::Vector2f((float)dX, (float)dY));
 	}
 }
 
@@ -126,8 +126,8 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Get the distance needed to centre the window
-	windowSize.x *= 0.5;
-	windowSize.y *= 0.5;
+	windowSize.x = (float)windowSize.x*0.5f;
+	windowSize.y = (float)windowSize.y*0.5f;
 
 	windowPosition.x += windowSize.x;
 	windowPosition.x += windowSize.y;
@@ -182,7 +182,7 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	if (pWindowOwner != NULL) 
 	{
 		// Set the window position to the center of the monitor which launched the exe
-		glfwSetWindowPos(pWindow, windowOwnerPos.x + (windowOwnerSize.x * 0.5) - windowSize.x, windowOwnerPos.y + (windowOwnerSize.y * 0.5) - windowSize.y);
+		glfwSetWindowPos(pWindow, (float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x, (float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y);
 	}
 }
 

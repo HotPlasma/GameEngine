@@ -90,9 +90,25 @@ void Model::loadModel()
 
 void Model::buffer()
 {
+	glm::mat4 rotMatrix = glm::mat4(1.0f);
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
+
+	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
+		0,m_scale.y,0,0,
+		0,0,m_scale.z,0,
+		0,0,0,1 };
+
+	glm::mat4 transMatrix = { 1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		m_position.x,m_position.y,m_position.z,1 };
+
+	m_M = transMatrix  * scaleMatrix * rotMatrix;
+
 	gl::BindVertexArray(m_vaoHandle);
 	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
-	
 }
 
 void Model::initModel()
@@ -159,22 +175,5 @@ void Model::initModel()
 
 void Model::render()
 {
-	glm::mat4 rotMatrix = glm::mat4(1.0f);
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
-
-	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
-		0,m_scale.y,0,0,
-		0,0,m_scale.z,0,
-		0,0,0,1 };
-
-	glm::mat4 transMatrix = { 1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		m_position.x,m_position.y,m_position.z,1 };
-
-	m_M = transMatrix  * scaleMatrix * rotMatrix;
-
 	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
 }

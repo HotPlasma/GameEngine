@@ -39,7 +39,7 @@ public:
 	void input_button(const int kiButton, const int kiAction) {}
 	void input_scroll(const double kdDelta) {}
 
-	void update(float t);
+	void update(const float kfTimeElapsed);
 	void render();
 	int returnMenuChoice();
 	void Click();
