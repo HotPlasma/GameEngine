@@ -23,8 +23,8 @@ bool Button::mouseOver(sf::Vector2f mousePos, const float kfWindowYSize)
 		mousePos.y > (m_position.y - (m_scale.y / 2)) && mousePos.y < (m_position.y - (m_scale.y / 2)) + m_scale.y)
 	{
 		// Sets standard texture as invisible and hovertex as visible
-		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisable(false);
-		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisable(true);
+		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisible(false);
+		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisible(true);
 
 		return true;
 	}
@@ -32,8 +32,8 @@ bool Button::mouseOver(sf::Vector2f mousePos, const float kfWindowYSize)
 	else
 	{
 		// Sets standard hovertex as invisible and texture as visible
-		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisable(true);
-		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisable(false);
+		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisible(true);
+		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisible(false);
 
 		return false;
 	}
@@ -46,18 +46,18 @@ void Button::render(GLSLProgram* pShader, const sf::Vector2i kWindowSize)
 	pShader->use();
 
 	// If default texture visible
-	if (m_pHUD->m_ImagePlane.at(m_uiTextureIndex).getVisable())
+	if (m_pHUD->m_ImagePlane.at(m_uiTextureIndex).isVisible())
 	{
-		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiTextureIndex).m_M);
+		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiTextureIndex).getM());
 		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
-		m_pHUD->RenderImage(m_uiTextureIndex);
+		m_pHUD->RenderImage(pShader, m_uiTextureIndex);
 	}
 
 	// If hover texture visible
-	if (m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).getVisable())
+	if (m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).isVisible())
 	{
-		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).m_M);
+		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).getM());
 		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
-		m_pHUD->RenderImage(m_uiHoverTextureIndex);
+		m_pHUD->RenderImage(pShader, m_uiHoverTextureIndex);
 	}
 }

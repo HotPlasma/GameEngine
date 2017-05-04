@@ -73,7 +73,7 @@ public:
 	////////////////////////////////////////////////////////////
 	void RenderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
 	void LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity);
-	void RenderImage(int index);
+	void RenderImage(GLSLProgram* pShader, int index);
 };
 
 ////////////////////////////////////////////////////////////

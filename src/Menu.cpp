@@ -60,9 +60,9 @@ void Menu::render()
 	m_ExitButton->render(&m_imageType, m_windowSize);
 	
 	//Draws Background		
-	m_imageType.setUniform("M", UI->m_ImagePlane.at(8).m_M);
+	m_imageType.setUniform("M", UI->m_ImagePlane.at(8).getM());
 	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-	UI->RenderImage(8);
+	UI->RenderImage(&m_imageType, 8);
 }
 
 int Menu::returnMenuChoice()

@@ -28,94 +28,10 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
-void Model::setCollectable(bool NewSetting)
-{
-	m_bCollectable = NewSetting;
-}
-
-void Model::setCollected(bool bCollected)
-{
-	m_bCollected = bCollected;
-}
-
-void Model::setName(string sNewName)
-{
-	m_sName = sNewName;
-}
-
-void Model::setFileLocation(string sNewLocation)
-{
-	m_sFileName = sNewLocation;
-}
-
-void  Model::setTextureLocation(string sNewLocation)
-{
-	m_sTexture = sNewLocation;
-}
-
-void Model::setVisable(bool Visability)
-{
-	m_bVisible = Visability;
-}
-
-void  Model::setPosition(glm::vec3 newPosition)
-{
-	m_position = newPosition;
-}
-
-void  Model::setRotation(glm::vec3 newRotation)
-{
-	m_rotation = newRotation;
-}
-
-void  Model::setScale(glm::vec3 newScale)
-{
-	m_scale = newScale;
-}
-
-void Model::setTexture(GLuint textureID)
-{
-	m_textureID = textureID;
-}
-
-void Model::setMaterial(int iMaterial)
-{
-	m_iMaterial = iMaterial;
-}
-
-void Model::loadModel()
-{
-	m_pModelReader = new ModelReader(m_sFileName);
-}
-
-void Model::buffer()
-{
-	glm::mat4 rotMatrix = glm::mat4(1.0f);
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
-	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
-
-	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
-		0,m_scale.y,0,0,
-		0,0,m_scale.z,0,
-		0,0,0,1 };
-
-	glm::mat4 transMatrix = { 1,0,0,0,
-		0,1,0,0,
-		0,0,1,0,
-		m_position.x,m_position.y,m_position.z,1 };
-
-	m_M = transMatrix  * scaleMatrix * rotMatrix;
-
-	gl::BindVertexArray(m_vaoHandle);
-	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
-}
-
 void Model::initModel()
 {
 	glm::mat4 rotMatrix = glm::mat4(1.0f);
 	
-
 	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
 		0,m_scale.y,0,0,
 		0,0,m_scale.z,0,
@@ -128,23 +44,18 @@ void Model::initModel()
 
 	m_M = scaleMatrix * rotMatrix * transMatrix;
 
-
 	m_positionData = m_pModelReader->getVertices();
 	m_uvData = m_pModelReader->getTextureCoordinates();
-
 
 	gl::GenBuffers(2, m_vboHandles);
 	GLuint positionBufferHandle = m_vboHandles[0];
 	GLuint uvBufferHandle = m_vboHandles[1];
-
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, positionBufferHandle);
 	gl::BufferData(gl::ARRAY_BUFFER, m_positionData.size() * sizeof(float), m_positionData.data(), gl::STATIC_DRAW);
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, uvBufferHandle);
 	gl::BufferData(gl::ARRAY_BUFFER, m_uvData.size() * sizeof(float), m_uvData.data(), gl::STATIC_DRAW);
-
-
 
 	// Create and set-up the vertex array object
 	gl::GenVertexArrays(1, &m_vaoHandle);
@@ -173,7 +84,40 @@ void Model::initModel()
 	gl::Uniform1f(loc, 1);
 }
 
-void Model::render()
+void Model::render(GLSLProgram* pShader, const glm::mat4 kModel)
 {
+	// Binds texture
+	gl::BindVertexArray(m_vaoHandle);
+	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
+
+	// Defines the rotation component
+	glm::mat4 rotMatrix = glm::mat4(1.0f);
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.x, glm::vec3(1, 0, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.y, glm::vec3(0, 1, 0));
+	rotMatrix = glm::rotate(rotMatrix, m_rotation.z, glm::vec3(0, 0, 1));
+
+	// Defines the scale component
+	glm::mat4 scaleMatrix = { m_scale.x,0,0,0,
+		0,m_scale.y,0,0,
+		0,0,m_scale.z,0,
+		0,0,0,1 };
+
+	// Defines the translation component
+	glm::mat4 transMatrix = { 1,0,0,0,
+		0,1,0,0,
+		0,0,1,0,
+		m_position.x,m_position.y,m_position.z,1 };
+
+	// Combines components into transformation matrix
+	m_M = transMatrix  * scaleMatrix * rotMatrix;
+	// Applies input tranformation
+	m_M *= kModel;
+
+	// Activates use of Shader
+	pShader->use();
+	// Sends transformation matrix to shader
+	pShader->setUniform("M", m_M);
+
+	// Draws Model
 	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
 }

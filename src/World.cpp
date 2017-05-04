@@ -30,7 +30,7 @@ void World::initScene(Freetype* pOverlay)
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
+		if (!m_sceneReader.m_modelList.at(i).isCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList[i].initModel();
 		}
@@ -112,7 +112,7 @@ void World::update(const float kfTimeElapsed)
 		if (m_sceneReader.m_modelList.at(i).isCollectable())
 		{
 			// If not collected
-			if (!m_sceneReader.m_modelList.at(i).getCollected())
+			if (!m_sceneReader.m_modelList.at(i).isCollected())
 			{
 				// Rotates collectable
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
@@ -158,14 +158,10 @@ void World::render()
 		}
 
 		// If Model is not collected
-		if (!m_sceneReader.m_modelList.at(i).getCollected())
+		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
-			// Buffers the Model
-			m_sceneReader.m_modelList.at(i).buffer();
-			// Sets the Model transformation matrix
-			m_worldShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
 			// Renders the Model
-			m_sceneReader.m_modelList.at(i).render();
+			m_sceneReader.m_modelList.at(i).render(&m_worldShader, transMat);
 		}
 	}
 

@@ -527,31 +527,19 @@ void Editor::render()
 	m_worldShader.setUniform("V", m_camera.getView());
 	m_worldShader.setUniform("P", m_camera.getProjection());
 
-	// Buffers the Model in hand
-	m_selection.m_pModel->buffer();
-	// Passes Model transformation data to shader
-	m_worldShader.setUniform("M", m_selection.m_pModel->m_M);
 	// Renders Model
-	m_selection.m_pModel->render();
+	m_selection.m_pModel->render(&m_worldShader, glm::mat4(1.0f));
 
 	// Updates Skybox position
 	m_pSkybox->setPosition(m_camera.getPosition());
-	// Buffers the Skybox
-	m_pSkybox->buffer();
-	// Passes Skybox transformation data to shader
-	m_worldShader.setUniform("M", m_pSkybox->m_M);
 	// Renders Skybox
-	m_pSkybox->render();
+	m_pSkybox->render(&m_worldShader, glm::mat4(1.0f));
 
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
-		// Buffers the Model
-		pModel->buffer();
-		// Passes Model transformation data to shader
-		m_worldShader.setUniform("M", pModel->m_M);
 		// Renders Model
-		pModel->render();
+		pModel->render(&m_worldShader, glm::mat4(1.0f));
 	}
 
 	// Draws HUD buttons
@@ -623,7 +611,7 @@ void Editor::save()
 		// Defines new element for <TexLocation>
 		tinyxml2::XMLElement* pTexLoc = document.NewElement("TexLocation");
 		// Sets <TexLocation> value to the Model texture location
-		pTexLoc->SetText(pModel->getTexFileLocation().c_str());
+		pTexLoc->SetText(pModel->getTextureLocation().c_str());
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pTexLoc);
 
