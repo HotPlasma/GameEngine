@@ -20,7 +20,7 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 	m_camera.setAspectRatio((float)kWindowSize.x / kWindowSize.y);
 
 	// Sets Camera initital position 
-	m_camera.setPosition(glm::vec3( 0.0f, 15.0f, 40.0f));
+	m_camera.setPosition(glm::vec3(0.0f, 15.0f, 40.0f));
 
 	// TEMPORARY - Need to read in a list of models to use
 	// Creates a tree Model
@@ -34,12 +34,27 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 	pModel->loadModel();
 	// Initialises Model
 	pModel->initModel();
-	
+
 	// Sets the first Model in the selection to selected
 	m_selection.m_pModel = pModel;
 
 	// Sets default transformation mode
 	m_transformMode = TRANSLATE;
+
+	// Creates a skybox
+	m_pSkybox = std::shared_ptr<Model>(new Model());
+	m_pSkybox->setName("Skybox");
+	m_pSkybox->setFileLocation("assets/models/skybox.obj");
+	m_pSkybox->setTextureLocation("assets/textures/skybox.bmp");
+	m_pSkybox->setPosition(m_camera.getPosition());
+	m_pSkybox->setRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+	m_pSkybox->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_pSkybox->setMaterial(1);
+
+	// Loads Model so it's ready for drawing
+	m_pSkybox->loadModel();
+	// Initialises Model
+	m_pSkybox->initModel();
 }
 
 // Void: Initialises the Editor Scene
@@ -490,6 +505,9 @@ void Editor::update(const float kfTimeElapsed)
 	m_buttons.m_pRotateMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pScaleMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y);
+
+	// Updates Skybox position
+	m_pSkybox->setPosition(m_camera.getPosition());
 }
 
 // Void: Renders the Editor to display
@@ -512,24 +530,27 @@ void Editor::render()
 	m_worldShader.setUniform("V", m_camera.getView());
 	m_worldShader.setUniform("P", m_camera.getProjection());
 
-	// Renders the Model in hand
+	// Buffers the Model in hand
 	m_selection.m_pModel->buffer();
-
 	// Passes Model transformation data to shader
 	m_worldShader.setUniform("M", m_selection.m_pModel->m_M);
-
 	// Renders Model
 	m_selection.m_pModel->render();
+
+	// Buffers the Skybox
+	m_pSkybox->buffer();
+	// Passes Skybox transformation data to shader
+	m_worldShader.setUniform("M", m_pSkybox->m_M);
+	// Renders Skybox
+	m_pSkybox->render();
 
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
 		// Buffers the Model
 		pModel->buffer();
-		
 		// Passes Model transformation data to shader
 		m_worldShader.setUniform("M", pModel->m_M);
-	
 		// Renders Model
 		pModel->render();
 	}
