@@ -505,9 +505,6 @@ void Editor::update(const float kfTimeElapsed)
 	m_buttons.m_pRotateMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pScaleMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y);
-
-	// Updates Skybox position
-	m_pSkybox->setPosition(m_camera.getPosition());
 }
 
 // Void: Renders the Editor to display
@@ -537,6 +534,8 @@ void Editor::render()
 	// Renders Model
 	m_selection.m_pModel->render();
 
+	// Updates Skybox position
+	m_pSkybox->setPosition(m_camera.getPosition());
 	// Buffers the Skybox
 	m_pSkybox->buffer();
 	// Passes Skybox transformation data to shader
