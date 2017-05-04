@@ -43,9 +43,9 @@ void World::initScene(Freetype* pOverlay)
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
 	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 10.0f, 15.0f, 0.0f);
-	pShader->setUniform("lightCutOff", glm::cos(glm::radians(40.0f)));
-	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(46.0f)));
-	pShader->setUniform("spotlightDriection", /*-0.1f, -1.0f, 0.0f*/ m_camera.getDirection());
+	pShader->setUniform("lightCutOff", glm::cos(glm::radians(10.f)));
+	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(15.0f)));
+	pShader->setUniform("spotlightDirection", m_camera.getDirection());/* glm::vec3(-0.1f, -1.0f, 0.0f));*/
 
 	//set the ambient lighting for the scene
 	pShader->setUniform("Ia", 0.3f, 0.3f, 0.3f);

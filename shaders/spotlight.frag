@@ -53,7 +53,7 @@ void main()
 		lightVector, normalize(vs_out.N))), normalize(vs_out.VertexPosition)), 0.0), Sre);
 		specular *= attenuation;
 
-		FragColour = ambient + diffuse + specular;
+		FragColour = (ambient + diffuse + specular) * intensity;
 	}
 	else
 	{
