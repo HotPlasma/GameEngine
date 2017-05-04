@@ -80,27 +80,27 @@ void World::initScene(Freetype* pOverlay)
 	m_CollisionBodies.push_back(body2);
 
 	// Initial position and orientation of the collision body
-	rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
+	/*rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
-	rp3d::Transform transform(initPosition, initOrientation);
+	rp3d::Transform transform(initPosition, initOrientation);*/
 	// Create a collision body in the world
 
-	CameraBody = m_CollisonWorld.createCollisionBody(transform);
+	//CameraBody = m_CollisonWorld.createCollisionBody(transform);
 
-	rp3d::CylinderShape cylinderShape(1.0, 3.0);
+	//rp3d::CylinderShape cylinderShape(1.0, 3.0);
 
-	CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
+	//CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
 
-	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	{
+	//for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	//{
 
-		rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
-		ModelBodies.resize(ModelBodies.size() + 1);
-		ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
-		ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
-	}
+	//	rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
+	//	ModelBodies.resize(ModelBodies.size() + 1);
+	//	ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
+	//	ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
+	//}
 
-	m_CollisonWorld.testCollision(CameraBody, CameraCallback);
+	//m_CollisonWorld.testCollision(CameraBody, CameraCallback);
 
 	
 
@@ -265,7 +265,8 @@ void World::update(const float kfTimeElapsed)
 		std::cout << "Not Colliding" << std::endl;
 	}*/
 	
-	m_dynamicWorld->stepsimulation(kftimeelapsed);
+
+	m_dynamicWorld->stepSimulation(kfTimeElapsed);
 }
 
 void World::render()
