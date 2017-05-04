@@ -9,6 +9,7 @@
 #include "ModelReader.h"
 #include "glslprogram.h"
 #include "Button.h"
+#include "TextBox.h"
 
 struct Selection
 {
@@ -61,6 +62,8 @@ private:
 	EditorHUD m_buttons; //!< Editor option buttons
 
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
+
+	std::shared_ptr<TextBox> m_textBox; //!< TextBox
 
 public:
 

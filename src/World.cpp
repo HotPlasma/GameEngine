@@ -16,6 +16,9 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_windowSize = windowSize;
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
+
+	// Sets Camera initital position 
+	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 }
 
 void World::initScene(Freetype* pOverlay)
@@ -23,6 +26,7 @@ void World::initScene(Freetype* pOverlay)
 	m_pHUD = pOverlay; // Get the Heads up display for the scene
 
 	linkShaders();
+
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -34,10 +38,14 @@ void World::initScene(Freetype* pOverlay)
 		{
 			m_sceneReader.m_modelList[i].initModel();
 		}
-		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
-//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
+	// Resets cursor to the center of the window
+	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
+	m_mousePos = sf::Vector2f(getWindowSize().x*0.5, getWindowSize().y*0.5);
+
+	// Updates camera vision
+	m_camera.updateView();
 }
 
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
@@ -80,8 +88,8 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
-	// Sticks the camera to y 0.0
-	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
+	// Sticks the camera to y 5.0
+	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound

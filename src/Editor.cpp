@@ -66,6 +66,9 @@ void Editor::initScene(Freetype* pOverlay)
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
 
+	// Defines new TextBox for user input
+	m_textBox = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.2f, m_windowSize.y*0.5f)));
+
 	// Defines button sizing
 	glm::vec2 buttonSize_Small(200.0f, 50.0f);
 	glm::vec2 buttonSize_Big(200.0f, 200.0f);
@@ -251,6 +254,9 @@ void Editor::initScene(Freetype* pOverlay)
 	// Toggles TranslateMode button true to match selection.mode declaration
 	m_buttons.m_pTranslateMode->setToggled(true);
 
+	// Updates camera vision
+	m_camera.updateView();
+
 	linkShaders();
 }
 
@@ -290,6 +296,17 @@ void Editor::input_key(const int kiKey, const int kiAction)
 				// Resets the hand scale vector
 				m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
 			}
+		}
+
+		if (kiKey != GLFW_KEY_BACKSPACE)
+		{
+			// Adds input to textbox
+			m_textBox->addLetter(kiKey);
+		}
+		else
+		{
+			// Removes last letter on textbox
+			m_textBox->removeLetter();
 		}
 	}
 }
@@ -550,6 +567,9 @@ void Editor::render()
 	m_buttons.m_pRotateMode->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pScaleMode->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pSave->render(&m_imageType, m_windowSize);
+
+	// Renders selection menu
+	m_textBox->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
 
 	// Activates FreeType shader
 	m_freeType.use();
