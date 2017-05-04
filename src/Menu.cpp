@@ -78,22 +78,27 @@ int Menu::returnMenuChoice()
 	{
 		if (m_PlayButton->isActive()) // New World button clicked
 		{
+			Music.stop();
 			WhichState = Play;
+			
 		}
 		else if (m_EditorButton->isActive()) // Load world button clicked
 		{
 			WhichState = Create;
+			Music.stop();
 		}
 		else if (m_OptionsButton->isActive()) // Exit button clicked
 		{
 			WhichState = Options;
+			Music.stop();
 		}
 		else if (m_ExitButton->isActive()) // Exit button clicked
 		{
 			WhichState = ExitMenu;
+			Music.stop();
 		}
 		m_bClicked = false; // "Unclick" button
-		Music.stop();
+		
 		return WhichState; // Return which button was clicked
 	}
 	return WhichState = None; // If no button clicked return none
