@@ -251,6 +251,9 @@ void Editor::initScene(Freetype* pOverlay)
 	// Toggles TranslateMode button true to match selection.mode declaration
 	m_buttons.m_pTranslateMode->setToggled(true);
 
+	// Updates camera vision
+	m_camera.updateView();
+
 	linkShaders();
 }
 
