@@ -18,7 +18,7 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
 
 	// Sets Camera initital position 
-	m_camera.setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 }
 
 void World::initScene(Freetype* pOverlay)
@@ -88,8 +88,8 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
-	// Sticks the camera to y 0.0
-	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
+	// Sticks the camera to y 5.0
+	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
