@@ -61,7 +61,7 @@ public:
 
 	void toggle() { m_bToggle = !m_bToggle; }
 
-	std::shared_ptr<Button> getActive() 
+	std::shared_ptr<Button> getButton()
 	{ 
 		// If toggle true
 		if (m_bToggle)
@@ -73,4 +73,7 @@ public:
 			// Sets active button to falseButton
 			return m_pFalseButton;
 	}
+
+	bool isToggled() { return m_bToggle; }
+	void setToggled(const bool kbToggle) { m_bToggle = kbToggle; }
 };

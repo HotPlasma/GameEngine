@@ -35,9 +35,9 @@ struct EditorHUD
 	std::shared_ptr<ToggleButton> m_pAI; //!< AI toggle
 
 	// Buttons for transformation mode switching
-	std::shared_ptr<Button> m_pTranslateMode; //!< Translate mode button
-	std::shared_ptr<Button> m_pRotateMode; //!< Rotate mode button
-	std::shared_ptr<Button> m_pScaleMode; //!< Scale mode button
+	std::shared_ptr<ToggleButton> m_pTranslateMode; //!< Translate mode button
+	std::shared_ptr<ToggleButton> m_pRotateMode; //!< Rotate mode button
+	std::shared_ptr<ToggleButton> m_pScaleMode; //!< Scale mode button
 
 	std::shared_ptr<Button> m_pSave; //!< Button to save Scene to file
 };
