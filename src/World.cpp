@@ -153,20 +153,6 @@ void World::update(float t)
 		}
 	}
 
-
-	//collision section
-	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	{
-		if (m_sceneReader.m_modelList.at(i).isCollidable()) // check if collidable
-		{
-			//m_collidableRotation = glm::vec3(0, -0.05, 0); //test to make sure collidables worked 
-			                                              //(now just need to take the distance from the ai and the collidables and stop them from collding- 
-			                                              //possibly the same with the camera and collidables...)
-		}
-		//m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() + m_collidableRotation);
-		//everything besides the collectables and the ai object
-	}
-
 	// Makes collectables rotate and bounce
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{

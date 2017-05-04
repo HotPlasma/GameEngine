@@ -9,6 +9,8 @@
 
 #include "World.h"
 
+#include "md2.h"
+
 using std::string;
 
 //std::map<GLchar, Character> Characters;

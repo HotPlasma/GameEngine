@@ -13,7 +13,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>true</Ai>
-    <Collidable>true</Collidable>
   </Object>
   
   <Object>
@@ -26,7 +25,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
   
   <Object>
@@ -39,7 +37,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -52,7 +49,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -65,7 +61,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -78,7 +73,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -91,7 +85,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -104,7 +97,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -117,7 +109,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -130,7 +121,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -143,7 +133,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -156,7 +145,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -169,7 +157,6 @@
     <Material>1</Material>
     <Collectable>false</Collectable>
     <Ai>false</Ai>
-    <Collidable>true</Collidable>
   </Object>
 
   <Object>
@@ -194,7 +181,6 @@
     <Material>1</Material>
     <Collectable>true</Collectable>
     <Ai>false</Ai>
-    <Collidable>false</Collidable>
   </Object>
 
   <Object>
@@ -207,7 +193,6 @@
     <Material>1</Material>
     <Collectable>true</Collectable>
     <Ai>false</Ai>
-    <Collidable>false</Collidable>
   </Object>
 
   <Object>
@@ -220,6 +205,5 @@
     <Material>1</Material>
     <Collectable>true</Collectable>
     <Ai>false</Ai>
-    <Collidable>false</Collidable>
   </Object>
 </Scene>
