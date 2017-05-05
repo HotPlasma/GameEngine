@@ -262,7 +262,7 @@ void Editor::initScene(Freetype* pOverlay)
 	m_menu.m_pActiveField = m_menu.m_pNameField;
 
 	m_menu.m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
-	m_pHUD->LoadHUDImage("assets/UI/Editor/ModelMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
+	m_pHUD->addImage("assets/UI/Editor/ModelMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
 	
 	m_menu.m_pLoad = std::shared_ptr<Button>
 	(
@@ -737,7 +737,7 @@ void Editor::render()
 		//// Draws background
 		//m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_menu.m_uiBGIndex).getM());
 		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-		//m_pHUD->RenderImage(&m_imageType, m_menu.m_uiBGIndex);
+		//m_pHUD->renderImage(&m_imageType, m_menu.m_uiBGIndex);
 	}
 
 	// Activates FreeType shader
@@ -748,17 +748,17 @@ void Editor::render()
 	// Defines position string
 	std::string sPos; sPos += "Model Position: x("; sPos += std::to_string(m_selection.m_position.x); sPos += ") y("; sPos += std::to_string(m_selection.m_position.y); sPos += ") z("; sPos += std::to_string(m_selection.m_position.z); sPos += ")";
 	// Outputs position string to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), sPos, m_windowSize.x*0.006f, m_windowSize.y*0.964f, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+	m_pHUD->renderText(m_freeType.getHandle(), sPos, m_windowSize.x*0.006f, m_windowSize.y*0.964f, 1.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 
 	// Defines rotation string
 	std::string sRot; sRot += "Model Rotation: x("; sRot += std::to_string(m_selection.m_rotation.x); sRot += ") y("; sRot += std::to_string(m_selection.m_rotation.y); sRot += ") z("; sRot += std::to_string(m_selection.m_rotation.z); sRot += ")";
 	// Outputs rotation string to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), sRot, m_windowSize.x*0.006f, m_windowSize.y*0.934f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+	m_pHUD->renderText(m_freeType.getHandle(), sRot, m_windowSize.x*0.006f, m_windowSize.y*0.934f, 1.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 
 	// Defines scale string
 	std::string sScale; sScale += "Model Scale: x("; sScale += std::to_string(m_selection.m_scale.x); sScale += ") y("; sScale += std::to_string(m_selection.m_scale.y); sScale += ") z("; sScale += std::to_string(m_selection.m_scale.z); sScale += ")";
 	// Outputs scale string to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), sScale, m_windowSize.x*0.006f, m_windowSize.y*0.904f, 1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+	m_pHUD->renderText(m_freeType.getHandle(), sScale, m_windowSize.x*0.006f, m_windowSize.y*0.904f, 1.0f, glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
 // Void: Saves the Scene to XML file

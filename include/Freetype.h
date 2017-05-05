@@ -38,9 +38,11 @@ public:
 
 	void loadCharacters();
 	void setupBuffers();
-	void RenderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
-	void LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity);
-	void RenderImage(GLSLProgram* pShader, int index);
+
+	void addImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity);
+
+	void renderText(GLuint ProgramHandle , std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color);
+	void renderImage(GLSLProgram* pShader, int index);
 };
 
 #endif

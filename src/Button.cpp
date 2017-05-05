@@ -5,10 +5,10 @@ Button::Button(const glm::vec2 kPosition, const string ksLoc, const string ksHov
 	m_pHUD = pOverlay;
 
 	m_uiTextureIndex = (unsigned int)m_pHUD->m_imagePlane.size();
-	m_pHUD->LoadHUDImage(ksLoc, vec3(kPosition, 1), 0, kScale, false);
+	m_pHUD->addImage(ksLoc, vec3(kPosition, 1), 0, kScale, false);
 
 	m_uiHoverTextureIndex = (unsigned int)m_pHUD->m_imagePlane.size();
-	m_pHUD->LoadHUDImage(ksHoverLoc, vec3(kPosition, 1), 0, kScale, false);
+	m_pHUD->addImage(ksHoverLoc, vec3(kPosition, 1), 0, kScale, false);
 
 	m_position = kPosition;
 	m_scale = vec2(kScale);
@@ -50,7 +50,7 @@ void Button::render(GLSLProgram* pShader, const sf::Vector2i kWindowSize)
 	{
 		pShader->setUniform("M", m_pHUD->m_imagePlane.at(m_uiTextureIndex).getM());
 		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
-		m_pHUD->RenderImage(pShader, m_uiTextureIndex);
+		m_pHUD->renderImage(pShader, m_uiTextureIndex);
 	}
 
 	// If hover texture visible
@@ -58,6 +58,6 @@ void Button::render(GLSLProgram* pShader, const sf::Vector2i kWindowSize)
 	{
 		pShader->setUniform("M", m_pHUD->m_imagePlane.at(m_uiHoverTextureIndex).getM());
 		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
-		m_pHUD->RenderImage(pShader, m_uiHoverTextureIndex);
+		m_pHUD->renderImage(pShader, m_uiHoverTextureIndex);
 	}
 }

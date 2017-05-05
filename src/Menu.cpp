@@ -71,7 +71,7 @@ void Menu::initScene(Freetype * pOverlay)
 	// Sets BG index to image plane size
 	m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
 	// Loads menu background into HUD
-	m_pHUD->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
+	m_pHUD->addImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
 }
 
 // Void: Called on key input event
@@ -153,5 +153,5 @@ void Menu::render()
 	//Draws Background		
 	m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_uiBGIndex).getM());
 	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-	m_pHUD->RenderImage(&m_imageType, m_uiBGIndex);
+	m_pHUD->renderImage(&m_imageType, m_uiBGIndex);
 }
