@@ -45,8 +45,8 @@ void World::initScene(Freetype* pOverlay)
 	}
 
 	// Resets cursor to the center of the window
-	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
-	m_mousePos = sf::Vector2f(getWindowSize().x*0.5, getWindowSize().y*0.5);
+	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5f, getWindowSize().y*0.5f);
+	m_mousePos = sf::Vector2f((float)getWindowSize().x*0.5f, (float)getWindowSize().y*0.5f);
 
 	// Updates camera vision
 	m_camera.updateView();

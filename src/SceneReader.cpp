@@ -37,7 +37,7 @@ void SceneReader::readSceneFile(string sFilename)
 					for (tinyxml2::XMLNode* iNode3 = iNode2->FirstChild(); iNode3 != NULL; iNode3 = iNode3->NextSibling())
 					{
 						// Sets the Node name to a string stream
-						istringstream iss(iNode3->ToElement()->GetText());
+						std::istringstream iss(iNode3->ToElement()->GetText());
 						// String to hold data coming out of the stringstream
 						string sData; 
 

@@ -1,3 +1,4 @@
+#pragma once
 #ifndef EDITOR_H
 #define EDITOR_H
 
@@ -7,7 +8,6 @@
 #include "Camera.h"
 #include "Model.h"
 #include "ModelReader.h"
-#include "glslprogram.h"
 #include "Button.h"
 #include "TextBox.h"
 
@@ -96,4 +96,5 @@ public:
 	void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 	void render(); //!< Renders the Editor to display
 };
+
 #endif

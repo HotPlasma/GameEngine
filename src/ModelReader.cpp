@@ -31,7 +31,7 @@ void ModelReader::readModelObjData(string filename)
 	string sToken = "";
 	while (getline(modelfile, sLine))
 	{
-		istringstream iss(sLine);
+		std::istringstream iss(sLine);
 
 		// Process the line
 		sToken = "";
@@ -73,7 +73,7 @@ void ModelReader::readModelObjData(string filename)
 
 }
 
-void ModelReader::processVertexLine(istringstream& iss)
+void ModelReader::processVertexLine(std::istringstream& iss)
 {
 	// Get all 3 verticies
 	float fVertex;
@@ -85,7 +85,7 @@ void ModelReader::processVertexLine(istringstream& iss)
 		m_vertices.push_back(fVertex); // Push to vector of vertices
 	}
 }
-void ModelReader::processVertexNormalLine(istringstream& iss)
+void ModelReader::processVertexNormalLine(std::istringstream& iss)
 {
 	// Get all vertices normals
 	float fVertexNormal;
@@ -97,7 +97,7 @@ void ModelReader::processVertexNormalLine(istringstream& iss)
 		m_vertexNormals.push_back(fVertexNormal); // Push to vertex normal's vector
 	}
 }
-void ModelReader::processVertexTextureLine(istringstream& iss)
+void ModelReader::processVertexTextureLine(std::istringstream& iss)
 {
 	// Get vertex texture lines
 	float fVertexTextureLine;
@@ -109,7 +109,7 @@ void ModelReader::processVertexTextureLine(istringstream& iss)
 		m_vertexTextureCoordinates.push_back(fVertexTextureLine); // Push to vector of vertex texture lines
 	}
 }
-void ModelReader::processFaceLine(istringstream& iss)
+void ModelReader::processFaceLine(std::istringstream& iss)
 {
 	// Get all face lines
 	int iFaces;

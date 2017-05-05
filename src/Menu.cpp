@@ -69,7 +69,7 @@ void Menu::initScene(Freetype * pOverlay)
 	if (!m_menuTheme.loadFromFile("assets/sounds/MainMenu.wav")) { /* Nothing if load failed */ }
 
 	// Sets BG index to image plane size
-	m_uiBGIndex = m_pHUD->m_ImagePlane.size();
+	m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
 	// Loads menu background into HUD
 	m_pHUD->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
 }
@@ -142,7 +142,7 @@ void Menu::render()
 	m_buttons.m_pExit->render(&m_imageType, m_windowSize);
 	
 	//Draws Background		
-	m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(m_uiBGIndex).getM());
+	m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_uiBGIndex).getM());
 	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
 	m_pHUD->RenderImage(&m_imageType, m_uiBGIndex);
 }

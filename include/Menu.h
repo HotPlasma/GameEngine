@@ -1,14 +1,14 @@
+#pragma once
 #ifndef MENU_H
 #define MENU_H
 
 #include "PreHeader.h"
 
+#include "Utilities.h"
 #include "Scene.h"
 #include "World.h"
 #include "Editor.h"
-#include "Utilities.h"
 #include "ModelReader.h"
-#include "glslprogram.h"
 #include "Freetype.h"
 #include "Button.h"
 

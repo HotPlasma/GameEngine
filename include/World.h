@@ -1,3 +1,4 @@
+#pragma once
 #ifndef WORLD_H
 #define WORLD_H
 
@@ -7,7 +8,6 @@
 #include "Camera.h"
 #include "SceneReader.h"
 #include "ModelReader.h"
-#include "glslprogram.h"
 #include "Freetype.h"
 #include "Utilities.h"
 

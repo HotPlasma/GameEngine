@@ -1,8 +1,9 @@
 #pragma once
+#ifndef TEXTBOX_H
+#define TEXTBOX_H
 
 #include "PreHeader.h"
 
-#include "GLSLProgram.h"
 #include "Freetype.h"
 
 class TextBox
@@ -25,3 +26,5 @@ public:
 
 	void render(GLSLProgram* pShader, Freetype* pHUD, const glm::vec2 kWindowSize);
 };
+
+#endif

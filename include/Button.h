@@ -1,8 +1,10 @@
 #pragma once
+#ifndef BUTTON_H
+#define BUTTON_H
 
-#include <iostream>
-#include <PreHeader.h>
-#include <Freetype.h>
+#include "PreHeader.h"
+
+#include "Freetype.h"
 
 class Button
 {
@@ -93,3 +95,5 @@ public:
 	// Sets the toggle member with new value
 	void setToggled(const bool kbToggle) { m_bToggle = kbToggle; }
 };
+
+#endif

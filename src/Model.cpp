@@ -119,5 +119,5 @@ void Model::render(GLSLProgram* pShader, const glm::mat4 kModel)
 	pShader->setUniform("M", m_M);
 
 	// Draws Model
-	gl::DrawArrays(gl::TRIANGLES, 0, m_positionData.size());
+	gl::DrawArrays(gl::TRIANGLES, 0, (GLsizei)m_positionData.size());
 }

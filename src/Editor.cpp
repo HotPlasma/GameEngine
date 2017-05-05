@@ -1,4 +1,3 @@
-
 #include "Editor.h"
 
 #define POSITION_SPEED 12.5f
@@ -262,7 +261,7 @@ void Editor::initScene(Freetype* pOverlay)
 	m_menu.m_pTexField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.45f)));
 	m_menu.m_pActiveField = m_menu.m_pNameField;
 
-	m_menu.m_uiBGIndex = m_pHUD->m_ImagePlane.size();
+	m_menu.m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
 	m_pHUD->LoadHUDImage("assets/UI/Editor/ModelMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
 	
 	m_menu.m_pLoad = std::shared_ptr<Button>
@@ -746,7 +745,7 @@ void Editor::render()
 		// Activates ImageType shader
 		//m_imageType.use();
 		//// Draws background
-		//m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(m_menu.m_uiBGIndex).getM());
+		//m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_menu.m_uiBGIndex).getM());
 		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
 		//m_pHUD->RenderImage(&m_imageType, m_menu.m_uiBGIndex);
 	}

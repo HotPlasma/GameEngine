@@ -2,6 +2,7 @@
 
 #include "PreHeader.h"
 
+#include "Freetype.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -9,14 +10,13 @@
 #include "Menu.h"
 #include "World.h"
 #include "Editor.h"
-#include <Freetype.h>
 
 std::shared_ptr<Scene> g_pScene;
 GLFWwindow *g_pWindow;
 Freetype g_HUD;
 
-float g_fCurrentTime = 0.f;
-float g_fPreviousTime = 0.f;
+float g_fCurrentTime = 0.0f; // Current time
+float g_fPrevTick = 0.0f; // Time of previous update
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
@@ -123,8 +123,8 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Get the distance needed to centre the window
-	windowSize.x = (float)windowSize.x*0.5f;
-	windowSize.y = (float)windowSize.y*0.5f;
+	windowSize.x = (int)(windowSize.x*0.5f);
+	windowSize.y = (int)(windowSize.y*0.5f);
 
 	windowPosition.x += windowSize.x;
 	windowPosition.x += windowSize.y;
@@ -179,7 +179,7 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	if (pWindowOwner != NULL) 
 	{
 		// Set the window position to the center of the monitor which launched the exe
-		glfwSetWindowPos(pWindow, (float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x, (float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y);
+		glfwSetWindowPos(pWindow, (int)((float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x), (int)((float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y));
 	}
 }
 
@@ -194,10 +194,11 @@ void mainLoop()
 		// If window is focused
 		if (g_bWindowFocused)
 		{
-			g_fPreviousTime = g_fCurrentTime;
+			// Defines currentTime and previousTick
+			g_fPrevTick = g_fCurrentTime;
 			g_fCurrentTime = (float)glfwGetTime();
 			// Updates and renders the scene
-			g_pScene->update(g_fCurrentTime - g_fPreviousTime);
+			g_pScene->update(g_fCurrentTime - g_fPrevTick);
 			g_pScene->render();
 		}
 
