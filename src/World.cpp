@@ -45,15 +45,16 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 10.0f, 15.0f, 0.0f);
 	pShader->setUniform("material.diffuse", 0);
 	pShader->setUniform("material.specular", 1);
+	pShader->setUniform("material.shininess", 32.0f);
 
 	//set the ambient lighting for the scene
 	pShader->setUniform("light.position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
 	pShader->setUniform("light.direction", m_camera.getDirection().x, m_camera.getDirection().y,m_camera.getDirection().z);
 
-	//pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
+	pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
 
-	//pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
+	pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
 
 
 	pShader->setUniform("viewPos", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
@@ -65,7 +66,7 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 	pShader->setUniform("light.linear", 0.09f);
 	pShader->setUniform("light.quadratic", 0.032f);
 
-	pShader->setUniform("material.shininess", 32.0f);
+	
 
 
 	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
