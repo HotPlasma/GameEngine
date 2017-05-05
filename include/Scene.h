@@ -10,12 +10,12 @@ class Scene
 {
 	public:
 
+		// Default constructor
 		Scene() {}
-		Scene(GLFWwindow *pWindow) {};
-	
+		
 		sf::Vector2i m_windowSize; // Dimensions of window
 	
-		sf::Sound Music;
+		sf::Sound m_music;
 
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* pOverlay) = 0;
@@ -23,7 +23,7 @@ class Scene
 		// Called on key input event
 		virtual void input_key(const int kiKey, const int kiAction) = 0;
 		// Called on char input event
-		virtual void input_char(const unsigned int kuiCodepoint) = 0;
+		virtual void input_char(const unsigned int kuiUnicode) = 0;
 		// Called on mouseButton input event
 		virtual void input_button(const int kiButton, const int kiAction) = 0;
 		// Called on mouseScroll input event

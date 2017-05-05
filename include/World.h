@@ -30,11 +30,11 @@ public:
 	void initScene(Freetype* pOverlay);
 
 	void input_key(const int kiKey, const int kiAction) {}
-	void input_char(const unsigned int kuiCodepoint) {}
+	void input_char(const unsigned int kuiUnicode) {}
 	void input_button(const int kiButton, const int kiAction) {}
 	void input_scroll(const double kdDelta) {}
 
 	void update(const float kfTimeElapsed);
 	void render();
 };
-#endif  
+#endif 

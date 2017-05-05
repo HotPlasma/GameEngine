@@ -11,8 +11,8 @@ using std::ifstream;
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
+	// Sets members with input
 	m_pWindow = pWindow;
-
 	m_windowSize = windowSize;
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
@@ -23,7 +23,11 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 void World::initScene(Freetype* pOverlay)
 {
-	m_pHUD = pOverlay; // Get the Heads up display for the scene
+	// Get the Heads up display for the scene
+	m_pHUD = pOverlay;
+
+	// Sets cursor style
+	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	linkShaders();
 
@@ -137,6 +141,9 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
+
+	// Resets cursor position
+	glfwSetCursorPos(m_pWindow, m_windowSize.x*0.5, m_windowSize.y*0.5);
 }
 
 void World::render()

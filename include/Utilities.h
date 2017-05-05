@@ -23,4 +23,11 @@ private:
 	float m_fLower; // Lower bound
 };
 
-#endif  
+static void closeProgram()
+{
+	// Terminates GLFW and closes the program
+	glfwTerminate();
+	exit(EXIT_SUCCESS);
+}
+
+#endif

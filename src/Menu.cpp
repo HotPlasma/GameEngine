@@ -1,51 +1,133 @@
-#include "..\include\Menu.h"
+#include "Menu.h"
 
 Menu::Menu(GLFWwindow *pWindow, sf::Vector2i windowSizes)
 {
+	// Sets members with input
 	m_pWindow = pWindow;
 	m_windowSize = windowSizes;
 }
 
-void Menu::initScene(Freetype * Overlay)
+void Menu::initScene(Freetype * pOverlay)
 {
-	UI = Overlay; // Get the Heads up display for the scene
+	// Get the Heads up display for the scene
+	m_pHUD = pOverlay;
+
+	// Sets cursor style
+	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
 	linkShaders();
+
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
-	m_PlayButton = new Button(glm::vec2((float)m_windowSize.x*0.5f, 700.0f), "assets/UI/Play.png", "assets/UI/PlayHover.png", glm::vec3(147.f, 46.f, 1.f), Overlay);
-
-	m_EditorButton = new Button(glm::vec2((float)m_windowSize.x*0.5f, 600.0f), "assets/UI/WorldEditor.png", "assets/UI/WorldEditorHover.png", glm::vec3(148.f, 46.f, 1.f), Overlay);
-
-	m_OptionsButton = new Button(glm::vec2((float)m_windowSize.x*0.5f, 500.0f), "assets/UI/Options.png", "assets/UI/OptionsHover.png", glm::vec3(126.f, 46.f, 1.f), Overlay);
-
-	m_ExitButton = new Button(glm::vec2((float)m_windowSize.x*0.5f, 400.0f), "assets/UI/Exit.png", "assets/UI/ExitHover.png", glm::vec3(83, 46.f, 1.f), Overlay);
+	m_buttons.m_pPlay = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2((float)m_windowSize.x*0.5f, 700.0f),
+			"assets/UI/Play.png",
+			"assets/UI/PlayHover.png",
+			glm::vec3(147.f, 46.f, 1.f),
+			pOverlay
+		)
+	);
+	m_buttons.m_pEditor = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2((float)m_windowSize.x*0.5f, 600.0f), 
+			"assets/UI/WorldEditor.png", 
+			"assets/UI/WorldEditorHover.png", 
+			glm::vec3(148.f, 46.f, 1.f), 
+			pOverlay
+		)
+	);
+	m_buttons.m_pOptions = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2((float)m_windowSize.x*0.5f, 500.0f), 
+			"assets/UI/Options.png", 
+			"assets/UI/OptionsHover.png",
+			glm::vec3(126.f, 46.f, 1.f),
+			pOverlay
+		)
+	);
+	m_buttons.m_pExit = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2((float)m_windowSize.x*0.5f, 400.0f), 
+			"assets/UI/Exit.png", 
+			"assets/UI/ExitHover.png",
+			glm::vec3(83, 46.f, 1.f),
+			pOverlay
+		)
+	);
 	
-	if (!MenuTheme.loadFromFile("assets/sounds/MainMenu.wav"))
-	{
-		// Nothing
-	}
+	// Loads main menu music
+	if (!m_menuTheme.loadFromFile("assets/sounds/MainMenu.wav")) { /* Nothing if load failed */ }
 
-	//UI->LoadHUDImage("assets/UI/Play.png", glm::vec3(m_windowSize.x / 2, m_windowSize.y / 2, 1), 0, glm::vec3(147, 46, 1.f));
-	UI->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
+	// Sets BG index to image plane size
+	m_uiBGIndex = m_pHUD->m_ImagePlane.size();
+	// Loads menu background into HUD
+	m_pHUD->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
 }
 
-void Menu::update(float t)
+// Void: Called on mouseButton input event
+void Menu::input_button(const int kiButton, const int kiAction)
 {
-	if (Music.getStatus() != sf::Sound::Playing)
+	// If action is a button press
+	if (kiAction == GLFW_PRESS)
 	{
-		Music.setBuffer(MenuTheme);
-		Music.setVolume(40);
-		Music.play();
+		// If left mouse button is clicked
+		if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
+		{
+			// If menu play button is clicked
+			if (m_buttons.m_pPlay->mouseOver(m_mousePos, (float)m_windowSize.y))
+			{
+				m_public.m_bEnterWorld = true;
+				m_public.m_bEnterEditor = false;
+			}
+
+			// If menu editor button is clicked
+			if (m_buttons.m_pEditor->mouseOver(m_mousePos, (float)m_windowSize.y))
+			{
+				m_public.m_bEnterEditor = true;
+				m_public.m_bEnterWorld = false;
+			}
+
+			// If menu options button is clicked
+			if (m_buttons.m_pOptions->mouseOver(m_mousePos, (float)m_windowSize.y))
+			{
+				// TEMPORARY NOTHING
+			}
+
+			// If menu exit button is clicked
+			if (m_buttons.m_pExit->mouseOver(m_mousePos, (float)m_windowSize.y))
+			{
+				closeProgram();
+			}
+		}
+	}
+}
+
+void Menu::update(const float kfTimeElapsed)
+{
+	// If music is not playing
+	if (m_music.getStatus() != sf::Sound::Playing)
+	{
+		// Play music
+		m_music.setBuffer(m_menuTheme);
+		m_music.setVolume(40.0f);
+		m_music.play();
 	}
 
-	m_V = mat4(1.0f);
-	m_P = glm::perspective(90.f, (float)m_windowSize.x / (float)m_windowSize.y, 1.f, 5000.f);
-	m_PlayButton->mouseOver(m_mousePos, (float)m_windowSize.y);
-	m_EditorButton->mouseOver(m_mousePos, (float)m_windowSize.y);
-	m_OptionsButton->mouseOver(m_mousePos, (float)m_windowSize.y);
-	m_ExitButton->mouseOver(m_mousePos, (float)m_windowSize.y);
+	// Checks whether HUD buttons are hovered
+	m_buttons.m_pPlay->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pEditor->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pOptions->mouseOver(m_mousePos, (float)m_windowSize.y);
+	m_buttons.m_pExit->mouseOver(m_mousePos, (float)m_windowSize.y);
 }
 
 void Menu::render()
@@ -54,53 +136,13 @@ void Menu::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// Draws HUD buttons
-	m_PlayButton->render(&m_imageType, m_windowSize);
-	m_EditorButton->render(&m_imageType, m_windowSize);
-	m_OptionsButton->render(&m_imageType, m_windowSize);
-	m_ExitButton->render(&m_imageType, m_windowSize);
+	m_buttons.m_pPlay->render(&m_imageType, m_windowSize);
+	m_buttons.m_pEditor->render(&m_imageType, m_windowSize);
+	m_buttons.m_pOptions->render(&m_imageType, m_windowSize);
+	m_buttons.m_pExit->render(&m_imageType, m_windowSize);
 	
 	//Draws Background		
-	m_imageType.setUniform("M", UI->m_ImagePlane.at(8).getM());
+	m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(m_uiBGIndex).getM());
 	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-	UI->RenderImage(&m_imageType, 8);
+	m_pHUD->RenderImage(&m_imageType, m_uiBGIndex);
 }
-
-int Menu::returnMenuChoice()
-{
-	if (m_bClicked) // If clicked
-	{
-		if (m_PlayButton->mouseOver(m_mousePos, (float)m_windowSize.y)) // New World button clicked
-		{
-			WhichState = Play;
-		}
-		else if (m_EditorButton->mouseOver(m_mousePos, (float)m_windowSize.y)) // Load world button clicked
-		{
-			WhichState = Create;
-		}
-		else if (m_OptionsButton->mouseOver(m_mousePos, (float)m_windowSize.y)) // Exit button clicked
-		{
-			WhichState = Options;
-		}
-		else if (m_ExitButton->mouseOver(m_mousePos, (float)m_windowSize.y)) // Exit button clicked
-		{
-			WhichState = ExitMenu;
-		}
-		m_bClicked = false; // "Unclick" button
-		Music.stop();
-		return WhichState; // Return which button was clicked
-	}
-	return WhichState = None; // If no button clicked return none
-}
-
-void Menu::Click()
-{
-	// To be run if mouse clicked
-	m_bClicked = true;
-}
-
-void Menu::ResetClick()
-{
-	// Set click to false
-	m_bClicked = false;
-}
-

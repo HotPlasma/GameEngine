@@ -80,20 +80,20 @@ private:
 
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
+	void save(); //!< Saves the Scene to XML file
+
 public:
 
 	Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize); //!< Constructor
 
 	void initScene(Freetype* pOverlay); //!< Initialises the Editor Scene
 
-	void save(); //!< Saves the Scene to XML file
-
 	void input_key(const int kiKey, const int kiAction); //!< Called on key input event
-	void input_char(const unsigned int kuiCodepoint); //!< Called on char input event
+	void input_char(const unsigned int kuiUnicode); //!< Called on char input event
 	void input_button(const int kiButton, const int kiAction); //!< Called on mouseButton input event
 	void input_scroll(const double kdDelta); //!< Called on mouseScroll input event
 
 	void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 	void render(); //!< Renders the Editor to display
 };
-#endif  
+#endif

@@ -63,6 +63,9 @@ void Editor::initScene(Freetype* pOverlay)
 	// Get the Heads up display for the scene
 	m_pHUD = pOverlay;
 
+	// Sets cursor style
+	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
 	// Enables OpenGL depth testing
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -348,50 +351,50 @@ void Editor::input_key(const int kiKey, const int kiAction)
 }
 
 // Void: Called on char input event
-void Editor::input_char(const unsigned int kuiCodepoint)
+void Editor::input_char(const unsigned int kuiUnicode)
 {
 	// If Model selection menu is open
 	if (m_bMenuOpen)
 	{
 		if 
 		(
-			(kuiCodepoint >= 97 && kuiCodepoint <= 122) || // a-z
-			(kuiCodepoint >= 65 && kuiCodepoint <= 90) || // A-Z
-			(kuiCodepoint >= 48 && kuiCodepoint <= 57) || // 0-9
-			(kuiCodepoint == 32) || // Spacebar
-			(kuiCodepoint == 33) || // !
-			(kuiCodepoint == 163) || // £
-			(kuiCodepoint == 35) || // #
-			(kuiCodepoint == 36) || // $
-			(kuiCodepoint == 37) || // %
-			(kuiCodepoint == 38) || // &
-			(kuiCodepoint == 39) || // '
-			(kuiCodepoint == 40) || // (
-			(kuiCodepoint == 41) || // )
-			(kuiCodepoint == 43) || // +
-			(kuiCodepoint == 44) || // ,
-			(kuiCodepoint == 45) || // -
-			(kuiCodepoint == 46) || // .
-			(kuiCodepoint == 59) || // ;
-			(kuiCodepoint == 61) || // =
-			(kuiCodepoint == 64) || // @
-			(kuiCodepoint == 91) || // [
-			(kuiCodepoint == 93) || // ]
-			(kuiCodepoint == 94) || // ^
-			(kuiCodepoint == 95) || // _
-			(kuiCodepoint == 96) || // `
-			(kuiCodepoint == 123) || // {
-			(kuiCodepoint == 125) || // }
-			(kuiCodepoint == 126) // ~
+			(kuiUnicode >= 97 && kuiUnicode <= 122) || // a-z
+			(kuiUnicode >= 65 && kuiUnicode <= 90) || // A-Z
+			(kuiUnicode >= 48 && kuiUnicode <= 57) || // 0-9
+			(kuiUnicode == 32) || // Spacebar
+			(kuiUnicode == 33) || // !
+			(kuiUnicode == 163) || // £
+			(kuiUnicode == 35) || // #
+			(kuiUnicode == 36) || // $
+			(kuiUnicode == 37) || // %
+			(kuiUnicode == 38) || // &
+			(kuiUnicode == 39) || // '
+			(kuiUnicode == 40) || // (
+			(kuiUnicode == 41) || // )
+			(kuiUnicode == 43) || // +
+			(kuiUnicode == 44) || // ,
+			(kuiUnicode == 45) || // -
+			(kuiUnicode == 46) || // .
+			(kuiUnicode == 59) || // ;
+			(kuiUnicode == 61) || // =
+			(kuiUnicode == 64) || // @
+			(kuiUnicode == 91) || // [
+			(kuiUnicode == 93) || // ]
+			(kuiUnicode == 94) || // ^
+			(kuiUnicode == 95) || // _
+			(kuiUnicode == 96) || // `
+			(kuiUnicode == 123) || // {
+			(kuiUnicode == 125) || // }
+			(kuiUnicode == 126) // ~
 		)
 		{
 			// Adds input to active textbox
 			//m_menu.m_pActiveField->addLetter(kiKey);
 
 			// TEMPORARY
-			m_menu.m_pNameField->addLetter(kuiCodepoint);
-			m_menu.m_pObjField->addLetter(kuiCodepoint);
-			m_menu.m_pTexField->addLetter(kuiCodepoint);
+			m_menu.m_pNameField->addLetter(kuiUnicode);
+			m_menu.m_pObjField->addLetter(kuiUnicode);
+			m_menu.m_pTexField->addLetter(kuiUnicode);
 		}
 	}
 }
