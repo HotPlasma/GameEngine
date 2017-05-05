@@ -63,9 +63,10 @@ public:
 	ToggleButton() {}
 
 	// Constructor with two buttons for True and False variants
-	ToggleButton(std::shared_ptr<Button> pTrueButton, std::shared_ptr<Button> pFalseButton)
+	ToggleButton(const bool kbToggle, std::shared_ptr<Button> pTrueButton, std::shared_ptr<Button> pFalseButton)
 	{
 		// Assigns parameters to members
+		m_bToggle = kbToggle;
 		m_pTrueButton = pTrueButton;
 		m_pFalseButton = pFalseButton;
 	}

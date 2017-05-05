@@ -43,6 +43,20 @@ struct EditorHUD
 	std::shared_ptr<Button> m_pSave; //!< Button to save Scene to file
 };
 
+struct ModelMenu
+{
+	unsigned int m_uiBGIndex; //!< Background imageplane index
+
+	std::shared_ptr<TextBox> m_activeField; //!< Text box active for writing
+
+	std::shared_ptr<TextBox> m_nameField; //!< Text box for Model name
+	std::shared_ptr<TextBox> m_objField; //!< Text box for Model obj file location
+	std::shared_ptr<TextBox> m_texField; //!< Text box for Model texture file location
+
+	std::shared_ptr<Button> m_pLoad; //!< Load Model button
+	std::shared_ptr<Button> m_pCancel; //!< Cancel button
+};
+
 //!< Scene subclass for creating levels
 class Editor : public Scene
 {
@@ -61,9 +75,10 @@ private:
 
 	EditorHUD m_buttons; //!< Editor option buttons
 
-	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
+	bool m_bMenuOpen = false; //!< Whether Model menu is active
+	ModelMenu m_menu; //!< Model selection menu
 
-	std::shared_ptr<TextBox> m_textBox; //!< TextBox
+	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
 public:
 
