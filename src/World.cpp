@@ -51,9 +51,9 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 
 	pShader->setUniform("light.direction", m_camera.getDirection().x, m_camera.getDirection().y,m_camera.getDirection().z);
 
-	pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
+	//pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
 
-	pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
+	//pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
 
 
 	pShader->setUniform("viewPos", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
