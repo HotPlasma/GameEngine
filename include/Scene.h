@@ -22,6 +22,8 @@ class Scene
 	
 		// Called on key input event
 		virtual void input_key(const int kiKey, const int kiAction) = 0;
+		// Called on char input event
+		virtual void input_char(const unsigned int kuiCodepoint) = 0;
 		// Called on mouseButton input event
 		virtual void input_button(const int kiButton, const int kiAction) = 0;
 		// Called on mouseScroll input event

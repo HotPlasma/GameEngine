@@ -38,6 +38,14 @@ static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iActi
 }
 
 //////////////////////////////////////////////////////////
+////  Char input callback ////////////////////////////////
+//////////////////////////////////////////////////////////
+static void char_callback(GLFWwindow* pWindow, unsigned int uiCodepoint)
+{
+	g_pScene->input_char(uiCodepoint);
+}
+
+//////////////////////////////////////////////////////////
 ////  Mouse button callback //////////////////////////////
 //////////////////////////////////////////////////////////
 static void button_callback(GLFWwindow* pWindow, int iButton, int iAction, int iMods)
@@ -294,6 +302,7 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
+	glfwSetCharCallback(g_pWindow, char_callback);
 	glfwSetMouseButtonCallback(g_pWindow, button_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetScrollCallback(g_pWindow, scroll_callback);

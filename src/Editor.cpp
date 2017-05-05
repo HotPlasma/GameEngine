@@ -254,10 +254,10 @@ void Editor::initScene(Freetype* pOverlay)
 	);
 
 	// Model Selection Menu Setup
-	m_menu.m_nameField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.2f, m_windowSize.y*0.4f)));
-	m_menu.m_objField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.2f, m_windowSize.y*0.5f)));
-	m_menu.m_texField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.2f, m_windowSize.y*0.6f)));
-	m_menu.m_activeField = m_menu.m_nameField;
+	m_menu.m_pNameField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.65f)));
+	m_menu.m_pObjField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.55f)));
+	m_menu.m_pTexField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.45f)));
+	m_menu.m_pActiveField = m_menu.m_pNameField;
 
 	m_menu.m_uiBGIndex = m_pHUD->m_ImagePlane.size();
 	m_pHUD->LoadHUDImage("assets/UI/Editor/ModelMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
@@ -297,18 +297,17 @@ void Editor::input_key(const int kiKey, const int kiAction)
 	// If action is a key press
 	if (kiAction == GLFW_PRESS)
 	{
-		// If Model selection menu is open
 		if (m_bMenuOpen)
 		{
-			if (kiKey != GLFW_KEY_BACKSPACE)
-			{
-				// Adds input to active textbox
-				m_menu.m_activeField->addLetter(kiKey);
-			}
-			else
+			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
 			{
 				// Removes last letter in active textbox
-				m_menu.m_activeField->removeLetter();
+				//m_menu.m_pActiveField->removeLetter();
+
+				// TEMPORARY
+				m_menu.m_pNameField->removeLetter();
+				m_menu.m_pObjField->removeLetter();
+				m_menu.m_pTexField->removeLetter();
 			}
 		}
 		else
@@ -348,6 +347,55 @@ void Editor::input_key(const int kiKey, const int kiAction)
 	}
 }
 
+// Void: Called on char input event
+void Editor::input_char(const unsigned int kuiCodepoint)
+{
+	// If Model selection menu is open
+	if (m_bMenuOpen)
+	{
+		if 
+		(
+			(kuiCodepoint >= 97 && kuiCodepoint <= 122) || // a-z
+			(kuiCodepoint >= 65 && kuiCodepoint <= 90) || // A-Z
+			(kuiCodepoint >= 48 && kuiCodepoint <= 57) || // 0-9
+			(kuiCodepoint == 32) || // Spacebar
+			(kuiCodepoint == 33) || // !
+			(kuiCodepoint == 163) || // £
+			(kuiCodepoint == 35) || // #
+			(kuiCodepoint == 36) || // $
+			(kuiCodepoint == 37) || // %
+			(kuiCodepoint == 38) || // &
+			(kuiCodepoint == 39) || // '
+			(kuiCodepoint == 40) || // (
+			(kuiCodepoint == 41) || // )
+			(kuiCodepoint == 43) || // +
+			(kuiCodepoint == 44) || // ,
+			(kuiCodepoint == 45) || // -
+			(kuiCodepoint == 46) || // .
+			(kuiCodepoint == 59) || // ;
+			(kuiCodepoint == 61) || // =
+			(kuiCodepoint == 64) || // @
+			(kuiCodepoint == 91) || // [
+			(kuiCodepoint == 93) || // ]
+			(kuiCodepoint == 94) || // ^
+			(kuiCodepoint == 95) || // _
+			(kuiCodepoint == 96) || // `
+			(kuiCodepoint == 123) || // {
+			(kuiCodepoint == 125) || // }
+			(kuiCodepoint == 126) // ~
+		)
+		{
+			// Adds input to active textbox
+			//m_menu.m_pActiveField->addLetter(kiKey);
+
+			// TEMPORARY
+			m_menu.m_pNameField->addLetter(kuiCodepoint);
+			m_menu.m_pObjField->addLetter(kuiCodepoint);
+			m_menu.m_pTexField->addLetter(kuiCodepoint);
+		}
+	}
+}
+
 // Void: Called on mouseButton input event
 void Editor::input_button(const int kiButton, const int kiAction)
 {
@@ -365,13 +413,26 @@ void Editor::input_button(const int kiButton, const int kiAction)
 				{
 					// Creates Model
 					std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
-					pModel->setName(m_menu.m_nameField->getStr());
-					pModel->setFileLocation(m_menu.m_objField->getStr());
-					pModel->setTextureLocation(m_menu.m_texField->getStr());
+					pModel->setName(m_menu.m_pNameField->getStr());
+					pModel->setFileLocation("assets/models/" + m_menu.m_pObjField->getStr() + ".obj");
+					pModel->setTextureLocation("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp");
 					pModel->setMaterial(1);
+
+					// Loads Model so it's ready for drawing
+					pModel->loadModel();
+					// Initialises Model
+					pModel->initModel();
 
 					// Sets Model in hand to this new Model
 					m_selection.m_pModel = pModel;
+
+					// Closes menu
+					m_bMenuOpen = false;
+
+					// Clears menu fields
+					m_menu.m_pNameField->setStr("");
+					m_menu.m_pObjField->setStr("");
+					m_menu.m_pTexField->setStr("");
 				}
 				// If menu cancel button is clicked
 				if (m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
@@ -380,9 +441,9 @@ void Editor::input_button(const int kiButton, const int kiAction)
 					m_bMenuOpen = false;
 
 					// Clears menu fields
-					m_menu.m_nameField->setStr("");
-					m_menu.m_objField->setStr("");
-					m_menu.m_texField->setStr("");
+					m_menu.m_pNameField->setStr("");
+					m_menu.m_pObjField->setStr("");
+					m_menu.m_pTexField->setStr("");
 				}
 			}
 			else
@@ -461,8 +522,8 @@ void Editor::input_button(const int kiButton, const int kiAction)
 // Void: Called on mouseScroll input event
 void Editor::input_scroll(const double kdDelta)
 {
-	// If Model selection menu is open
-	if (m_bMenuOpen)
+	// If Model selection menu is not open
+	if (!m_bMenuOpen)
 	{
 		// Move in the Z axis 
 		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_ZOOM*kdDelta));
@@ -663,16 +724,28 @@ void Editor::render()
 		m_menu.m_pCancel->render(&m_imageType, m_windowSize);
 
 		// Renders text boxes
-		m_menu.m_nameField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
-		m_menu.m_objField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
-		m_menu.m_texField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		// Name field
+		std::shared_ptr<TextBox> pNameField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pNameField.get()));
+		std::string sNameStr; sNameStr += "Model Name: "; sNameStr += m_menu.m_pNameField->getStr();
+		pNameField->setStr(sNameStr);
+		pNameField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		// Obj field
+		std::shared_ptr<TextBox> pObjField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pObjField.get()));
+		std::string sObjStr; sObjStr += "Obj File: assets/models/"; sObjStr += m_menu.m_pObjField->getStr(); sObjStr += ".obj";
+		pObjField->setStr(sObjStr);
+		pObjField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		// Tex field
+		std::shared_ptr<TextBox> pTexField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pTexField.get()));
+		std::string sTexStr; sTexStr += "Texture File: assets/textures/"; sTexStr += m_menu.m_pTexField->getStr(); sTexStr += ".bmp";
+		pTexField->setStr(sTexStr);
+		pTexField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
 
 		// Activates ImageType shader
-		m_imageType.use();
-		// Draws background
-		m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(m_menu.m_uiBGIndex).getM());
-		m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-		m_pHUD->RenderImage(&m_imageType, m_menu.m_uiBGIndex);
+		//m_imageType.use();
+		//// Draws background
+		//m_imageType.setUniform("M", m_pHUD->m_ImagePlane.at(m_menu.m_uiBGIndex).getM());
+		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
+		//m_pHUD->RenderImage(&m_imageType, m_menu.m_uiBGIndex);
 	}
 
 	// Activates FreeType shader
