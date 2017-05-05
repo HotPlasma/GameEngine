@@ -53,9 +53,9 @@ void  Model::setTextureLocation(string sNewLocation)
 	m_sTexture = sNewLocation;
 }
 
-void Model::setVisable(bool Visability)
+void Model::setVisible(const bool kbVisibility)
 {
-	m_bVisible = Visability;
+	m_bVisible = kbVisibility;
 }
 
 void  Model::setPosition(glm::vec3 newPosition)
@@ -73,9 +73,9 @@ void  Model::setScale(glm::vec3 newScale)
 	m_scale = newScale;
 }
 
-void Model::setTexture(GLuint textureID)
+void Model::setTextureID(const GLuint kTextureID)
 {
-	m_textureID = textureID;
+	m_textureID = kTextureID;
 }
 
 void Model::setMaterial(int iMaterial)

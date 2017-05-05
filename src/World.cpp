@@ -43,6 +43,7 @@ void World::initScene(Freetype* pOverlay)
 	// Resets cursor to the center of the window
 	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
 	m_mousePos = sf::Vector2f(getWindowSize().x*0.5, getWindowSize().y*0.5);
+}
 
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
@@ -228,10 +229,10 @@ void World::render()
       // Configures lighting
 			setLightParamaters(&m_spotlightShader, i);
 			// Sets the Model transformation matrix
-			m_spotlightShader.setUniform("model", m_sceneReader.m_modelList.at(i).m_M * transMat);
+			m_spotlightShader.setUniform("model", m_sceneReader.m_modelList.at(i).getM() * transMat);
 			//setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 			// Renders the Model
-			m_sceneReader.m_modelList.at(i).render(&m_worldShader, transMat);
+			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
 		}
 	}
 

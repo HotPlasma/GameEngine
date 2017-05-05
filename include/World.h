@@ -29,6 +29,8 @@ public:
 
 	void initScene(Freetype* pOverlay);
 
+	void setLightParamaters(GLSLProgram *pShader, int i);
+
 	void input_key(const int kiKey, const int kiAction) {}
 	void input_button(const int kiButton, const int kiAction) {}
 	void input_scroll(const double kdDelta) {}

@@ -69,6 +69,8 @@ class Model
 		bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
 		int getMaterial() { return m_iMaterial; }; // Returns materialID
 	
+		void Model::buffer();
+
 		void loadModel() { m_pModelReader = new ModelReader(m_sFileName); } // Loads in the model to be rendered
 		void initModel(); // Draws model
 

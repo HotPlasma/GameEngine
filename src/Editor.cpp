@@ -551,12 +551,12 @@ void Editor::render()
 	m_spotlightShader.setUniform("M", m_pSelectedModel->m_M);
 
 	// Renders Model
-	m_selection.m_pModel->render(&m_worldShader, glm::mat4(1.0f));
+	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
 	// Updates Skybox position
 	m_pSkybox->setPosition(m_camera.getPosition());
 	// Renders Skybox
-	m_pSkybox->render(&m_worldShader, glm::mat4(1.0f));
+	m_pSkybox->render(&m_phongShader, glm::mat4(1.0f));
 
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
@@ -565,10 +565,10 @@ void Editor::render()
 		pModel->buffer();
 		
 		// Passes Model transformation data to shader
-		m_spotlightShader.setUniform("M", pModel->m_M);
+		m_spotlightShader.setUniform("M", pModel->getM());
 	
 		// Renders Model
-		pModel->render();
+		pModel->render(&m_spotlightShader, pModel->getM());
 	}
 
 	// Activates FreeType shader
