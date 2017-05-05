@@ -299,6 +299,9 @@ void Editor::input_key(const int kiKey, const int kiAction)
 	// If action is a key press
 	if (kiAction == GLFW_PRESS)
 	{
+		// If Esc key pressed
+		if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
+
 		if (m_bMenuOpen)
 		{
 			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace

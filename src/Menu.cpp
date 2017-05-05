@@ -74,6 +74,17 @@ void Menu::initScene(Freetype * pOverlay)
 	m_pHUD->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
 }
 
+// Void: Called on key input event
+void Menu::input_key(const int kiKey, const int kiAction)
+{
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
+	{
+		// If Esc key pressed
+		if (kiKey == GLFW_KEY_ESCAPE) closeProgram();
+	}
+}
+
 // Void: Called on mouseButton input event
 void Menu::input_button(const int kiButton, const int kiAction)
 {
@@ -86,15 +97,13 @@ void Menu::input_button(const int kiButton, const int kiAction)
 			// If menu play button is clicked
 			if (m_buttons.m_pPlay->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
-				m_public.m_bEnterWorld = true;
-				m_public.m_bEnterEditor = false;
+				m_intention = TO_GAME;
 			}
 
 			// If menu editor button is clicked
 			if (m_buttons.m_pEditor->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
-				m_public.m_bEnterEditor = true;
-				m_public.m_bEnterWorld = false;
+				m_intention = TO_EDITOR;
 			}
 
 			// If menu options button is clicked

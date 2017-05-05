@@ -205,21 +205,27 @@ void mainLoop()
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
 
-		// If Scene can be cast to Menu
-		if (std::dynamic_pointer_cast<Menu>(g_pScene) != NULL)
+		// If Scene has an intent
+		if (g_pScene->m_intention != NONE)
 		{
 			// Gets window size
 			sf::Vector2i windowSize;
 			glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
-			// If signalled to enter World
-			if (std::dynamic_pointer_cast<Menu>(g_pScene)->m_public.m_bEnterWorld)
+			// If signalled to enter Menu
+			if (g_pScene->m_intention == TO_MENU)
+			{
+				g_pScene = std::shared_ptr<Scene>(new Menu(g_pWindow, windowSize));
+				g_pScene->initScene(&g_HUD);
+			}
+			// Else If signalled to enter World
+			else if (g_pScene->m_intention == TO_GAME)
 			{
 				g_pScene = std::shared_ptr<Scene>(new World(g_pWindow, windowSize));
 				g_pScene->initScene(&g_HUD);
 			}
 			// Else If signalled to enter Editor
-			else if (std::dynamic_pointer_cast<Menu>(g_pScene)->m_public.m_bEnterEditor)
+			else if (g_pScene->m_intention == TO_EDITOR)
 			{
 				g_pScene = std::shared_ptr<Scene>(new Editor(g_pWindow, windowSize));
 				g_pScene->initScene(&g_HUD);

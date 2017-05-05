@@ -64,6 +64,17 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("P", kProjection);
 }
 
+// Void: Called on key input event
+void World::input_key(const int kiKey, const int kiAction)
+{
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
+	{
+		// If Esc key pressed
+		if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
+	}
+}
+
 void World::update(const float kfTimeElapsed)
 {
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
