@@ -34,9 +34,12 @@ private:
 public:
 	Menu(GLFWwindow *pWindow, sf::Vector2i windowSize);
 	void initScene(Freetype* Overlay);
-	void keyPress(const int kiKey) {}
-	void mouseScroll(const double kdDelta) {}
-	void update(float t);
+
+	void input_key(const int kiKey, const int kiAction) {}
+	void input_button(const int kiButton, const int kiAction) {}
+	void input_scroll(const double kdDelta) {}
+
+	void update(const float kfTimeElapsed);
 	void render();
 	int returnMenuChoice();
 	void Click();

@@ -20,7 +20,7 @@ Camera::Camera()
 	m_fFar = 1000.0f; // Far culling distance
 
 	// Sets Position default value
-	m_position = glm::vec3(1.0f, 1.0f, 1.0f);
+	m_position = glm::vec3(0.0f, 0.0f, 0.0f);
 }
 
 glm::quat fromAxisAngle(glm::vec3 axis, float angle)
@@ -41,6 +41,7 @@ void Camera::rotate(const float kfYaw, const float kfPitch)
 	m_orientation = glm::normalize(fromAxisAngle(WORLDX, kfPitch) * m_orientation);
 	m_orientation = glm::normalize(m_orientation * fromAxisAngle(WORLDY, kfYaw));
 
+	// Updates vision
 	updateView();
 }
 
@@ -50,7 +51,7 @@ void Camera::move(const glm::vec3 kDisplacement)
 	m_position += m_yAxis * -kDisplacement.y;
 	m_position += m_zAxis * kDisplacement.z;
 
-	// Now call updateView()
+	// Updates vision
 	updateView();
 }
 

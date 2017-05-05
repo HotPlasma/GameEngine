@@ -24,6 +24,9 @@ Freetype userInterface;
 enum GameState { MainMenu, Game, LevelEditor, Exit };
 GameState g_gameState = MainMenu;
 
+float g_fCurrentTime = 0.f;
+float g_fPreviousTime = 0.f;
+
 bool g_bWindowFocused; // Stores whether the window is in focus
 
 //////////////////////////////////////////////////////////
@@ -31,10 +34,23 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 //////////////////////////////////////////////////////////
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
-	if (iAction == GLFW_PRESS)
-	{
-		g_pScene->keyPress(iKey);
-	}
+	g_pScene->input_key(iKey, iAction);
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse button callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void button_callback(GLFWwindow* pWindow, int iButton, int iAction, int iMods)
+{
+	g_pScene->input_button(iButton, iAction);
+}
+
+//////////////////////////////////////////////////////////
+////  Mouse scroll callback //////////////////////////////
+//////////////////////////////////////////////////////////
+static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
+{
+	g_pScene->input_scroll(dY);
 }
 
 //////////////////////////////////////////////////////////
@@ -45,16 +61,8 @@ static void cursor_callback(GLFWwindow *pWindow, double dX, double dY)
 	// If window is focused
 	if (g_bWindowFocused)
 	{
-		g_pScene->setMousePos(sf::Vector2f(dX, dY));
+		g_pScene->setMousePos(sf::Vector2f((float)dX, (float)dY));
 	}
-}
-
-//////////////////////////////////////////////////////////
-////  Mouse scroll callback //////////////////////////////
-//////////////////////////////////////////////////////////
-static void scroll_callback(GLFWwindow *pWindow, double dX, double dY)
-{
-	g_pScene->mouseScroll(dY);
 }
 
 //////////////////////////////////////////////////////////
@@ -118,8 +126,8 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Get the distance needed to centre the window
-	windowSize.x *= 0.5;
-	windowSize.y *= 0.5;
+	windowSize.x = (float)windowSize.x*0.5f;
+	windowSize.y = (float)windowSize.y*0.5f;
 
 	windowPosition.x += windowSize.x;
 	windowPosition.x += windowSize.y;
@@ -174,7 +182,7 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	if (pWindowOwner != NULL) 
 	{
 		// Set the window position to the center of the monitor which launched the exe
-		glfwSetWindowPos(pWindow, windowOwnerPos.x + (windowOwnerSize.x * 0.5) - windowSize.x, windowOwnerPos.y + (windowOwnerSize.y * 0.5) - windowSize.y);
+		glfwSetWindowPos(pWindow, (float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x, (float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y);
 	}
 }
 
@@ -199,13 +207,13 @@ void mainLoop()
 		// If window is focused
 		if (g_bWindowFocused)
 		{
+			g_fPreviousTime = g_fCurrentTime;
+			g_fCurrentTime = (float)glfwGetTime();
 			// Updates and renders the scene
-			g_pScene->update((float)glfwGetTime() * 20);
+			g_pScene->update(g_fCurrentTime - g_fPreviousTime);
 			g_pScene->render();
 		}
 
-		// Resets elapsed time
-		glfwSetTime(0);
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
     
@@ -286,6 +294,7 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
+	glfwSetMouseButtonCallback(g_pWindow, button_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetScrollCallback(g_pWindow, scroll_callback);
 	glfwSetWindowFocusCallback(g_pWindow, focus_callback);

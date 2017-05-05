@@ -1,72 +1,63 @@
-#include "..\include\Button.h"
+#include "Button.h"
 
-Button::Button()
+Button::Button(const glm::vec2 kPosition, const string ksLoc, const string ksHoverLoc, const vec3 kScale, Freetype *pOverlay)
 {
+	m_pHUD = pOverlay;
 
+	m_uiTextureIndex = m_pHUD->m_ImagePlane.size();
+	m_pHUD->LoadHUDImage(ksLoc, vec3(kPosition, 1), 0, kScale, false);
+
+	m_uiHoverTextureIndex = m_pHUD->m_ImagePlane.size();
+	m_pHUD->LoadHUDImage(ksHoverLoc, vec3(kPosition, 1), 0, kScale, false);
+
+	m_position = kPosition;
+	m_scale = vec2(kScale);
 }
 
-Button::Button(float fX, float fY, int iTextureID, string ButtonLoc, string ButtonHoverLoc, vec3 scale, Freetype *Overlay)
+bool Button::mouseOver(sf::Vector2f mousePos, const float kfWindowYSize)
 {
-	SetProperties(fX, fY, iTextureID, ButtonLoc , ButtonHoverLoc, scale, Overlay); // Create button
-}
-
-void Button::SetProperties(float fX, float fY, int iTextureID, string ButtonLoc, string ButtonHoverLoc, vec3 scale, Freetype *Overlay)
-{
-	m_ButtonSprite = Overlay;
-	m_ButtonSprite->LoadHUDImage(ButtonLoc, vec3(fX, fY, 1), 0, scale, false);
-	m_ButtonSprite->LoadHUDImage(ButtonHoverLoc, vec3(fX, fY, 1), 0, scale, false);
-	ButtonPos = vec2(fX, fY);
-	m_Scale = vec2(scale);
-	m_bActive = true;
-}
-
-void Button::ChangeTexture(int iNewTextureID)
-{
+	mousePos.y = kfWindowYSize - mousePos.y; // Origins mouse at top-left instead of bottom left.
 	
-}
-
-void Button::CheckHover(sf::Vector2f MousePos, int index)
-{
-	
-	MousePos.y = 1080 - MousePos.y; // Origins mouse at top-left instead of bottom left.
-
-	// Mouse is hovering over button
-	if (MousePos.x > (ButtonPos.x - (m_Scale.x /2)) && MousePos.x < (ButtonPos.x - (m_Scale.x / 2)) +  m_Scale.x  &&
-		MousePos.y > (ButtonPos.y - (m_Scale.y / 2)) && MousePos.y < (ButtonPos.y - (m_Scale.y / 2)) + m_Scale.y)
-	/*if (MousePos.x > 100)*/
+	// Mouse is over over Button
+	if (mousePos.x > (m_position.x - (m_scale.x / 2)) && mousePos.x < (m_position.x - (m_scale.x / 2)) + m_scale.x  &&
+		mousePos.y > (m_position.y - (m_scale.y / 2)) && mousePos.y < (m_position.y - (m_scale.y / 2)) + m_scale.y)
 	{
-		//ChangeTexture(m_iCurrentTexID + 1); // Change texture to highlighted texture
-		m_bActive = true;
-		m_ButtonSprite->m_ImagePlane.at(index + 1).setVisable(true);
-		m_ButtonSprite->m_ImagePlane.at(index).setVisable(false);
+		// Sets standard texture as invisible and hovertex as visible
+		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisible(false);
+		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisible(true);
+
+		return true;
 	}
-	// Mouse is not pointing at button
+	// Mouse is not over Button
 	else
 	{
-		/*ChangeTexture(m_iCurrentTexID);*/
-		m_bActive = false;
-		m_ButtonSprite->m_ImagePlane.at(index).setVisable(true);
-		m_ButtonSprite->m_ImagePlane.at(index + 1).setVisable(false);
+		// Sets standard hovertex as invisible and texture as visible
+		m_pHUD->m_ImagePlane.at(m_uiTextureIndex).setVisible(true);
+		m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).setVisible(false);
+
+		return false;
 	}
+
+	return false;
 }
 
-void Button::draw()
+void Button::render(GLSLProgram* pShader, const sf::Vector2i kWindowSize)
 {
-	//if (m_bActive)
-	//{
-	//	m_ButtonSprite->RenderImage(0);
-	//}
-	//else
-	/*{
-		m_ButtonSprite->RenderImage(1);
-	}*/
-}
+	pShader->use();
 
-bool Button::isActive()
-{
-	return m_bActive;
-}
+	// If default texture visible
+	if (m_pHUD->m_ImagePlane.at(m_uiTextureIndex).isVisible())
+	{
+		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiTextureIndex).getM());
+		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
+		m_pHUD->RenderImage(pShader, m_uiTextureIndex);
+	}
 
-Button::~Button()
-{
+	// If hover texture visible
+	if (m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).isVisible())
+	{
+		pShader->setUniform("M", m_pHUD->m_ImagePlane.at(m_uiHoverTextureIndex).getM());
+		pShader->setUniform("P", glm::ortho(0.0f, (float)kWindowSize.x, 0.f, (float)kWindowSize.y));
+		m_pHUD->RenderImage(pShader, m_uiHoverTextureIndex);
+	}
 }

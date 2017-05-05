@@ -13,8 +13,6 @@ Freetype::Freetype()
 
 	// Set size to load glyphs as
 	FT_Set_Pixel_Sizes(m_Face, 0, 25);
-
-	
 }
 
 void Freetype::loadCharacters()
@@ -133,17 +131,14 @@ void Freetype::LoadHUDImage(std::string imageLocation, glm::vec3 position, GLflo
 {
 	m_ImagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
 
-	m_ImagePlane.at(m_ImagePlane.size() - 1).setVisable(visablity);
+	m_ImagePlane.at(m_ImagePlane.size() - 1).setVisible(visablity);
 
 	m_ImagePlane.at(m_ImagePlane.size() - 1).loadModel();
 
 	m_ImagePlane.at(m_ImagePlane.size() - 1).initModel();
 }
 
-void Freetype::RenderImage(int index)
+void Freetype::RenderImage(GLSLProgram* pShader, int index)
 {
-	
-	m_ImagePlane.at(index).buffer();
-	m_ImagePlane.at(index).render();
-
+	m_ImagePlane.at(index).render(pShader, glm::mat4(1.0f));
 }

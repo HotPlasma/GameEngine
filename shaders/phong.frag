@@ -1,26 +1,11 @@
 #version 430
 
-// Binds texture to model based on texture coordinates and applies Phong lighting to objects.
+// Binds texture to model based on texture coordinates.
 
+uniform sampler2D tex;
+in vec2 texCoord;
 out vec4 FragColour;
 
-in VS_OUT 
-{
-	vec2 TextureCoord;
-	vec3 N;
-	vec3 LightPosition;
-	vec3 VertexPosition;
-} vs_out;
-
-uniform sampler2D tex;			//texture to be applied
-uniform vec3 Ia;				//Ambient light intensity
-uniform vec3 Id;				//Diffuse light intensity
-uniform vec3 Is;				//Specular light intensity
-uniform vec3 Rd;				//Diffuse reflectivity
-uniform vec3 Rs;				//SPecular reflectivity
-uniform float lightCutOff;
-uniform float lightOuterCutOff;
-uniform vec3 spotlightDirection;
 
 void main()
 {

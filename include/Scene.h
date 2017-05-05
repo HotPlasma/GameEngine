@@ -20,13 +20,15 @@ class Scene
 		// Load in all texture and initilise shaders
 		virtual void initScene(Freetype* pOverlay) = 0;
 	
-		// Called on keyPress event
-		virtual void keyPress(const int kiKey) = 0;
-		// Called on mouseScroll event
-		virtual void mouseScroll(const double kdDelta) = 0;
+		// Called on key input event
+		virtual void input_key(const int kiKey, const int kiAction) = 0;
+		// Called on mouseButton input event
+		virtual void input_button(const int kiButton, const int kiAction) = 0;
+		// Called on mouseScroll input event
+		virtual void input_scroll(const double kdDelta) = 0;
 
 		// Run every frame
-		virtual void update(float fTimeElapsed) = 0;
+		virtual void update(const float kfTimeElapsed) = 0;
 	
 		// Draw Scene
 		virtual void render() = 0;

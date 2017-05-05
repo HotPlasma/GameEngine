@@ -4,10 +4,10 @@ using std::string;
 using std::ifstream;
 
 #define COLLECTABLE_ROTATION 90.0f
-#define COLLECTABLE_SPEED 7.5f
+#define COLLECTABLE_SPEED 1.5f
 
 #define CAMERA_ROTATION 0.0025f
-#define CAMERA_SPEED 50.0f
+#define CAMERA_SPEED 15.0f
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -16,6 +16,9 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_windowSize = windowSize;
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
+
+	// Sets Camera initital position 
+	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 }
 
 void World::initScene(Freetype* pOverlay)
@@ -23,6 +26,7 @@ void World::initScene(Freetype* pOverlay)
 	m_pHUD = pOverlay; // Get the Heads up display for the scene
 
 	linkShaders();
+
 	// Stops rendered models from being transparent
 	gl::Enable(gl::DEPTH_TEST);
 
@@ -30,15 +34,15 @@ void World::initScene(Freetype* pOverlay)
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		if (!m_sceneReader.m_modelList.at(i).getCollected()) // Draw all items except collected collectables
+		if (!m_sceneReader.m_modelList.at(i).isCollected()) // Draw all items except collected collectables
 		{
 			m_sceneReader.m_modelList[i].initModel();
 		}
-		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
-	//m_pHUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", vec3(500.0f, 500.0f, 0.0f), 0.0f, vec3(1.0f, 1.0f, 1.0f), TRUE);
-}
+	// Resets cursor to the center of the window
+	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
+	m_mousePos = sf::Vector2f(getWindowSize().x*0.5, getWindowSize().y*0.5);
 
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
@@ -139,8 +143,8 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
-	// Sticks the camera to y 0.0
-	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
+	// Sticks the camera to y 5.0
+	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
@@ -171,7 +175,7 @@ void World::update(const float kfTimeElapsed)
 		if (m_sceneReader.m_modelList.at(i).isCollectable())
 		{
 			// If not collected
-			if (!m_sceneReader.m_modelList.at(i).getCollected())
+			if (!m_sceneReader.m_modelList.at(i).isCollected())
 			{
 				// Rotates collectable
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
@@ -217,7 +221,7 @@ void World::render()
 		}
 
 		// If Model is not collected
-		if (!m_sceneReader.m_modelList.at(i).getCollected())
+		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
 			// Buffers the Model
 			m_sceneReader.m_modelList.at(i).buffer();
@@ -227,7 +231,7 @@ void World::render()
 			m_spotlightShader.setUniform("model", m_sceneReader.m_modelList.at(i).m_M * transMat);
 			//setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 			// Renders the Model
-			m_sceneReader.m_modelList.at(i).render();
+			m_sceneReader.m_modelList.at(i).render(&m_worldShader, transMat);
 		}
 	}
 

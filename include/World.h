@@ -13,27 +13,27 @@
 
 class World : public Scene
 {
-	private:
-  
-		void setLightParamaters(GLSLProgram * pShader, int i);
-		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
-	
-		SceneReader m_sceneReader; // Reads .xml file in order to create world
+private:
 
-		bool m_collectGoingUp = true; // Whether collectables are moving up
-		float m_collectYOffset = 0.0f; // Y axis offset for collectables
-		Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
-	
-	public:
+	SceneReader m_sceneReader; // Reads .xml file in order to create world
 
-		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+	bool m_collectGoingUp = true; // Whether collectables are moving up
+	float m_collectYOffset = 0.0f; // Y axis offset for collectables
+	Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 
-		void initScene(Freetype* pOverlay);
+	void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
-		void keyPress(const int kiKey) {}
-		void mouseScroll(const double kdDelta) {}
+public:
 
-		void update(const float kfTimeElapsed);
-		void render();
+	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+
+	void initScene(Freetype* pOverlay);
+
+	void input_key(const int kiKey, const int kiAction) {}
+	void input_button(const int kiButton, const int kiAction) {}
+	void input_scroll(const double kdDelta) {}
+
+	void update(const float kfTimeElapsed);
+	void render();
 };
 #endif  
