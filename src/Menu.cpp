@@ -24,7 +24,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 700.0f),
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.65f),
 			"assets/UI/Play.png",
 			"assets/UI/PlayHover.png",
 			glm::vec3(147.f, 46.f, 1.f),
@@ -35,7 +35,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 600.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.55f),
 			"assets/UI/WorldEditor.png", 
 			"assets/UI/WorldEditorHover.png", 
 			glm::vec3(148.f, 46.f, 1.f), 
@@ -46,7 +46,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 500.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.45f),
 			"assets/UI/Options.png", 
 			"assets/UI/OptionsHover.png",
 			glm::vec3(126.f, 46.f, 1.f),
@@ -57,7 +57,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 400.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.35f),
 			"assets/UI/Exit.png", 
 			"assets/UI/ExitHover.png",
 			glm::vec3(83, 46.f, 1.f),
