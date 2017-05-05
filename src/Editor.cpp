@@ -307,13 +307,13 @@ void Editor::input_key(const int kiKey, const int kiAction)
 			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
 			{
 				// Removes last letter in active textbox
-				//m_menu.m_pActiveField->removeLetter();
-
-				// TEMPORARY
-				m_menu.m_pNameField->removeLetter();
-				m_menu.m_pObjField->removeLetter();
-				m_menu.m_pTexField->removeLetter();
+				m_menu.m_pActiveField->removeLetter();
 			}
+
+			// TEMPORARY Field Selection
+			if (kiKey == GLFW_KEY_1) m_menu.m_pActiveField = m_menu.m_pNameField;
+			if (kiKey == GLFW_KEY_2) m_menu.m_pActiveField = m_menu.m_pObjField;
+			if (kiKey == GLFW_KEY_3) m_menu.m_pActiveField = m_menu.m_pTexField;
 		}
 		else
 		{
@@ -391,12 +391,7 @@ void Editor::input_char(const unsigned int kuiUnicode)
 		)
 		{
 			// Adds input to active textbox
-			//m_menu.m_pActiveField->addLetter(kiKey);
-
-			// TEMPORARY
-			m_menu.m_pNameField->addLetter(kuiUnicode);
-			m_menu.m_pObjField->addLetter(kuiUnicode);
-			m_menu.m_pTexField->addLetter(kuiUnicode);
+			m_menu.m_pActiveField->addLetter(kuiUnicode);
 		}
 	}
 }
@@ -433,22 +428,14 @@ void Editor::input_button(const int kiButton, const int kiAction)
 
 					// Closes menu
 					m_bMenuOpen = false;
-
-					// Clears menu fields
-					m_menu.m_pNameField->setStr("");
-					m_menu.m_pObjField->setStr("");
-					m_menu.m_pTexField->setStr("");
+					m_menu.reset();
 				}
 				// If menu cancel button is clicked
 				if (m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
 				{
 					// Closes menu
 					m_bMenuOpen = false;
-
-					// Clears menu fields
-					m_menu.m_pNameField->setStr("");
-					m_menu.m_pObjField->setStr("");
-					m_menu.m_pTexField->setStr("");
+					m_menu.reset();
 				}
 			}
 			else

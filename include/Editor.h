@@ -55,6 +55,17 @@ struct ModelMenu
 
 	std::shared_ptr<Button> m_pLoad; //!< Load Model button
 	std::shared_ptr<Button> m_pCancel; //!< Cancel button
+
+	void reset() //!< Resets field data and active field
+	{
+		// Clears menu fields
+		m_pNameField->setStr("");
+		m_pObjField->setStr("");
+		m_pTexField->setStr("");
+
+		// Resets active field to name
+		m_pActiveField = m_pNameField;
+	}
 };
 
 //!< Scene subclass for creating levels
