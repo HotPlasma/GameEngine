@@ -545,10 +545,10 @@ void Editor::render()
 	m_spotlightShader.setUniform("P", m_camera.getProjection());
 
 	// Renders the Model in hand
-	m_pSelectedModel->buffer();
+	//m_pSelectedModel->buffer();
 
 	// Passes Model transformation data to shader
-	m_spotlightShader.setUniform("M", m_pSelectedModel->m_M);
+//	m_spotlightShader.setUniform("M", m_pSelectedModel->m_M);
 
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
@@ -562,7 +562,7 @@ void Editor::render()
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
 		// Buffers the Model
-		pModel->buffer();
+		//pModel->buffer();
 		
 		// Passes Model transformation data to shader
 		m_spotlightShader.setUniform("M", pModel->getM());

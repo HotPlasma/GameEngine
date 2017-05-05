@@ -225,7 +225,7 @@ void World::render()
 		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
 			// Buffers the Model
-			m_sceneReader.m_modelList.at(i).buffer();
+//			m_sceneReader.m_modelList.at(i).buffer();
       // Configures lighting
 			setLightParamaters(&m_spotlightShader, i);
 			// Sets the Model transformation matrix

@@ -65,20 +65,20 @@ class Scene
 		// Links vert and frag shaders into a glslprogram
 		void linkShaders()
 		{
-			try
-			{
-				// Shader which allows first person camera and textured object rendering
-				m_phongShader.compileShader("Shaders/phong.vert");
-				m_phongShader.compileShader("Shaders/phong.frag");
-				m_phongShader.link();
-				m_phongShader.validate();
-				m_phongShader.use();
-			}
-			catch (GLSLProgramException & e)
-			{
-				cerr << e.what() << endl;
-				exit(EXIT_FAILURE);
-			}
+			//try
+			//{
+			//	// Shader which allows first person camera and textured object rendering
+			//	m_phongShader.compileShader("Shaders/phong.vert");
+			//	m_phongShader.compileShader("Shaders/phong.frag");
+			//	m_phongShader.link();
+			//	m_phongShader.validate();
+			//	m_phongShader.use();
+			//}
+			//catch (GLSLProgramException & e)
+			//{
+			//	cerr << e.what() << endl;
+			//	exit(EXIT_FAILURE);
+			//}
 
 			try
 			{

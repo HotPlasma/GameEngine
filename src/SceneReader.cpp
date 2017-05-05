@@ -172,7 +172,7 @@ void SceneReader::readSceneFile(string sFilename)
 							}
 						}
 					}
-
+					newModel.set3D(true);
 					// Pushes newModel onto the vector of models
 					m_modelList.push_back(newModel); 
 				}

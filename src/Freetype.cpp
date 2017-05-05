@@ -129,7 +129,7 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 
 void Freetype::LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
 {
-	m_ImagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
+	m_ImagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0, false));
 
 	m_ImagePlane.at(m_ImagePlane.size() - 1).setVisible(visablity);
 
