@@ -43,43 +43,59 @@ void World::initScene(Freetype* pOverlay)
 void World::setLightParamaters(GLSLProgram *pShader, int i)
 {
 	vec3 worldLight = vec3(/*160.0f, 60.0f, -70.0f*/ 10.0f, 15.0f, 0.0f);
-	pShader->setUniform("lightCutOff", glm::cos(glm::radians(10.f)));
-	pShader->setUniform("ligthOuterCutOff", glm::cos(glm::radians(15.0f)));
-	pShader->setUniform("spotlightDirection", m_camera.getDirection());/* glm::vec3(-0.1f, -1.0f, 0.0f));*/
+	pShader->setUniform("material.diffuse", 0);
+	pShader->setUniform("material.specular", 1);
 
 	//set the ambient lighting for the scene
-	pShader->setUniform("Ia", 0.3f, 0.3f, 0.3f);
+	pShader->setUniform("light.position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
-	pShader->setUniform("lightPosition", m_camera.getPosition() /*worldLight*/);
+	pShader->setUniform("light.direction", m_camera.getDirection().x, m_camera.getDirection().y,m_camera.getDirection().z);
 
-	if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
-	{
-		m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-		m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-		m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
-	{
-		m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-		m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-		m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-		m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
-	{
-		m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-		m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-		m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-		m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
-	}
-	else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
-	{
-		m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
-		m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-		m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-		m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
-	}
+	pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
+
+	pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
+
+
+	pShader->setUniform("viewPos", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
+
+	pShader->setUniform("light.ambient", 0.8f, 0.8f, 0.8f);
+	pShader->setUniform("light.diffuse", 0.8f, 0.8f, 0.8f);
+	pShader->setUniform("light.specular", 1.0f, 1.0f, 1.0f);
+	pShader->setUniform("light.constant", 1.0f);
+	pShader->setUniform("light.linear", 0.09f);
+	pShader->setUniform("light.quadratic", 0.032f);
+
+	pShader->setUniform("material.shininess", 32.0f);
+
+
+	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
+	//	m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
+	//	m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
+	//	m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
+	//	m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
+	//	m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
+	//	m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
+	//{
+	//	m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
+	//	m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
+	//	m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
+	//	m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
+	//}
 }
 
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
@@ -89,9 +105,9 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
 	pShader->setUniform("MVP", kProjection * mv);
 	mat3 normMat = glm::transpose(glm::inverse(mat3(kModel)));
-	pShader->setUniform("M", kModel);
-	pShader->setUniform("V", kView);
-	pShader->setUniform("P", kProjection);
+	pShader->setUniform("model", kModel);
+	pShader->setUniform("view", kView);
+	pShader->setUniform("projection", kProjection);
 }
 
 void World::update(const float kfTimeElapsed)
@@ -207,7 +223,8 @@ void World::render()
       // Configures lighting
 			setLightParamaters(&m_spotlightShader, i);
 			// Sets the Model transformation matrix
-			m_spotlightShader.setUniform("M", m_sceneReader.m_modelList.at(i).m_M * transMat);
+			m_spotlightShader.setUniform("model", m_sceneReader.m_modelList.at(i).m_M * transMat);
+			//setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 			// Renders the Model
 			m_sceneReader.m_modelList.at(i).render();
 		}
