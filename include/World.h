@@ -20,10 +20,16 @@ class World : public Scene
 		float yRot; //amount for random turns of ai in wander state
 		bool searching = true; 
 		int duration = 0;
-		clock_t timer;
+		//clock_t timer;
 		float xPos;
 		float zPos;
 		mat4 movement;
+		sf::Clock batteryTimer;
+		sf::Clock LevelTimer;
+		float spareBatteries = 0;
+		float batteryLife = 100;
+		
+		
 	
 
 	

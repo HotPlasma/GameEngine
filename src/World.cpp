@@ -14,7 +14,7 @@ void World::initScene()
 	
 	srand(time(NULL)); //to get true random numbers
 	yRot = rand() % 360 + 1; //for direction ai will move in in the wander state
-	
+
 
 	linkMe(1, 2);
 	// Stops rendered models from being transparent
@@ -95,13 +95,44 @@ void World::update(float t)
 	m_WorldShader.setUniform("mProjection", P);
 
 	//Ai section
-	double rotationAngle;
-	timer = clock();
-	duration = (clock()) / (double)CLOCKS_PER_SEC;
-	if (duration % 4 == 0)
+
+	
+	sf::Time bTimer = batteryTimer.getElapsedTime();
+	sf::Time lTimer = LevelTimer.getElapsedTime();
+
+	//cout << bTimer.asSeconds() << endl;
+	
+	if (bTimer.asSeconds() >= 10)
 	{
-		searching = false;
+		if (batteryLife >= 20)
+		{
+			batteryLife -= 20;
+			cout << "battery life = " << batteryLife << "%" << endl;
+		}
+		else
+		{
+			cout << "it was too dark, you lose" << endl;
+		}
+		batteryTimer.restart();
 	}
+
+	//cout << lTimer.asSeconds() << endl;
+	if (lTimer.asSeconds() >= 200)
+	{
+		cout << "you survived!" << endl;
+		//victory!
+	}
+
+
+
+
+	double rotationAngle;
+	//timer = clock();
+	//duration = (clock()) / (double)CLOCKS_PER_SEC;
+	//if (duration % 4 == 0)
+	//{
+		//searching = false;
+	//}
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 
@@ -119,7 +150,7 @@ void World::update(float t)
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
 			{
-				cout << "wandering" << endl;
+				//cout << "wandering" << endl;
 				// wander();
 				if (searching == true)
 				{
@@ -135,7 +166,7 @@ void World::update(float t)
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2.8f) // if ai is in chase range
 			{
-				cout << "chasing" << endl;
+				//cout << "chasing" << endl;
 				// chase();
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
@@ -174,10 +205,21 @@ void World::update(float t)
 				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_collectableSpeed );
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + 5, m_sceneReader.m_modelList.at(i).getRotation().z));
 				// Get distance between player and collectable
-				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
+				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and a collectable
 
 				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // If collision with a collectable mark it as collected and stop drawing it
 				{
+					if (batteryLife < 100)
+					{
+						batteryLife += 20;
+						cout << "BATTERY LIFE INCREASED;" << " battery life = " << batteryLife << "%" << endl;
+					}
+					else
+					{
+						cout << "BATTERY LIFE ALREADY FULL- BATTERY STORED FOR WHEN YOU LOSE CHARGE" << endl;
+						spareBatteries++;
+						cout << "number of spare batteries= " << spareBatteries << endl;
+					}
 					m_sceneReader.m_modelList.at(i).setCollected(true);
 				}
 			}
