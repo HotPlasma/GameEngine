@@ -66,6 +66,7 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 
 void World::update(const float kfTimeElapsed)
 {
+	
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
@@ -95,6 +96,41 @@ void World::update(const float kfTimeElapsed)
 	// Sticks the camera to y 5.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
+	//BATTERY AND SURVIVAL TIMERS
+	sf::Time bTimer = batteryTimer.getElapsedTime();
+	sf::Time lTimer = LevelTimer.getElapsedTime();
+
+	//cout << bTimer.asSeconds() << endl;
+	if (bTimer.asSeconds() >= 10)
+	{
+		if (batteryLife >= 20)
+		{
+			batteryLife -= 20;
+			std::cout << "battery life = " << batteryLife << "%" << std::endl;
+			
+		}
+		else
+		{
+			std::cout << "it was too dark, you lose" << std::endl;
+		}
+		batteryTimer.restart();
+	}
+
+	//cout << lTimer.asSeconds() << endl;
+	if (lTimer.asSeconds() >= 200)
+	{
+		//std::cout << "you survived!" << std::endl;
+		lTime = "You Survived!";
+		//victory!
+	}
+	else
+	{
+		lTime = std::to_string(lTimer.asSeconds());
+	}
+
+	bLife = std::to_string(batteryLife);
+	
+	
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
@@ -135,6 +171,18 @@ void World::update(const float kfTimeElapsed)
 				// If collision with a collectable
 				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 				{
+					if (batteryLife < 100)
+					{
+						batteryLife += 20;
+						std::cout << "BATTERY LIFE INCREASED;" << " battery life = " << batteryLife << "%" << std::endl;
+					}
+					else
+					{
+						std::cout << "BATTERY LIFE ALREADY FULL- BATTERY STORED FOR WHEN YOU LOSE CHARGE" << std::endl;
+						spareBatteries++;
+						std::cout << "number of spare batteries= " << spareBatteries << std::endl;
+						
+					}
 					// Marks it as collected
 					m_sceneReader.m_modelList.at(i).setCollected(true);
 				}
@@ -179,11 +227,17 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render(&m_worldShader, transMat);
 		}
 	}
-
 	// Activates FreeType shader
+
+
+	
 	m_freeType.use();
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
 	// Renders placeholder text to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), "Placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->RenderText(m_freeType.getHandle(), "placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->RenderText(m_freeType.getHandle(), bLife, 1600.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->RenderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->RenderText(m_freeType.getHandle(), "Battery Life-   %", 1390.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+
 }
