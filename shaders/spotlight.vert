@@ -1,23 +1,28 @@
+#version 430
 
+layout (location = 0) in vec3 VertexPosition;
+layout (location = 1) in vec3 VertexNormal;
+layout (location = 2) in vec2 TextureCoord;
 
-#version 330 core
-layout (location = 0) in vec3 position;
-layout (location = 1) in vec3 normal;
-layout (location = 2) in vec2 texCoords;
+out VS_OUT
+{
+	vec3 VertexPosition;
+	vec3 N;
+	vec2 TextureCoord;
+} vs_out;
 
-out vec3 Normal;
-out vec3 FragPos;
-out vec2 TexCoords;
-
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+uniform mat4 M;
+uniform mat4 V;
+uniform mat4 P;
 
 void main()
 {
-    gl_Position = projection * view *  model * vec4(position, 1.0f);
-    FragPos = vec3(model * vec4(position, 1.0f));
-    Normal = mat3(transpose(inverse(model))) * normal;  
-    TexCoords = texCoords;
-} 
+	vs_out.VertexPosition = vec3(V * M * vec4(VertexPosition,1.0));
 
+	mat3 normalMatrix = transpose(inverse(mat3(M)));
+	vs_out.N = normalize(normalMatrix * VertexNormal);
+
+	vs_out.TextureCoord = TextureCoord;
+
+	gl_Position = P * V * M * vec4(VertexPosition,1.0);
+}

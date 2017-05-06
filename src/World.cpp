@@ -55,25 +55,17 @@ void World::setLightParamaters(GLSLProgram *pShader, int i)
 	//set the ambient lighting for the scene
 	pShader->setUniform("light.position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
-	pShader->setUniform("light.direction", m_camera.getDirection().x, m_camera.getDirection().y,m_camera.getDirection().z);
-
+	pShader->setUniform("light.direction", m_camera.getPosition().x + m_camera.getDirection().x, m_camera.getPosition().y + m_camera.getDirection().y, m_camera.getPosition().z + m_camera.getDirection().z);
 	pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
-
 	pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
 
-
-	pShader->setUniform("viewPos", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
-
-	pShader->setUniform("light.ambient", 0.8f, 0.8f, 0.8f);
-	pShader->setUniform("light.diffuse", 0.8f, 0.8f, 0.8f);
-	pShader->setUniform("light.specular", 1.0f, 1.0f, 1.0f);
+	pShader->setUniform("light.ambient", 0.3f, 0.3f, 0.3f);
+	pShader->setUniform("light.diffuse", 0.5f, 0.5f, 0.5f);
+	pShader->setUniform("light.specular", 0.8f, 0.8f, 0.8f);
 	pShader->setUniform("light.constant", 1.0f);
 	pShader->setUniform("light.linear", 0.09f);
 	pShader->setUniform("light.quadratic", 0.032f);
-
 	
-
-
 	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
 	//{
 	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
@@ -111,9 +103,9 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
 	pShader->setUniform("MVP", kProjection * mv);
 	mat3 normMat = glm::transpose(glm::inverse(mat3(kModel)));
-	pShader->setUniform("model", kModel);
-	pShader->setUniform("view", kView);
-	pShader->setUniform("projection", kProjection);
+	pShader->setUniform("M", kModel);
+	pShader->setUniform("V", kView);
+	pShader->setUniform("P", kProjection);
 }
 
 void World::update(const float kfTimeElapsed)
@@ -203,7 +195,6 @@ void World::render()
 	// WORLD
 	// Activates World shader
 	m_spotlightShader.use();
-	setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
@@ -224,13 +215,10 @@ void World::render()
 		// If Model is not collected
 		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
-			// Buffers the Model
-//			m_sceneReader.m_modelList.at(i).buffer();
-      // Configures lighting
+			// Configures lighting
 			setLightParamaters(&m_spotlightShader, i);
 			// Sets the Model transformation matrix
-			m_spotlightShader.setUniform("model", m_sceneReader.m_modelList.at(i).getM() * transMat);
-			//setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
+			setMatrices(&m_spotlightShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
 			// Renders the Model
 			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
 		}
