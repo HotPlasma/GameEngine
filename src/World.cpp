@@ -71,7 +71,7 @@ void World::input_key(const int kiKey, const int kiAction)
 	if (kiAction == GLFW_PRESS)
 	{
 		// If Esc key pressed
-		//if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
+		if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
 	}
 }
 
