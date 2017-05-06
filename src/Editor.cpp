@@ -674,10 +674,10 @@ void Editor::update(const float kfTimeElapsed)
 			/////////////////// Z ///////////////////
 			// If A key is pressed
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-				m_selection.m_rotation += glm::vec3(0.0f, 0.0f, -ROTATION_SPEED*kfTimeElapsed);
+				m_selection.m_rotation += glm::vec3(0.0f, 0.0f, ROTATION_SPEED*kfTimeElapsed);
 			// If D key is pressed
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-				m_selection.m_rotation += glm::vec3(0.0f, 0.0f, ROTATION_SPEED*kfTimeElapsed);
+				m_selection.m_rotation += glm::vec3(0.0f, 0.0f, -ROTATION_SPEED*kfTimeElapsed);
 		}
 
 		/////////////////// SCALE ///////////////////
@@ -686,10 +686,10 @@ void Editor::update(const float kfTimeElapsed)
 			/////////////////// X ///////////////////
 			// If W key is pressed
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-				m_selection.m_scale += glm::vec3(-SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+				m_selection.m_scale += glm::vec3(SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
 			// If S key is pressed
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-				m_selection.m_scale += glm::vec3(SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+				m_selection.m_scale += glm::vec3(-SCALE_SPEED*kfTimeElapsed, 0.0f, 0.0f);
 
 			/////////////////// Y ///////////////////
 			// If Spacebar is pressed

@@ -29,7 +29,7 @@ struct Selection
 
 	std::vector<std::shared_ptr<Model>> m_pRedoList; //!< Models that have been undone
 
-	Bouncer m_lightIntensity = Bouncer(Bounds(0.15, -0.15)); //!< Bouncing value for selection light intensity
+	Bouncer m_lightIntensity = Bouncer(Bounds(0.15f, -0.15f)); //!< Bouncing value for selection light intensity
 };
 
 struct EditorHUD
