@@ -1,15 +1,15 @@
 #pragma once
+#ifndef MODEL_H
+#define MODEL_H
 
 #include "PreHeader.h"
 
 #include "ModelReader.h"
-#include "glslprogram.h"
-
-using namespace std;
 
 class Model
 {
 private:
+  
 	string m_sName; // A moniker for each model
 	string m_sFileName; // File location of the obj
 	string m_sTexture; // File location of the texture
@@ -25,8 +25,6 @@ private:
 
 	bool m_bVisible = true; // is the model visable
 
-	bool m_b3D;
-
 	GLuint m_textureID; // ID of the texture
 	ModelReader* m_pModelReader; // Model Reader for the render the model
 
@@ -39,12 +37,12 @@ private:
 	GLuint m_vaoHandle;
 
 public:
-	Model(); // Constructor
-	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID, bool ThreeDimentional = true); // Full constructor
 
-	vector<float> m_positionData;
-	vector<float> m_vertexNormalData;
-	vector<float> m_uvData;
+	Model(); // Constructor
+	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
+	
+	std::vector<float> m_positionData;
+	std::vector<float> m_uvData;
 
 	void setName(const string ksName) { m_sName = ksName; }
 	void setFileLocation(const string ksLocation) { m_sFileName = ksLocation; }
@@ -58,8 +56,7 @@ public:
 	void setCollected(const bool kbCollected) { m_bCollected = kbCollected; }
 	void setVisible(const bool kbVisibility) { m_bVisible = kbVisibility; }
 	void setMaterial(const int kiMaterial) { m_iMaterial = kiMaterial; }
-	void set3D(const bool ThreeDimentional) { m_b3D = ThreeDimentional; }
-
+	
 	string getName() { return m_sName; }; // Returns Model name
 	string getFileLocation() { return m_sFileName; }; // Returns location of obj
 	string getTextureLocation() { return m_sTexture; }; // Returns location of texture
@@ -71,7 +68,6 @@ public:
 	bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
 	bool isCollected() { return m_bCollected; }; // Check if a collectable has been collected
 	bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
-	bool is3D() { return m_b3D; };
 	int getMaterial() { return m_iMaterial; }; // Returns materialID
 
 	void loadModel() { m_pModelReader = new ModelReader(m_sFileName); } // Loads in the model to be rendered
@@ -79,3 +75,5 @@ public:
 
 	void render(GLSLProgram* pShader, const glm::mat4 kModel);
 };
+
+#endif

@@ -1,54 +1,62 @@
+#pragma once
 #ifndef SCENE_H
 #define SCENE_H
 
 #include "PreHeader.h"
+
 #include "Camera.h"
-#include <Freetype.h>
+#include "Freetype.h"
+
+enum Intent { NONE, TO_MENU, TO_GAME, TO_EDITOR };
 
 // Abstract class in order to set up world
 class Scene
 {
-	public:
+public:
 
-		Scene() {}
-		Scene(GLFWwindow *pWindow) {};
+	// Default constructor
+	Scene() {}
 	
-		sf::Vector2i m_windowSize; // Dimensions of window
-	
-		sf::Sound Music;
+	sf::Vector2i m_windowSize; // Dimensions of window
 
-		// Load in all texture and initilise shaders
-		virtual void initScene(Freetype* pOverlay) = 0;
-	
-		// Called on key input event
-		virtual void input_key(const int kiKey, const int kiAction) = 0;
-		// Called on mouseButton input event
-		virtual void input_button(const int kiButton, const int kiAction) = 0;
-		// Called on mouseScroll input event
-		virtual void input_scroll(const double kdDelta) = 0;
+	Intent m_intention = NONE;
 
-		// Run every frame
-		virtual void update(const float kfTimeElapsed) = 0;
-	
-		// Draw Scene
-		virtual void render() = 0;
-	
-		// Allow screen to be resized without causing rendering issues
-		void resize(int iWidth, int iHeight)
-		{
-			m_windowSize.x = iWidth;
-			m_windowSize.y = iHeight;
-	
-			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
-			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
-		}
-	
-		// Used to update cursor position
-		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
+	sf::Sound m_music;
 
-		sf::Vector2i getWindowSize() { return m_windowSize; }
-	    
-	protected:
+	// Load in all texture and initilise shaders
+	virtual void initScene(Freetype* pOverlay) = 0;
+
+	// Called on key input event
+	virtual void input_key(const int kiKey, const int kiAction) = 0;
+	// Called on char input event
+	virtual void input_char(const unsigned int kuiUnicode) = 0;
+	// Called on mouseButton input event
+	virtual void input_button(const int kiButton, const int kiAction) = 0;
+	// Called on mouseScroll input event
+	virtual void input_scroll(const double kdDelta) = 0;
+
+	// Run every frame
+	virtual void update(const float kfTimeElapsed) = 0;
+
+	// Draw Scene
+	virtual void render() = 0;
+
+	// Allow screen to be resized without causing rendering issues
+	void resize(int iWidth, int iHeight)
+	{
+		m_windowSize.x = iWidth;
+		m_windowSize.y = iHeight;
+
+		gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
+		m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
+	}
+
+	// Used to update cursor position
+	void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
+
+	sf::Vector2i getWindowSize() { return m_windowSize; }
+    
+protected:
 
 		GLSLProgram m_textureShader;
 		GLSLProgram m_phongShader;
@@ -56,16 +64,16 @@ class Scene
 		GLSLProgram m_freeType;
 		GLSLProgram m_imageType;
 
-		Camera m_camera; // Camera which user can control
+	Camera m_camera; // Camera which user can control
 
-		Freetype* m_pHUD;
+	Freetype* m_pHUD;
 
-		GLFWwindow *m_pWindow; // The window
-		sf::Vector2f m_mousePos; // Holds mouse cursor position
+	GLFWwindow *m_pWindow; // The window
+	sf::Vector2f m_mousePos; // Holds mouse cursor position
 
-		// Links vert and frag shaders into a glslprogram
-		void linkShaders()
-		{
+	// Links vert and frag shaders into a glslprogram
+	void linkShaders()
+	{
 			try
 			{
 				// Shader which allows blank flat texture rendering
@@ -194,6 +202,7 @@ class Scene
 			//	m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
 			//}
 		}
+	}
 };
 
 #endif // SCENE_H

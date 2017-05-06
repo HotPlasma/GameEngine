@@ -11,8 +11,8 @@ using std::ifstream;
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
+	// Sets members with input
 	m_pWindow = pWindow;
-
 	m_windowSize = windowSize;
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
@@ -23,7 +23,11 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 void World::initScene(Freetype* pOverlay)
 {
-	m_pHUD = pOverlay; // Get the Heads up display for the scene
+	// Get the Heads up display for the scene
+	m_pHUD = pOverlay;
+
+	// Sets cursor style
+	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
 	linkShaders();
 
@@ -41,12 +45,27 @@ void World::initScene(Freetype* pOverlay)
 	}
 
 	// Resets cursor to the center of the window
-	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5, getWindowSize().y*0.5);
-	m_mousePos = sf::Vector2f(getWindowSize().x*0.5, getWindowSize().y*0.5);
+	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5f, getWindowSize().y*0.5f);
+	m_mousePos = sf::Vector2f((float)getWindowSize().x*0.5f, (float)getWindowSize().y*0.5f);
+
+	// Updates camera vision
+	m_camera.updateView();
+}
+
+// Void: Called on key input event
+void World::input_key(const int kiKey, const int kiAction)
+{
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
+	{
+		// If Esc key pressed
+		if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
+	}
 }
 
 void World::update(const float kfTimeElapsed)
 {
+	
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
@@ -73,9 +92,67 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+	{
+		if (spareBatteries > 0)
+		{
+			if (batteryLife <= 80)
+			{
+				batteryLife += 20;
+			    spareBatteries -= 1;
+			}
+		}
+	}
+
 	// Sticks the camera to y 5.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
+	//BATTERY AND SURVIVAL TIMERS
+	sf::Time bTimer = batteryTimer.getElapsedTime();
+	sf::Time lTimer = LevelTimer.getElapsedTime();
+
+	//cout << bTimer.asSeconds() << endl;
+	if (bTimer.asSeconds() >= 1)
+	{
+		if (batteryLife >= 1)
+		{
+			batteryLife -= 1;
+			std::cout << "battery life = " << batteryLife << "%" << std::endl;
+			
+		}
+		else
+		{
+			std::cout << "it was too dark, you lose" << std::endl;
+		}
+		batteryTimer.restart();
+	}
+
+	//cout << lTimer.asSeconds() << endl;
+	if (lTimer.asSeconds() >= 1)
+	{
+		if (lCountdown >= 1)
+		{
+			lCountdown -= 1;
+			lTime = std::to_string(lCountdown);
+			
+		}
+		else
+		{ 
+			//std::cout << "you survived!" << std::endl;
+			lTime = "You Survived!";
+			//victory!}
+	    }
+		LevelTimer.restart();
+
+	
+}
+
+	bLife = std::to_string(batteryLife);
+
+	extraBatteries = std::to_string(spareBatteries);
+	
+	
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
@@ -116,12 +193,27 @@ void World::update(const float kfTimeElapsed)
 				// If collision with a collectable
 				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 				{
+					if (batteryLife <= 80)
+					{
+						batteryLife += 20;
+						std::cout << "BATTERY LIFE INCREASED;" << " battery life = " << batteryLife << "%" << std::endl;
+					}
+					else
+					{
+						std::cout << "BATTERY LIFE ALREADY FULL- BATTERY STORED FOR WHEN YOU LOSE CHARGE" << std::endl;
+						spareBatteries++;
+						std::cout << "number of spare batteries= " << spareBatteries << std::endl;
+						
+					}
 					// Marks it as collected
 					m_sceneReader.m_modelList.at(i).setCollected(true);
 				}
 			}
 		}
 	}
+
+	// Resets cursor position
+	glfwSetCursorPos(m_pWindow, m_windowSize.x*0.5, m_windowSize.y*0.5);
 }
 
 void World::render()
@@ -165,11 +257,19 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
 		}
 	}
-
 	// Activates FreeType shader
+
+
+	
 	m_freeType.use();
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
 	// Renders placeholder text to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), "Placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), "spare batteries-   ('E' to use for 20% battery life)", 30.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), extraBatteries, 300.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), bLife, 1820.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+
 }
+

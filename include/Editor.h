@@ -1,3 +1,4 @@
+#pragma once
 #ifndef EDITOR_H
 #define EDITOR_H
 
@@ -7,9 +8,9 @@
 #include "Camera.h"
 #include "Model.h"
 #include "ModelReader.h"
-#include "glslprogram.h"
 #include "Button.h"
 #include "TextBox.h"
+#include "Utilities.h"
 
 struct Selection
 {
@@ -43,6 +44,31 @@ struct EditorHUD
 	std::shared_ptr<Button> m_pSave; //!< Button to save Scene to file
 };
 
+struct ModelMenu
+{
+	unsigned int m_uiBGIndex; //!< Background imageplane index
+
+	std::shared_ptr<TextBox> m_pActiveField; //!< Text box active for writing
+
+	std::shared_ptr<TextBox> m_pNameField; //!< Text box for Model name
+	std::shared_ptr<TextBox> m_pObjField; //!< Text box for Model obj file location
+	std::shared_ptr<TextBox> m_pTexField; //!< Text box for Model texture file location
+
+	std::shared_ptr<Button> m_pLoad; //!< Load Model button
+	std::shared_ptr<Button> m_pCancel; //!< Cancel button
+
+	void reset() //!< Resets field data and active field
+	{
+		// Clears menu fields
+		m_pNameField->setStr("");
+		m_pObjField->setStr("");
+		m_pTexField->setStr("");
+
+		// Resets active field to name
+		m_pActiveField = m_pNameField;
+	}
+};
+
 //!< Scene subclass for creating levels
 class Editor : public Scene
 {
@@ -61,9 +87,12 @@ private:
 
 	EditorHUD m_buttons; //!< Editor option buttons
 
+	bool m_bMenuOpen = false; //!< Whether Model menu is active
+	ModelMenu m_menu; //!< Model selection menu
+
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
-	std::shared_ptr<TextBox> m_textBox; //!< TextBox
+	void save(); //!< Saves the Scene to XML file
 
 public:
 
@@ -71,13 +100,13 @@ public:
 
 	void initScene(Freetype* pOverlay); //!< Initialises the Editor Scene
 
-	void save(); //!< Saves the Scene to XML file
-
 	void input_key(const int kiKey, const int kiAction); //!< Called on key input event
+	void input_char(const unsigned int kuiUnicode); //!< Called on char input event
 	void input_button(const int kiButton, const int kiAction); //!< Called on mouseButton input event
 	void input_scroll(const double kdDelta); //!< Called on mouseScroll input event
 
 	void update(const float kfTimeElapsed); //!< Updates the Editor with elapsed time
 	void render(); //!< Renders the Editor to display
 };
-#endif  
+
+#endif

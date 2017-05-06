@@ -2,6 +2,7 @@
 
 #include "PreHeader.h"
 
+#include "Freetype.h"
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
@@ -9,23 +10,13 @@
 #include "Menu.h"
 #include "World.h"
 #include "Editor.h"
-#include <Freetype.h>
 
-using std::string;
-
-//std::map<GLchar, Character> Characters;
-
-Menu *g_pMenu;
-Scene *g_pScene;
+std::shared_ptr<Scene> g_pScene;
 GLFWwindow *g_pWindow;
+Freetype g_HUD;
 
-Freetype userInterface;
-
-enum GameState { MainMenu, Game, LevelEditor, Exit };
-GameState g_gameState = MainMenu;
-
-float g_fCurrentTime = 0.f;
-float g_fPreviousTime = 0.f;
+float g_fCurrentTime = 0.0f; // Current time
+float g_fPrevTick = 0.0f; // Time of previous update
 
 bool g_bWindowFocused; // Stores whether the window is in focus
 
@@ -35,6 +26,14 @@ bool g_bWindowFocused; // Stores whether the window is in focus
 static void key_callback(GLFWwindow* pWindow, int iKey, int iScancode, int iAction, int iMods)
 {
 	g_pScene->input_key(iKey, iAction);
+}
+
+//////////////////////////////////////////////////////////
+////  Char input callback ////////////////////////////////
+//////////////////////////////////////////////////////////
+static void char_callback(GLFWwindow* pWindow, unsigned int uiCodepoint)
+{
+	g_pScene->input_char(uiCodepoint);
 }
 
 //////////////////////////////////////////////////////////
@@ -77,7 +76,7 @@ static void focus_callback(GLFWwindow *pWindow, int iFocused)
 }
 
 //////////////////////////////////////////////////////////
-//// Window resize callback //////////////////////////////
+////  Window resize callback /////////////////////////////
 //////////////////////////////////////////////////////////
 static void resize_callback(GLFWwindow *pWindow, int iWidth, int iHeight)
 {
@@ -96,20 +95,18 @@ void initializeGL()
 	sf::Vector2i windowSize;
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
-	// Creates a World scene
-	//g_pScene = new World(windowSize);
-	g_pMenu = new Menu(g_pWindow, windowSize);
-	g_pScene = g_pMenu;
+	// Creates an initial scene - a Menu
+	g_pScene = std::shared_ptr<Scene>(new Menu(g_pWindow, windowSize));
 
 	// Set-up freetype
 	gl::Enable(gl::BLEND);
 	gl::BlendFunc(gl::SRC_ALPHA, gl::ONE_MINUS_SRC_ALPHA);
 
-	userInterface.loadCharacters();
-	userInterface.setupBuffers();
+	g_HUD.loadCharacters();
+	g_HUD.setupBuffers();
 	
 	// Initialises scene
-	g_pScene->initScene(&userInterface);
+	g_pScene->initScene(&g_HUD);
 }
 
 //////////////////////////////////////////////////////////
@@ -126,8 +123,8 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
 
 	// Get the distance needed to centre the window
-	windowSize.x = (float)windowSize.x*0.5f;
-	windowSize.y = (float)windowSize.y*0.5f;
+	windowSize.x = (int)(windowSize.x*0.5f);
+	windowSize.y = (int)(windowSize.y*0.5f);
 
 	windowPosition.x += windowSize.x;
 	windowPosition.x += windowSize.y;
@@ -182,78 +179,57 @@ void glfwSetWindowPositionCenter(GLFWwindow* pWindow)
 	if (pWindowOwner != NULL) 
 	{
 		// Set the window position to the center of the monitor which launched the exe
-		glfwSetWindowPos(pWindow, (float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x, (float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y);
+		glfwSetWindowPos(pWindow, (int)((float)windowOwnerPos.x + ((float)windowOwnerSize.x * 0.5f) - (float)windowSize.x), (int)((float)windowOwnerPos.y + ((float)windowOwnerSize.y * 0.5f) - (float)windowSize.y));
 	}
 }
 
 //////////////////////////////////////////////////////////
-//// Main loop  //////////////////////////////////////////
+////  Main loop  /////////////////////////////////////////
 //////////////////////////////////////////////////////////
 void mainLoop() 
 {
-	// Sets the cursor position to center screen for tracking
-	glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
-
 	// While the window should remain open and escape is not pressed
-	while (!glfwWindowShouldClose(g_pWindow) && !glfwGetKey(g_pWindow, GLFW_KEY_ESCAPE))
+	while (!glfwWindowShouldClose(g_pWindow))
 	{
-		// If GameState is 'Game' - Sets the cursor to be hidden
-		if (g_gameState == Game)
-			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-		// Else - Cursor visible
-		else
-			glfwSetInputMode(g_pWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
 		// If window is focused
 		if (g_bWindowFocused)
 		{
-			g_fPreviousTime = g_fCurrentTime;
+			// Defines currentTime and previousTick
+			g_fPrevTick = g_fCurrentTime;
 			g_fCurrentTime = (float)glfwGetTime();
 			// Updates and renders the scene
-			g_pScene->update(g_fCurrentTime - g_fPreviousTime);
+			g_pScene->update(g_fCurrentTime - g_fPrevTick);
 			g_pScene->render();
 		}
 
 		glfwSwapBuffers(g_pWindow);
 		glfwPollEvents();
-    
-		if (g_gameState == MainMenu)
+
+		// If Scene has an intent
+		if (g_pScene->m_intention != NONE)
 		{
-			if (glfwGetMouseButton(g_pWindow, GLFW_MOUSE_BUTTON_1))
+			// Gets window size
+			sf::Vector2i windowSize;
+			glfwGetWindowSize(g_pWindow, &windowSize.x, &windowSize.y);
+
+			// If signalled to enter Menu
+			if (g_pScene->m_intention == TO_MENU)
 			{
-				{
-					g_pMenu->Click();
-				}
+				g_pScene = std::shared_ptr<Scene>(new Menu(g_pWindow, windowSize));
+				g_pScene->initScene(&g_HUD);
 			}
-
-			switch (g_pMenu->returnMenuChoice())
+			// Else If signalled to enter World
+			else if (g_pScene->m_intention == TO_GAME)
 			{
-			case 1:
-				g_pScene = new World(g_pWindow, sf::Vector2i(1920,1080));
-				g_pScene->initScene(&userInterface);
-				g_gameState = Game;
-				break;
-			case 2:
-				g_pScene = new Editor(g_pWindow, sf::Vector2i(1920, 1080));
-				g_pScene->initScene(&userInterface);
-				g_gameState = LevelEditor;
-				break;
-			case 3:
-				break;
-			case 4:
-				delete g_pScene;
-				glfwTerminate();
-				exit(EXIT_SUCCESS);
-				break;
-
+				g_pScene = std::shared_ptr<Scene>(new World(g_pWindow, windowSize));
+				g_pScene->initScene(&g_HUD);
 			}
-		}
-
-		// If GameState is 'Game' - Sets the cursor to screen center
-		if (g_gameState == Game)
-		{
-			// Resets cursor to the center of the window after cursor event
-			if (g_bWindowFocused) glfwSetCursorPos(g_pWindow, g_pScene->getWindowSize().x*0.5, g_pScene->getWindowSize().y*0.5);
+			// Else If signalled to enter Editor
+			else if (g_pScene->m_intention == TO_EDITOR)
+			{
+				g_pScene = std::shared_ptr<Scene>(new Editor(g_pWindow, windowSize));
+				g_pScene->initScene(&g_HUD);
+			}
 		}
 	}
 }
@@ -278,12 +254,7 @@ int main(int argc, char *argv[])
 	g_pWindow = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
 	
 	// If the window isn't created
-	if (!g_pWindow)
-	{
-		// Clean up and abort
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
+	if (!g_pWindow) { closeProgram(); }
 	
 	// Focusses on the window
 	glfwMakeContextCurrent(g_pWindow);
@@ -294,6 +265,7 @@ int main(int argc, char *argv[])
 
 	// Defines callback functions
 	glfwSetKeyCallback(g_pWindow, key_callback);
+	glfwSetCharCallback(g_pWindow, char_callback);
 	glfwSetMouseButtonCallback(g_pWindow, button_callback);
 	glfwSetCursorPosCallback(g_pWindow, cursor_callback);
 	glfwSetScrollCallback(g_pWindow, scroll_callback);
@@ -303,27 +275,16 @@ int main(int argc, char *argv[])
 	// Load the OpenGL functions
 	gl::exts::LoadTest didLoad = gl::sys::LoadFunctions();
 	// If the functions failed to load
-	if (!didLoad) 
-	{
-		// Clean up and abort
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}
+	if (!didLoad) { closeProgram(); }
 
 	// Initialisation
 	initializeGL();
 	
-
 	// Resets elapsed time before mainloop begins
 	glfwSetTime(0);
 
 	// Enters the main loop
 	mainLoop();
 
-	// Deletes Scene ptr
-	delete g_pScene;
-	// Close window and terminate GLFW
-	glfwTerminate();
-	// Exit program
-	exit(EXIT_SUCCESS);
+	closeProgram();
 }

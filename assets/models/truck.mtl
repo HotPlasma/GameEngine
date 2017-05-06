@@ -1,0 +1,27 @@
+newmtl Old_Truck:TruckGlass
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.00 0.00 0.00
+map_Kd Truck_glass_D.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl Old_Truck:TruckMat1
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Truck_mat1_D.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl Old_Truck:TruckMat2
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd Truck_mat2_D.tga
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
