@@ -704,7 +704,12 @@ void Editor::render()
 	m_phongShader.setUniform("V", m_camera.getView());
 	m_phongShader.setUniform("P", m_camera.getProjection());
 	// Configures lighting
-	setLightParams(&m_phongShader);
+	m_phongShader.setUniform("Material.Ka", glm::vec3(0.2f, 0.2f, 0.2f));
+	m_phongShader.setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
+	m_phongShader.setUniform("Material.Ks", glm::vec3(1.0f, 1.0f, 1.0f));
+	m_phongShader.setUniform("Material.Shininess", 20.0f);
+	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
+	m_phongShader.setUniform("Light.Position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
@@ -724,6 +729,7 @@ void Editor::render()
 	// Sets shader view and projection
 	m_textureShader.setUniform("V", m_camera.getView());
 	m_textureShader.setUniform("P", m_camera.getProjection());
+	m_textureShader.setUniform("Light.Intensity", glm::vec3(1.0f, 1.0f, 1.0f));
 
 	// Updates Skybox position
 	m_pSkybox->setPosition(m_camera.getPosition());

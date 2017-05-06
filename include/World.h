@@ -29,7 +29,9 @@ private:
 	string bLife;
 	string lTime;
 	string extraBatteries;
-	
+
+	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
+
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);

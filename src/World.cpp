@@ -19,6 +19,21 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 	// Sets Camera initital position 
 	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+
+	// Creates a skybox
+	m_pSkybox = std::shared_ptr<Model>(new Model());
+	m_pSkybox->setName("Skybox");
+	m_pSkybox->setFileLocation("assets/models/skybox.obj");
+	m_pSkybox->setTextureLocation("assets/textures/skybox.bmp");
+	m_pSkybox->setPosition(m_camera.getPosition());
+	m_pSkybox->setRotation(glm::vec3(0.0f, 90.0f, 0.0f));
+	m_pSkybox->setScale(glm::vec3(1.0f, 1.0f, 1.0f));
+	m_pSkybox->setMaterial(1);
+
+	// Loads Model so it's ready for drawing
+	m_pSkybox->loadModel();
+	// Initialises Model
+	m_pSkybox->initModel();
 }
 
 void World::initScene(Freetype* pOverlay)
@@ -257,10 +272,23 @@ void World::render()
 			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
 		}
 	}
-	// Activates FreeType shader
-
-
 	
+	// Activates texture shader
+	m_textureShader.use();
+
+	// Passes texture map to shader
+	m_textureShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_textureShader.setUniform("V", m_camera.getView());
+	m_textureShader.setUniform("P", m_camera.getProjection());
+	m_textureShader.setUniform("Light.Intensity", glm::vec3(0.1f, 0.1f, 0.1f));
+
+	// Updates Skybox position
+	m_pSkybox->setPosition(m_camera.getPosition());
+	// Renders Skybox
+	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
+
+	// Activates FreeType shader
 	m_freeType.use();
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));

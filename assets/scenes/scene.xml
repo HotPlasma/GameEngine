@@ -80,17 +80,6 @@
   </Object>
 
   <Object>
-    <Name>Skybox</Name>
-    <OBJLocation>assets/models/skybox.obj</OBJLocation>
-    <TexLocation>assets/textures/skybox.bmp</TexLocation>
-    <Translation> 0 0 0</Translation>
-    <Rotation>0 90 0</Rotation>
-    <Scale>1 1 1</Scale>
-    <Material>1</Material>
-    <Collectable>false</Collectable>
-  </Object>
-
-  <Object>
     <Name>FarmHouse</Name>
     <OBJLocation>assets/models/farmhouse.obj</OBJLocation>
     <TexLocation>assets/textures/farmhouse.bmp</TexLocation>

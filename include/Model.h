@@ -36,7 +36,7 @@ private:
 	GLuint m_vbo;
 	GLuint m_vaoHandle;
 
-	bool m_b3D = false;
+	bool m_b3D = true;
 
 public:
 
