@@ -17,15 +17,14 @@ class World : public Scene
 		glm::vec3 m_aiSpeed; //ai movement speed
 		glm::vec3 m_aiRotation; //ai rotation
 		glm::vec3 m_collidableRotation;
-		float yRot; //amount for random turns of ai in wander state
-		bool searching = true; 
-		int duration = 0;
+		bool aiSearching = true; 
 		//clock_t timer;
-		float xPos;
-		float zPos;
+		double rotationAngle;
+		float movementSpeed = 0.0005;
 		mat4 movement;
 		sf::Clock batteryTimer;
-		sf::Clock LevelTimer;
+		sf::Clock levelTimer;
+		sf::Clock aiWander;
 		float spareBatteries = 0;
 		float batteryLife = 100;
 		

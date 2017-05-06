@@ -12,9 +12,7 @@ World::World(sf::Vector2i windowSize)
 void World::initScene()
 {
 	
-	srand(time(NULL)); //to get true random numbers
-	yRot = rand() % 360 + 1; //for direction ai will move in in the wander state
-
+	//srand(time(NULL)); //to get true random numbers
 
 	linkMe(1, 2);
 	// Stops rendered models from being transparent
@@ -94,14 +92,12 @@ void World::update(float t)
 	//gl::UniformMatrix4fv(projectionMatrixID, 1, gl::FALSE_, glm::value_ptr(P));
 	m_WorldShader.setUniform("mProjection", P);
 
-	//Ai section
+	//timer section
 
-	
 	sf::Time bTimer = batteryTimer.getElapsedTime();
-	sf::Time lTimer = LevelTimer.getElapsedTime();
+	sf::Time lTimer = levelTimer.getElapsedTime();
+	sf::Time aiTimer = aiWander.getElapsedTime();
 
-	//cout << bTimer.asSeconds() << endl;
-	
 	if (bTimer.asSeconds() >= 10)
 	{
 		if (batteryLife >= 20)
@@ -116,23 +112,19 @@ void World::update(float t)
 		batteryTimer.restart();
 	}
 
-	//cout << lTimer.asSeconds() << endl;
 	if (lTimer.asSeconds() >= 200)
 	{
-		cout << "you survived!" << endl;
-		//victory!
+		cout << "you survived!" << endl; //player wins
 	}
 
+	//Ai section
+	
+	if (aiTimer.asSeconds() >= 2)
+	{
+		aiSearching = false;
+		aiWander.restart();
 
-
-
-	double rotationAngle;
-	//timer = clock();
-	//duration = (clock()) / (double)CLOCKS_PER_SEC;
-	//if (duration % 4 == 0)
-	//{
-		//searching = false;
-	//}
+	}
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 
@@ -143,38 +135,36 @@ void World::update(float t)
 		{
 			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the wander range
 			{
-				// locate();
-				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
-				m_aiSpeed = glm::vec3(0.002f, 0, 0.002f) * distance;
+				m_aiRotation += glm::vec3(0, rotationAngle - 90, 0);
+				//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
 			{
-				//cout << "wandering" << endl;
-				// wander();
-				if (searching == true)
+				if (aiSearching == true)
 				{
-					m_aiRotation = glm::vec3(0, yRot, 0);
-					m_aiSpeed = glm::vec3(0, 0, 0); 
+					m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+					m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
 				}
-				if (searching == false)
+				if (aiSearching == false)
 				{
-					yRot = rand() % 360 + 1;
-					searching = true;	
+					m_aiSpeed = glm::vec3(0, 0, 0);
+					m_aiRotation.y = rand() % 360 + 1;
+					aiSearching = true;	
 				}
 			}
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2.8f) // if ai is in chase range
 			{
-				//cout << "chasing" << endl;
-				// chase();
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+
+				//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
 			}
 
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2.8f) // if ai catches player
 			{
-				// player has been caught
 				m_aiRotation = glm::vec3(0, rotationAngle -90, 0);
 				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
