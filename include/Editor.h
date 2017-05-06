@@ -26,11 +26,16 @@ struct Selection
 	unsigned int m_uiMaterial = 1; //!< Model material preset
 
 	std::shared_ptr<Model> m_pModel; //!< Selection Model
+
+	std::vector<std::shared_ptr<Model>> m_pRedoList; //!< Models that have been undone
 };
 
 struct EditorHUD
 {
+	// Buttons for Model settings
 	std::shared_ptr<Button> m_pModel; //!< Model selection
+	std::shared_ptr<Button> m_pUndo; //!< Undo button
+	std::shared_ptr<Button> m_pRedo; //!< Redo button
 
 	// Buttons for Object properties
 	std::shared_ptr<ToggleButton> m_pCollectable; //!< Collectable toggle

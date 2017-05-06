@@ -69,6 +69,7 @@ void Editor::initScene(Freetype* pOverlay)
 	gl::Enable(gl::DEPTH_TEST);
 
 	// Defines button sizing
+	glm::vec2 buttonSize_Tiny(100.0f, 50.0f);
 	glm::vec2 buttonSize_Small(200.0f, 50.0f);
 	glm::vec2 buttonSize_Big(200.0f, 200.0f);
 	float buttonPosX = m_windowSize.x*0.006f;
@@ -79,10 +80,35 @@ void Editor::initScene(Freetype* pOverlay)
 	(
 		new Button
 		(
-			glm::vec2(buttonPosX + buttonSize_Big.x*0.5f, m_windowSize.y*0.606f + buttonSize_Big.y*0.5f),
+			glm::vec2(buttonPosX + buttonSize_Big.x*0.5f, m_windowSize.y*0.666f + buttonSize_Big.y*0.5f),
 			"assets/UI/Editor/Model.png",
 			"assets/UI/Editor/ModelHover.png",
 			glm::vec3(buttonSize_Big, 1.0f),
+			pOverlay
+		)
+	);
+
+	// Undo button
+	m_buttons.m_pUndo = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Tiny.x*0.5f, m_windowSize.y*0.606f + buttonSize_Tiny.y*0.5f),
+			"assets/UI/Editor/Undo.png",
+			"assets/UI/Editor/UndoHover.png",
+			glm::vec3(buttonSize_Small.x*0.5f, buttonSize_Small.y, 1.0f),
+			pOverlay
+		)
+	);
+	// Redo button
+	m_buttons.m_pRedo = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Tiny.x + buttonSize_Tiny.x*0.5f, m_windowSize.y*0.606f + buttonSize_Tiny.y*0.5f),
+			"assets/UI/Editor/Redo.png",
+			"assets/UI/Editor/RedoHover.png",
+			glm::vec3(buttonSize_Small.x*0.5f, buttonSize_Small.y, 1.0f),
 			pOverlay
 		)
 	);
@@ -322,13 +348,8 @@ void Editor::input_key(const int kiKey, const int kiAction)
 			{
 				// Model is added to a vector of placed Models
 				m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_selection.m_pModel.get())));
-			}
-
-			// TEMPORARY UNDO -  If U key is pressed
-			if (kiKey == GLFW_KEY_U)
-			{
-				// If vector is not empty pop the back Model off
-				if (!m_pModels.empty()) m_pModels.pop_back();
+				// Resets redo list
+				m_selection.m_pRedoList.clear();
 			}
 
 			// If R key is pressed
@@ -470,6 +491,31 @@ void Editor::input_button(const int kiButton, const int kiAction)
 				{
 					// Enter Model selection menu
 					m_bMenuOpen = true;
+				}
+
+				// If undo button is clicked
+				if (m_buttons.m_pUndo->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// If Model vector is not empty
+					if (!m_pModels.empty())
+					{
+						// Stores Model in redo vector
+						m_selection.m_pRedoList.push_back(m_pModels.back());
+						// Removes Model from Model vector
+						m_pModels.pop_back();
+					}
+				}
+				// If redo button is clicked
+				if (m_buttons.m_pRedo->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// If redo list is not empty
+					if (!m_selection.m_pRedoList.empty())
+					{
+						// Stores redone Model in Model vector
+						m_pModels.push_back(m_selection.m_pRedoList.back());
+						// Removes Model from redo vector
+						m_selection.m_pRedoList.pop_back();
+					}
 				}
 
 				// If Collectable button is clicked
@@ -680,6 +726,8 @@ void Editor::update(const float kfTimeElapsed)
 	{
 		// Checks whether HUD buttons are hovered
 		m_buttons.m_pModel->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_buttons.m_pUndo->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_buttons.m_pRedo->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pCollectable->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pAI->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pTranslateMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
@@ -738,6 +786,8 @@ void Editor::render()
 
 	// Draws HUD buttons
 	m_buttons.m_pModel->render(&m_imageType, m_windowSize);
+	m_buttons.m_pUndo->render(&m_imageType, m_windowSize);
+	m_buttons.m_pRedo->render(&m_imageType, m_windowSize);
 	m_buttons.m_pCollectable->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pAI->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pTranslateMode->getButton()->render(&m_imageType, m_windowSize);
