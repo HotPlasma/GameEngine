@@ -1,0 +1,27 @@
+newmtl tree_oak:tree_oak_branch_tree_oak_branch_d_dds
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd tree_oak_branch_d.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tree_oak:tree_oak_leaf_tree_oak_leaf_d_dds
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 0.00 0.00 0.00
+map_Kd tree_oak_leaf_d.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
+newmtl tree_oak:tree_oak_trunk_tree_oak_trunk_d_dds
+illum 4
+Kd 0.00 0.00 0.00
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+map_Kd tree_oak_trunk_d.dds
+Ni 1.00
+Ks 0.00 0.00 0.00
+Ns 96.08
