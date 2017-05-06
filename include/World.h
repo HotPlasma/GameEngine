@@ -14,6 +14,13 @@
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
 
+struct bulletObject
+{
+	int id;
+	bool hit;
+	btRigidBody * body;
+};
+
 class World : public Scene
 {
 	private:
@@ -47,9 +54,11 @@ class World : public Scene
 		btRigidBody *rigidBody;
 
 		vector<btRigidBody*> m_CollisionBodies;
-
-		bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2);
 		
+
+		void initPhysics();
+
+
 
 	//	btRigidBody* addSphere(float rad, float x, float y, float z, float mass);
 

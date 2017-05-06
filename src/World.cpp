@@ -54,10 +54,12 @@ using std::ifstream;
 //	m_sceneReader.m_modelList[1].m_M = m_sceneReader.m_modelList[1].m_M * mat;
 //}
 
-bool World::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+bool contact_callback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
 {
-	cout << obj1->getCollisionObject()->getUserPointer() << " " << obj2->getCollisionObject()->getUserPointer() << std::endl;
-		 
+	//cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
+		
+	cout << "Collision" << endl;
+
 	return false;
 }
 
@@ -68,8 +70,9 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_windowSize = windowSize;
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
-}
 
+	gContactAddedCallback = contact_callback;
+}
 
 
 void World::initScene(Freetype* pOverlay)
@@ -137,12 +140,14 @@ void World::initScene(Freetype* pOverlay)
 
 	btRigidBody * PlayBody = new btRigidBody(PlayerInfo);
 
+	StumpBody->setCollisionFlags(PlayBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+
 	m_CollisionBodies.push_back(PlayBody);
 
 	m_collisionWorld->addRigidBody(m_CollisionBodies.at(1));
 	PlayBody->setUserPointer(m_CollisionBodies.at(1));
 
-	gContactAddedCallback = &collisionCallback;
+	
 
 	// Initial position and orientation of the collision body
 	/*rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
@@ -233,7 +238,7 @@ void World::update(const float kfTimeElapsed)
 
 	m_collisionWorld->stepSimulation(kfTimeElapsed);
 
-	std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
+	//std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
 	
 	
 
