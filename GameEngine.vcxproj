@@ -119,10 +119,10 @@
     <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\freetype.frag" />
-    <None Include="shaders\freetype.vert" />
-    <None Include="shaders\image.frag" />
-    <None Include="shaders\image.vert" />
+    <None Include="shaders\freetype.fs" />
+    <None Include="shaders\freetype.vs" />
+    <None Include="shaders\image.fs" />
+    <None Include="shaders\image.vs" />
     <None Include="shaders\phong.fs" />
     <None Include="shaders\phong.vs" />
     <None Include="shaders\spotlight.fs" />

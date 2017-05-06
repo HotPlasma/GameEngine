@@ -122,8 +122,8 @@ protected:
 		try
 		{
 			// Shader which allows heads up display rendering
-			m_freeType.compileShader("Shaders/freetype.vert");
-			m_freeType.compileShader("Shaders/freetype.frag");
+			m_freeType.compileShader("Shaders/freetype.vs");
+			m_freeType.compileShader("Shaders/freetype.fs");
 			m_freeType.link();
 			m_freeType.validate();
 			m_freeType.use();
@@ -136,8 +136,8 @@ protected:
 		try
 		{
 			// Shader which allows for image rendering
-			m_imageType.compileShader("Shaders/image.vert");
-			m_imageType.compileShader("Shaders/image.frag");
+			m_imageType.compileShader("Shaders/image.vs");
+			m_imageType.compileShader("Shaders/image.fs");
 			m_imageType.link();
 			m_imageType.validate();
 		}
