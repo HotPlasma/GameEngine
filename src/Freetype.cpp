@@ -54,7 +54,7 @@ void Freetype::loadCharacters()
 			texture,
 			glm::ivec2(m_face->glyph->bitmap.width, m_face->glyph->bitmap.rows),
 			glm::ivec2(m_face->glyph->bitmap_left, m_face->glyph->bitmap_top),
-			m_face->glyph->advance.x
+			(GLuint)m_face->glyph->advance.x
 		};
 		m_cCharacters.insert(std::pair<GLchar, Character>(c, character));
 	}
@@ -82,7 +82,18 @@ void Freetype::setupBuffers()
 	gl::BindVertexArray(0);
 }
 
-void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void Freetype::addImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
+{
+	m_imagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
+
+	m_imagePlane.at(m_imagePlane.size() - 1).setVisible(visablity);
+
+	m_imagePlane.at(m_imagePlane.size() - 1).loadModel();
+
+	m_imagePlane.at(m_imagePlane.size() - 1).initModel();
+}
+
+void Freetype::renderText(GLuint ProgramHandle, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
 	// Activate corresponding render state	
 	//shader.use();
@@ -127,18 +138,7 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 	gl::BindTexture(gl::TEXTURE_2D, 0);
 }
 
-void Freetype::LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
-{
-	m_imagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
-
-	m_imagePlane.at(m_imagePlane.size() - 1).setVisible(visablity);
-
-	m_imagePlane.at(m_imagePlane.size() - 1).loadModel();
-
-	m_imagePlane.at(m_imagePlane.size() - 1).initModel();
-}
-
-void Freetype::RenderImage(GLSLProgram* pShader, int index)
+void Freetype::renderImage(GLSLProgram* pShader, int index)
 {
 	m_imagePlane.at(index).render(pShader, glm::mat4(1.0f));
 }

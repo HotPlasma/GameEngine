@@ -20,12 +20,6 @@ struct MenuHUD
 	std::shared_ptr<Button> m_pExit;
 };
 
-struct PublicMember
-{
-	bool m_bEnterWorld = false;
-	bool m_bEnterEditor = false;
-};
-
 class Menu : public Scene
 {
 private:
@@ -41,15 +35,13 @@ public:
 
 	void initScene(Freetype* Overlay);
 
-	void input_key(const int kiKey, const int kiAction) {}
+	void input_key(const int kiKey, const int kiAction);
 	void input_char(const unsigned int kuiUnicode) {}
 	void input_button(const int kiButton, const int kiAction);
 	void input_scroll(const double kdDelta) {}
 
 	void update(const float kfTimeElapsed);
 	void render();
-
-	PublicMember m_public;
 };
 
 #endif

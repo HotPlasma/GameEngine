@@ -7,6 +7,8 @@
 #include "Camera.h"
 #include "Freetype.h"
 
+enum Intent { NONE, TO_MENU, TO_GAME, TO_EDITOR };
+
 // Abstract class in order to set up world
 class Scene
 {
@@ -16,6 +18,8 @@ public:
 	Scene() {}
 	
 	sf::Vector2i m_windowSize; // Dimensions of window
+
+	Intent m_intention = NONE;
 
 	sf::Sound m_music;
 

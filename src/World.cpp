@@ -64,6 +64,17 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("P", kProjection);
 }
 
+// Void: Called on key input event
+void World::input_key(const int kiKey, const int kiAction)
+{
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
+	{
+		// If Esc key pressed
+		//if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
+	}
+}
+
 void World::update(const float kfTimeElapsed)
 {
 	
@@ -235,9 +246,10 @@ void World::render()
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
 	// Renders placeholder text to HUD
-	m_pHUD->RenderText(m_freeType.getHandle(), "placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->RenderText(m_freeType.getHandle(), bLife, 1600.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->RenderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->RenderText(m_freeType.getHandle(), "Battery Life-   %", 1390.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	//m_pHUD->RenderText(m_freeType.getHandle(), "placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), bLife, 1600.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1390.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
 }
+

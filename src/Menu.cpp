@@ -24,7 +24,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 700.0f),
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.65f),
 			"assets/UI/Play.png",
 			"assets/UI/PlayHover.png",
 			glm::vec3(147.f, 46.f, 1.f),
@@ -35,7 +35,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 600.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.55f),
 			"assets/UI/WorldEditor.png", 
 			"assets/UI/WorldEditorHover.png", 
 			glm::vec3(148.f, 46.f, 1.f), 
@@ -46,7 +46,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 500.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.45f),
 			"assets/UI/Options.png", 
 			"assets/UI/OptionsHover.png",
 			glm::vec3(126.f, 46.f, 1.f),
@@ -57,7 +57,7 @@ void Menu::initScene(Freetype * pOverlay)
 	(
 		new Button
 		(
-			glm::vec2((float)m_windowSize.x*0.5f, 400.0f), 
+			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.35f),
 			"assets/UI/Exit.png", 
 			"assets/UI/ExitHover.png",
 			glm::vec3(83, 46.f, 1.f),
@@ -71,7 +71,18 @@ void Menu::initScene(Freetype * pOverlay)
 	// Sets BG index to image plane size
 	m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
 	// Loads menu background into HUD
-	m_pHUD->LoadHUDImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
+	m_pHUD->addImage("assets/UI/BG.png", glm::vec3((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.5f, 1.0f), 0, glm::vec3((float)m_windowSize.x, (float)m_windowSize.y, 1.f), true);
+}
+
+// Void: Called on key input event
+void Menu::input_key(const int kiKey, const int kiAction)
+{
+	// If action is a key press
+	if (kiAction == GLFW_PRESS)
+	{
+		// If Esc key pressed
+		if (kiKey == GLFW_KEY_ESCAPE) closeProgram();
+	}
 }
 
 // Void: Called on mouseButton input event
@@ -86,15 +97,13 @@ void Menu::input_button(const int kiButton, const int kiAction)
 			// If menu play button is clicked
 			if (m_buttons.m_pPlay->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
-				m_public.m_bEnterWorld = true;
-				m_public.m_bEnterEditor = false;
+				m_intention = TO_GAME;
 			}
 
 			// If menu editor button is clicked
 			if (m_buttons.m_pEditor->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
-				m_public.m_bEnterEditor = true;
-				m_public.m_bEnterWorld = false;
+				m_intention = TO_EDITOR;
 			}
 
 			// If menu options button is clicked
@@ -144,5 +153,5 @@ void Menu::render()
 	//Draws Background		
 	m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_uiBGIndex).getM());
 	m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
-	m_pHUD->RenderImage(&m_imageType, m_uiBGIndex);
+	m_pHUD->renderImage(&m_imageType, m_uiBGIndex);
 }
