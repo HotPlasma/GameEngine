@@ -9,7 +9,7 @@
 class Model
 {
 private:
-
+  
 	string m_sName; // A moniker for each model
 	string m_sFileName; // File location of the obj
 	string m_sTexture; // File location of the texture

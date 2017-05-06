@@ -52,18 +52,6 @@ void World::initScene(Freetype* pOverlay)
 	m_camera.updateView();
 }
 
-void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
-{
-	mat4 mv = kView * kModel;
-	pShader->setUniform("ModelViewMatrix", mv);
-	pShader->setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	pShader->setUniform("MVP", kProjection * mv);
-	mat3 normMat = glm::transpose(glm::inverse(mat3(kModel)));
-	pShader->setUniform("M", kModel);
-	pShader->setUniform("V", kView);
-	pShader->setUniform("P", kProjection);
-}
-
 // Void: Called on key input event
 void World::input_key(const int kiKey, const int kiAction)
 {
@@ -235,8 +223,16 @@ void World::render()
 
 	// WORLD
 	// Activates World shader
-	m_worldShader.use();
-	setMatrices(&m_worldShader, glm::mat4(1.0f), m_camera.getView(), m_camera.getProjection());
+	m_spotlightShader.use();
+
+	// Passes texture map to shader
+	m_spotlightShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_spotlightShader.setUniform("V", m_camera.getView());
+	m_spotlightShader.setUniform("P", m_camera.getProjection());
+	// Configures lighting
+	setLightParams(&m_spotlightShader);
+
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
@@ -258,7 +254,7 @@ void World::render()
 		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
 			// Renders the Model
-			m_sceneReader.m_modelList.at(i).render(&m_worldShader, transMat);
+			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
 		}
 	}
 	// Activates FreeType shader

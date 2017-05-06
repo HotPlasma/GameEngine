@@ -372,7 +372,7 @@ void Editor::input_char(const unsigned int kuiUnicode)
 			(kuiUnicode >= 48 && kuiUnicode <= 57) || // 0-9
 			(kuiUnicode == 32) || // Spacebar
 			(kuiUnicode == 33) || // !
-			(kuiUnicode == 163) || // £
+			(kuiUnicode == 163) || // Â£
 			(kuiUnicode == 35) || // #
 			(kuiUnicode == 36) || // $
 			(kuiUnicode == 37) || // %
@@ -696,33 +696,39 @@ void Editor::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// Activates World shader
-	m_worldShader.use();
+	m_phongShader.use();
 
-	// Sets shader MVP
-	glm::mat4 model = glm::mat4(1.0);
-	mat4 mv = m_camera.getView() * model;
-	m_worldShader.setUniform("ModelViewMatrix", mv);
-	m_worldShader.setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	m_worldShader.setUniform("MVP", m_camera.getProjection() * mv);
-	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	m_worldShader.setUniform("M", model);
-	m_worldShader.setUniform("V", m_camera.getView());
-	m_worldShader.setUniform("P", m_camera.getProjection());
+	// Passes texture map to shader
+	m_phongShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_phongShader.setUniform("V", m_camera.getView());
+	m_phongShader.setUniform("P", m_camera.getProjection());
+	// Configures lighting
+	setLightParams(&m_phongShader);
 
 	// Renders Model
-	m_selection.m_pModel->render(&m_worldShader, glm::mat4(1.0f));
-
-	// Updates Skybox position
-	m_pSkybox->setPosition(m_camera.getPosition());
-	// Renders Skybox
-	m_pSkybox->render(&m_worldShader, glm::mat4(1.0f));
+	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
 		// Renders Model
-		pModel->render(&m_worldShader, glm::mat4(1.0f));
+		pModel->render(&m_phongShader, glm::mat4(1.0f));
 	}
+
+	// Activates texture shader
+	m_textureShader.use();
+
+	// Passes texture map to shader
+	m_textureShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_textureShader.setUniform("V", m_camera.getView());
+	m_textureShader.setUniform("P", m_camera.getProjection());
+
+	// Updates Skybox position
+	m_pSkybox->setPosition(m_camera.getPosition());
+	// Renders Skybox
+	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
 
 	// Draws HUD buttons
 	m_buttons.m_pModel->render(&m_imageType, m_windowSize);
@@ -764,7 +770,7 @@ void Editor::render()
 		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
 		//m_pHUD->renderImage(&m_imageType, m_menu.m_uiBGIndex);
 	}
-
+  
 	// Activates FreeType shader
 	m_freeType.use();
 	// Configures projection

@@ -30,10 +30,6 @@ private:
 	string lTime;
 	string extraBatteries;
 	
-
-
-	void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
-
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
@@ -48,4 +44,4 @@ public:
 	void update(const float kfTimeElapsed);
 	void render();
 };
-#endif 
+#endif
