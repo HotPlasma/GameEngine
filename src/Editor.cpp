@@ -20,6 +20,10 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 	// Updates Camera aspect ratio
 	m_camera.setAspectRatio((float)kWindowSize.x / kWindowSize.y);
 
+	// Sets Camera Near/Far culling
+	m_camera.setNearCull(1.0f);
+	m_camera.setFarCull(500.0f);
+
 	// Sets Camera initital position 
 	m_camera.setPosition(glm::vec3(0.0f, 15.0f, 40.0f));
 
@@ -38,9 +42,6 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 
 	// Sets the first Model in the selection to selected
 	m_selection.m_pModel = pModel;
-
-	// Sets default transformation mode
-	m_transformMode = TRANSLATE;
 
 	// Creates a skybox
 	m_pSkybox = std::shared_ptr<Model>(new Model());

@@ -31,10 +31,13 @@ public:
 	void setPosition(const glm::vec3 kPosition) { m_position = kPosition; }; // Sets Camera Pos
 
 	float getAspectRatio() { return m_fAspectRatio; }; // Returns Camera aspect ratio
-	void setAspectRatio(const float kfAS) { m_fAspectRatio = kfAS; }; // Sets Camera aspect ratio
+	void setAspectRatio(const float kfAS) { m_fAspectRatio = kfAS; updateView(); }; // Sets Camera aspect ratio
 
 	float getFOV() { return m_fFOV; }; // Returns Camera FOV
-	void setFOV(const float kfFOV) { m_fFOV = glm::radians(kfFOV); }; // Sets Camera FOV
+	void setFOV(const float kfFOV) { m_fFOV = glm::radians(kfFOV); updateView(); }; // Sets Camera FOV
+
+	void setNearCull(const float kfNear) { m_fNear = kfNear; updateView(); } // Sets Near culling
+	void setFarCull(const float kfFar) { m_fFar = kfFar; updateView(); } // Sets Far culling
 
 	glm::mat4 getView() { return m_view; }; // Returns Camera View
 	glm::mat4 getProjection() { return m_projection; }; // Returns Camera Projection

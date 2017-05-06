@@ -90,7 +90,7 @@ private:
 	sf::Vector2f m_lastMousePos; //!< Last cursor position
 
 	enum TransformationMode { TRANSLATE, ROTATE, SCALE }; //!< Enum for which transformation mode the Editor is in
-	TransformationMode m_transformMode; //!< Editor's current transformation mode
+	TransformationMode m_transformMode = TRANSLATE; //!< Editor's current transformation mode
 
 	EditorHUD m_buttons; //!< Editor option buttons
 

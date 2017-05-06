@@ -15,7 +15,12 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	m_pWindow = pWindow;
 	m_windowSize = windowSize;
 
+	// Updates Camera aspect ratio
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
+
+	// Sets Camera Near/Far culling
+	m_camera.setNearCull(1.0f);
+	m_camera.setFarCull(5000.0f);
 
 	// Sets Camera initital position 
 	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
