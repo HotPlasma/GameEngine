@@ -104,6 +104,19 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
+	{
+		if (spareBatteries > 0)
+		{
+			if (batteryLife <= 80)
+			{
+				batteryLife += 20;
+			    spareBatteries -= 1;
+			}
+		}
+	}
+
 	// Sticks the camera to y 5.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
@@ -112,11 +125,11 @@ void World::update(const float kfTimeElapsed)
 	sf::Time lTimer = LevelTimer.getElapsedTime();
 
 	//cout << bTimer.asSeconds() << endl;
-	if (bTimer.asSeconds() >= 10)
+	if (bTimer.asSeconds() >= 1)
 	{
-		if (batteryLife >= 20)
+		if (batteryLife >= 1)
 		{
-			batteryLife -= 20;
+			batteryLife -= 1;
 			std::cout << "battery life = " << batteryLife << "%" << std::endl;
 			
 		}
@@ -128,18 +141,28 @@ void World::update(const float kfTimeElapsed)
 	}
 
 	//cout << lTimer.asSeconds() << endl;
-	if (lTimer.asSeconds() >= 200)
+	if (lTimer.asSeconds() >= 1)
 	{
-		//std::cout << "you survived!" << std::endl;
-		lTime = "You Survived!";
-		//victory!
-	}
-	else
-	{
-		lTime = std::to_string(lTimer.asSeconds());
-	}
+		if (lCountdown >= 1)
+		{
+			lCountdown -= 1;
+			lTime = std::to_string(lCountdown);
+			
+		}
+		else
+		{ 
+			//std::cout << "you survived!" << std::endl;
+			lTime = "You Survived!";
+			//victory!}
+	    }
+		LevelTimer.restart();
+
+	
+}
 
 	bLife = std::to_string(batteryLife);
+
+	extraBatteries = std::to_string(spareBatteries);
 	
 	
 	/////////////////// COLLECTABLE BOBBING ///////////////////
@@ -182,7 +205,7 @@ void World::update(const float kfTimeElapsed)
 				// If collision with a collectable
 				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 				{
-					if (batteryLife < 100)
+					if (batteryLife <= 80)
 					{
 						batteryLife += 20;
 						std::cout << "BATTERY LIFE INCREASED;" << " battery life = " << batteryLife << "%" << std::endl;
@@ -246,10 +269,11 @@ void World::render()
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
 	// Renders placeholder text to HUD
-	//m_pHUD->RenderText(m_freeType.getHandle(), "placeholder", 100.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), bLife, 1600.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), "spare batteries-   ('E' to use for 20% battery life)", 30.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), extraBatteries, 300.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), bLife, 1820.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 	m_pHUD->renderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1390.f, 100.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
 }
 

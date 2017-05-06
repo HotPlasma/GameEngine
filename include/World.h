@@ -23,10 +23,12 @@ private:
 
 	sf::Clock batteryTimer;
 	sf::Clock LevelTimer;
-	float spareBatteries = 0;
+	int spareBatteries = 0;
 	int batteryLife = 100;
+	int lCountdown = 10;
 	string bLife;
 	string lTime;
+	string extraBatteries;
 	
 
 
