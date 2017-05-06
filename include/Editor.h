@@ -10,6 +10,7 @@
 #include "ModelReader.h"
 #include "Button.h"
 #include "TextBox.h"
+#include "Utilities.h"
 
 struct Selection
 {

@@ -324,6 +324,13 @@ void Editor::input_key(const int kiKey, const int kiAction)
 				m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_selection.m_pModel.get())));
 			}
 
+			// TEMPORARY UNDO -  If U key is pressed
+			if (kiKey == GLFW_KEY_U)
+			{
+				// If vector is not empty pop the back Model off
+				if (!m_pModels.empty()) m_pModels.pop_back();
+			}
+
 			// If R key is pressed
 			if (kiKey == GLFW_KEY_R)
 			{
@@ -411,24 +418,42 @@ void Editor::input_button(const int kiButton, const int kiAction)
 				// If menu load button is clicked
 				if (m_menu.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y))
 				{
-					// Creates Model
-					std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
-					pModel->setName(m_menu.m_pNameField->getStr());
-					pModel->setFileLocation("assets/models/" + m_menu.m_pObjField->getStr() + ".obj");
-					pModel->setTextureLocation("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp");
-					pModel->setMaterial(1);
+					// If obj file doesn't exist
+					if (!fileExists("assets/models/" + m_menu.m_pObjField->getStr() + ".obj"))
+					{
+						std::cerr << "[EDITOR] ERROR - OBJ FILE DOESN'T EXIST: " << ("assets/models/" + m_menu.m_pObjField->getStr() + ".obj") << std::endl;
+					}
+					// Else - obj exists
+					else
+					{
+						// If texture file doesn't exist
+						if (!fileExists("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp"))
+						{
+							std::cerr << "[EDITOR] ERROR - BMP FILE DOESN'T EXIST: " << ("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp") << std::endl;
+						}
+						// Else - texture exists
+						else
+						{
+							// Creates Model
+							std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
+							pModel->setName(m_menu.m_pNameField->getStr());
+							pModel->setFileLocation("assets/models/" + m_menu.m_pObjField->getStr() + ".obj");
+							pModel->setTextureLocation("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp");
+							pModel->setMaterial(1);
 
-					// Loads Model so it's ready for drawing
-					pModel->loadModel();
-					// Initialises Model
-					pModel->initModel();
+							// Loads Model so it's ready for drawing
+							pModel->loadModel();
+							// Initialises Model
+							pModel->initModel();
 
-					// Sets Model in hand to this new Model
-					m_selection.m_pModel = pModel;
+							// Sets Model in hand to this new Model
+							m_selection.m_pModel = pModel;
 
-					// Closes menu
-					m_bMenuOpen = false;
-					m_menu.reset();
+							// Closes menu
+							m_bMenuOpen = false;
+							m_menu.reset();
+						}
+					}
 				}
 				// If menu cancel button is clicked
 				if (m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))

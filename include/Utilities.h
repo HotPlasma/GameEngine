@@ -31,4 +31,13 @@ static void closeProgram()
 	exit(EXIT_SUCCESS);
 }
 
+static bool fileExists(const std::string ksFilePath)
+{
+	// Declares a file stream with the input file path
+	std::ifstream file(ksFilePath.c_str());
+
+	// Returns whether the file exists or not
+	return file.good();
+}
+
 #endif
