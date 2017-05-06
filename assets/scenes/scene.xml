@@ -64,6 +64,19 @@
     <Ai>false</Ai>
   </Object>
 
+
+  <Object>
+    <Name>Truck</Name>
+    <OBJLocation>assets/models/truck.obj</OBJLocation>
+    <TexLocation>assets/textures/truck.bmp</TexLocation>
+    <Translation>-15 -4 100</Translation>
+    <Rotation>0 75 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
   <Object>
     <Name>Pumpkin</Name>
     <OBJLocation>assets/models/pumpkin.obj</OBJLocation>
@@ -117,6 +130,30 @@
     <OBJLocation>assets/models/Plane.obj</OBJLocation>
     <TexLocation>assets/textures/Grassy.bmp</TexLocation>
     <Translation>0 -5 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>50 -5 100</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>false</Ai>
+  </Object>
+
+  <Object>
+    <Name>GrassyPlane</Name>
+    <OBJLocation>assets/models/Plane.obj</OBJLocation>
+    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <Translation>0 -5 100</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
     <Material>1</Material>
