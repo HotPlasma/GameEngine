@@ -54,14 +54,14 @@ using std::ifstream;
 //	m_sceneReader.m_modelList[1].m_M = m_sceneReader.m_modelList[1].m_M * mat;
 //}
 
-bool contact_callback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
-{
-	cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
-		
-	cout << "Collision" << endl;
-
-	return false;
-}
+//bool contact_callback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
+//{
+//	cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
+//		
+//	cout << "Collision" << endl;
+//
+//	return false;
+//}
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
@@ -71,7 +71,7 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
 
-	gContactAddedCallback = contact_callback;
+	//gContactAddedCallback = contact_callback;
 }
 
 
@@ -98,7 +98,21 @@ void World::initScene(Freetype* pOverlay)
 
 	m_Player.loadModel();
 	m_Player.initModel();
-	m_Player.setVisable(true);
+	//m_Player.setVisable(true);
+
+	// Initial position and orientation of the collision body
+	rp3d::Vector3 initPosition(0.0, 0.0, 0.0);
+	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
+	rp3d::Transform transform(initPosition, initOrientation);
+	// Create a collision body in the world
+	rp3d::CollisionBody * body;
+
+	m_collisionBodies.at(0) = m_collisionWorld.createCollisionBody(transform);
+	rp3d::ConvexMeshShape shape(&m_Player.m_positionData[0], m_Player.m_positionData.size(), 3 * sizeof(float));
+	body->addCollisionShape(&shape, rp3d::Transform::identity());
+	m_collisionBodies.push_back(body);
+	
+
 
 	////Physics
 	//m_collisionCofig = new btDefaultCollisionConfiguration();
@@ -218,6 +232,13 @@ void World::update(const float kfTimeElapsed)
 	{
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
+
+	// New position and orientation of the collision body
+	rp3d::Vector3 position(10.0, 3.0, 0.0);
+	rp3d::Quaternion orientation = rp3d::Quaternion::identity();
+	rp3d::Transform newTransform(position, orientation);
+	// Move the collision body
+	m_collisionBodies.at(0)->setTransform(newTransform);
 
 	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{

@@ -11,17 +11,17 @@
 #include "Freetype.h"
 #include "Utilities.h"
 #include "reactphysics3d.h"
-#include "btBulletDynamicsCommon.h"
-#include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
-#include "LinearMath\btIDebugDraw.h"
+//#include "btBulletDynamicsCommon.h"
+//#include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
+//#include "LinearMath\btIDebugDraw.h"
 
-struct bulletObject
-{
-	int id;
-	bool hit;
-	btRigidBody * body;
-	
-};
+//struct bulletObject
+//{
+//	int id;
+//	bool hit;
+//	btRigidBody * body;
+//	
+//};
 
 class World : public Scene
 {
@@ -40,6 +40,11 @@ class World : public Scene
 		rp3d::CollisionBody * CameraBody;*/
 
 		Model m_Player;
+
+		rp3d::CollisionWorld m_collisionWorld;
+
+		vector<rp3d::CollisionBody*> m_collisionBodies;
+
 
 		//vector<rp3d::CollisionBody*> ModelBodies;
 		//rp3d::CollisionCallback * CameraCallback;
