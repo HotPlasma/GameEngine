@@ -531,18 +531,15 @@ void Editor::render()
 	gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
 	// Activates World shader
-	m_spotlightShader.use();
+	m_phongShader.use();
 
-	// Sets shader MVP
-	glm::mat4 model = glm::mat4(1.0);
-	mat4 mv = m_camera.getView() * model;
-	m_spotlightShader.setUniform("ModelViewMatrix", mv);
-	m_spotlightShader.setUniform("NormalMatrix", mat3(vec3(mv[0]), vec3(mv[1]), vec3(mv[2])));
-	m_spotlightShader.setUniform("MVP", m_camera.getProjection() * mv);
-	mat3 normMat = glm::transpose(glm::inverse(mat3(model)));
-	m_spotlightShader.setUniform("M", model);
-	m_spotlightShader.setUniform("V", m_camera.getView());
-	m_spotlightShader.setUniform("P", m_camera.getProjection());
+	// Passes texture map to shader
+	m_phongShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_phongShader.setUniform("V", m_camera.getView());
+	m_phongShader.setUniform("P", m_camera.getProjection());
+	// Configures lighting
+	setLightParams(&m_phongShader);
 
 	// Renders the Model in hand
 	//m_pSelectedModel->buffer();
@@ -553,11 +550,6 @@ void Editor::render()
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
-	// Updates Skybox position
-	m_pSkybox->setPosition(m_camera.getPosition());
-	// Renders Skybox
-	m_pSkybox->render(&m_phongShader, glm::mat4(1.0f));
-
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
@@ -565,11 +557,25 @@ void Editor::render()
 		//pModel->buffer();
 		
 		// Passes Model transformation data to shader
-		m_spotlightShader.setUniform("M", pModel->getM());
+		m_phongShader.setUniform("M", pModel->getM());
 	
 		// Renders Model
-		pModel->render(&m_spotlightShader, pModel->getM());
+		pModel->render(&m_phongShader, pModel->getM());
 	}
+
+	// Activates texture shader
+	m_textureShader.use();
+
+	// Passes texture map to shader
+	m_textureShader.setUniform("TextureMap", 0);
+	// Sets shader view and projection
+	m_textureShader.setUniform("V", m_camera.getView());
+	m_textureShader.setUniform("P", m_camera.getProjection());
+
+	// Updates Skybox position
+	m_pSkybox->setPosition(m_camera.getPosition());
+	// Renders Skybox
+	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
 
 	// Activates FreeType shader
 	m_freeType.use();

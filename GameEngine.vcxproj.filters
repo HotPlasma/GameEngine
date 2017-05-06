@@ -187,16 +187,22 @@
     <None Include="shaders\image.frag">
       <Filter>Resource Files\Shaders\UI</Filter>
     </None>
-    <None Include="shaders\spotlight.frag">
+    <None Include="shaders\phong.fs">
       <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
-    <None Include="shaders\spotlight.vert">
+    <None Include="shaders\phong.vs">
       <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
-    <None Include="shaders\phong.frag">
+    <None Include="shaders\spotlight.fs">
       <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
-    <None Include="shaders\phong.vert">
+    <None Include="shaders\spotlight.vs">
+      <Filter>Resource Files\Shaders\Scene</Filter>
+    </None>
+    <None Include="shaders\texture.fs">
+      <Filter>Resource Files\Shaders\Scene</Filter>
+    </None>
+    <None Include="shaders\texture.vs">
       <Filter>Resource Files\Shaders\Scene</Filter>
     </None>
   </ItemGroup>

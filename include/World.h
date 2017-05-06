@@ -21,15 +21,11 @@ private:
 	float m_collectYOffset = 0.0f; // Y axis offset for collectables
 	Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 
-	void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
-
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
 
 	void initScene(Freetype* pOverlay);
-
-	void setLightParamaters(GLSLProgram *pShader, int i);
 
 	void input_key(const int kiKey, const int kiAction) {}
 	void input_button(const int kiButton, const int kiAction) {}
