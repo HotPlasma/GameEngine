@@ -80,7 +80,6 @@ void World::input_key(const int kiKey, const int kiAction)
 
 void World::update(const float kfTimeElapsed)
 {
-	
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - sf::Vector2f(m_windowSize.x * 0.5f, m_windowSize.y * 0.5f));
@@ -110,12 +109,12 @@ void World::update(const float kfTimeElapsed)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
 	{
-		if (spareBatteries > 0)
+		if (m_iSpareBatteries > 0)
 		{
-			if (batteryLife <= 80)
+			if (m_iBatteryLife <= 80)
 			{
-				batteryLife += 20;
-			    spareBatteries -= 1;
+				m_iBatteryLife += 20;
+				m_iSpareBatteries -= 1;
 			}
 		}
 	}
@@ -124,50 +123,41 @@ void World::update(const float kfTimeElapsed)
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	//BATTERY AND SURVIVAL TIMERS
-	sf::Time bTimer = batteryTimer.getElapsedTime();
-	sf::Time lTimer = LevelTimer.getElapsedTime();
+	sf::Time batteryTimer = m_batteryTimer.getElapsedTime();
+	sf::Time levelTimer = m_levelTimer.getElapsedTime();
 
 	//cout << bTimer.asSeconds() << endl;
-	if (bTimer.asSeconds() >= 1)
+	if (levelTimer.asSeconds() >= 1)
 	{
-		if (batteryLife >= 1)
+		if (m_iBatteryLife >= 1)
 		{
-			batteryLife -= 1;
-			std::cout << "battery life = " << batteryLife << "%" << std::endl;
-			
+			m_iBatteryLife -= 1;
+			std::cout << "battery life = " << m_iBatteryLife << "%" << std::endl;
 		}
 		else
 		{
 			std::cout << "it was too dark, you lose" << std::endl;
 		}
-		batteryTimer.restart();
+		m_batteryTimer.restart();
 	}
 
 	//cout << lTimer.asSeconds() << endl;
-	if (lTimer.asSeconds() >= 1)
+	if (levelTimer.asSeconds() >= 1)
 	{
-		if (lCountdown >= 1)
+		if (m_iCountdown >= 1)
 		{
-			lCountdown -= 1;
-			lTime = std::to_string(lCountdown);
-			
+			m_iCountdown -= 1;
+			m_sTime = std::to_string(m_iCountdown);
 		}
 		else
 		{ 
 			//std::cout << "you survived!" << std::endl;
-			lTime = "You Survived!";
+			m_sTime = "You Survived!";
 			//victory!}
 	    }
-		LevelTimer.restart();
+		m_levelTimer.restart();
+	}
 
-	
-}
-
-	bLife = std::to_string(batteryLife);
-
-	extraBatteries = std::to_string(spareBatteries);
-	
-	
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
@@ -208,16 +198,16 @@ void World::update(const float kfTimeElapsed)
 				// If collision with a collectable
 				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 				{
-					if (batteryLife <= 80)
+					if (m_iBatteryLife <= 80)
 					{
-						batteryLife += 20;
-						std::cout << "BATTERY LIFE INCREASED;" << " battery life = " << batteryLife << "%" << std::endl;
+						m_iBatteryLife += 20;
+						std::cout << "BATTERY LIFE INCREASED;" << " battery life = " << m_iBatteryLife << "%" << std::endl;
 					}
 					else
 					{
 						std::cout << "BATTERY LIFE ALREADY FULL- BATTERY STORED FOR WHEN YOU LOSE CHARGE" << std::endl;
-						spareBatteries++;
-						std::cout << "number of spare batteries= " << spareBatteries << std::endl;
+						m_iSpareBatteries++;
+						std::cout << "number of spare batteries= " << m_iSpareBatteries << std::endl;
 						
 					}
 					// Marks it as collected
@@ -347,11 +337,17 @@ void World::render()
 	m_freeType.use();
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
-	// Renders placeholder text to HUD
-	m_pHUD->renderText(m_freeType.getHandle(), "spare batteries-   ('E' to use for 20% battery life)", 30.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), extraBatteries, 300.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), bLife, 1820.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), lTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
-	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
+	// Defines spareBatteries string
+	std::string sSpareBatteries; sSpareBatteries += "Spare batteries: "; sSpareBatteries += std::to_string(m_iSpareBatteries); sSpareBatteries += " ('E' to use for 20% battery life)";
+	// Renders spareBatteries to HUD
+	m_pHUD->renderText(m_freeType.getHandle(), sSpareBatteries, 30.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+
+	// Defines batteryLife string
+	std::string sBatteryLife; sBatteryLife += "Battery life: "; sBatteryLife += std::to_string(m_iBatteryLife); sBatteryLife += "%";
+	// Renders batteryLife to HUD
+	m_pHUD->renderText(m_freeType.getHandle(), sBatteryLife, 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+
+	// Renders level time to HUD
+	m_pHUD->renderText(m_freeType.getHandle(), m_sTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }

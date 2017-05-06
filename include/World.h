@@ -21,17 +21,16 @@ private:
 	float m_collectYOffset = 0.0f; // Y axis offset for collectables
 	Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
 
-	sf::Clock batteryTimer;
-	sf::Clock LevelTimer;
-	int spareBatteries = 0;
-	int batteryLife = 100;
-	int lCountdown = 10;
-	string bLife;
-	string lTime;
-	string extraBatteries;
-
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
+	sf::Clock m_batteryTimer;
+	sf::Clock m_levelTimer;
+	int m_iSpareBatteries = 0;
+	int m_iBatteryLife = 100;
+	int m_iCountdown = 10;
+	string m_sLife;
+	string m_sTime;
+	
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
