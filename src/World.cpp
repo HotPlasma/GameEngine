@@ -9,6 +9,58 @@ using std::ifstream;
 #define CAMERA_ROTATION 0.0025f
 #define CAMERA_SPEED 15.0f
 
+//btRigidBody * World::addSphere(float rad, float x, float y, float z, float mass)
+//{
+//	btTransform t;
+//	t.setIdentity();
+//	t.setOrigin(btVector3(x, y, z));
+//
+//	btSphereShape * Sphere = new btSphereShape(rad);
+//	btVector3 inertia(0, 0, 0);
+//	if (mass != 0)
+//	{
+//		Sphere->calculateLocalInertia(mass, inertia);
+//	}
+//	btMotionState * motion = new btDefaultMotionState(t);
+//
+//	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, Sphere);
+//
+//	btRigidBody * body = new btRigidBody(info);
+//
+//	m_collisionWorld->addRigidBody(body);
+//	m_CollisionBodies.push_back(body);
+//		
+//	//tester = Model("assets/models/Rock.obj", "ssets/textures/Rock.bmp", glm::vec3(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
+//
+//	return body;
+//}
+
+//void World::renderSphere(btRigidBody * sphere)
+//{
+//	float r = ((btSphereShape*)sphere->getCollisionShape())->getRadius();
+//	btTransform t;
+//	sphere->getMotionState()->getWorldTransform(t);
+//	glm::mat4 mat;
+//	t.getOpenGLMatrix(glm::value_ptr(mat));
+//	tester.m_M = tester.m_M * mat;
+//}
+//
+//void World::renderPlane(btRigidBody * Plane)
+//{
+//	btTransform t;
+//	Plane->getMotionState()->getWorldTransform(t);
+//	glm::mat4 mat;
+//	t.getOpenGLMatrix(glm::value_ptr(mat));
+//	m_sceneReader.m_modelList[1].m_M = m_sceneReader.m_modelList[1].m_M * mat;
+//}
+
+bool World::collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2)
+{
+	cout << obj1->getCollisionObject()->getUserPointer() << " " << obj2->getCollisionObject()->getUserPointer() << std::endl;
+		 
+	return false;
+}
+
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
 	m_pWindow = pWindow;
@@ -17,6 +69,8 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 	m_camera.setAspectRatio((float)windowSize.x / windowSize.y);
 }
+
+
 
 void World::initScene(Freetype* pOverlay)
 {
@@ -49,35 +103,46 @@ void World::initScene(Freetype* pOverlay)
 	m_broadphase = new btDbvtBroadphase();
 	m_constraintSolver = new btSequentialImpulseConstraintSolver();
 
-	m_dynamicWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
-	m_dynamicWorld->setGravity(btVector3(0, -10, 0));
+	m_collisionWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
+	m_collisionWorld->setGravity(btVector3(0, 0, 0));
 
-	btTransform t(btQuaternion(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
+	btTransform t;
+	t.setIdentity();
+	t.setOrigin(btVector3(m_sceneReader.m_modelList.at(3).getPosition().x, m_sceneReader.m_modelList.at(3).getPosition().y, m_sceneReader.m_modelList.at(3).getPosition().z));
 
-	btBoxShape *  box = new btBoxShape(btVector3(m_Player.getCollisionBox().boundingBox.x, m_Player.getCollisionBox().boundingBox.y, m_Player.getCollisionBox().boundingBox.z));
+	btBoxShape * stump = new btBoxShape(btVector3(20,20,20));
+
 	btMotionState * motion = new btDefaultMotionState(t);
 
-	btRigidBody::btRigidBodyConstructionInfo info(0, motion, box);
+	btRigidBody::btRigidBodyConstructionInfo info(0, motion, stump);
 
-	btRigidBody * body = new btRigidBody(info);
+	btRigidBody * StumpBody = new btRigidBody(info);
 
-	m_dynamicWorld->addRigidBody(body);
+	StumpBody->setCollisionFlags(StumpBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-	m_CollisionBodies.push_back(body);
-
-	btTransform t2(btQuaternion(m_sceneReader.m_modelList.at(6).getPosition().x, m_sceneReader.m_modelList.at(6).getPosition().y, m_sceneReader.m_modelList.at(6).getPosition().z));
-
-	btBoxShape *  box2 = new btBoxShape(btVector3(m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.x, m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.y, m_sceneReader.m_modelList.at(6).getCollisionBox().boundingBox.z));
-	btMotionState * motion2 = new btDefaultMotionState(t2);
-
-	btRigidBody::btRigidBodyConstructionInfo info2(0, motion2, box2);
-
-	btRigidBody * body2 = new btRigidBody(info2);
+	m_CollisionBodies.push_back(StumpBody);
+	m_collisionWorld->addRigidBody(m_CollisionBodies.at(0));
+	StumpBody->setUserPointer(m_CollisionBodies.at(0));
 
 
-	m_dynamicWorld->addRigidBody(body2);
+	btTransform tP;
+	t.setIdentity();
+	t.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
 
-	m_CollisionBodies.push_back(body2);
+	btBoxShape * PBox = new btBoxShape(btVector3(20, 20, 20));
+
+	btMotionState * PMotion = new btDefaultMotionState(t);
+
+	btRigidBody::btRigidBodyConstructionInfo PlayerInfo(10, PMotion, PBox);
+
+	btRigidBody * PlayBody = new btRigidBody(PlayerInfo);
+
+	m_CollisionBodies.push_back(PlayBody);
+
+	m_collisionWorld->addRigidBody(m_CollisionBodies.at(1));
+	PlayBody->setUserPointer(m_CollisionBodies.at(1));
+
+	gContactAddedCallback = &collisionCallback;
 
 	// Initial position and orientation of the collision body
 	/*rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
@@ -149,8 +214,36 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+	{
+		btRigidBody* sphere = addSphere(10, m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z, 1.0);
+		btVector3 look(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
+		sphere->setLinearVelocity(look);
+	}*/
+
+	btTransform trans, trans2;
+
+	m_CollisionBodies.at(1)->getMotionState()->getWorldTransform(trans);
+
+	m_CollisionBodies.at(0)->getMotionState()->getWorldTransform(trans2);
+
+	trans.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
+
+	m_CollisionBodies.at(1)->setWorldTransform(trans);
+
+	m_collisionWorld->stepSimulation(kfTimeElapsed);
+
+	std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
+	
+	
+
+	//m_collisionWorld->contactPairTest(m_CollisionBodies.at(1), m_CollisionBodies.at(2), )
+
+	//system("CLS");
+
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
+	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5, m_camera.getPosition().z));
 
 //	CameraBody->setTransform(rp3d::Transform(rp3d::Vector3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z), rp3d::Quaternion::identity()));
 
@@ -159,7 +252,6 @@ void World::update(const float kfTimeElapsed)
 	//rp3d::Transform newTransform(position, orientation);
 	// Move the collision body
 	//CameraBody->setTransform(newTransform);
-	
 	
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
@@ -210,7 +302,7 @@ void World::update(const float kfTimeElapsed)
 	}
 	
 
-	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5, m_camera.getPosition().z));
+
 
 	//for (int j = 5; j < m_sceneReader.m_modelList.size(); j++)
 	//{
@@ -265,8 +357,6 @@ void World::update(const float kfTimeElapsed)
 		std::cout << "Not Colliding" << std::endl;
 	}*/
 	
-
-	m_dynamicWorld->stepSimulation(kfTimeElapsed);
 }
 
 void World::render()
@@ -281,7 +371,24 @@ void World::render()
 
 	m_Player.buffer();
 	m_worldShader.setUniform("M", m_Player.m_M);
+
+	//tester.buffer();
+	//m_worldShader.setUniform("M", tester.m_M);
+	//tester.render();
 	
+	/*for (int i = 0; i < m_CollisionBodies.size(); i++)
+	{
+		if (m_CollisionBodies.at(i)->getCollisionShape()->getShapeType() == STATIC_PLANE_PROXYTYPE)
+		{
+			renderPlane(m_CollisionBodies.at(i));
+		}
+		else if (m_CollisionBodies.at(i)->getCollisionShape()->getShapeType() == SPHERE_SHAPE_PROXYTYPE)
+		{
+			renderSphere(m_CollisionBodies.at(i));
+		}
+	}*/
+	
+
 	//m_Player.render();
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{

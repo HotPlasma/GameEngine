@@ -37,7 +37,7 @@ class World : public Scene
 
 		btBroadphaseInterface* broadphase;
 
-		btDynamicsWorld * m_dynamicWorld;
+		btDynamicsWorld * m_collisionWorld;
 		btDispatcher * m_dispatcher;
 		btCollisionConfiguration * m_collisionCofig; 
 		btBroadphaseInterface * m_broadphase;
@@ -47,7 +47,16 @@ class World : public Scene
 		btRigidBody *rigidBody;
 
 		vector<btRigidBody*> m_CollisionBodies;
-	
+
+		bool collisionCallback(btManifoldPoint& cp, const btCollisionObjectWrapper* obj1, int id1, int index1, const btCollisionObjectWrapper* obj2, int id2, int index2);
+		
+
+	//	btRigidBody* addSphere(float rad, float x, float y, float z, float mass);
+
+		/*void renderSphere(btRigidBody * sphere);
+		void renderPlane(btRigidBody * Plane);*/
+
+		//Model tester;
 	public:
 
 		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
