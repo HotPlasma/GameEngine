@@ -13,12 +13,14 @@
 #include "reactphysics3d.h"
 #include "btBulletDynamicsCommon.h"
 #include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
+#include "LinearMath\btIDebugDraw.h"
 
 struct bulletObject
 {
 	int id;
 	bool hit;
 	btRigidBody * body;
+	
 };
 
 class World : public Scene
@@ -42,21 +44,22 @@ class World : public Scene
 		//vector<rp3d::CollisionBody*> ModelBodies;
 		//rp3d::CollisionCallback * CameraCallback;
 
-		btBroadphaseInterface* broadphase;
+		//btBroadphaseInterface* broadphase;
 
-		btDynamicsWorld * m_collisionWorld;
-		btDispatcher * m_dispatcher;
-		btCollisionConfiguration * m_collisionCofig; 
-		btBroadphaseInterface * m_broadphase;
-		btConstraintSolver * m_constraintSolver;
+		//btDynamicsWorld * m_collisionWorld;
+		//btDispatcher * m_dispatcher;
+		//btCollisionConfiguration * m_collisionCofig; 
+		//btBroadphaseInterface * m_broadphase;
+		//btConstraintSolver * m_constraintSolver;
 
-		btRigidBody *CameraRigidBody;
-		btRigidBody *rigidBody;
+		//btRigidBody *CameraRigidBody;
+		//btRigidBody *rigidBody;
 
-		vector<btRigidBody*> m_CollisionBodies;
+		//vector<btRigidBody*> m_CollisionBodies;
 		
+		//btIDebugDraw DebugDrawer;
 
-		void initPhysics();
+		//void initPhysics();
 
 
 

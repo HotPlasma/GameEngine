@@ -56,7 +56,7 @@ using std::ifstream;
 
 bool contact_callback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
 {
-	//cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
+	cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
 		
 	cout << "Collision" << endl;
 
@@ -100,52 +100,52 @@ void World::initScene(Freetype* pOverlay)
 	m_Player.initModel();
 	m_Player.setVisable(true);
 
-	//Physics
-	m_collisionCofig = new btDefaultCollisionConfiguration();
-	m_dispatcher = new btCollisionDispatcher(m_collisionCofig);
-	m_broadphase = new btDbvtBroadphase();
-	m_constraintSolver = new btSequentialImpulseConstraintSolver();
+	////Physics
+	//m_collisionCofig = new btDefaultCollisionConfiguration();
+	//m_dispatcher = new btCollisionDispatcher(m_collisionCofig);
+	//m_broadphase = new btDbvtBroadphase();
+	//m_constraintSolver = new btSequentialImpulseConstraintSolver();
 
-	m_collisionWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
-	m_collisionWorld->setGravity(btVector3(0, 0, 0));
+	//m_collisionWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
+	//m_collisionWorld->setGravity(btVector3(0, 0, 0));
 
-	btTransform t;
-	t.setIdentity();
-	t.setOrigin(btVector3(m_sceneReader.m_modelList.at(3).getPosition().x, m_sceneReader.m_modelList.at(3).getPosition().y, m_sceneReader.m_modelList.at(3).getPosition().z));
+	//btTransform t;
+	//t.setIdentity();
+	//t.setOrigin(btVector3(m_sceneReader.m_modelList.at(3).getPosition().x, m_sceneReader.m_modelList.at(3).getPosition().y, m_sceneReader.m_modelList.at(3).getPosition().z));
 
-	btBoxShape * stump = new btBoxShape(btVector3(20,20,20));
+	//btBoxShape * stump = new btBoxShape(btVector3(20,20,20));
 
-	btMotionState * motion = new btDefaultMotionState(t);
+	//btMotionState * motion = new btDefaultMotionState(t);
 
-	btRigidBody::btRigidBodyConstructionInfo info(0, motion, stump);
+	//btRigidBody::btRigidBodyConstructionInfo info(0, motion, stump);
 
-	btRigidBody * StumpBody = new btRigidBody(info);
+	//btRigidBody * StumpBody = new btRigidBody(info);
 
-	StumpBody->setCollisionFlags(StumpBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	//StumpBody->setCollisionFlags(StumpBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-	m_CollisionBodies.push_back(StumpBody);
-	m_collisionWorld->addRigidBody(m_CollisionBodies.at(0));
-	StumpBody->setUserPointer(m_CollisionBodies.at(0));
+	//m_CollisionBodies.push_back(StumpBody);
+	//m_collisionWorld->addRigidBody(m_CollisionBodies.at(0));
+	//StumpBody->setUserPointer(m_CollisionBodies.at(0));
 
 
-	btTransform tP;
-	t.setIdentity();
-	t.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
+	//btTransform tP;
+	//tP.setIdentity();
+	//tP.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
 
-	btBoxShape * PBox = new btBoxShape(btVector3(20, 20, 20));
+	//btBoxShape * PBox = new btBoxShape(btVector3(20, 20, 20));
 
-	btMotionState * PMotion = new btDefaultMotionState(t);
+	//btMotionState * PMotion = new btDefaultMotionState(tP);
 
-	btRigidBody::btRigidBodyConstructionInfo PlayerInfo(10, PMotion, PBox);
+	//btRigidBody::btRigidBodyConstructionInfo PlayerInfo(0, PMotion, PBox);
 
-	btRigidBody * PlayBody = new btRigidBody(PlayerInfo);
+	//btRigidBody * PlayBody = new btRigidBody(PlayerInfo);
 
-	StumpBody->setCollisionFlags(PlayBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
+	//StumpBody->setCollisionFlags(PlayBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
 
-	m_CollisionBodies.push_back(PlayBody);
+	//m_CollisionBodies.push_back(PlayBody);
 
-	m_collisionWorld->addRigidBody(m_CollisionBodies.at(1));
-	PlayBody->setUserPointer(m_CollisionBodies.at(1));
+	//m_collisionWorld->addRigidBody(m_CollisionBodies.at(1));
+	//PlayBody->setUserPointer(m_CollisionBodies.at(1));
 
 	
 
@@ -221,22 +221,24 @@ void World::update(const float kfTimeElapsed)
 
 	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
-		btRigidBody* sphere = addSphere(10, m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z, 1.0);
+		btRigidBody* sphere = m_CollisionBodies.at(1);
 		btVector3 look(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 		sphere->setLinearVelocity(look);
+		m_sceneReader.m_modelList.at(3).setPosition(glm::vec3(sphere->getLinearVelocity().x, sphere->getLinearVelocity().y, sphere->getLinearVelocity().z));
 	}*/
 
-	btTransform trans, trans2;
+	//btTransform trans, trans2;
 
-	m_CollisionBodies.at(1)->getMotionState()->getWorldTransform(trans);
+	//m_CollisionBodies.at(1)->getMotionState()->getWorldTransform(trans);
 
-	m_CollisionBodies.at(0)->getMotionState()->getWorldTransform(trans2);
+	//m_CollisionBodies.at(0)->getMotionState()->getWorldTransform(trans2);
 
-	trans.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
+	//trans.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
 
-	m_CollisionBodies.at(1)->setWorldTransform(trans);
+	//m_CollisionBodies.at(1)->setWorldTransform(trans);
 
-	m_collisionWorld->stepSimulation(kfTimeElapsed);
+
+	//m_collisionWorld->stepSimulation(kfTimeElapsed);
 
 	//std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
 	
@@ -392,7 +394,9 @@ void World::render()
 			renderSphere(m_CollisionBodies.at(i));
 		}
 	}*/
+
 	
+	//m_collisionWorld->debugDrawWorld();
 
 	//m_Player.render();
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
