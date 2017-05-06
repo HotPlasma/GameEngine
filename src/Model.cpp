@@ -10,7 +10,7 @@ Model::Model()
 	};
 }
 
-Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, int iMaterialID, bool ThreeDimentional)
+Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, int iMaterialID, bool b3D)
 {
 	// Constucts a model with the given variables
 	m_sFileName = sFileLocation;
@@ -19,7 +19,7 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	m_rotation = rotation;
 	m_scale = scale;
 	m_iMaterial = iMaterialID;
-	m_b3D = ThreeDimentional;
+	m_b3D = b3D;
 	m_M = {
 		1,0,0,0,
 		0,1,0,0,
@@ -45,7 +45,7 @@ void Model::initModel()
 	m_M = scaleMatrix * rotMatrix * transMatrix;
 
 	m_positionData = m_pModelReader->getVertices();
-	m_vertexNormalData = m_pModelReader->getNormals();
+	m_normalData = m_pModelReader->getNormals();
 	m_uvData = m_pModelReader->getTextureCoordinates();
 
 	gl::GenBuffers(3, m_vboHandles);
@@ -57,7 +57,7 @@ void Model::initModel()
 	gl::BufferData(gl::ARRAY_BUFFER, m_positionData.size() * sizeof(float), m_positionData.data(), gl::STATIC_DRAW);
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, vertexBufferHandle);
-	gl::BufferData(gl::ARRAY_BUFFER, m_vertexNormalData.size() * sizeof(float), m_vertexNormalData.data(), gl::STATIC_DRAW);
+	gl::BufferData(gl::ARRAY_BUFFER, m_normalData.size() * sizeof(float), m_normalData.data(), gl::STATIC_DRAW);
 
 	gl::BindBuffer(gl::ARRAY_BUFFER, uvBufferHandle);
 	gl::BufferData(gl::ARRAY_BUFFER, m_uvData.size() * sizeof(float), m_uvData.data(), gl::STATIC_DRAW);

@@ -36,12 +36,15 @@ private:
 	GLuint m_vbo;
 	GLuint m_vaoHandle;
 
+	bool m_b3D = false;
+
 public:
 
 	Model(); // Constructor
-	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
-	
+	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID, bool b3D); // Full constructor
+
 	std::vector<float> m_positionData;
+	std::vector<float> m_normalData;
 	std::vector<float> m_uvData;
 
 	void setName(const string ksName) { m_sName = ksName; }
@@ -56,6 +59,7 @@ public:
 	void setCollected(const bool kbCollected) { m_bCollected = kbCollected; }
 	void setVisible(const bool kbVisibility) { m_bVisible = kbVisibility; }
 	void setMaterial(const int kiMaterial) { m_iMaterial = kiMaterial; }
+	void set3D(const bool kb3D) { m_b3D = kb3D; }
 	
 	string getName() { return m_sName; }; // Returns Model name
 	string getFileLocation() { return m_sFileName; }; // Returns location of obj
@@ -69,6 +73,7 @@ public:
 	bool isCollected() { return m_bCollected; }; // Check if a collectable has been collected
 	bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
 	int getMaterial() { return m_iMaterial; }; // Returns materialID
+	bool get3D() { return m_b3D; }
 
 	void loadModel() { m_pModelReader = new ModelReader(m_sFileName); } // Loads in the model to be rendered
 	void initModel(); // Draws model

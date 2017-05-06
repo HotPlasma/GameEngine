@@ -84,7 +84,7 @@ void Freetype::setupBuffers()
 
 void Freetype::addImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
 {
-	m_imagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
+	m_imagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0, false));
 
 	m_imagePlane.at(m_imagePlane.size() - 1).setVisible(visablity);
 
