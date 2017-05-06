@@ -24,7 +24,7 @@ public:
 	void setStr(const std::string ksString) { m_sText = ksString; }
 	std::string getStr() { return m_sText; }
 
-	void render(GLSLProgram* pShader, Freetype* pHUD, const glm::vec2 kWindowSize);
+	void render(GLSLProgram* pShader, Freetype* pHUD, const glm::vec2 kWindowSize, const glm::vec3 kColour);
 };
 
 #endif

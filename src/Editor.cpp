@@ -340,9 +340,17 @@ void Editor::input_key(const int kiKey, const int kiAction)
 			}
 
 			// TEMPORARY Field Selection
-			if (kiKey == GLFW_KEY_1) m_menu.m_pActiveField = m_menu.m_pNameField;
-			if (kiKey == GLFW_KEY_2) m_menu.m_pActiveField = m_menu.m_pObjField;
-			if (kiKey == GLFW_KEY_3) m_menu.m_pActiveField = m_menu.m_pTexField;
+			if (kiKey == GLFW_KEY_TAB)
+			{
+				// If name field active - Wwitch to obj field
+				if (m_menu.m_pActiveField == m_menu.m_pNameField) m_menu.m_pActiveField = m_menu.m_pObjField;
+
+				// If obj field active - Wwitch to tex field
+				else if (m_menu.m_pActiveField == m_menu.m_pObjField) m_menu.m_pActiveField = m_menu.m_pTexField;
+
+				// If tex field active - Wwitch to name field
+				else if (m_menu.m_pActiveField == m_menu.m_pTexField) m_menu.m_pActiveField = m_menu.m_pNameField;
+			}
 		}
 		else
 		{
@@ -716,6 +724,10 @@ void Editor::update(const float kfTimeElapsed)
 	m_selection.m_pModel->setRotation(m_selection.m_rotation);
 	// Sets Model scale to selection value
 	m_selection.m_pModel->setScale(m_selection.m_scale);
+	// Sets Model collectable to selection value
+	m_selection.m_pModel->setCollectable(m_selection.m_bCollectable);
+	// Sets Model ai to selection value
+	//m_selection.m_pModel->setAI(m_selection.m_bAI); // TEMPORARY UNTIL AI BRANCH MERGED IN
 	// Sets Model material to selection value
 	m_selection.m_pModel->setMaterial(m_selection.m_uiMaterial);
 
@@ -811,22 +823,34 @@ void Editor::render()
 		m_menu.m_pLoad->render(&m_imageType, m_windowSize);
 		m_menu.m_pCancel->render(&m_imageType, m_windowSize);
 
+		// Defines colours for field text
+		glm::vec3 activeColour = glm::vec3(1.0f, 0.0f, 0.0f);
+		glm::vec3 inactiveColour = glm::vec3(1.0f, 5.0f, 5.0f);
+
+		// Sets all field colours to inactive colour
+		glm::vec3 nameFieldColour = inactiveColour; glm::vec3 objFieldColour = inactiveColour; glm::vec3 texFieldColour = inactiveColour;
+
+		// If field is active sets colour appropriately
+		if (m_menu.m_pActiveField == m_menu.m_pNameField) { nameFieldColour = glm::vec3(1.0f, 0.0f, 0.0f); }
+		if (m_menu.m_pActiveField == m_menu.m_pObjField) { objFieldColour = glm::vec3(1.0f, 0.0f, 0.0f); }
+		if (m_menu.m_pActiveField == m_menu.m_pTexField) { texFieldColour = glm::vec3(1.0f, 0.0f, 0.0f); }
+
 		// Renders text boxes
 		// Name field
 		std::shared_ptr<TextBox> pNameField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pNameField.get()));
 		std::string sNameStr; sNameStr += "Model Name: "; sNameStr += m_menu.m_pNameField->getStr();
 		pNameField->setStr(sNameStr);
-		pNameField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		pNameField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y), nameFieldColour);
 		// Obj field
 		std::shared_ptr<TextBox> pObjField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pObjField.get()));
 		std::string sObjStr; sObjStr += "Obj File: assets/models/"; sObjStr += m_menu.m_pObjField->getStr(); sObjStr += ".obj";
 		pObjField->setStr(sObjStr);
-		pObjField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		pObjField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y), objFieldColour);
 		// Tex field
 		std::shared_ptr<TextBox> pTexField = std::shared_ptr<TextBox>(new TextBox(*m_menu.m_pTexField.get()));
 		std::string sTexStr; sTexStr += "Texture File: assets/textures/"; sTexStr += m_menu.m_pTexField->getStr(); sTexStr += ".bmp";
 		pTexField->setStr(sTexStr);
-		pTexField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y));
+		pTexField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y), texFieldColour);
 
 		// Activates ImageType shader
 		//m_imageType.use();
@@ -903,7 +927,7 @@ void Editor::save()
 		// Defines new element for <Translation>
 		tinyxml2::XMLElement* pTrans = document.NewElement("Translation");
 		// Defines string for Translation data
-		std::string sTData = std::to_string(m_selection.m_position.x); sTData += " "; sTData += std::to_string(m_selection.m_position.y); sTData += " "; sTData += std::to_string(m_selection.m_position.z);
+		std::string sTData = std::to_string(pModel->getPosition().x); sTData += " "; sTData += std::to_string(pModel->getPosition().y); sTData += " "; sTData += std::to_string(pModel->getPosition().z);
 		// Sets <Translation> value to the selection position
 		pTrans->SetText(sTData.c_str());
 		// Inserts element into <Object>
@@ -912,7 +936,7 @@ void Editor::save()
 		// Defines new element for <Rotation>
 		tinyxml2::XMLElement* pRot = document.NewElement("Rotation");
 		// Defines string for Rotation data
-		std::string sRData = std::to_string(m_selection.m_rotation.x); sRData += " "; sRData += std::to_string(m_selection.m_rotation.y); sRData += " "; sRData += std::to_string(m_selection.m_rotation.z);
+		std::string sRData = std::to_string(pModel->getRotation().x); sRData += " "; sRData += std::to_string(pModel->getRotation().y); sRData += " "; sRData += std::to_string(pModel->getRotation().z);
 		// Sets <Rotation> value to selection rotation
 		pRot->SetText(sRData.c_str());
 		// Inserts element into <Object>
@@ -921,7 +945,7 @@ void Editor::save()
 		// Defines new element for <Scale>
 		tinyxml2::XMLElement* pScale = document.NewElement("Scale");
 		// Defines string for Scale data
-		std::string sSData = std::to_string(m_selection.m_scale.x); sSData += " "; sSData += std::to_string(m_selection.m_scale.y); sSData += " "; sSData += std::to_string(m_selection.m_scale.z);
+		std::string sSData = std::to_string(pModel->getScale().x); sSData += " "; sSData += std::to_string(pModel->getScale().y); sSData += " "; sSData += std::to_string(pModel->getScale().z);
 		// Sets <Scale> value to selection scale
 		pScale->SetText(sSData.c_str());
 		// Inserts element into <Object>
@@ -930,21 +954,21 @@ void Editor::save()
 		// Defines new element for <Material>
 		tinyxml2::XMLElement* pMaterial = document.NewElement("Material");
 		// Sets <Material> value to selection material
-		pMaterial->SetText(m_selection.m_uiMaterial);
+		pMaterial->SetText(pModel->getMaterial());
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pMaterial);
 
 		// Defines new element for <Collectable>
 		tinyxml2::XMLElement* pCollectable = document.NewElement("Collectable");
 		// Sets <Collectable> value to selection collectable setting
-		pCollectable->SetText(m_selection.m_bCollectable);
+		pCollectable->SetText(pModel->isCollectable());
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pCollectable);
 
 		// Defines new element for <AI>
 		tinyxml2::XMLElement* pAI = document.NewElement("AI");
 		// Sets <AI> value to selection AI setting
-		pAI->SetText(m_selection.m_bAI);
+		pAI->SetText(false); // TEMPORARY UNTIL AI BRANCH MERGED IN
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pAI);
 	}
