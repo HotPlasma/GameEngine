@@ -231,6 +231,61 @@ void World::update(const float kfTimeElapsed)
 	glfwSetCursorPos(m_pWindow, m_windowSize.x*0.5, m_windowSize.y*0.5);
 }
 
+void setLightParams(GLSLProgram *pShader, Camera *camera)
+{
+	pShader->setUniform("Material.Ka", glm::vec3(0.2f, 0.2f, 0.2f));
+	pShader->setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
+	pShader->setUniform("Material.Ks", glm::vec3(1.0f, 1.0f, 1.0f));
+	pShader->setUniform("Material.Shininess", 20.0f);
+
+	pShader->setUniform("Light.Intensity", glm::vec3(0.1f, 0.1f, 0.1f));
+	pShader->setUniform("Light.Position", camera->getPosition());
+
+	pShader->setUniform("Spotlight.Direction", camera->getPosition() + camera->getDirection());
+	pShader->setUniform("Spotlight.CutOff", glm::cos(glm::radians(15.0f)));
+	pShader->setUniform("Spotlight.OuterCutOff", glm::cos(glm::radians(22.5f)));
+
+	//pShader->setUniform("light.direction", m_camera.getPosition().x + m_camera.getDirection().x, m_camera.getPosition().y + m_camera.getDirection().y, m_camera.getPosition().z + m_camera.getDirection().z);
+	//pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
+	//pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
+	//
+	//pShader->setUniform("light.ambient", 0.3f, 0.3f, 0.3f);
+	//pShader->setUniform("light.diffuse", 0.5f, 0.5f, 0.5f);
+	//pShader->setUniform("light.specular", 0.8f, 0.8f, 0.8f);
+	//pShader->setUniform("light.constant", 1.0f);
+	//pShader->setUniform("light.linear", 0.09f);
+	//pShader->setUniform("light.quadratic", 0.032f);
+
+	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
+	//	m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
+	//	m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
+	//	m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
+	//	m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
+	//{
+	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
+	//	m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
+	//	m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
+	//	m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
+	//}
+	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
+	//{
+	//	m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
+	//	m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
+	//	m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
+	//	m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
+	//}
+}
+
 void World::render()
 {
 	// Check depth and clear last frame
@@ -246,7 +301,7 @@ void World::render()
 	m_spotlightShader.setUniform("V", m_camera.getView());
 	m_spotlightShader.setUniform("P", m_camera.getProjection());
 	// Configures lighting
-	setLightParams(&m_spotlightShader);
+	setLightParams(&m_spotlightShader, &m_camera);
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -300,4 +355,3 @@ void World::render()
 	m_pHUD->renderText(m_freeType.getHandle(), "Battery Life-   %", 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
 }
-
