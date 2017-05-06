@@ -8,6 +8,8 @@
 #define CAMERA_SPEED 0.01f
 #define CAMERA_ZOOM 3.5f
 
+#define FLASH_SPEED 0.5f
+
 // Constructor
 Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 {
@@ -600,6 +602,29 @@ void Editor::update(const float kfTimeElapsed)
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - m_lastMousePos);
 
+	/////////////////// COLLECTABLE BOBBING ///////////////////
+	// If collectables are moving up and offset is greater than upper bound
+	if (m_selection.m_flashGoingUp && m_selection.m_flashOffset >= m_selection.m_flashBounds.upper())
+	{
+		// Move collectable down
+		m_selection.m_flashGoingUp = false;
+	}
+
+	// If collectables are moving down and offset is less than lower bound
+	if (!m_selection.m_flashGoingUp && m_selection.m_flashOffset <= m_selection.m_flashBounds.lower())
+	{
+		// Move collectable up
+		m_selection.m_flashGoingUp = true;
+	}
+
+	// Increments offset up or down
+	if (m_selection.m_flashGoingUp) { m_selection.m_flashOffset += FLASH_SPEED*kfTimeElapsed; }
+	else if (!m_selection.m_flashGoingUp) { m_selection.m_flashOffset -= FLASH_SPEED*kfTimeElapsed; }
+
+	// Clamps offset to bounds
+	m_selection.m_flashOffset = glm::clamp(m_selection.m_flashOffset, m_selection.m_flashBounds.lower(), m_selection.m_flashBounds.upper());
+
+	/////////////////// USER CONTROLS ///////////////////
 	// If Model selection menu is not open
 	if (!m_bMenuOpen)
 	{
@@ -759,15 +784,17 @@ void Editor::render()
 	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
 	m_phongShader.setUniform("Light.Position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
-	// Renders Model
-	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
-
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
 		// Renders Model
 		pModel->render(&m_phongShader, glm::mat4(1.0f));
 	}
+
+	// Applies flashing effect to selection
+	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f + m_selection.m_flashOffset, 0.6f + m_selection.m_flashOffset, 0.6f + m_selection.m_flashOffset));
+	// Renders Model
+	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
 	// Activates texture shader
 	m_textureShader.use();

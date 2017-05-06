@@ -28,6 +28,10 @@ struct Selection
 	std::shared_ptr<Model> m_pModel; //!< Selection Model
 
 	std::vector<std::shared_ptr<Model>> m_pRedoList; //!< Models that have been undone
+
+	bool m_flashGoingUp = true; // Whether flash are moving up
+	float m_flashOffset = 0.0f; // Light intensity for selected Model
+	Bounds m_flashBounds = Bounds(0.15f, -0.15f); // Upper and lower bounds for flash intensity
 };
 
 struct EditorHUD
