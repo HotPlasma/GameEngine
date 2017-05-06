@@ -602,27 +602,8 @@ void Editor::update(const float kfTimeElapsed)
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - m_lastMousePos);
 
-	/////////////////// COLLECTABLE BOBBING ///////////////////
-	// If collectables are moving up and offset is greater than upper bound
-	if (m_selection.m_flashGoingUp && m_selection.m_flashOffset >= m_selection.m_flashBounds.upper())
-	{
-		// Move collectable down
-		m_selection.m_flashGoingUp = false;
-	}
-
-	// If collectables are moving down and offset is less than lower bound
-	if (!m_selection.m_flashGoingUp && m_selection.m_flashOffset <= m_selection.m_flashBounds.lower())
-	{
-		// Move collectable up
-		m_selection.m_flashGoingUp = true;
-	}
-
-	// Increments offset up or down
-	if (m_selection.m_flashGoingUp) { m_selection.m_flashOffset += FLASH_SPEED*kfTimeElapsed; }
-	else if (!m_selection.m_flashGoingUp) { m_selection.m_flashOffset -= FLASH_SPEED*kfTimeElapsed; }
-
-	// Clamps offset to bounds
-	m_selection.m_flashOffset = glm::clamp(m_selection.m_flashOffset, m_selection.m_flashBounds.lower(), m_selection.m_flashBounds.upper());
+	/////////////////// SELECTION FLASHING ///////////////////
+	m_selection.m_lightIntensity.update(FLASH_SPEED*kfTimeElapsed);
 
 	/////////////////// USER CONTROLS ///////////////////
 	// If Model selection menu is not open
@@ -792,7 +773,7 @@ void Editor::render()
 	}
 
 	// Applies flashing effect to selection
-	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f + m_selection.m_flashOffset, 0.6f + m_selection.m_flashOffset, 0.6f + m_selection.m_flashOffset));
+	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f + m_selection.m_lightIntensity.value(), 0.6f + m_selection.m_lightIntensity.value(), 0.6f + m_selection.m_lightIntensity.value()));
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 

@@ -17,9 +17,7 @@ private:
 
 	SceneReader m_sceneReader; // Reads .xml file in order to create world
 
-	bool m_collectGoingUp = true; // Whether collectables are moving up
-	float m_collectYOffset = 0.0f; // Y axis offset for collectables
-	Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
+	Bouncer m_collHeight = Bouncer(Bounds(3.0f, 1.0f)); //!< Bouncing value for collectable Y position
 
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 

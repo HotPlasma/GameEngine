@@ -159,26 +159,7 @@ void World::update(const float kfTimeElapsed)
 	}
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
-	// If collectables are moving up and offset is greater than upper bound
-	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
-	{
-		// Move collectable down
-		m_collectGoingUp = false;
-	}
-
-	// If collectables are moving down and offset is less than lower bound
-	if (!m_collectGoingUp && m_collectYOffset <= m_collectBounds.lower())
-	{
-		// Move collectable up
-		m_collectGoingUp = true;
-	}
-
-	// Increments offset up or down
-	if (m_collectGoingUp) { m_collectYOffset += COLLECTABLE_SPEED*kfTimeElapsed; }
-	else if (!m_collectGoingUp) { m_collectYOffset -= COLLECTABLE_SPEED*kfTimeElapsed; }
-
-	// Clamps offset to bounds
-	m_collectYOffset = glm::clamp(m_collectYOffset, m_collectBounds.lower(), m_collectBounds.upper());
+	m_collHeight.update(COLLECTABLE_SPEED*kfTimeElapsed);
 
 	// For all Models
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
@@ -306,7 +287,7 @@ void World::render()
 				1, 0, 0, 0,
 				0, 1, 0, 0,
 				0, 0, 1, 0,
-				0, m_collectYOffset, 0, 1 
+				0, m_collHeight.value(), 0, 1 
 			);
 		}
 

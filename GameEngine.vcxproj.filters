@@ -171,7 +171,7 @@
       <Filter>Header Files\Scene\UI</Filter>
     </ClInclude>
     <ClInclude Include="include\Utilities.h">
-      <Filter>Resource Files</Filter>
+      <Filter>Header Files\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
