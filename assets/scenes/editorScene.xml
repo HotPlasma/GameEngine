@@ -1,1 +1,3258 @@
-<Scene/>
+<Scene>
+    <Object>
+        <Name>Logs</Name>
+        <OBJLocation>assets/models/logs.obj</OBJLocation>
+        <TexLocation>assets/textures/logs.bmp</TexLocation>
+        <Translation>-56.497692 0.818528 174.774368</Translation>
+        <Rotation>0.000000 -226.318359 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Logs</Name>
+        <OBJLocation>assets/models/logs.obj</OBJLocation>
+        <TexLocation>assets/textures/logs.bmp</TexLocation>
+        <Translation>7.745851 0.818528 29.311934</Translation>
+        <Rotation>0.000000 -226.318359 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Logs</Name>
+        <OBJLocation>assets/models/logs.obj</OBJLocation>
+        <TexLocation>assets/textures/logs.bmp</TexLocation>
+        <Translation>-40.510384 0.818528 -73.552750</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Logs</Name>
+        <OBJLocation>assets/models/logs.obj</OBJLocation>
+        <TexLocation>assets/textures/logs.bmp</TexLocation>
+        <Translation>50.536110 0.818528 -159.015320</Translation>
+        <Rotation>0.000000 94.416504 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Logs</Name>
+        <OBJLocation>assets/models/logs.obj</OBJLocation>
+        <TexLocation>assets/textures/logs.bmp</TexLocation>
+        <Translation>-143.745834 0.818528 -64.290802</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Demon</Name>
+        <OBJLocation>assets/models/demon.obj</OBJLocation>
+        <TexLocation>assets/textures/demon.bmp</TexLocation>
+        <Translation>-30.130953 0.000000 78.411285</Translation>
+        <Rotation>0.000000 -286.347656 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>-171.613647 0.000000 -75.377754</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>-130.423630 0.000000 92.872101</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>-14.754101 0.000000 110.518059</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>164.657761 0.000000 157.406250</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>170.877731 0.000000 -66.586937</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Battery</Name>
+        <OBJLocation>assets/models/battery.obj</OBJLocation>
+        <TexLocation>assets/textures/battery.bmp</TexLocation>
+        <Translation>59.965900 0.000000 -189.573761</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>true</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-63.259766 0.000000 -190.872742</Translation>
+        <Rotation>0.000000 -254.816895 0.000000</Rotation>
+        <Scale>2.163330 2.082764 2.165771</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-86.571526 0.000000 -104.339378</Translation>
+        <Rotation>0.000000 -194.875488 0.000000</Rotation>
+        <Scale>2.163330 2.082764 2.165771</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-157.010468 0.000000 1.664108</Translation>
+        <Rotation>0.000000 -133.395996 0.000000</Rotation>
+        <Scale>2.163330 2.082764 2.165771</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-62.090332 0.000000 54.772247</Translation>
+        <Rotation>0.000000 -133.395996 0.000000</Rotation>
+        <Scale>2.163330 2.082764 2.165771</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-143.592499 0.000000 144.895660</Translation>
+        <Rotation>0.000000 -133.395996 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-145.287140 0.000000 118.961502</Translation>
+        <Rotation>0.000000 -133.395996 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-126.815277 0.000000 91.294395</Translation>
+        <Rotation>0.000000 -71.960449 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-82.964645 0.000000 94.091942</Translation>
+        <Rotation>0.000000 -71.960449 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-27.486700 0.000000 45.833458</Translation>
+        <Rotation>0.000000 -71.960449 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-16.843342 0.000000 5.532082</Translation>
+        <Rotation>0.000000 -71.960449 0.000000</Rotation>
+        <Scale>0.792480 1.084229 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>143.603836 0.000000 68.922455</Translation>
+        <Rotation>0.000000 -71.960449 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>122.062515 0.000000 102.552261</Translation>
+        <Rotation>0.000000 -224.890137 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>137.740738 0.000000 119.552376</Translation>
+        <Rotation>0.000000 -224.890137 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>103.288048 0.000000 80.710411</Translation>
+        <Rotation>0.000000 -224.890137 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>113.204338 0.000000 66.847794</Translation>
+        <Rotation>0.000000 -164.904785 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>138.617599 0.000000 3.108279</Translation>
+        <Rotation>0.000000 -164.904785 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>141.389435 0.000000 -31.881496</Translation>
+        <Rotation>0.000000 -164.904785 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>107.098412 0.000000 -47.830540</Translation>
+        <Rotation>0.000000 -164.904785 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>38.876709 0.000000 -60.708641</Translation>
+        <Rotation>0.000000 -164.904785 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>30.847366 0.000000 -106.074203</Translation>
+        <Rotation>0.000000 -119.926758 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>67.063614 0.000000 -104.220924</Translation>
+        <Rotation>0.000000 -119.926758 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>96.509789 0.000000 -139.630432</Translation>
+        <Rotation>0.000000 -119.926758 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>120.965759 0.000000 -153.271637</Translation>
+        <Rotation>0.000000 -119.926758 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>101.513580 0.000000 -162.898483</Translation>
+        <Rotation>0.000000 -76.464844 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>135.165573 0.000000 -164.203522</Translation>
+        <Rotation>0.000000 -76.464844 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>146.248352 0.000000 -157.275116</Translation>
+        <Rotation>0.000000 -76.464844 0.000000</Rotation>
+        <Scale>0.792480 0.918213 0.953613</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>132.348328 0.000000 -146.183395</Translation>
+        <Rotation>0.000000 -76.464844 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-26.953758 0.000000 -131.732239</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-97.421112 0.000000 -157.022400</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-140.508575 0.000000 -185.128342</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-153.243942 0.000000 -141.695557</Translation>
+        <Rotation>0.000000 -295.400391 -3.010254</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-166.949219 0.000000 -87.549034</Translation>
+        <Rotation>0.000000 -245.917969 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-144.427902 0.000000 -48.452244</Translation>
+        <Rotation>0.000000 -187.448730 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-132.670547 0.000000 32.938419</Translation>
+        <Rotation>0.000000 -187.448730 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-102.316307 0.000000 96.178360</Translation>
+        <Rotation>0.000000 -140.954590 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-41.203285 0.000000 173.785507</Translation>
+        <Rotation>0.000000 -140.954590 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>11.657413 0.000000 184.385376</Translation>
+        <Rotation>0.000000 -140.954590 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>61.104134 0.000000 153.125061</Translation>
+        <Rotation>0.000000 -140.954590 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>106.120964 0.000000 175.815063</Translation>
+        <Rotation>0.000000 -94.482422 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>157.430908 0.000000 130.333847</Translation>
+        <Rotation>0.000000 -50.998535 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>114.523575 0.000000 79.172523</Translation>
+        <Rotation>0.000000 -50.998535 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>104.003296 0.000000 37.669598</Translation>
+        <Rotation>0.000000 -50.998535 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>140.934143 0.000000 21.531282</Translation>
+        <Rotation>0.000000 -19.577637 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>152.094879 0.000000 -21.033419</Translation>
+        <Rotation>0.000000 43.395996 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>141.127731 0.000000 -152.288315</Translation>
+        <Rotation>0.000000 43.395996 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>102.503807 0.000000 -41.877937</Translation>
+        <Rotation>0.000000 43.395996 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>40.157974 0.000000 -66.450256</Translation>
+        <Rotation>0.000000 43.395996 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>28.804438 0.000000 -99.940262</Translation>
+        <Rotation>0.000000 91.362305 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>63.006512 0.000000 -108.589912</Translation>
+        <Rotation>0.000000 91.362305 0.000000</Rotation>
+        <Scale>1.832520 1.250244 1.748291</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>House</Name>
+        <OBJLocation>assets/models/house.obj</OBJLocation>
+        <TexLocation>assets/textures/house.bmp</TexLocation>
+        <Translation>109.316048 0.000000 -179.283569</Translation>
+        <Rotation>0.000000 91.362305 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>135.603653 0.000000 -41.563339</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>141.938568 0.000000 -39.298309</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>150.890121 0.000000 -39.042053</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>159.975159 0.000000 -36.695236</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>168.734406 0.000000 -36.653603</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>167.591476 0.000000 -45.021057</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>160.833313 0.000000 -46.260185</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>152.985016 0.000000 -47.322906</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>144.764359 0.000000 -49.014542</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>137.717926 0.000000 -50.466488</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>137.867462 0.000000 -124.614098</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>137.534073 0.000000 -112.965660</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>137.218552 0.000000 -101.941055</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>136.914841 0.000000 -91.329803</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>138.760315 0.000000 -57.337555</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>138.287109 0.000000 -66.575333</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>137.494644 0.000000 -73.745552</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>139.277115 0.000000 -81.827164</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>156.191101 0.000000 -63.202469</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>157.227646 0.000000 -72.739098</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>147.738754 0.000000 -73.945511</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>149.649292 0.000000 -63.747463</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>151.012299 0.000000 -55.184258</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>161.233276 0.000000 -55.349419</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>169.592743 0.000000 -53.284756</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>148.829620 0.000000 -81.605530</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>155.850769 0.000000 -81.986382</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>161.978394 0.000000 -81.554497</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>170.356415 0.000000 -82.037033</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>168.835449 0.000000 -90.184166</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>169.694748 0.000000 -98.359528</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>169.872177 0.000000 -107.293816</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>170.396973 0.000000 -117.269402</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>170.036209 0.000000 -126.605637</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>159.711838 0.000000 -126.425392</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>159.769089 0.000000 -117.339882</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>158.662720 0.000000 -109.002815</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>157.376892 0.000000 -100.564629</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>156.900482 0.000000 -90.645775</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>147.245773 0.000000 -89.188507</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>147.791260 0.000000 -97.841255</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>147.921417 0.000000 -107.525620</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>149.059494 0.000000 -117.153961</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Corn</Name>
+        <OBJLocation>assets/models/corn.obj</OBJLocation>
+        <TexLocation>assets/textures/corn.bmp</TexLocation>
+        <Translation>150.071243 0.000000 -126.481674</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.250244 1.291443 1.208130</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Truck</Name>
+        <OBJLocation>assets/models/truck.obj</OBJLocation>
+        <TexLocation>assets/textures/truck.bmp</TexLocation>
+        <Translation>-143.198517 0.000000 -168.690323</Translation>
+        <Rotation>0.000000 -413.723145 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Truck</Name>
+        <OBJLocation>assets/models/truck.obj</OBJLocation>
+        <TexLocation>assets/textures/truck.bmp</TexLocation>
+        <Translation>-13.464153 0.000000 101.447311</Translation>
+        <Rotation>0.000000 -311.791992 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>-44.376266 0.000000 -49.377964</Translation>
+        <Rotation>0.000000 -91.384277 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>-44.312088 0.000000 -58.698021</Translation>
+        <Rotation>0.000000 -91.384277 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>-4.362347 0.000000 195.401520</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>168.429886 0.000000 174.151245</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>169.108490 0.000000 165.641006</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestoneb.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestoneb.bmp</TexLocation>
+        <Translation>169.257446 0.000000 157.455032</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestonea.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestonea.bmp</TexLocation>
+        <Translation>156.138306 0.000000 175.459564</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestonea.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestonea.bmp</TexLocation>
+        <Translation>155.950012 0.000000 167.583237</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestonea.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestonea.bmp</TexLocation>
+        <Translation>156.200363 0.000000 158.167709</Translation>
+        <Rotation>0.000000 -451.373291 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestonea.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestonea.bmp</TexLocation>
+        <Translation>51.620171 0.000000 26.130259</Translation>
+        <Rotation>0.000000 -403.363037 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Gravestone</Name>
+        <OBJLocation>assets/models/gravestonea.obj</OBJLocation>
+        <TexLocation>assets/textures/gravestonea.bmp</TexLocation>
+        <Translation>45.804688 0.000000 20.999804</Translation>
+        <Rotation>0.000000 -403.363037 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>138.751999 0.000000 -165.704346</Translation>
+        <Rotation>0.000000 -458.712158 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>99.604950 0.000000 -133.455734</Translation>
+        <Rotation>0.000000 -425.731201 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>134.996887 0.000000 -36.236420</Translation>
+        <Rotation>0.000000 -425.731201 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>100.570938 0.000000 25.625147</Translation>
+        <Rotation>0.000000 -367.261963 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>87.867210 0.000000 87.558250</Translation>
+        <Rotation>0.000000 -367.261963 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>65.348213 0.000000 140.306488</Translation>
+        <Rotation>0.000000 -317.779541 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.405639 0.000000 143.396378</Translation>
+        <Rotation>0.000000 -317.779541 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-63.220245 0.000000 105.436440</Translation>
+        <Rotation>0.000000 -317.779541 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-129.845428 0.000000 158.222519</Translation>
+        <Rotation>0.000000 -317.779541 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-114.444916 0.000000 110.622231</Translation>
+        <Rotation>0.000000 -317.779541 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-117.684425 0.000000 31.185575</Translation>
+        <Rotation>0.000000 -376.281738 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-92.747345 0.000000 -1.809151</Translation>
+        <Rotation>0.000000 -376.281738 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-10.482508 0.000000 -42.231365</Translation>
+        <Rotation>0.000000 -323.772583 0.000000</Rotation>
+        <Scale>1.415802 1.459290 1.458832</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>6.539830 0.000000 -38.787762</Translation>
+        <Rotation>0.000000 -323.772583 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>44.518986 0.000000 156.134781</Translation>
+        <Rotation>0.000000 -323.772583 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>56.302757 0.000000 101.263710</Translation>
+        <Rotation>0.000000 -323.772583 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>25.303595 0.000000 109.028152</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>108.467064 0.000000 75.889618</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>134.445236 0.000000 13.727933</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>101.956345 0.000000 -17.930809</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>113.718559 0.000000 -52.933147</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>90.776245 0.000000 -129.201950</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>24.604929 0.000000 -107.636620</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-14.300415 0.000000 -138.330978</Translation>
+        <Rotation>0.000000 -263.803711 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-44.745724 0.000000 -165.673767</Translation>
+        <Rotation>0.000000 -217.337036 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-84.792595 0.000000 -149.677505</Translation>
+        <Rotation>0.000000 -217.337036 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-144.027344 0.000000 -90.733429</Translation>
+        <Rotation>0.000000 -217.337036 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-114.403923 0.000000 -57.783379</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-82.301781 0.000000 -25.067810</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-131.861603 0.000000 -8.040097</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-93.211464 0.000000 29.691929</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-120.594589 0.000000 132.023178</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-103.812340 0.000000 162.978653</Translation>
+        <Rotation>0.000000 -158.867798 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-60.348537 0.000000 130.059967</Translation>
+        <Rotation>0.000000 -106.397095 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-34.956394 0.000000 154.324753</Translation>
+        <Rotation>0.000000 -106.397095 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-48.851891 0.000000 145.144577</Translation>
+        <Rotation>0.000000 -106.397095 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-17.996309 0.000000 63.679710</Translation>
+        <Rotation>0.000000 -106.397095 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>12.817315 0.000000 54.036671</Translation>
+        <Rotation>0.000000 -58.463745 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>3.642732 0.000000 38.712616</Translation>
+        <Rotation>0.000000 31.530762 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>42.151035 0.000000 12.872531</Translation>
+        <Rotation>0.000000 67.527466 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>37.015598 0.000000 -5.821386</Translation>
+        <Rotation>0.000000 67.527466 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>145.559784 0.000000 137.061813</Translation>
+        <Rotation>0.000000 44.964294 0.000000</Rotation>
+        <Scale>1.209503 1.208130 1.208588</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>116.574448 0.000000 180.903534</Translation>
+        <Rotation>0.000000 44.964294 0.000000</Rotation>
+        <Scale>1.209503 1.208130 1.208588</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>115.209862 0.000000 146.470322</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Fence</Name>
+        <OBJLocation>assets/models/fence.obj</OBJLocation>
+        <TexLocation>assets/textures/fence.bmp</TexLocation>
+        <Translation>149.918747 0.000000 167.713028</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Fence</Name>
+        <OBJLocation>assets/models/fence.obj</OBJLocation>
+        <TexLocation>assets/textures/fence.bmp</TexLocation>
+        <Translation>107.641220 0.000000 -164.612869</Translation>
+        <Rotation>0.000000 91.441956 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>House</Name>
+        <OBJLocation>assets/models/house.obj</OBJLocation>
+        <TexLocation>assets/textures/house.bmp</TexLocation>
+        <Translation>-162.327316 0.000000 -65.216591</Translation>
+        <Rotation>0.000000 91.441956 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>House</Name>
+        <OBJLocation>assets/models/house.obj</OBJLocation>
+        <TexLocation>assets/textures/house.bmp</TexLocation>
+        <Translation>22.842499 0.000000 17.224791</Translation>
+        <Rotation>0.000000 317.776093 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Farmhouse</Name>
+        <OBJLocation>assets/models/farmhouse.obj</OBJLocation>
+        <TexLocation>assets/textures/farmhouse.bmp</TexLocation>
+        <Translation>-79.689819 0.000000 168.532730</Translation>
+        <Rotation>0.000000 361.238007 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Farmhouse</Name>
+        <OBJLocation>assets/models/farmhouse.obj</OBJLocation>
+        <TexLocation>assets/textures/farmhouse.bmp</TexLocation>
+        <Translation>41.772842 0.000000 -171.678375</Translation>
+        <Rotation>0.000000 89.937515 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Plane</Name>
+        <OBJLocation>assets/models/plane.obj</OBJLocation>
+        <TexLocation>assets/textures/plane.bmp</TexLocation>
+        <Translation>0.000000 0.000000 0.000000</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>6.997410 1.000000 7.870074</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>20.253222 0.000000 6.139452</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-35.154957 0.000000 11.120711</Translation>
+        <Rotation>0.000000 -51.047287 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-23.988895 0.000000 88.375366</Translation>
+        <Rotation>0.000000 -51.047287 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-59.871185 0.000000 140.095474</Translation>
+        <Rotation>0.000000 -51.047287 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-37.360397 0.000000 173.484955</Translation>
+        <Rotation>0.000000 -51.047287 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-0.581050 0.000000 193.311584</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>52.463562 0.000000 151.776535</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>141.027725 0.000000 136.856476</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>112.347878 0.000000 65.269783</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>132.837219 0.000000 -32.527416</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>100.361664 0.000000 -41.659443</Translation>
+        <Rotation>0.000000 -4.512634 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>38.719845 0.000000 -3.998472</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>8.236923 0.000000 -41.546696</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>25.390413 0.000000 -104.268524</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-44.307915 0.000000 -163.349609</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-85.984734 0.000000 -107.575333</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-115.835022 0.000000 -58.547409</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>-14.873999 0.000000 -135.957047</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Rock</Name>
+        <OBJLocation>assets/models/rock.obj</OBJLocation>
+        <TexLocation>assets/textures/rock.bmp</TexLocation>
+        <Translation>23.657644 0.000000 -183.357620</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>40.364296 0.000000 -162.339050</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>17.335453 0.000000 -166.915466</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>92.156929 0.000000 -135.919067</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>64.172646 0.000000 -110.294487</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-45.667953 0.000000 -58.308941</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.291901 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-87.389565 0.000000 -148.896744</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-150.899826 0.000000 -145.081024</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-142.025833 0.000000 -96.173645</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-151.029709 0.000000 -61.686474</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-95.095863 0.000000 -7.231823</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-67.595428 0.000000 98.161873</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-94.315262 0.000000 150.978058</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-43.568428 0.000000 169.051392</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-13.954442 0.000000 113.290550</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>80.297913 0.000000 83.702324</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>50.427132 0.000000 26.371305</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>10.761120 0.000000 28.002468</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>101.803291 0.000000 37.870411</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>150.362198 0.000000 153.758743</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>153.500488 0.000000 130.312027</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Longgrass</Name>
+        <OBJLocation>assets/models/longgrass.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>134.749466 0.000000 114.459457</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.250111 1.541763 1.208359</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>93.653275 0.000000 -181.137100</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>92.939255 0.000000 -170.862747</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>93.355370 0.000000 -161.258057</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>102.794922 0.000000 -159.132202</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>102.918083 0.000000 -168.220795</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>112.001610 0.000000 -167.703445</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>112.019279 0.000000 -159.906113</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>122.046745 0.000000 -159.279129</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>122.278877 0.000000 -167.834183</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>123.594017 0.000000 -179.611099</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>34.900745 0.000000 2.441800</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>25.155382 0.000000 4.078989</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>17.932173 0.000000 9.268863</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>11.820776 0.000000 15.060585</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>7.553440 0.000000 24.302162</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>13.477466 0.000000 32.233742</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>23.063740 0.000000 30.297571</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>31.099966 0.000000 23.102419</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>38.501457 0.000000 14.767902</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>44.812843 0.000000 23.360363</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>52.429001 0.000000 31.635397</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>46.033028 0.000000 36.863056</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>38.321060 0.000000 30.253578</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>31.040720 0.000000 38.331894</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>40.040794 0.000000 43.681446</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>21.036869 0.000000 40.456532</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>29.079739 0.000000 48.311092</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>168.729004 0.000000 156.138489</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>166.472198 0.000000 167.105042</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>166.866104 0.000000 176.899429</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>164.657120 0.000000 183.530884</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>155.766006 0.000000 183.030090</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>146.244568 0.000000 182.336380</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>137.761765 0.000000 181.623932</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>137.786499 0.000000 169.821533</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>147.674973 0.000000 170.008606</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>156.708649 0.000000 171.381470</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>155.421204 0.000000 160.687210</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>157.649612 0.000000 155.098648</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>146.712753 0.000000 156.723450</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>139.016495 0.000000 159.916794</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>140.213043 0.000000 152.555573</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>60.837166 0.000000 151.127884</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>64.202782 0.000000 139.529572</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>54.481888 0.000000 141.802277</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>45.997623 0.000000 149.610947</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>52.329918 0.000000 155.394547</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-43.307148 0.000000 173.669067</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-46.780479 0.000000 182.683426</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-51.791451 0.000000 188.566544</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-59.670132 0.000000 191.953140</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-63.576378 0.000000 191.953064</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-67.283508 0.000000 180.515778</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-59.332752 0.000000 177.536438</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-53.953495 0.000000 168.848206</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-62.369709 0.000000 158.808609</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-65.776009 0.000000 166.964981</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-65.875298 0.000000 149.875259</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-77.465698 0.000000 145.627975</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-86.712341 0.000000 147.610596</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-71.394913 0.000000 145.985596</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-90.972862 0.000000 154.464203</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-91.699272 0.000000 163.351639</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-94.180763 0.000000 173.363525</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-94.475121 0.000000 181.385406</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-95.213493 0.000000 188.714050</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-27.367748 0.000000 97.866417</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-19.832092 0.000000 89.293930</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-9.481933 0.000000 96.492653</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-19.216177 0.000000 105.978737</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-10.795601 0.000000 113.305634</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-3.049125 0.000000 102.386147</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-39.734707 0.000000 -50.016392</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-30.597719 0.000000 -49.718872</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-21.686954 0.000000 -48.594547</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-23.224541 0.000000 -60.879581</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-32.458195 0.000000 -60.990032</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-40.881451 0.000000 -60.415939</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-145.289764 0.000000 -55.230282</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-154.205673 0.000000 -54.766544</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-161.664383 0.000000 -54.649708</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-169.555862 0.000000 -54.076878</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-149.004822 0.000000 -161.701691</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-142.298157 0.000000 -165.924728</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-135.945313 0.000000 -169.924942</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Grass</Name>
+        <OBJLocation>assets/models/longgrassb.obj</OBJLocation>
+        <TexLocation>assets/textures/longgrass.bmp</TexLocation>
+        <Translation>-130.771439 0.000000 -174.909378</Translation>
+        <Rotation>0.000000 54.014282 0.000000</Rotation>
+        <Scale>1.748005 0.791336 2.125717</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+</Scene>

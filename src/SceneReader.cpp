@@ -172,7 +172,7 @@ void SceneReader::readSceneFile(string sFilename)
 							}
 						}
 						// If the Node is <AI>
-						if (strcmp(iNode3->Value(), "Ai") == 0) // Check if model is a collectable
+						if (strcmp(iNode3->Value(), "AI") == 0) // Check if model is a collectable
 						{
 							// Binds current data in the stringstream to a string
 							iss >> sData;

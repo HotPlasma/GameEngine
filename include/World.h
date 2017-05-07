@@ -29,11 +29,12 @@ private:
 	int m_iCountdown = 10;
 	string m_sLife;
 	string m_sTime;
+	float aiSpawn = 0;
 	glm::vec3 m_aiSpeed; //ai movement speed
 	glm::vec3 m_aiRotation; //ai rotation
 	bool aiSearching = true;
 	double rotationAngle;
-	float movementSpeed = 0.0005;
+	float movementSpeed = 0.003;
 
 public:
 

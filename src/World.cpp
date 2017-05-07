@@ -21,7 +21,7 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 	// Sets Camera Near/Far culling
 	m_camera.setNearCull(1.0f);
-	m_camera.setFarCull(5000.0f);
+	m_camera.setFarCull(500.0f);
 
 	// Sets Camera initital position 
 	m_camera.setPosition(glm::vec3(0.0f, 5.0f, 0.0f));
@@ -44,6 +44,8 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 
 void World::initScene(Freetype* pOverlay)
 {
+
+	srand(time(NULL));
 	// Get the Heads up display for the scene
 	m_pHUD = pOverlay;
 
@@ -94,22 +96,52 @@ void World::update(const float kfTimeElapsed)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+		{
+			m_camera.move(glm::vec3(0.0f, 0.0f, (-CAMERA_SPEED* 2)*kfTimeElapsed));
+		}
+		else
+		{
+			m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+		}
 	}
+	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+		{
+			m_camera.move(glm::vec3((-CAMERA_SPEED* 2)*kfTimeElapsed, 0.0f, 0.0f));
+		}
+		else
+		{
+			m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+		{
+			m_camera.move(glm::vec3(0.0f, 0.0f, (CAMERA_SPEED * 2)*kfTimeElapsed));
+		}
+		else
+		{
+			m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
+		{
+			m_camera.move(glm::vec3((CAMERA_SPEED * 2)*kfTimeElapsed, 0.0f, 0.0f));
+		}
+		else
+		{
+			m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		}
 	}
 
 
@@ -175,53 +207,72 @@ void World::update(const float kfTimeElapsed)
 	}
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-
 		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
 		rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
 
 		if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
 		{
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the wander range
+			m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
+		
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is out of the chase range
 			{
-				m_aiRotation += glm::vec3(0, rotationAngle - 90, 0);
-				//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
-			}
-
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
-			{
-				if (aiSearching == true)
+				aiSpawn = rand() % 4 + 1;
+				if (aiSpawn == 1)
 				{
-					//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
-					//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
 				}
-				if (aiSearching == false)
+				if (aiSpawn == 2)
 				{
-					m_aiSpeed = glm::vec3(0, 0, 0);
-					m_aiRotation.y = rand() % 360 + 1;
-					aiSearching = true;
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
 				}
+				if (aiSpawn == 3)
+				{
+			    m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
+				}
+				if (aiSpawn == 4)
+				{
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
+				}	
 			}
-
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2.8f) // if ai is in chase range
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5) // if ai is in chase range
 			{
-				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
-				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
-
 				//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
 				//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2.8f) // if ai catches player
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // if ai catches player
 			{
-				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
+			   //endgame 
+				std::cout << "gameover" << std::endl;
 				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
+			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
 			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
-			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() = m_aiRotation);
-
 		}
 	}
 
+	//if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the chase
+	//{
+	//	m_aiRotation += glm::vec3(0, rotationAngle - 90, 0);
+	//	//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+	//}
+
+	//else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
+	//{
+	//	if (aiSearching == true)
+	//	{
+	//		//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+	//		//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+	//	}
+	//	if (aiSearching == false)
+	//	{
+	//		m_aiSpeed = glm::vec3(0, 0, 0);
+	//		m_aiRotation.y = rand() % 360 + 1;
+	//		aiSearching = true;
+	//	}
+	//}
+	//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	m_collHeight.update(COLLECTABLE_SPEED*kfTimeElapsed);
 
@@ -273,7 +324,7 @@ void setLightParams(GLSLProgram *pShader, Camera *camera)
 	pShader->setUniform("Material.Ks", glm::vec3(1.0f, 1.0f, 1.0f));
 	pShader->setUniform("Material.Shininess", 20.0f);
 
-	pShader->setUniform("Light.Intensity", glm::vec3(0.1f, 0.1f, 0.1f));
+	pShader->setUniform("Light.Intensity", glm::vec3(0.2f, 0.2f, 0.2f));
 	pShader->setUniform("Light.Position", camera->getPosition());
 
 	pShader->setUniform("Spotlight.Direction", camera->getPosition() + camera->getDirection());
@@ -328,15 +379,15 @@ void World::render()
 
 	// WORLD
 	// Activates World shader
-	m_spotlightShader.use();
+	m_phongShader.use();
 
 	// Passes texture map to shader
-	m_spotlightShader.setUniform("TextureMap", 0);
+	m_phongShader.setUniform("TextureMap", 0);
 	// Sets shader view and projection
-	m_spotlightShader.setUniform("V", m_camera.getView());
-	m_spotlightShader.setUniform("P", m_camera.getProjection());
+	m_phongShader.setUniform("V", m_camera.getView());
+	m_phongShader.setUniform("P", m_camera.getProjection());
 	// Configures lighting
-	setLightParams(&m_spotlightShader, &m_camera);
+	setLightParams(&m_phongShader, &m_camera);
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -359,7 +410,7 @@ void World::render()
 		if (!m_sceneReader.m_modelList.at(i).isCollected())
 		{
 			// Renders the Model
-			m_sceneReader.m_modelList.at(i).render(&m_spotlightShader, transMat);
+			m_sceneReader.m_modelList.at(i).render(&m_phongShader, transMat);
 		}
 	}
 	
@@ -371,7 +422,7 @@ void World::render()
 	// Sets shader view and projection
 	m_textureShader.setUniform("V", m_camera.getView());
 	m_textureShader.setUniform("P", m_camera.getProjection());
-	m_textureShader.setUniform("Light.Intensity", glm::vec3(0.1f, 0.1f, 0.1f));
+	m_textureShader.setUniform("Light.Intensity", glm::vec3(0.2f, 0.2f, 0.2f));
 
 	// Updates Skybox position
 	m_pSkybox->setPosition(m_camera.getPosition());
