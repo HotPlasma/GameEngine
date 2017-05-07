@@ -1,110 +1,154 @@
+#pragma once
 #ifndef SCENE_H
 #define SCENE_H
 
 #include "PreHeader.h"
+
 #include "Camera.h"
-#include <Freetype.h>
+#include "Freetype.h"
+
+enum Intent { NONE, TO_MENU, TO_GAME, TO_EDITOR };
 
 // Abstract class in order to set up world
 class Scene
 {
-	public:
+public:
 
-		Scene() {}
-		Scene(GLFWwindow *pWindow) {};
+	// Default constructor
+	Scene() {}
 	
-		sf::Vector2i m_windowSize; // Dimensions of window
-	
-		sf::Sound Music;
+	sf::Vector2i m_windowSize; // Dimensions of window
 
-		// Load in all texture and initilise shaders
-		virtual void initScene(Freetype* pOverlay) = 0;
-	
-		// Called on keyPress event
-		virtual void keyPress(const int kiKey) = 0;
-		// Called on mouseScroll event
-		virtual void mouseScroll(const double kdDelta) = 0;
+	Intent m_intention = NONE;
 
-		// Run every frame
-		virtual void update(float fTimeElapsed) = 0;
-	
-		// Draw Scene
-		virtual void render() = 0;
-	
-		// Allow screen to be resized without causing rendering issues
-		void resize(int iWidth, int iHeight)
+	sf::Sound m_music;
+	sf::Sound m_sfx;
+	sf::Sound m_scream;
+
+	// Load in all texture and initilise shaders
+	virtual void initScene(Freetype* pOverlay) = 0;
+
+	// Called on key input event
+	virtual void input_key(const int kiKey, const int kiAction) = 0;
+	// Called on char input event
+	virtual void input_char(const unsigned int kuiUnicode) = 0;
+	// Called on mouseButton input event
+	virtual void input_button(const int kiButton, const int kiAction) = 0;
+	// Called on mouseScroll input event
+	virtual void input_scroll(const double kdDelta) = 0;
+
+	// Run every frame
+	virtual void update(const float kfTimeElapsed) = 0;
+
+	// Draw Scene
+	virtual void render() = 0;
+
+	// Allow screen to be resized without causing rendering issues
+	void resize(int iWidth, int iHeight)
+	{
+		m_windowSize.x = iWidth;
+		m_windowSize.y = iHeight;
+
+		gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
+		m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
+	}
+
+	// Used to update cursor position
+	void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
+
+	sf::Vector2i getWindowSize() { return m_windowSize; }
+    
+protected:
+
+	GLSLProgram m_textureShader;
+	GLSLProgram m_phongShader;
+	GLSLProgram m_spotlightShader;
+	GLSLProgram m_freeType;
+	GLSLProgram m_imageType;
+
+	Camera m_camera; // Camera which user can control
+
+	Freetype* m_pHUD;
+
+	GLFWwindow *m_pWindow; // The window
+	sf::Vector2f m_mousePos; // Holds mouse cursor position
+
+	// Links vert and frag shaders into a glslprogram
+	void linkShaders()
+	{
+		try
 		{
-			m_windowSize.x = iWidth;
-			m_windowSize.y = iHeight;
-	
-			gl::Viewport(0, 0, m_windowSize.x, m_windowSize.y);
-			m_camera.setAspectRatio((float)m_windowSize.x / m_windowSize.y);
+			// Shader which allows blank flat texture rendering
+			m_textureShader.compileShader("Shaders/texture.vs");
+			m_textureShader.compileShader("Shaders/texture.fs");
+			m_textureShader.link();
+			m_textureShader.validate();
+			m_textureShader.use();
 		}
-	
-		// Used to update cursor position
-		void setMousePos(const sf::Vector2f kMousePos) { m_mousePos = kMousePos; }
-
-		sf::Vector2i getWindowSize() { return m_windowSize; }
-	    
-	protected:
-
-		GLSLProgram m_worldShader;
-		GLSLProgram m_freeType;
-		GLSLProgram m_imageType;
-
-		Camera m_camera; // Camera which user can control
-
-		Freetype* m_pHUD;
-
-		GLFWwindow *m_pWindow; // The window
-		sf::Vector2f m_mousePos; // Holds mouse cursor position
-
-		// Links vert and frag shaders into a glslprogram
-		void linkShaders()
+		catch (GLSLProgramException & e)
 		{
-			try
-			{
-				// Shader which allows first person camera and textured object rendering
-				m_worldShader.compileShader("Shaders/shader.vert");
-				m_worldShader.compileShader("Shaders/shader.frag");
-				m_worldShader.link();
-				m_worldShader.validate();
-				m_worldShader.use();
-			}
-			catch (GLSLProgramException & e)
-			{
-				cerr << e.what() << endl;
-				exit(EXIT_FAILURE);
-			}
-
-			try
-			{
-				// Shader which allows heads up display rendering
-				m_freeType.compileShader("Shaders/freetype.vert");
-				m_freeType.compileShader("Shaders/freetype.frag");
-				m_freeType.link();
-				m_freeType.validate();
-				m_freeType.use();
-			}
-			catch (GLSLProgramException & e) {
-				cerr << e.what() << endl;
-				exit(EXIT_FAILURE);
-			}
-
-			try
-			{
-				// Shader which allows for image rendering
-				m_imageType.compileShader("Shaders/image.vert");
-				m_imageType.compileShader("Shaders/image.frag");
-				m_imageType.link();
-				m_imageType.validate();
-			}
-			catch (GLSLProgramException & e)
-			{
-				cerr << e.what() << endl;
-				exit(EXIT_FAILURE);
-			}
+			std::cerr << e.what() << std::endl;
+			exit(EXIT_FAILURE);
 		}
+
+		try
+		{
+			// Shader which allows first person camera and textured object rendering
+			m_phongShader.compileShader("Shaders/phong.vs");
+			m_phongShader.compileShader("Shaders/phong.fs");
+			m_phongShader.link();
+			m_phongShader.validate();
+			m_phongShader.use();
+		}
+		catch (GLSLProgramException & e)
+		{
+			std::cerr << e.what() << std::endl;
+			exit(EXIT_FAILURE);
+		}
+
+		try
+		{
+			// Shader which allows for a spotlight
+			m_spotlightShader.compileShader("Shaders/spotlight.vs");
+			m_spotlightShader.compileShader("Shaders/spotlight.fs");
+			m_spotlightShader.link();
+			m_spotlightShader.validate();
+			m_spotlightShader.use();
+		}
+		catch (GLSLProgramException & e)
+		{
+			std::cerr << e.what() << std::endl;
+			exit(EXIT_FAILURE);
+		}
+
+		try
+		{
+			// Shader which allows heads up display rendering
+			m_freeType.compileShader("Shaders/freetype.vs");
+			m_freeType.compileShader("Shaders/freetype.fs");
+			m_freeType.link();
+			m_freeType.validate();
+			m_freeType.use();
+		}
+		catch (GLSLProgramException & e) {
+			std::cerr << e.what() << std::endl;
+			exit(EXIT_FAILURE);
+		}
+
+		try
+		{
+			// Shader which allows for image rendering
+			m_imageType.compileShader("Shaders/image.vs");
+			m_imageType.compileShader("Shaders/image.fs");
+			m_imageType.link();
+			m_imageType.validate();
+		}
+		catch (GLSLProgramException & e)
+		{
+			std::cerr << e.what() << std::endl;
+			exit(EXIT_FAILURE);
+		}
+	}
 };
 
 #endif // SCENE_H

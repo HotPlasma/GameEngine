@@ -1,20 +1,18 @@
-#include <Freetype.h>
+#include "Freetype.h"
 
 Freetype::Freetype()
 {
 	// FreeType
 	// All functions return a value different than 0 whenever an error occurred
-	if (FT_Init_FreeType(&m_Ft))
+	if (FT_Init_FreeType(&m_ftLib))
 		std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 
 	// Load font as face
-	if (FT_New_Face(m_Ft, "assets/fonts/DEARBORN.ttf", 0, &m_Face))
+	if (FT_New_Face(m_ftLib, "assets/fonts/DEARBORN.ttf", 0, &m_face))
 		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 
 	// Set size to load glyphs as
-	FT_Set_Pixel_Sizes(m_Face, 0, 25);
-
-	
+	FT_Set_Pixel_Sizes(m_face, 0, 25);
 }
 
 void Freetype::loadCharacters()
@@ -26,7 +24,7 @@ void Freetype::loadCharacters()
 	for (GLubyte c = 0; c < 128; c++)
 	{
 		// Load character glyph 
-		if (FT_Load_Char(m_Face, c, FT_LOAD_RENDER))
+		if (FT_Load_Char(m_face, c, FT_LOAD_RENDER))
 		{
 			std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
 			continue;
@@ -39,12 +37,12 @@ void Freetype::loadCharacters()
 			gl::TEXTURE_2D,
 			0,
 			gl::RED,
-			m_Face->glyph->bitmap.width,
-			m_Face->glyph->bitmap.rows,
+			m_face->glyph->bitmap.width,
+			m_face->glyph->bitmap.rows,
 			0,
 			gl::RED,
 			gl::UNSIGNED_BYTE,
-			m_Face->glyph->bitmap.buffer
+			m_face->glyph->bitmap.buffer
 		);
 		// Set texture options
 		gl::TexParameteri(gl::TEXTURE_2D, gl::TEXTURE_WRAP_S, gl::CLAMP_TO_EDGE);
@@ -54,28 +52,28 @@ void Freetype::loadCharacters()
 		// Now store character for later use
 		Character character = {
 			texture,
-			glm::ivec2(m_Face->glyph->bitmap.width, m_Face->glyph->bitmap.rows),
-			glm::ivec2(m_Face->glyph->bitmap_left, m_Face->glyph->bitmap_top),
-			m_Face->glyph->advance.x
+			glm::ivec2(m_face->glyph->bitmap.width, m_face->glyph->bitmap.rows),
+			glm::ivec2(m_face->glyph->bitmap_left, m_face->glyph->bitmap_top),
+			(GLuint)m_face->glyph->advance.x
 		};
 		m_cCharacters.insert(std::pair<GLchar, Character>(c, character));
 	}
 	gl::BindTexture(gl::TEXTURE_2D, 0);
 	// Destroy FreeType once we're finished
-	FT_Done_Face(m_Face);
-	FT_Done_FreeType(m_Ft);
+	FT_Done_Face(m_face);
+	FT_Done_FreeType(m_ftLib);
 }
 
 void Freetype::setupBuffers()
 {
-	gl::GenBuffers(1, &m_VBO);
+	gl::GenBuffers(1, &m_vbo);
 	// Configure VAO/VBO for texture quads
 
-	gl::BindBuffer(gl::ARRAY_BUFFER, m_VBO);
+	gl::BindBuffer(gl::ARRAY_BUFFER, m_vbo);
 	gl::BufferData(gl::ARRAY_BUFFER, sizeof(GLfloat) * 6 * 4, NULL, gl::DYNAMIC_DRAW);
 
-	gl::GenVertexArrays(1, &m_VAO);
-	gl::BindVertexArray(m_VAO);
+	gl::GenVertexArrays(1, &m_vao);
+	gl::BindVertexArray(m_vao);
 
 	gl::EnableVertexAttribArray(0);
 	gl::VertexAttribPointer(0, 4, gl::FLOAT, 0, 4 * sizeof(GLfloat), 0);
@@ -84,13 +82,24 @@ void Freetype::setupBuffers()
 	gl::BindVertexArray(0);
 }
 
-void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
+void Freetype::addImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
+{
+	m_imagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0, false));
+
+	m_imagePlane.at(m_imagePlane.size() - 1).setVisible(visablity);
+
+	m_imagePlane.at(m_imagePlane.size() - 1).loadModel();
+
+	m_imagePlane.at(m_imagePlane.size() - 1).initModel();
+}
+
+void Freetype::renderText(GLuint ProgramHandle, std::string text, GLfloat x, GLfloat y, GLfloat scale, glm::vec3 color)
 {
 	// Activate corresponding render state	
 	//shader.use();
 	gl::Uniform3f(gl::GetUniformLocation(ProgramHandle, "textColor"), color.x, color.y, color.z);
 	gl::ActiveTexture(gl::TEXTURE0);
-	gl::BindVertexArray(m_VAO);
+	gl::BindVertexArray(m_vao);
 
 	// Iterate through all characters
 	std::string::const_iterator c;
@@ -98,11 +107,11 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 	{
 		Character ch = m_cCharacters[*c];
 
-		GLfloat xpos = x + ch.Bearing.x * scale;
-		GLfloat ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+		GLfloat xpos = x + ch.m_bearing.x * scale;
+		GLfloat ypos = y - (ch.m_size.y - ch.m_bearing.y) * scale;
 
-		GLfloat w = ch.Size.x * scale;
-		GLfloat h = ch.Size.y * scale;
+		GLfloat w = ch.m_size.x * scale;
+		GLfloat h = ch.m_size.y * scale;
 		// Update VBO for each character
 		GLfloat vertices[6][4] = {
 			{ xpos,     ypos + h,   0.0, 0.0 },
@@ -114,36 +123,22 @@ void Freetype::RenderText(GLuint ProgramHandle, std::string text, GLfloat x, GLf
 			{ xpos + w, ypos + h,   1.0, 0.0 }
 		};
 		// Render glyph texture over quad
-		gl::BindTexture(gl::TEXTURE_2D, ch.uiTextureID);
+		gl::BindTexture(gl::TEXTURE_2D, ch.m_textureID);
 		// Update content of VBO memory
-		gl::BindBuffer(gl::ARRAY_BUFFER, m_VBO);
+		gl::BindBuffer(gl::ARRAY_BUFFER, m_vbo);
 		gl::BufferSubData(gl::ARRAY_BUFFER, 0, sizeof(vertices), vertices); // Be sure to use glBufferSubData and not glBufferData
 
 		gl::BindBuffer(gl::ARRAY_BUFFER, 0);
 		// Render quad
 		gl::DrawArrays(gl::TRIANGLES, 0, 6);
 		// Now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-		x += (ch.uiAdvance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
+		x += (ch.m_advance >> 6) * scale; // Bitshift by 6 to get value in pixels (2^6 = 64 (divide amount of 1/64th pixels by 64 to get amount of pixels))
 	}
 	gl::BindVertexArray(0);
 	gl::BindTexture(gl::TEXTURE_2D, 0);
 }
 
-void Freetype::LoadHUDImage(std::string imageLocation, glm::vec3 position, GLfloat rotation, glm::vec3 scale, bool visablity)
+void Freetype::renderImage(GLSLProgram* pShader, int index)
 {
-	m_ImagePlane.push_back(Model("assets/Models/HUDPlane.obj", imageLocation, position, glm::vec3(0, 0, rotation), scale, 0));
-
-	m_ImagePlane.at(m_ImagePlane.size() - 1).setVisable(visablity);
-
-	m_ImagePlane.at(m_ImagePlane.size() - 1).loadModel();
-
-	m_ImagePlane.at(m_ImagePlane.size() - 1).initModel();
-}
-
-void Freetype::RenderImage(int index)
-{
-	
-	m_ImagePlane.at(index).buffer();
-	m_ImagePlane.at(index).render();
-
+	m_imagePlane.at(index).render(pShader, glm::mat4(1.0f));
 }

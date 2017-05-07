@@ -1,3 +1,4 @@
+#pragma once
 #ifndef WORLD_H
 #define WORLD_H
 
@@ -7,7 +8,6 @@
 #include "Camera.h"
 #include "SceneReader.h"
 #include "ModelReader.h"
-#include "glslprogram.h"
 #include "Freetype.h"
 #include "Utilities.h"
 
@@ -21,30 +21,45 @@ struct CollisionInfo
 
 class World : public Scene
 {
-	private:
+private:
 
-		SceneReader m_sceneReader; // Reads .xml file in order to create world
+	SceneReader m_sceneReader; // Reads .xml file in order to create world
 
-		bool m_collectGoingUp = true; // Whether collectables are moving up
-		float m_collectYOffset = 0.0f; // Y axis offset for collectables
-		Bounds m_collectBounds = Bounds(3.0f, 1.0f); // Upper and lower bounds for Y offset
+	Bouncer m_collHeight = Bouncer(Bounds(3.0f, 1.0f)); //!< Bouncing value for collectable Y position
 
-		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
+	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
-		bool m_bCollisionInit = false;
+	sf::Clock m_batteryTimer;
+	sf::Clock m_levelTimer;
+	sf::Clock aiWander;
+	int m_iSpareBatteries = 0;
+	int m_iBatteryLife = 100;
+	int m_iCountdown = 200;
+	string m_sLife;
+	string m_sTime;
+	float aiSpawn = 0;
+	glm::vec3 m_aiSpeed; //ai movement speed
+	glm::vec3 m_aiRotation; //ai rotation
+	sf::SoundBuffer m_aiFootsteps;
+	sf::SoundBuffer m_ambientMusic;
+	sf::SoundBuffer m_aiScream;
+	bool loopSound = true;
+	bool aiSearching = true;
+	double rotationAngle;
+	float movementSpeed = 0.002;
+	Model m_Player;
+public:
 
-		Model m_Player;
+	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
 
-	public:
+	void initScene(Freetype* pOverlay);
 
-		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
+	void input_key(const int kiKey, const int kiAction);
+	void input_char(const unsigned int kuiUnicode) {}
+	void input_button(const int kiButton, const int kiAction) {}
+	void input_scroll(const double kdDelta) {}
 
-		void initScene(Freetype* pOverlay);
-
-		void keyPress(const int kiKey) {}
-		void mouseScroll(const double kdDelta) {}
-
-		void update(const float kfTimeElapsed);
-		void render();
+	void update(const float kfTimeElapsed);
+	void render();
 };
-#endif  
+#endif

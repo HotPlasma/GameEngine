@@ -1,4 +1,6 @@
 #pragma once
+#ifndef MODEL_H
+#define MODEL_H
 
 #include "PreHeader.h"
 
@@ -23,74 +25,85 @@ struct CollisionBox
 
 class Model
 {
-	private:
-		string m_sName; // A moniker for each model
-		string m_sFileName; // File location of the obj
-		string m_sTexture; // File location of the texture
-		int m_iMaterial; // Which material the model with have. Different integers are different materials.
-	
-		glm::vec3 m_position; // Position of Model
-		glm::vec3 m_rotation; // Rotation of Model
-		glm::vec3 m_scale; // Scale of Model
-	
-		bool m_bCollectable = false; // is the model a collectable?
-		bool m_bCollected = false; // has the collectable been collected?
+private:
+  
+	string m_sName; // A moniker for each model
+	string m_sFileName; // File location of the obj
+	string m_sTexture; // File location of the texture
+	int m_iMaterial; // Which material the model with have. Different integers are different materials.
 
-		bool m_bVisible = true; // is the model visable
-	
-		GLuint m_textureID; // ID of the texture
-		ModelReader* m_pModelReader; // Model Reader for the render the model
+	glm::vec3 m_position; // Position of Model
+	glm::vec3 m_rotation; // Rotation of Model
+	glm::vec3 m_scale; // Scale of Model
+	glm::mat4 m_M; // Transformation matrix
 
-		GLuint m_programHandle;
-		Texture *m_pTexture;
-		Bitmap m_bmp = Bitmap::bitmapFromFile("assets/textures/Default.bmp");;
-	
-		GLuint m_vboHandles[2];
-		GLuint m_vbo;
-		GLuint m_vaoHandle;
+	bool m_bCollectable = false; // is the model a collectable?
+	bool m_bCollected = false; // has the collectable been collected?
+	bool m_bAI = false; //does the object use ai?
+	bool m_bplayerCaught = false; //has the ai caught the player?
 
-		glm::vec3 m_BoundingBox;
+	bool m_bVisible = true; // is the model visable
 
-		glm::vec3 m_BoundBoxMax;
-		glm::vec3 m_BoundBoxMin;
+	GLuint m_textureID; // ID of the texture
+	ModelReader* m_pModelReader; // Model Reader for the render the model
 
-	public:
-		Model(); // Constructor
-		Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID); // Full constructor
-		string getName() { return m_sName; }; // Returns moniker
-		string getFileLocation() { return m_sFileName; }; // Returns location of obj
-		string getTexFileLocation() { return m_sTexture; }; // Returns file location of texture
-		GLuint getTextureLocation() { return m_textureID; }; // Returns location of texture
-		glm::vec3 getPosition() { return m_position; }; // Returns rosition of model
-		glm::vec3 getRotation() { return m_rotation; }; // Returns rotation of model
-		glm::vec3 getScale() { return m_scale; }; // Returns scale of model
-		glm::vec3 getCollisionMesh() { return m_BoundingBox; };
-		bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
-		bool getCollected() { return m_bCollected; }; // Check if a collectable has been collected
-		bool getVisable() { return m_bVisible; }; // Check if a collectable has been collected
-		int getMaterial() { return m_iMaterial; }; // Returns materialID
+	GLuint m_programHandle;
+	Texture *m_pTexture;
+	Bitmap m_bmp = Bitmap::bitmapFromFile("assets/textures/Default.bmp");;
+
+	GLuint m_vboHandles[2];
+	GLuint m_vbo;
+	GLuint m_vaoHandle;
+
+	bool m_b3D = true;
+
+public:
+
+	Model(); // Constructor
+	Model(string FileLocation, string TextureLocation, glm::vec3 Position, glm::vec3 Rotation, glm::vec3, int MaterialID, bool b3D); // Full constructor
+
+	std::vector<float> m_positionData;
+	std::vector<float> m_normalData;
+	std::vector<float> m_uvData;
+
+	void setName(const string ksName) { m_sName = ksName; }
+	void setFileLocation(const string ksLocation) { m_sFileName = ksLocation; }
+	void setTextureLocation(const string ksLocation) { m_sTexture = ksLocation; }
+	void setTextureID(const GLuint kTextureID) { m_textureID = kTextureID; }
+	void setPosition(const glm::vec3 kPosition) { m_position = kPosition; }
+	void setRotation(const glm::vec3 kRotation) { m_rotation = kRotation; }
+	void setScale(const glm::vec3 kScale) { m_scale = kScale; }
+	void setM(const glm::mat4 kM) { m_M = kM; }
+	void setCollectable(const bool kbCollectable) { m_bCollectable = kbCollectable; }
+	void setCollected(const bool kbCollected) { m_bCollected = kbCollected; }
+	void setAI(const bool kbAI) { m_bAI = kbAI; }
+	void playerCaught(bool playerCaught);
+	void setVisible(const bool kbVisibility) { m_bVisible = kbVisibility; }
+	void setMaterial(const int kiMaterial) { m_iMaterial = kiMaterial; }
+	void set3D(const bool kb3D) { m_b3D = kb3D; }
 	
-		void setCollectable(bool NewSetting);
-		void setCollected(bool bCollected); // Set collected or not collected for a collectable
-		void setName(string sNewName);
-		void setTexture(GLuint textureID); // Set texture ID
-		void setFileLocation(string sNewLocation); // Set obj location
-		void setTextureLocation(string sNewLocation); // Set texture location
-		void setVisable(bool Visability); // Check if a collectable has been collected
-		void setPosition(glm::vec3 newPosition); // Set model position
-		void setRotation(glm::vec3 newRotation); // Set model rotation
-		void setScale(glm::vec3 newScale); // Set model scale
-		void setMaterial(int iMaterialID); // Set model MaterialID
-		void buffer();
-		CollisionBox getCollisionBox();
-		vector<float> m_positionData;
-		vector<float> m_uvData;
-	
-		glm::mat4 m_M;
-	
-		void loadModel(); // Loads in the model to be rendered
-		void initModel(); // Draws model
-	
-		void render();
+	string getName() { return m_sName; }; // Returns Model name
+	string getFileLocation() { return m_sFileName; }; // Returns location of obj
+	string getTextureLocation() { return m_sTexture; }; // Returns location of texture
+	GLuint getTextureID() { return m_textureID; }; // Returns texture ID
+	glm::vec3 getPosition() { return m_position; }; // Returns rosition of model
+	glm::vec3 getRotation() { return m_rotation; }; // Returns rotation of model
+	glm::vec3 getScale() { return m_scale; }; // Returns scale of model
+	glm::mat4 getM() { return m_M; }; // Returns model transformation matrix
+	bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
+	bool isCollected() { return m_bCollected; }; // Check if a collectable has been collected
+	bool isAI() { return m_bAI; }; //check if object uses ai
+	bool isPlayerCaught() { return m_bplayerCaught; };
+	bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
+	int getMaterial() { return m_iMaterial; }; // Returns materialID
+	bool get3D() { return m_b3D; }
+
+	CollisionBox getCollisionBox();
+
+	void loadModel() { m_pModelReader = new ModelReader(m_sFileName); } // Loads in the model to be rendered
+	void initModel(); // Draws model
+
+	void render(GLSLProgram* pShader, const glm::mat4 kModel);
 };
 
+#endif

@@ -54,11 +54,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries\freetype-2.7.1\include;$</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries/freetype-2.7.1/include;$(ProjectDir)libraries/glm/glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\;$(ProjectDir)libraries\reactphysics3d\build\lib\Debug\;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio-d.lib;sfml-system-d.lib;sfml-window-d.lib;sfml-graphics-d.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -68,13 +69,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries\freetype-2.7.1\include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)libraries/SFML-2.4.1/include;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/include;$(ProjectDir)libraries/tinyxml;$(ProjectDir)include;$(ProjectDir)libraries/freetype-2.7.1/include;$(ProjectDir)libraries/glm/glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(ProjectDir)libraries/SFML-2.4.1/lib;$(ProjectDir)libraries/GLFW/glfw-3.2.1.bin.WIN64/lib-vc2015;$(ProjectDir)libraries\freetype-2.7.1\objs\vc2010\Win64\;</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-audio.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;opengl32.lib;glfw3.lib;freetype271d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/NODEFAULTLIB:MSVCRTD %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -91,6 +93,7 @@
     <ClCompile Include="src\Model.cpp" />
     <ClCompile Include="src\ModelReader.cpp" />
     <ClCompile Include="src\SceneReader.cpp" />
+    <ClCompile Include="src\TextBox.cpp" />
     <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\World.cpp" />
   </ItemGroup>
@@ -109,18 +112,23 @@
     <ClInclude Include="include\Scene.h" />
     <ClInclude Include="include\SceneReader.h" />
     <ClInclude Include="include\stb_image.h" />
+    <ClInclude Include="include\TextBox.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\Utilities.h" />
     <ClInclude Include="include\World.h" />
     <ClInclude Include="libraries\tinyxml\tinyxml2.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="shaders\freetype.frag" />
-    <None Include="shaders\freetype.vert" />
-    <None Include="shaders\image.frag" />
-    <None Include="shaders\image.vert" />
-    <None Include="shaders\shader.frag" />
-    <None Include="shaders\shader.vert" />
+    <None Include="shaders\freetype.fs" />
+    <None Include="shaders\freetype.vs" />
+    <None Include="shaders\image.fs" />
+    <None Include="shaders\image.vs" />
+    <None Include="shaders\phong.fs" />
+    <None Include="shaders\phong.vs" />
+    <None Include="shaders\spotlight.fs" />
+    <None Include="shaders\spotlight.vs" />
+    <None Include="shaders\texture.fs" />
+    <None Include="shaders\texture.vs" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="assets\scenes\scene.xml">
