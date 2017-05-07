@@ -103,6 +103,7 @@ void World::update(const float kfTimeElapsed)
 
 		//m_camera.move(displacement);
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
+		m_bPlayerMoved = true;
 	}
 	
 
@@ -112,6 +113,7 @@ void World::update(const float kfTimeElapsed)
 
 		//m_camera.move(displacement);
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
+		m_bPlayerMoved = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
@@ -120,6 +122,7 @@ void World::update(const float kfTimeElapsed)
 
 		//m_camera.move(displacement);
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
+		m_bPlayerMoved = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
@@ -128,6 +131,7 @@ void World::update(const float kfTimeElapsed)
 
 		//m_camera.move(displacement);
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
+		m_bPlayerMoved = true;
 	}
 
 	// Locks bounding box to y0.0
@@ -197,73 +201,77 @@ void World::update(const float kfTimeElapsed)
 	//AI SECTION
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
-		rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
-
-		if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
+		if (m_bPlayerMoved == true)
 		{
-			m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
+			glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
+			rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
 
-			if (aiTimer.asSeconds() >= 15)
+			if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
 			{
-				aiSpawn = rand() % 4 + 1;
-				if (aiSpawn == 1)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 2)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 3)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 4)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
-				}
-				aiWander.restart();
+				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
 
+				if (aiTimer.asSeconds() >= 15)
+				{
+					aiSpawn = rand() % 4 + 1;
+					if (aiSpawn == 1)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 2)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 3)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 4)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
+					}
+					aiWander.restart();
+
+				}
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
+				{
+					m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
+					m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
+				}
+				else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
+				{
+					// If footsteps SFX is not playing
+					if (m_music.getStatus() != sf::Sound::Playing)
+					{
+						// Play footsteps
+						m_music.setBuffer(m_aiFootsteps);
+						m_music.setVolume(40.0f);
+						m_music.play();
+					}
+					loopSound = true;
+					m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+				}
+
+				else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8)
+				{
+					if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
+					{
+
+						// Play scream
+						m_scream.setBuffer(m_aiScream);
+						m_scream.setVolume(100.0f);
+						m_scream.play();
+						loopSound = false;
+						m_intention = TO_MENU;
+
+					}
+
+
+					m_sTime = "You've been caught, Game over!";
+					m_aiSpeed = glm::vec3(0, 0, 0);
+				}
+				m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 			}
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
-			{
-				m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
-				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
-			}
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
-			{
-				// If footsteps SFX is not playing
-				if (m_music.getStatus() != sf::Sound::Playing)
-				{
-					// Play footsteps
-					m_music.setBuffer(m_aiFootsteps);
-					m_music.setVolume(40.0f);
-					m_music.play();
-				}
-				loopSound = true;
-				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
-			}
-
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8)
-			{
-				if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
-				{
-					// Play scream
-					m_scream.setBuffer(m_aiScream);
-					m_scream.setVolume(100.0f);
-					m_scream.play();
-					loopSound = false;
-					m_intention = TO_MENU;
-
-				}
-
-
-				m_sTime = "You've been caught, Game over!";
-				m_aiSpeed = glm::vec3(0, 0, 0);
-			}
-			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
-			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 		}
 	}
 

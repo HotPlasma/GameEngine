@@ -49,6 +49,8 @@ private:
 	float movementSpeed = 0.002;
 	Model m_Player;
 
+	bool m_bPlayerMoved = false;
+
 	void setLightParams(GLSLProgram *pShader, Camera *camera);
 
 public:
