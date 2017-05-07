@@ -33,14 +33,6 @@ class World : public Scene
 
 		bool m_bCollisionInit = false;
 
-		/*rp3d::BoxShape* TheBoxShape;
-
-		rp3d::BoxShape* TheBoxShape2;*/
-
-	/*	rp3d::CollisionWorld m_CollisonWorld;
-
-		rp3d::CollisionBody * CameraBody;*/
-
 		Model m_Player;
 
 	public:

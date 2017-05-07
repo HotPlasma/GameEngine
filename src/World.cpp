@@ -9,60 +9,6 @@ using std::ifstream;
 #define CAMERA_ROTATION 0.0025f
 #define CAMERA_SPEED 15.0f
 
-//btRigidBody * World::addSphere(float rad, float x, float y, float z, float mass)
-//{
-//	btTransform t;
-//	t.setIdentity();
-//	t.setOrigin(btVector3(x, y, z));
-//
-//	btSphereShape * Sphere = new btSphereShape(rad);
-//	btVector3 inertia(0, 0, 0);
-//	if (mass != 0)
-//	{
-//		Sphere->calculateLocalInertia(mass, inertia);
-//	}
-//	btMotionState * motion = new btDefaultMotionState(t);
-//
-//	btRigidBody::btRigidBodyConstructionInfo info(mass, motion, Sphere);
-//
-//	btRigidBody * body = new btRigidBody(info);
-//
-//	m_collisionWorld->addRigidBody(body);
-//	m_CollisionBodies.push_back(body);
-//		
-//	//tester = Model("assets/models/Rock.obj", "ssets/textures/Rock.bmp", glm::vec3(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
-//
-//	return body;
-//}
-
-//void World::renderSphere(btRigidBody * sphere)
-//{
-//	float r = ((btSphereShape*)sphere->getCollisionShape())->getRadius();
-//	btTransform t;
-//	sphere->getMotionState()->getWorldTransform(t);
-//	glm::mat4 mat;
-//	t.getOpenGLMatrix(glm::value_ptr(mat));
-//	tester.m_M = tester.m_M * mat;
-//}
-//
-//void World::renderPlane(btRigidBody * Plane)
-//{
-//	btTransform t;
-//	Plane->getMotionState()->getWorldTransform(t);
-//	glm::mat4 mat;
-//	t.getOpenGLMatrix(glm::value_ptr(mat));
-//	m_sceneReader.m_modelList[1].m_M = m_sceneReader.m_modelList[1].m_M * mat;
-//}
-
-//bool contact_callback(btManifoldPoint& cp, const btCollisionObjectWrapper* colObj0Wrap, int partId0, int index0, const btCollisionObjectWrapper* colObj1Wrap, int partId1, int index1)
-//{
-//	cout << ((btRigidBody*)index0)->getUserPointer() << " " << ((btRigidBody*)index1)->getUserPointer() << std::endl;
-//		
-//	cout << "Collision" << endl;
-//
-//	return false;
-//}
-
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
 
@@ -93,12 +39,10 @@ void World::initScene(Freetype* pOverlay)
 		{
 			m_sceneReader.m_modelList[i].initModel();
 		}
-		/*world.ModelList[i].DrawModel(true, true);*/
 	}
 
 	m_Player.loadModel();
 	m_Player.initModel();
-	//m_Player.setVisable(true);
 }
 
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
@@ -255,71 +199,10 @@ void World::update(const float kfTimeElapsed)
 				bHasCollided = true;
 			}
 
-			/*glm::vec3 Diff(
-			abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
-			m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
-			-5,
-			abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
-			m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
-			);*/
+		}
+	}
 
-			//calculate distance required to move out of object
-			/*float tempXDiff = Distance.x - (m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left);
-			float tempZDiff = Distance.y - (m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front);
-			m_Player.setPosition(glm::vec3(m_Player.getPosition().x + tempXDiff, m_Player.getPosition().y, m_Player.getPosition().z + tempZDiff));*/
-
-			
-
-		/*	abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
-				m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top)),*/
-
-
-			//if (Diff.x <= Diff.y && Diff.x <= Diff.z)
-			//{
-			//	//Set pos in x by doing Diff * (unitVect(Distance))
-			//	m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5), 0, 0));
-			//}
-			//else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
-			//{
-			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0, (Distance.y + 5) * Diff.y, 0));
-			//}
-			//else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
-			//{
-			//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0, 0, (Distance.z + 5) * Diff.z));
-			//}
-
-
-					//m_camera.setPosition(m_Player.getPosition());
-				}
-			}
-
-			/*if (m_CollisionBodies[0->checkCollideWith(rigidBody))
-			{
-				std::cout << "Colliding" << std::endl;
-			}
-			else
-			{
-				std::cout << "Not Colliding" << std::endl;
-			}*/
-
-		//if (TestCollision(m_Player, m_sceneReader.m_modelList.at(3), CInfo))
-		//{
-		//	cout << "Colliding" << endl;
-
-		//	/*float ma = (-2*-2) ;
-		//	float mb = (-2*-2) ;
-
-		//	float m = ma + mb;
-
-		//	m_Player.setPosition(m_Player.getPosition() + (CInfo.minTranslateVec + CInfo.penetration * (ma/ m)));
-		//	m_sceneReader.m_modelList.at(3).setPosition(m_Player.getPosition() + (CInfo.minTranslateVec + CInfo.penetration * (mb / m)));*/
-		//}
-		//else
-		//{
-		//	cout << "Not Colliding" << endl;
-		//}
-	//}
-	//}
+	
 }
 
 void World::render()
@@ -335,26 +218,7 @@ void World::render()
 	m_Player.buffer();
 	m_worldShader.setUniform("M", m_Player.m_M);
 
-	//tester.buffer();
-	//m_worldShader.setUniform("M", tester.m_M);
-	//tester.render();
-	
-	/*for (int i = 0; i < m_CollisionBodies.size(); i++)
-	{
-		if (m_CollisionBodies.at(i)->getCollisionShape()->getShapeType() == STATIC_PLANE_PROXYTYPE)
-		{
-			renderPlane(m_CollisionBodies.at(i));
-		}
-		else if (m_CollisionBodies.at(i)->getCollisionShape()->getShapeType() == SPHERE_SHAPE_PROXYTYPE)
-		{
-			renderSphere(m_CollisionBodies.at(i));
-		}
-	}*/
-
-	
-	//m_collisionWorld->debugDrawWorld();
-
-	m_Player.render();
+	//m_Player.render();
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing
