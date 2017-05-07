@@ -23,12 +23,18 @@ private:
 
 	sf::Clock m_batteryTimer;
 	sf::Clock m_levelTimer;
+	sf::Clock aiWander;
 	int m_iSpareBatteries = 0;
 	int m_iBatteryLife = 100;
 	int m_iCountdown = 10;
 	string m_sLife;
 	string m_sTime;
-	
+	glm::vec3 m_aiSpeed; //ai movement speed
+	glm::vec3 m_aiRotation; //ai rotation
+	bool aiSearching = true;
+	double rotationAngle;
+	float movementSpeed = 0.0005;
+
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);

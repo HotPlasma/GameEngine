@@ -149,3 +149,8 @@ void Model::render(GLSLProgram* pShader, const glm::mat4 kModel)
 	// Draws Model
 	gl::DrawArrays(gl::TRIANGLES, 0, (GLsizei)m_positionData.size());
 }
+
+void Model::playerCaught(bool playerCaught)
+{
+	m_bplayerCaught = playerCaught;
+}

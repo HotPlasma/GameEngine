@@ -22,6 +22,8 @@ private:
 
 	bool m_bCollectable = false; // is the model a collectable?
 	bool m_bCollected = false; // has the collectable been collected?
+	bool m_bAI = false; //does the object use ai?
+	bool m_bplayerCaught = false; //has the ai caught the player?
 
 	bool m_bVisible = true; // is the model visable
 
@@ -57,6 +59,8 @@ public:
 	void setM(const glm::mat4 kM) { m_M = kM; }
 	void setCollectable(const bool kbCollectable) { m_bCollectable = kbCollectable; }
 	void setCollected(const bool kbCollected) { m_bCollected = kbCollected; }
+	void setAi(const bool kbAI) { m_bAI = kbAI; }
+	void playerCaught(bool playerCaught);
 	void setVisible(const bool kbVisibility) { m_bVisible = kbVisibility; }
 	void setMaterial(const int kiMaterial) { m_iMaterial = kiMaterial; }
 	void set3D(const bool kb3D) { m_b3D = kb3D; }
@@ -71,6 +75,8 @@ public:
 	glm::mat4 getM() { return m_M; }; // Returns model transformation matrix
 	bool isCollectable() { return m_bCollectable; }; // Check if a model is a collectable
 	bool isCollected() { return m_bCollected; }; // Check if a collectable has been collected
+	bool isAi() { return m_bAI; }; //check if object uses ai
+	bool isPlayerCaught() { return m_bplayerCaught; };
 	bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
 	int getMaterial() { return m_iMaterial; }; // Returns materialID
 	bool get3D() { return m_b3D; }

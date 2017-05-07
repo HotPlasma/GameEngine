@@ -1,4 +1,5 @@
 #include "World.h"
+#include <math.h>
 
 using std::string;
 using std::ifstream;
@@ -130,6 +131,7 @@ void World::update(const float kfTimeElapsed)
 	//BATTERY AND SURVIVAL TIMERS
 	sf::Time batteryTimer = m_batteryTimer.getElapsedTime();
 	sf::Time levelTimer = m_levelTimer.getElapsedTime();
+	sf::Time aiTimer = aiWander.getElapsedTime();
 
 	//cout << bTimer.asSeconds() << endl;
 	if (levelTimer.asSeconds() >= 1)
@@ -161,6 +163,63 @@ void World::update(const float kfTimeElapsed)
 			//victory!}
 	    }
 		m_levelTimer.restart();
+	}
+
+
+
+	if (aiTimer.asSeconds() >= 2)
+	{
+		aiSearching = false;
+		aiWander.restart();
+
+	}
+	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
+	{
+
+		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
+		rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
+
+		if (m_sceneReader.m_modelList.at(i).isAi()) // check if object has ai
+		{
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the wander range
+			{
+				m_aiRotation += glm::vec3(0, rotationAngle - 90, 0);
+				//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+			}
+
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
+			{
+				if (aiSearching == true)
+				{
+					//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+					//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				}
+				if (aiSearching == false)
+				{
+					m_aiSpeed = glm::vec3(0, 0, 0);
+					m_aiRotation.y = rand() % 360 + 1;
+					aiSearching = true;
+				}
+			}
+
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 2.8f) // if ai is in chase range
+			{
+				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
+				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+
+				//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+			}
+
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 2.8f) // if ai catches player
+			{
+				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
+				m_aiSpeed = glm::vec3(0, 0, 0);
+			}
+			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
+			m_sceneReader.m_modelList.at(i).setRotation(m_sceneReader.m_modelList.at(i).getRotation() = m_aiRotation);
+
+		}
 	}
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////

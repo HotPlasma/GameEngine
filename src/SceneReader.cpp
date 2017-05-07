@@ -171,6 +171,23 @@ void SceneReader::readSceneFile(string sFilename)
 								newModel.setCollectable(false);
 							}
 						}
+						// If the Node is <AI>
+						if (strcmp(iNode3->Value(), "Ai") == 0) // Check if model is a collectable
+						{
+							// Binds current data in the stringstream to a string
+							iss >> sData;
+
+							// If data string contains "true"
+							if (sData == "true")
+							{
+								newModel.setAi(true);
+							}
+							else
+							{
+								newModel.setAi(false);
+							}
+						}
+					
 					}
 					newModel.set3D(true);
 					// Pushes newModel onto the vector of models

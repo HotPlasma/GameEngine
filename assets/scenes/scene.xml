@@ -2,6 +2,19 @@
 
 <Scene>
   <!--List of Objects to be loaded for the room-->
+
+  <Object>
+    <Name>Demon</Name>
+    <OBJLocation>assets/models/demon.obj</OBJLocation>
+    <TexLocation>assets/textures/demon.bmp</TexLocation>
+    <Translation>5 0 50</Translation>
+    <Rotation>0 0 0</Rotation>
+    <Scale>1 1 1</Scale>
+    <Material>1</Material>
+    <Collectable>false</Collectable>
+    <Ai>true</Ai>
+  </Object>
+
   <Object>
     <Name>Deer</Name>
     <OBJLocation>assets/models/deer.obj</OBJLocation>
