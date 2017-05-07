@@ -1013,7 +1013,11 @@ void Editor::render()
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
+<<<<<<< HEAD
 	// Sets Phong LI for spawn indicator
+=======
+	// Sets LI for Spawn Indicator
+>>>>>>> refs/remotes/origin/Physics
 	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
 	// Renders Spawn indicator
 	m_pSpawn->render(&m_phongShader, glm::mat4(1.0f));

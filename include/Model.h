@@ -6,6 +6,23 @@
 
 #include "ModelReader.h"
 
+using namespace std;
+
+
+struct CollisionBox
+{
+	float front;
+	float back;
+	float left;
+	float right;
+	float top;
+	float bottom;
+
+	glm::vec3 max;
+	glm::vec3 min;
+	glm::vec3 boundingBox;
+};
+
 class Model
 {
 private:
@@ -37,6 +54,11 @@ private:
 	GLuint m_vboHandles[2];
 	GLuint m_vbo;
 	GLuint m_vaoHandle;
+
+	glm::vec3 m_BoundingBox;
+
+	glm::vec3 m_BoundBoxMax;
+	glm::vec3 m_BoundBoxMin;
 
 	bool m_b3D = true;
 
@@ -80,6 +102,8 @@ public:
 	bool isVisible() { return m_bVisible; }; // Check if a collectable has been collected
 	int getMaterial() { return m_iMaterial; }; // Returns materialID
 	bool get3D() { return m_b3D; }
+
+	CollisionBox getCollisionBox();
 
 	void loadModel() { m_pModelReader = new ModelReader(m_sFileName); } // Loads in the model to be rendered
 	void initModel(); // Draws model

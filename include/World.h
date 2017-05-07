@@ -11,6 +11,14 @@
 #include "Freetype.h"
 #include "Utilities.h"
 
+
+struct CollisionInfo
+{
+	bool isIntersecting = false;
+	glm::vec3 minTranslateVec = glm::vec3(0,0,0);
+	float penetration = 0;
+};
+
 class World : public Scene
 {
 private:
@@ -39,6 +47,11 @@ private:
 	bool aiSearching = true;
 	double rotationAngle;
 	float movementSpeed = 0.002;
+	Model m_Player;
+
+	bool m_bPlayerMoved = false;
+
+	void setLightParams(GLSLProgram *pShader, Camera *camera);
 
 public:
 

@@ -28,6 +28,24 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
+CollisionBox Model::getCollisionBox()
+{
+	CollisionBox newBox;
+	newBox.left = m_position.x - (m_BoundingBox.x / 2);
+	newBox.right = m_position.x + (m_BoundingBox.x / 2);
+	newBox.bottom = m_position.y - (m_BoundingBox.y / 2);
+	newBox.top = m_position.y + (m_BoundingBox.y / 2);
+	newBox.front = m_position.z - (m_BoundingBox.z / 2);
+	newBox.back = m_position.z + (m_BoundingBox.z / 2);
+
+	newBox.max = m_BoundBoxMax;
+	newBox.min = m_BoundBoxMin;
+
+	newBox.boundingBox;
+	
+	return newBox;
+}
+
 void Model::initModel()
 {
 	glm::mat4 rotMatrix = glm::mat4(1.0f);
@@ -101,16 +119,64 @@ void Model::initModel()
 
 	gl::BindVertexArray(m_vaoHandle);
 
-	m_bmp = Bitmap::bitmapFromFile(m_sTexture);
-	m_bmp.flipVertically();
-	m_pTexture = new Texture(m_bmp);
-	//Set texture
-	gl::ActiveTexture(gl::TEXTURE0);
-	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
-	GLint loc = gl::GetUniformLocation(m_programHandle, "tex");
+	if (m_sTexture.compare("") != 0) // Allow a model to be loaded without a texture without crashing
+	{
+		m_bmp = Bitmap::bitmapFromFile(m_sTexture);
+		m_bmp.flipVertically();
+		m_pTexture = new Texture(m_bmp);
+		//Set texture
+		gl::ActiveTexture(gl::TEXTURE0);
+		gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
+		GLint loc = gl::GetUniformLocation(m_programHandle, "tex");
 
-	gl::Uniform1f(loc, 2);
+		gl::Uniform1f(loc, 1);
+
+	}
+
+	m_BoundBoxMax = glm::vec3(-999999.0f, -999999.0f, -999999.0f);
+	m_BoundBoxMin = glm::vec3(999999.0f, 999999.0f, 999999.0f);
+
+	for (int i = 0; i < m_positionData.size(); i+=3)
+	{
+		if (m_positionData.at(i) > m_BoundBoxMax.x)
+		{
+			m_BoundBoxMax.x = m_positionData.at(i);
+		}
+
+		if (m_positionData.at(i + 1) > m_BoundBoxMax.y)
+		{
+			m_BoundBoxMax.y = m_positionData.at(i+1);
+		}
+
+		if (m_positionData.at(i + 2) > m_BoundBoxMax.z)
+		{
+			m_BoundBoxMax.z = m_positionData.at(i+2);
+		}
+
+		if (m_positionData.at(i) < m_BoundBoxMin.x)
+		{
+			m_BoundBoxMin.x = m_positionData.at(i);
+		}
+
+		if (m_positionData.at(i + 1) < m_BoundBoxMin.y)
+		{
+			m_BoundBoxMin.y = m_positionData.at(i + 1);
+		}
+
+		if (m_positionData.at(i + 2) < m_BoundBoxMin.z)
+		{
+			m_BoundBoxMin.z = m_positionData.at(i + 2);
+		}
+	}
+
+	m_BoundingBox = glm::vec3(m_BoundBoxMax - m_BoundBoxMin);
+
 }
+
+//rp3d::ConvexMeshShape Model::getCollisionMesh()
+//{
+//	return m_MeshShape;
+//}
 
 void Model::render(GLSLProgram* pShader, const glm::mat4 kModel)
 {

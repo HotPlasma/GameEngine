@@ -64,6 +64,8 @@ void World::initScene(Freetype* pOverlay)
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
+	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(15, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1, true);
+
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		if (!m_sceneReader.m_modelList.at(i).isCollected()) // Draw all items except collected collectables
@@ -72,12 +74,8 @@ void World::initScene(Freetype* pOverlay)
 		}
 	}
 
-	// Resets cursor to the center of the window
-	glfwSetCursorPos(m_pWindow, getWindowSize().x*0.5f, getWindowSize().y*0.5f);
-	m_mousePos = sf::Vector2f((float)getWindowSize().x*0.5f, (float)getWindowSize().y*0.5f);
-
-	// Updates camera vision
-	m_camera.updateView();
+	m_Player.loadModel();
+	m_Player.initModel();
 }
 
 // Void: Called on key input event
@@ -101,25 +99,45 @@ void World::update(const float kfTimeElapsed)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+		glm::vec3 displacement = glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
+		m_bPlayerMoved = true;
 	}
 	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-			m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		glm::vec3 displacement = glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
+		m_bPlayerMoved = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-			m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+		glm::vec3 displacement = glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
+		m_bPlayerMoved = true;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-			m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		glm::vec3 displacement = glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
+		m_bPlayerMoved = true;
 	}
 
+	// Locks bounding box to y0.0
+	m_Player.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
+	// Locks Camera to y5.0
+	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 5.0f, m_Player.getPosition().z));
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
 	{
@@ -132,9 +150,6 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
-
-	// Sticks the camera to y 5.0
-	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	//BATTERY AND SURVIVAL TIMERS
 	sf::Time batteryTimer = m_batteryTimer.getElapsedTime();
@@ -186,75 +201,80 @@ void World::update(const float kfTimeElapsed)
 	//AI SECTION
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
-		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
-		rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
-
-		if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
+		if (m_bPlayerMoved == true)
 		{
-			m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
-		
-			if (aiTimer.asSeconds() >= 15)
-			{
-				aiSpawn = rand() % 4 + 1;
-				if (aiSpawn == 1)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 2)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 3)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
-				}
-				if (aiSpawn == 4)
-				{
-					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
-				}
-				aiWander.restart();
+			glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
+			rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
 
-			}
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
+			if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
 			{
-				m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
-				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; 
-			}
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
-			{
-				// If footsteps SFX is not playing
-				if (m_music.getStatus() != sf::Sound::Playing)
-				{
-					// Play footsteps
-					m_music.setBuffer(m_aiFootsteps);
-					m_music.setVolume(40.0f);
-					m_music.play();
-				}
-				loopSound = true;
-				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
-			}
+				m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8) 
-			{
-				if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
+				if (aiTimer.asSeconds() >= 15)
 				{
-					// Play scream
-					m_scream.setBuffer(m_aiScream);
-					m_scream.setVolume(100.0f);
-					m_scream.play();
-					loopSound = false;
-					m_intention = TO_MENU;
-					
+					aiSpawn = rand() % 4 + 1;
+					if (aiSpawn == 1)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 2)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 3)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
+					}
+					if (aiSpawn == 4)
+					{
+						m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
+					}
+					aiWander.restart();
+
 				}
-		
-				
-				m_sTime = "You've been caught, Game over!";
-				m_aiSpeed = glm::vec3(0, 0, 0);
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
+				{
+					m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
+					m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
+				}
+				else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
+				{
+					// If footsteps SFX is not playing
+					if (m_music.getStatus() != sf::Sound::Playing)
+					{
+						// Play footsteps
+						m_music.setBuffer(m_aiFootsteps);
+						m_music.setVolume(40.0f);
+						m_music.play();
+					}
+					loopSound = true;
+					m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
+				}
+
+				else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8)
+				{
+					if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
+					{
+
+						// Play scream
+						m_scream.setBuffer(m_aiScream);
+						m_scream.setVolume(100.0f);
+						m_scream.play();
+						loopSound = false;
+						m_intention = TO_MENU;
+
+					}
+
+
+					m_sTime = "You've been caught, Game over!";
+					m_aiSpeed = glm::vec3(0, 0, 0);
+				}
+				m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
+				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 			}
-			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
-			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 		}
 	}
+
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	m_collHeight.update(COLLECTABLE_SPEED*kfTimeElapsed);
@@ -270,12 +290,12 @@ void World::update(const float kfTimeElapsed)
 			{
 				// Rotates collectable
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
-				
+
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
 				// If collision with a collectable
-				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5)
 				{
 					if (m_iBatteryLife <= 80)
 					{
@@ -296,11 +316,72 @@ void World::update(const float kfTimeElapsed)
 		}
 	}
 
+	for (int j = 3; j < m_sceneReader.m_modelList.size(); j++)
+	{
+
+		if (m_sceneReader.m_modelList.at(j).isAI()) // Do not create a collision box for AI
+		{
+
+		}
+		else
+		{
+			if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
+				m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
+				m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
+				m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
+				m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
+				m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+			{
+				cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
+
+				glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
+				//Distance = glm::normalize(Distance);
+				//Diff in X to move out
+
+				bool bHasCollided = false;
+				float fCollisionOffset = 0.1f; //offsets player after resolution to prevent successive collisions
+				float fZDiff;
+				float fXDiff;
+
+				//resolve the collisions using if statements
+				//player front collision resolution
+				if ((m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && (m_Player.getCollisionBox().front > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && bHasCollided == false)
+				{
+					fZDiff = abs(m_Player.getCollisionBox().front - m_sceneReader.m_modelList.at(j).getCollisionBox().back) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + fZDiff));
+					bHasCollided = true;
+				}
+				//player back collision resolution
+				else if ((m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && (m_Player.getCollisionBox().back < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && bHasCollided == false)
+				{
+					fZDiff = abs(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z - fZDiff));
+					bHasCollided = true;
+				}
+				//player right side collision resolution
+				else if ((m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && (/*player right is less than object right*/m_Player.getCollisionBox().right < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && bHasCollided == false)
+				{
+					fXDiff = abs(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x - fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+					bHasCollided = true;
+				}
+				//player left side collision resolution
+				else if ((m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && (/*player left is greater than object left*/m_Player.getCollisionBox().left > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && bHasCollided == false)
+				{
+					fXDiff = abs(m_Player.getCollisionBox().left - m_sceneReader.m_modelList.at(j).getCollisionBox().right) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x + fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+					bHasCollided = true;
+				}
+
+			}
+		}
+	}
+
 	// Resets cursor position
 	glfwSetCursorPos(m_pWindow, m_windowSize.x*0.5, m_windowSize.y*0.5);
 }
 
-void setLightParams(GLSLProgram *pShader, Camera *camera)
+void World::setLightParams(GLSLProgram *pShader, Camera *camera)
 {
 	pShader->setUniform("Material.Ka", glm::vec3(0.2f, 0.2f, 0.2f));
 	pShader->setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
@@ -315,45 +396,6 @@ void setLightParams(GLSLProgram *pShader, Camera *camera)
 	pShader->setUniform("Spotlight.CutOff", glm::cos(glm::radians(15.0f)));
 	pShader->setUniform("Spotlight.OuterCutOff", glm::cos(glm::radians(22.5f)));
 
-	//pShader->setUniform("light.direction", m_camera.getPosition().x + m_camera.getDirection().x, m_camera.getPosition().y + m_camera.getDirection().y, m_camera.getPosition().z + m_camera.getDirection().z);
-	//pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
-	//pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
-	//
-	//pShader->setUniform("light.ambient", 0.3f, 0.3f, 0.3f);
-	//pShader->setUniform("light.diffuse", 0.5f, 0.5f, 0.5f);
-	//pShader->setUniform("light.specular", 0.8f, 0.8f, 0.8f);
-	//pShader->setUniform("light.constant", 1.0f);
-	//pShader->setUniform("light.linear", 0.09f);
-	//pShader->setUniform("light.quadratic", 0.032f);
-
-	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-	//	m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-	//	m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-	//	m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-	//	m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-	//	m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-	//	m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
-	//{
-	//	m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
-	//	m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-	//	m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-	//	m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
-	//}
 }
 
 void World::render()
@@ -414,6 +456,7 @@ void World::render()
 	m_pSkybox->render(&m_spotlightShader, glm::mat4(1.0f));
 
 	// Activates FreeType shader
+
 	m_freeType.use();
 	// Configures projection
 	m_freeType.setUniform("projection", glm::ortho(0.0f, float(m_windowSize.x), 0.f, float(m_windowSize.y)));
