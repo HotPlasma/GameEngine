@@ -289,54 +289,62 @@ void World::update(const float kfTimeElapsed)
 
 	for (int j = 3; j < m_sceneReader.m_modelList.size(); j++)
 	{
-		if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
-			m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
-			m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
-			m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
-			m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
-			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+
+		if (m_sceneReader.m_modelList.at(j).isAI()) // Do not create a collision box for AI
 		{
-			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
 
-			glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
-			//Distance = glm::normalize(Distance);
-			//Diff in X to move out
+		}
+		else
+		{
+			if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
+				m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
+				m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
+				m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
+				m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
+				m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+			{
+				cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
 
-			bool bHasCollided = false;
-			float fCollisionOffset = 0.1f; //offsets player after resolution to prevent successive collisions
-			float fZDiff;
-			float fXDiff;
+				glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
+				//Distance = glm::normalize(Distance);
+				//Diff in X to move out
 
-			//resolve the collisions using if statements
-			//player front collision resolution
-			if ((m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && (m_Player.getCollisionBox().front > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && bHasCollided == false)
-			{
-				fZDiff = abs(m_Player.getCollisionBox().front - m_sceneReader.m_modelList.at(j).getCollisionBox().back) + fCollisionOffset;
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + fZDiff));
-				bHasCollided = true;
-			}
-			//player back collision resolution
-			else if ((m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && (m_Player.getCollisionBox().back < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && bHasCollided == false)
-			{
-				fZDiff = abs(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front) + fCollisionOffset;
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z - fZDiff));
-				bHasCollided = true;
-			}
-			//player right side collision resolution
-			else if ((m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && (/*player right is less than object right*/m_Player.getCollisionBox().right < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && bHasCollided == false)
-			{
-				fXDiff = abs(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left) + fCollisionOffset;
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x - fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
-				bHasCollided = true;
-			}
-			//player left side collision resolution
-			else if ((m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && (/*player left is greater than object left*/m_Player.getCollisionBox().left > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && bHasCollided == false)
-			{
-				fXDiff = abs(m_Player.getCollisionBox().left - m_sceneReader.m_modelList.at(j).getCollisionBox().right) + fCollisionOffset;
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x + fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
-				bHasCollided = true;
-			}
+				bool bHasCollided = false;
+				float fCollisionOffset = 0.1f; //offsets player after resolution to prevent successive collisions
+				float fZDiff;
+				float fXDiff;
 
+				//resolve the collisions using if statements
+				//player front collision resolution
+				if ((m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && (m_Player.getCollisionBox().front > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && bHasCollided == false)
+				{
+					fZDiff = abs(m_Player.getCollisionBox().front - m_sceneReader.m_modelList.at(j).getCollisionBox().back) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + fZDiff));
+					bHasCollided = true;
+				}
+				//player back collision resolution
+				else if ((m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && (m_Player.getCollisionBox().back < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && bHasCollided == false)
+				{
+					fZDiff = abs(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z - fZDiff));
+					bHasCollided = true;
+				}
+				//player right side collision resolution
+				else if ((m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && (/*player right is less than object right*/m_Player.getCollisionBox().right < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && bHasCollided == false)
+				{
+					fXDiff = abs(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x - fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+					bHasCollided = true;
+				}
+				//player left side collision resolution
+				else if ((m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && (/*player left is greater than object left*/m_Player.getCollisionBox().left > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && bHasCollided == false)
+				{
+					fXDiff = abs(m_Player.getCollisionBox().left - m_sceneReader.m_modelList.at(j).getCollisionBox().right) + fCollisionOffset;
+					m_Player.setPosition(glm::vec3(m_Player.getPosition().x + fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+					bHasCollided = true;
+				}
+
+			}
 		}
 	}
 
@@ -359,45 +367,6 @@ void World::setLightParams(GLSLProgram *pShader, Camera *camera)
 	pShader->setUniform("Spotlight.CutOff", glm::cos(glm::radians(15.0f)));
 	pShader->setUniform("Spotlight.OuterCutOff", glm::cos(glm::radians(22.5f)));
 
-	//pShader->setUniform("light.direction", m_camera.getPosition().x + m_camera.getDirection().x, m_camera.getPosition().y + m_camera.getDirection().y, m_camera.getPosition().z + m_camera.getDirection().z);
-	//pShader->setUniform("light.cutOff", glm::cos(glm::radians(25.5f)));
-	//pShader->setUniform("light.outerCutOff", glm::cos(glm::radians(35.5f)));
-	//
-	//pShader->setUniform("light.ambient", 0.3f, 0.3f, 0.3f);
-	//pShader->setUniform("light.diffuse", 0.5f, 0.5f, 0.5f);
-	//pShader->setUniform("light.specular", 0.8f, 0.8f, 0.8f);
-	//pShader->setUniform("light.constant", 1.0f);
-	//pShader->setUniform("light.linear", 0.09f);
-	//pShader->setUniform("light.quadratic", 0.032f);
-
-	//if (m_sceneReader.m_modelList.at(i).getMaterial() == 1) //Wooden material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Is", 0.4f, 0.4f, 0.4f);
-	//	m_spotlightShader.setUniform("Rd", 0.6f, 0.6f, 0.6f);
-	//	m_spotlightShader.setUniform("Rs", 0.3f, 0.3f, 0.3f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 2) //Metal material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.7f, 0.7f, 0.7f);
-	//	m_spotlightShader.setUniform("Is", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Rd", 0.8f, 0.8f, 0.8f);
-	//	m_spotlightShader.setUniform("Rs", 0.8f, 0.8f, 0.8f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 3) //Deer material
-	//{
-	//	m_spotlightShader.setUniform("Id", 0.5f, 0.5f, 0.5f);
-	//	m_spotlightShader.setUniform("Is", 0.3f, 0.3f, 0.3f);
-	//	m_spotlightShader.setUniform("Rd", 0.7f, 0.7f, 0.7f);
-	//	m_spotlightShader.setUniform("Rs", 0.5f, 0.5f, 0.5f);
-	//}
-	//else if (m_sceneReader.m_modelList.at(i).getMaterial() == 4) //Skybox material
-	//{
-	//	m_spotlightShader.setUniform("Id", 1.0f, 1.0f, 1.0f);
-	//	m_spotlightShader.setUniform("Is", 0.0f, 0.0f, 0.0f);
-	//	m_spotlightShader.setUniform("Rd", 0.0f, 0.0, 0.0f);
-	//	m_spotlightShader.setUniform("Rs", 0.0f, 0.0f, 0.0f);
-	//}
 }
 
 void World::render()
