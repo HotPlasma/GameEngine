@@ -251,7 +251,7 @@ int main(int argc, char *argv[])
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, TRUE);
 
 	// Creates a new glfw window
-	g_pWindow = glfwCreateWindow(1920, 1080, string("Game Engine").c_str(), NULL, NULL);
+	g_pWindow = glfwCreateWindow(1920, 1080, string("TREBuchet - The greatest medieval engine.").c_str(), NULL, NULL);
 	
 	// If the window isn't created
 	if (!g_pWindow) { closeProgram(); }
