@@ -23,6 +23,13 @@
 //	
 //};
 
+struct CollisionInfo
+{
+	bool isIntersecting = false;
+	glm::vec3 minTranslateVec = glm::vec3(0,0,0);
+	float penetration = 0;
+};
+
 class World : public Scene
 {
 	private:
@@ -37,9 +44,9 @@ class World : public Scene
 
 		bool m_bCollisionInit = false;
 
-		rp3d::BoxShape* TheBoxShape;
+		/*rp3d::BoxShape* TheBoxShape;
 
-		rp3d::BoxShape* TheBoxShape2;
+		rp3d::BoxShape* TheBoxShape2;*/
 
 	/*	rp3d::CollisionWorld m_CollisonWorld;
 
@@ -47,18 +54,23 @@ class World : public Scene
 
 		Model m_Player;
 
-		rp3d::CollisionWorld m_collisionWorld;
+		CollisionInfo CInfo;
 
-		vector<rp3d::CollisionBody*> m_collisionBodies;
+		//rp3d::CollisionWorld m_collisionWorld;
 
-		rp3d::CollisionBody * PlayerBody;
+		//vector<rp3d::CollisionBody*> m_collisionBodies;
 
-		rp3d::CollisionBody * StumpBody;
+		//rp3d::CollisionBody * PlayerBody;
 
-		rp3d::CollisionCallback * CollisionCB;
+		//rp3d::CollisionBody * StumpBody;
+
+		//rp3d::CollisionCallback * CollisionCB;
 
 		//rp3d::ContactPointInfo * collisionInfo;
 
+		bool TestCollision(Model CollisionShape1, Model CollisionShape2, CollisionInfo &CollisionResult);
+
+		bool TestCollisionAxis(glm::vec3 axis, float minA, float maxA, float minB, float maxB, glm::vec3 &mtvAxis, float &mtvDistance);
 
 		//vector<rp3d::CollisionBody*> ModelBodies;
 		//rp3d::CollisionCallback * CameraCallback;
