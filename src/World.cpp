@@ -75,7 +75,6 @@ World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 	//gContactAddedCallback = contact_callback;
 }
 
-
 void World::initScene(Freetype* pOverlay)
 {
 	m_pHUD = pOverlay; // Get the Heads up display for the scene
@@ -100,9 +99,6 @@ void World::initScene(Freetype* pOverlay)
 	m_Player.loadModel();
 	m_Player.initModel();
 	//m_Player.setVisable(true);
-
-
-
 }
 
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
@@ -116,10 +112,6 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("V", kView);
 	pShader->setUniform("P", kProjection);
 }
-
-
-
-
 
 void World::update(const float kfTimeElapsed)
 {
@@ -161,12 +153,13 @@ void World::update(const float kfTimeElapsed)
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
 	}
 
+	// Locks bounding box to y0.0
+	m_Player.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
 	// Locks Camera to y5.0
-	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
+	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 5.0f, m_Player.getPosition().z));
 	
-
-		/////////////////// COLLECTABLE BOBBING ///////////////////
-		// If collectables are moving up and offset is greater than upper bound
+	/////////////////// COLLECTABLE BOBBING ///////////////////
+	// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
 	{
 		// Move collectable down
@@ -211,7 +204,6 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
-
 
 	for (int j = 3; j < m_sceneReader.m_modelList.size(); j++)
 	{
