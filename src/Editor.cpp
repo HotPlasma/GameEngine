@@ -796,7 +796,6 @@ void Editor::render()
 	m_phongShader.setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
 	m_phongShader.setUniform("Material.Ks", glm::vec3(1.0f, 1.0f, 1.0f));
 	m_phongShader.setUniform("Material.Shininess", 20.0f);
-	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
 	m_phongShader.setUniform("Light.Position", m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
 
 	// Render all Models in the Scene
@@ -809,10 +808,15 @@ void Editor::render()
 			m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f + m_collFlash.value()));
 		}
 		// If AI
-		if (pModel->isAI())
+		else if (pModel->isAI())
 		{
 			// Flashes blue
 			m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f + m_collFlash.value(), 0.6f));
+		}
+		// If neither Coll or AI
+		else
+		{
+			m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
 		}
 
 		// Renders Model
