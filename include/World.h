@@ -48,6 +48,9 @@ private:
 	double rotationAngle;
 	float movementSpeed = 0.002;
 	Model m_Player;
+
+	void setLightParams(GLSLProgram *pShader, Camera *camera);
+
 public:
 
 	World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);

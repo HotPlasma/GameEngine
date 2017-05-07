@@ -28,11 +28,6 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
-void Model::loadModel()
-{
-	m_pModelReader = new ModelReader(m_sFileName);
-}
-
 CollisionBox Model::getCollisionBox()
 {
 	CollisionBox newBox;

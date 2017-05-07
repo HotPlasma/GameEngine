@@ -1013,6 +1013,11 @@ void Editor::render()
 	// Renders Model
 	m_selection.m_pModel->render(&m_phongShader, glm::mat4(1.0f));
 
+	// Sets LI for Spawn Indicator
+	m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f));
+	// Renders Spawn indicator
+	m_pSpawn->render(&m_phongShader, glm::mat4(1.0f));
+
 	// Activates texture shader
 	m_textureShader.use();
 
@@ -1027,9 +1032,6 @@ void Editor::render()
 	m_pSkybox->setPosition(m_camera.getPosition());
 	// Renders Skybox
 	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
-
-	// Renders Spawn indicator
-	m_pSpawn->render(&m_textureShader, glm::mat4(1.0f));
 
 	// Draws HUD buttons
 	m_buttons.m_pModel->render(&m_imageType, m_windowSize);

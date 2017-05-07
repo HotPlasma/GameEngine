@@ -64,7 +64,7 @@ void World::initScene(Freetype* pOverlay)
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
-	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(15, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
+	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(15, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1, true);
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -130,6 +130,10 @@ void World::update(const float kfTimeElapsed)
 		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
 	}
 
+	// Locks bounding box to y0.0
+	m_Player.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
+	// Locks Camera to y5.0
+	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 5.0f, m_Player.getPosition().z));
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E))
 	{
@@ -142,9 +146,6 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
-
-	// Sticks the camera to y 5.0
-	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 5.0f, m_camera.getPosition().z));
 
 	//BATTERY AND SURVIVAL TIMERS
 	sf::Time batteryTimer = m_batteryTimer.getElapsedTime();
@@ -202,7 +203,7 @@ void World::update(const float kfTimeElapsed)
 		if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
 		{
 			m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
-		
+
 			if (aiTimer.asSeconds() >= 15)
 			{
 				aiSpawn = rand() % 4 + 1;
@@ -228,7 +229,7 @@ void World::update(const float kfTimeElapsed)
 			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
 			{
 				m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
-				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; 
+				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
 			}
 			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
 			{
@@ -243,38 +244,6 @@ void World::update(const float kfTimeElapsed)
 				loopSound = true;
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
-	// Locks bounding box to y0.0
-	m_Player.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
-	// Locks Camera to y5.0
-	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 5.0f, m_Player.getPosition().z));
-	
-	/////////////////// COLLECTABLE BOBBING ///////////////////
-	// If collectables are moving up and offset is greater than upper bound
-	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
-	{
-		// Move collectable down
-		m_collectGoingUp = false;
-	}
-
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8) 
-			{
-				if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
-				{
-					// Play scream
-					m_scream.setBuffer(m_aiScream);
-					m_scream.setVolume(100.0f);
-					m_scream.play();
-					loopSound = false;
-					m_intention = TO_MENU;
-					
-				}
-		
-				
-				m_sTime = "You've been caught, Game over!";
-				m_aiSpeed = glm::vec3(0, 0, 0);
-			}
-			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
-			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 		}
 	}
 
@@ -375,7 +344,7 @@ void World::update(const float kfTimeElapsed)
 	glfwSetCursorPos(m_pWindow, m_windowSize.x*0.5, m_windowSize.y*0.5);
 }
 
-void setLightParams(GLSLProgram *pShader, Camera *camera)
+void World::setLightParams(GLSLProgram *pShader, Camera *camera)
 {
 	pShader->setUniform("Material.Ka", glm::vec3(0.2f, 0.2f, 0.2f));
 	pShader->setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
