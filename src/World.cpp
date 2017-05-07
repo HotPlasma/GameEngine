@@ -86,7 +86,7 @@ void World::initScene(Freetype* pOverlay)
 
 	m_sceneReader = SceneReader("assets/scenes/Scene.xml");
 
-	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(10, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
+	m_Player = Model("assets/models/Player.obj", "assets/textures/default.bmp", glm::vec3(15, -5, 0), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1), 1);
 
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -222,6 +222,41 @@ void World::update(const float kfTimeElapsed)
 			//Distance = glm::normalize(Distance);
 			//Diff in X to move out
 
+			bool bHasCollided = false;
+			float fCollisionOffset = 0.1f; //offsets player after resolution to prevent successive collisions
+			float fZDiff;
+			float fXDiff;
+
+			//resolve the collisions using if statements
+			//player front collision resolution
+			if ((m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && (m_Player.getCollisionBox().front > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && bHasCollided == false)
+			{
+				fZDiff = abs(m_Player.getCollisionBox().front - m_sceneReader.m_modelList.at(j).getCollisionBox().back) + fCollisionOffset;
+				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + fZDiff));
+				bHasCollided = true;
+			}
+			//player back collision resolution
+			else if ((m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front) && (m_Player.getCollisionBox().back < m_sceneReader.m_modelList.at(j).getCollisionBox().back) && bHasCollided == false)
+			{
+				fZDiff = abs(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front) + fCollisionOffset;
+				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z - fZDiff));
+				bHasCollided = true;
+			}
+			//player right side collision resolution
+			else if ((m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && (/*player right is less than object right*/m_Player.getCollisionBox().right < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && bHasCollided == false)
+			{
+				fXDiff = abs(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left) + fCollisionOffset;
+				m_Player.setPosition(glm::vec3(m_Player.getPosition().x - fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+				bHasCollided = true;
+			}
+			//player left side collision resolution
+			else if ((m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right) && (/*player left is greater than object left*/m_Player.getCollisionBox().left > m_sceneReader.m_modelList.at(j).getCollisionBox().left) && bHasCollided == false)
+			{
+				fXDiff = abs(m_Player.getCollisionBox().left - m_sceneReader.m_modelList.at(j).getCollisionBox().right) + fCollisionOffset;
+				m_Player.setPosition(glm::vec3(m_Player.getPosition().x + fXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
+				bHasCollided = true;
+			}
+
 			/*glm::vec3 Diff(
 			abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
 			m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
@@ -230,26 +265,6 @@ void World::update(const float kfTimeElapsed)
 			m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
 			);*/
 
-			if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left) //if player right is inside object left side 
-			{
-				float tempXDiff = (m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left);
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x - tempXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
-			}
-			if (m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right) //if player left is inside object right side 
-			{
-				float tempXDiff = (m_Player.getCollisionBox().left - m_sceneReader.m_modelList.at(j).getCollisionBox().right);
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x + tempXDiff, m_Player.getPosition().y, m_Player.getPosition().z));
-			}
-			if (m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front) //if player back is inside object front side 
-			{
-				float tempZDiff = (m_sceneReader.m_modelList.at(j).getCollisionBox().front - m_Player.getCollisionBox().back);
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + tempZDiff));
-			}
-			if (m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back) //if player front is inside object front side 
-			{
-				float tempZDiff = (m_sceneReader.m_modelList.at(j).getCollisionBox().front - m_Player.getCollisionBox().back);
-				m_Player.setPosition(glm::vec3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z + tempZDiff));
-			}
 			//calculate distance required to move out of object
 			/*float tempXDiff = Distance.x - (m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left);
 			float tempZDiff = Distance.y - (m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front);
