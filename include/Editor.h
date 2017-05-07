@@ -5,6 +5,7 @@
 #include "PreHeader.h"
 
 #include "Scene.h"
+#include "SceneReader.h"
 #include "Camera.h"
 #include "Model.h"
 #include "ModelReader.h"
@@ -81,7 +82,7 @@ class Editor : public Scene
 {
 private:
 	
-	std::string m_sFilepath = "assets/scenes/editorScene.xml"; //!< Scene file path TEMPORARY default
+	std::string m_sFilePath = "assets/scenes/editorScene.xml"; //!< Scene file path TEMPORARY default
 
 	std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
@@ -99,7 +100,8 @@ private:
 
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
-	void save(); //!< Saves the Scene to XML file
+	void save(const std::string ksFilePath); //!< Saves the Scene to XML file
+	void load(const std::string ksFilePath); //!< Loads a Scene into the Editor
 
 public:
 

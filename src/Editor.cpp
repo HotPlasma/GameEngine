@@ -387,6 +387,13 @@ void Editor::input_key(const int kiKey, const int kiAction)
 					m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
 				}
 			}
+
+			// TEMPORARY LOAD FILE
+			// If L is pressed
+			if (kiKey == GLFW_KEY_L)
+			{
+				load(m_sFilePath);
+			}
 		}
 	}
 }
@@ -586,7 +593,7 @@ void Editor::input_button(const int kiButton, const int kiAction)
 				if (m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y))
 				{
 					// Saves Scene to file
-					save();
+					save(m_sFilePath);
 				}
 			}
 		}
@@ -882,7 +889,7 @@ void Editor::render()
 }
 
 // Void: Saves the Scene to XML file
-void Editor::save()
+void Editor::save(const std::string ksFilePath)
 {
 	std::cerr << "[EDITOR] Saving to file..." << std::endl;
 
@@ -974,7 +981,31 @@ void Editor::save()
 	}
 
 	// Saves the document
-	document.SaveFile(m_sFilepath.c_str());
+	document.SaveFile(ksFilePath.c_str());
 
 	std::cerr << "[EDITOR] File saved." << std::endl;
+}
+
+// Void: Loads a Scene into the Editor
+void Editor::load(const std::string ksFilePath)
+{
+	std::cerr << "[EDITOR] Loading from file..." << std::endl;
+
+	// Creates a SceneReader that loads the file into a vector
+	SceneReader reader = SceneReader(ksFilePath);
+	std::vector<Model> loadedModels = reader.m_modelList;
+
+	while (!loadedModels.empty())
+	{
+		// Initialises Model
+		loadedModels.back().initModel();
+
+		// Pushes Model onto Editor vector
+		m_pModels.push_back(std::make_shared<Model>(loadedModels.back()));
+
+		// Removes Model from loaded vector
+		loadedModels.pop_back();
+	}
+
+	std::cerr << "[EDITOR] File loaded." << std::endl;
 }
