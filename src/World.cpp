@@ -131,31 +131,37 @@ void World::update(const float kfTimeElapsed)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
-		m_Player.setPosition(m_Player.getPosition() + glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
+		glm::vec3 displacement = glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-		m_Player.setPosition(m_Player.getPosition() + glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		glm::vec3 displacement = glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
-		m_Player.setPosition(m_Player.getPosition() + glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
+		glm::vec3 displacement = glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getZAxis() * displacement.z));
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-		m_Player.setPosition(m_Player.getPosition() + glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
+		glm::vec3 displacement = glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f);
+
+		//m_camera.move(displacement);
+		m_Player.setPosition(m_Player.getPosition() + (m_camera.getXAxis() * displacement.x));
 	}
 
-
-
-
+	// Locks Camera to y5.0
 	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
 	
 
@@ -356,7 +362,7 @@ void World::render()
 	
 	//m_collisionWorld->debugDrawWorld();
 
-	//m_Player.render();
+	m_Player.render();
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		// Defines a transformation matrix that does nothing

@@ -20,7 +20,7 @@
     <TexLocation>assets/textures/Grassy.bmp</TexLocation>
     <Translation>0 -5 0</Translation>
     <Rotation>0 0 0</Rotation>
-    <Scale>1 1 1</Scale>
+    <Scale>8 1 8</Scale>
     <Material>1</Material>
     <Collectable>false</Collectable>
   </Object>
