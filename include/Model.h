@@ -55,6 +55,11 @@ private:
 	GLuint m_vbo;
 	GLuint m_vaoHandle;
 
+	glm::vec3 m_BoundingBox;
+
+	glm::vec3 m_BoundBoxMax;
+	glm::vec3 m_BoundBoxMin;
+
 	bool m_b3D = true;
 
 public:

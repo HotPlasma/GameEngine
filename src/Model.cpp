@@ -28,71 +28,9 @@ Model::Model(string sFileLocation, string sTextureLocation, glm::vec3 position, 
 	};
 }
 
-void Model::setCollectable(bool NewSetting)
-{
-	m_bCollectable = NewSetting;
-}
-
-void Model::setCollected(bool bCollected)
-{
-	m_bCollected = bCollected;
-}
-
-void Model::setName(string sNewName)
-{
-	m_sName = sNewName;
-}
-
-void Model::setFileLocation(string sNewLocation)
-{
-	m_sFileName = sNewLocation;
-}
-
-void  Model::setTextureLocation(string sNewLocation)
-{
-	m_sTexture = sNewLocation;
-}
-
-void Model::setVisable(bool Visability)
-{
-	m_bVisible = Visability;
-}
-
-void  Model::setPosition(glm::vec3 newPosition)
-{
-	m_position = newPosition;
-}
-
-void  Model::setRotation(glm::vec3 newRotation)
-{
-	m_rotation = newRotation;
-}
-
-void  Model::setScale(glm::vec3 newScale)
-{
-	m_scale = newScale;
-}
-
-void Model::setTexture(GLuint textureID)
-{
-	m_textureID = textureID;
-}
-
-void Model::setMaterial(int iMaterial)
-{
-	m_iMaterial = iMaterial;
-}
-
 void Model::loadModel()
 {
 	m_pModelReader = new ModelReader(m_sFileName);
-}
-
-void Model::buffer()
-{
-	gl::BindVertexArray(m_vaoHandle);
-	gl::BindTexture(gl::TEXTURE_2D, m_pTexture->object());
-	
 }
 
 CollisionBox Model::getCollisionBox()
