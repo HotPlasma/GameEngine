@@ -22,6 +22,8 @@ public:
 	Intent m_intention = NONE;
 
 	sf::Sound m_music;
+	sf::Sound m_sfx;
+	sf::Sound m_scream;
 
 	// Load in all texture and initilise shaders
 	virtual void initScene(Freetype* pOverlay) = 0;

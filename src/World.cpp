@@ -46,9 +46,14 @@ void World::initScene(Freetype* pOverlay)
 {
 
 	srand(time(NULL));
+	// Loads footstep sound
+	if (!m_aiFootsteps.loadFromFile("assets/sounds/Footsteps.wav")) { /* Nothing if load failed */ }
+	// Loads ambient bg music
+	if (!m_ambientMusic.loadFromFile("assets/sounds/Ambient.wav")) { /* Nothing if load failed */ }
+	// Loads scream sfx
+	if (!m_aiScream.loadFromFile("assets/sounds/Scream.wav")) { /* Nothing if load failed */ }
 	// Get the Heads up display for the scene
 	m_pHUD = pOverlay;
-
 	// Sets cursor style
 	glfwSetInputMode(m_pWindow, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 
@@ -169,6 +174,15 @@ void World::update(const float kfTimeElapsed)
 		m_levelTimer.restart();
 	}
 
+	// If music is not playing
+	if (m_sfx.getStatus() != sf::Sound::Playing)
+	{
+		// Play music
+		m_sfx.setBuffer(m_ambientMusic);
+		m_sfx.setVolume(70.0f);
+		m_sfx.play();
+	}
+
 	//AI SECTION
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
@@ -206,15 +220,34 @@ void World::update(const float kfTimeElapsed)
 				m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
 				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; 
 			}
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5) // if ai is in chase range
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5.8) // if ai is in chase range
 			{
+				// If footsteps SFX is not playing
+				if (m_music.getStatus() != sf::Sound::Playing)
+				{
+					// Play footsteps
+					m_music.setBuffer(m_aiFootsteps);
+					m_music.setVolume(40.0f);
+					m_music.play();
+				}
+				loopSound = true;
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8) 
 			{
-			   //gameover
-				m_intention = TO_MENU;
+				if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
+				{
+					// Play scream
+					m_scream.setBuffer(m_aiScream);
+					m_scream.setVolume(100.0f);
+					m_scream.play();
+					loopSound = false;
+					m_intention = TO_MENU;
+					
+				}
+		
+				
 				m_sTime = "You've been caught, Game over!";
 				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
