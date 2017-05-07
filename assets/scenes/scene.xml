@@ -15,8 +15,8 @@
 
   <Object>
     <Name>GrassyPlane</Name>
-    <OBJLocation>assets/models/Plane.obj</OBJLocation>
-    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <OBJLocation>assets/models/plane.obj</OBJLocation>
+    <TexLocation>assets/textures/plane.bmp</TexLocation>
     <Translation>0 0 0</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -26,8 +26,8 @@
 
   <Object>
     <Name>GrassyPlane</Name>
-    <OBJLocation>assets/models/Plane.obj</OBJLocation>
-    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <OBJLocation>assets/models/plane.obj</OBJLocation>
+    <TexLocation>assets/textures/plane.bmp</TexLocation>
     <Translation>50 0 0</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -37,8 +37,8 @@
 
   <Object>
     <Name>GrassyPlane</Name>
-    <OBJLocation>assets/models/Plane.obj</OBJLocation>
-    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <OBJLocation>assets/models/plane.obj</OBJLocation>
+    <TexLocation>assets/textures/plane.bmp</TexLocation>
     <Translation>50 0 50</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -48,8 +48,8 @@
 
   <Object>
     <Name>GrassyPlane</Name>
-    <OBJLocation>assets/models/Plane.obj</OBJLocation>
-    <TexLocation>assets/textures/Grassy.bmp</TexLocation>
+    <OBJLocation>assets/models/plane.obj</OBJLocation>
+    <TexLocation>assets/textures/plane.bmp</TexLocation>
     <Translation>0 0 50</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -70,8 +70,8 @@
 
   <Object>
     <Name>Rock</Name>
-    <OBJLocation>assets/models/Rock.obj</OBJLocation>
-    <TexLocation>assets/textures/Rock.bmp</TexLocation>
+    <OBJLocation>assets/models/rock.obj</OBJLocation>
+    <TexLocation>assets/textures/rock.bmp</TexLocation>
     <Translation>15 1 25</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -136,8 +136,8 @@
 
   <Object>
     <Name>Battery</Name>
-    <OBJLocation>assets/models/Battery.obj</OBJLocation>
-    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <OBJLocation>assets/models/battery.obj</OBJLocation>
+    <TexLocation>assets/textures/battery.bmp</TexLocation>
     <Translation>-40 0 23</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -147,8 +147,8 @@
 
   <Object>
     <Name>Battery</Name>
-    <OBJLocation>assets/models/Battery.obj</OBJLocation>
-    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <OBJLocation>assets/models/battery.obj</OBJLocation>
+    <TexLocation>assets/textures/battery.bmp</TexLocation>
     <Translation>25 0 8</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
@@ -158,8 +158,8 @@
 
   <Object>
     <Name>Battery</Name>
-    <OBJLocation>assets/models/Battery.obj</OBJLocation>
-    <TexLocation>assets/textures/Battery.bmp</TexLocation>
+    <OBJLocation>assets/models/battery.obj</OBJLocation>
+    <TexLocation>assets/textures/battery.bmp</TexLocation>
     <Translation>0 0 -20</Translation>
     <Rotation>0 0 0</Rotation>
     <Scale>1 1 1</Scale>
