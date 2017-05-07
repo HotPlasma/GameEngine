@@ -179,7 +179,7 @@ void World::update(const float kfTimeElapsed)
 		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
 		rotationAngle = (atan2(distance.x, distance.z)) * 180 / M_PI;
 
-		if (m_sceneReader.m_modelList.at(i).isAi()) // check if object has ai
+		if (m_sceneReader.m_modelList.at(i).isAI()) // check if object has ai
 		{
 			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the wander range
 			{

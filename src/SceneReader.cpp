@@ -180,11 +180,11 @@ void SceneReader::readSceneFile(string sFilename)
 							// If data string contains "true"
 							if (sData == "true")
 							{
-								newModel.setAi(true);
+								newModel.setAI(true);
 							}
 							else
 							{
-								newModel.setAi(false);
+								newModel.setAI(false);
 							}
 						}
 					

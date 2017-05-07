@@ -632,6 +632,8 @@ void Editor::update(const float kfTimeElapsed)
 
 	/////////////////// SELECTION FLASHING ///////////////////
 	m_selection.m_lightIntensity.update(FLASH_SPEED*kfTimeElapsed);
+	m_collFlash.update(FLASH_SPEED*kfTimeElapsed);
+	m_aiFlash.update(FLASH_SPEED*kfTimeElapsed);
 
 	/////////////////// USER CONTROLS ///////////////////
 	// If Model selection menu is not open
@@ -746,7 +748,7 @@ void Editor::update(const float kfTimeElapsed)
 	// Sets Model collectable to selection value
 	m_selection.m_pModel->setCollectable(m_selection.m_bCollectable);
 	// Sets Model ai to selection value
-	//m_selection.m_pModel->setAI(m_selection.m_bAI); // TEMPORARY UNTIL AI BRANCH MERGED IN
+	m_selection.m_pModel->setAI(m_selection.m_bAI);
 	// Sets Model material to selection value
 	m_selection.m_pModel->setMaterial(m_selection.m_uiMaterial);
 
@@ -800,6 +802,19 @@ void Editor::render()
 	// Render all Models in the Scene
 	for (std::shared_ptr<Model> pModel : m_pModels)
 	{
+		// If collectable
+		if (pModel->isCollectable())
+		{
+			// Flashes blue
+			m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f, 0.6f + m_collFlash.value()));
+		}
+		// If AI
+		if (pModel->isAI())
+		{
+			// Flashes blue
+			m_phongShader.setUniform("Light.Intensity", glm::vec3(0.6f, 0.6f + m_collFlash.value(), 0.6f));
+		}
+
 		// Renders Model
 		pModel->render(&m_phongShader, glm::mat4(1.0f));
 	}
@@ -987,7 +1002,7 @@ void Editor::save(const std::string ksFilePath)
 		// Defines new element for <AI>
 		tinyxml2::XMLElement* pAI = document.NewElement("AI");
 		// Sets <AI> value to selection AI setting
-		pAI->SetText(false); // TEMPORARY UNTIL AI BRANCH MERGED IN
+		pAI->SetText(pModel->isAI());
 		// Inserts element into <Object>
 		pObject->InsertEndChild(pAI);
 	}

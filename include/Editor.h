@@ -98,6 +98,9 @@ private:
 
 	bool m_bMenuOpen = false; //!< Whether Model menu is active
 	ModelMenu m_menu; //!< Model selection menu
+	
+	Bouncer m_collFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
+	Bouncer m_aiFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
 
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
