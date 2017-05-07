@@ -1,0 +1,3137 @@
+<Scene>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>6.833228 0.000000 -0.805342</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>2.584091 0.000000 -3.021695</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-1.251365 0.000000 -5.285752</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-3.687857 0.000000 -4.580040</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.369876 0.000000 -1.039432</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.126957 0.000000 1.021703</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-1.435806 0.000000 2.049540</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>2.083688 0.000000 1.634744</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>5.396474 0.000000 1.244310</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>5.018935 0.000000 10.483875</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>1.497972 0.000000 10.898843</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-1.193172 0.000000 11.216013</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.506242 0.000000 11.606480</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-8.853695 0.000000 8.567757</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.018292 0.000000 5.297369</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.639408 0.000000 1.816941</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.979362 0.000000 -1.067526</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-11.628068 0.000000 -7.821947</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-8.155640 0.000000 -12.200755</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.426785 0.000000 -13.984373</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-1.906249 0.000000 -14.399291</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>1.406206 0.000000 -14.789685</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>4.769528 0.000000 -14.766804</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>8.007079 0.000000 -12.224413</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>11.477648 0.000000 -9.499035</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>14.485778 0.000000 -7.136803</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>15.446617 0.000000 -4.325082</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>15.713855 0.000000 -2.057607</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>16.029545 0.000000 0.620992</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>14.505651 0.000000 3.726225</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>12.129876 0.000000 6.722128</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>9.703743 0.000000 9.307033</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>7.013167 0.000000 9.624136</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>4.735156 0.000000 9.892614</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>2.043917 0.000000 10.209794</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-1.477093 0.000000 10.624769</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.168521 0.000000 10.941971</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-6.909033 0.000000 10.847599</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-10.147907 0.000000 8.304169</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.486834 0.000000 6.280379</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.753980 0.000000 4.013658</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.045401 0.000000 1.540975</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.385439 0.000000 -1.344199</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-7.840293 0.000000 -9.521019</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-2.397006 0.000000 -11.414818</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>3.194785 0.000000 -12.073846</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>5.678984 0.000000 -12.366626</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>7.750618 0.000000 -12.610781</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>10.502282 0.000000 -10.638215</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>13.278399 0.000000 -8.458179</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>18.696522 0.000000 -3.455735</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>12.455625 0.000000 11.279766</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>8.594170 0.000000 12.361812</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>6.109213 0.000000 12.654680</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>3.003325 0.000000 13.020732</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>0.311234 0.000000 13.338013</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.228570 0.000000 24.287186</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.184864 0.000000 24.700649</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.468964 0.000000 22.013025</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.752864 0.000000 19.327291</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-4.993207 0.000000 17.053606</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.277277 0.000000 14.366265</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.583069 0.000000 11.473422</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.910785 0.000000 8.373183</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-6.325862 0.000000 4.446486</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-6.675351 0.000000 1.140270</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-7.046682 0.000000 -2.372582</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-7.461760 0.000000 -6.299279</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-7.833211 0.000000 -9.813270</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-8.204722 0.832680 -13.327825</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-8.554110 4.156364 -16.633095</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-8.794402 6.442241 -18.906305</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-9.056619 8.936668 -21.386909</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-9.340598 11.638124 -24.073400</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-10.105203 18.911718 -31.306688</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-10.585828 23.483850 -35.853485</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-11.110159 28.471752 -40.813759</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.049666 37.409172 -49.701672</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.311762 39.902451 -52.181137</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.551914 42.186996 -54.453022</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.076285 47.175282 -59.413670</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.403951 50.292313 -62.513432</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.709853 53.202312 -65.407326</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-13.972069 55.696728 -67.887924</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-14.256088 58.398552 -70.574791</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-14.474398 60.475307 -72.640045</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-14.714870 62.762890 -74.914963</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-14.998649 65.462433 -77.599556</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-15.239081 67.749626 -79.874107</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-15.741430 72.528412 -84.626411</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-16.396843 78.763245 -90.826706</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-16.702726 81.673042 -93.720413</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-16.877590 83.336487 -95.374649</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-17.139669 85.829575 -97.853928</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-17.401945 88.324570 -100.335114</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-17.685806 91.024879 -103.020477</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-17.882576 92.896690 -104.881927</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-18.079126 94.766411 -106.741302</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-18.384892 97.675079 -109.633850</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-18.712679 100.793251 -112.734756</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-18.996580 103.493935 -115.420494</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-19.258778 105.988159 -117.900925</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-19.520916 108.481819 -120.380783</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-19.783014 110.975082 -122.860268</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-20.067034 113.676941 -125.547127</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-20.307346 115.963005 -127.820526</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-21.356030 125.939018 -137.741272</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-22.513838 136.953064 -148.694199</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-22.797918 139.655472 -151.381622</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-24.479954 155.656448 -167.293854</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-24.982485 160.436935 -172.047852</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-25.244862 162.932877 -174.529953</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-25.834448 168.541473 -180.107452</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-26.096663 171.035919 -182.588043</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-26.424351 174.153183 -185.688004</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-27.123493 180.803986 -192.301941</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-27.516632 184.543823 -196.021057</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-27.866339 187.870575 -199.329315</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-28.128336 190.362915 -201.807816</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-28.434118 193.271774 -204.700562</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-28.630785 195.142654 -206.561066</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-28.892982 197.636932 -209.041473</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-29.111433 199.714996 -211.108047</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-29.351707 202.000687 -213.381058</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-29.613869 204.494507 -215.861099</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-29.941555 207.611740 -218.961060</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-30.138161 209.482056 -220.820984</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-30.444044 212.391876 -223.714645</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-30.684420 214.678513 -225.988617</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-31.033909 218.003174 -229.294800</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 193.272415 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 188.285278 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 186.414993 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 184.129120 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 181.426361 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 179.141800 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 176.647171 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 173.946075 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 170.828476 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 168.750198 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 166.255585 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 163.762497 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 161.892395 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 158.982391 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 156.696716 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 154.410446 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 151.708801 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 149.422562 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 146.929077 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 142.356766 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 135.707306 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 126.147278 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 122.198738 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 119.705276 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 117.003250 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 114.509789 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 112.015175 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 109.522263 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 107.027458 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 104.324280 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 101.623405 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 98.714348 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 96.013664 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 93.103851 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 90.402405 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 87.285553 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 84.790382 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 82.089508 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 79.387497 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 76.893082 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 74.399048 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 71.698929 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 68.580574 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 65.463547 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 62.761902 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 59.229492 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 56.319302 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 53.616135 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 51.331970 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 48.423100 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 46.136269 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 43.227028 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 40.733368 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 38.447300 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 35.745846 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 33.043633 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 30.549582 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 27.639954 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 25.147427 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 21.822601 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 19.119627 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 16.418167 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 13.715759 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 11.015255 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 8.105818 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 5.195622 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 2.077636 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -0.830469 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -3.740095 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -6.442883 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -10.182337 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -12.261186 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -14.963023 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -18.079678 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -20.990824 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -23.898741 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -25.977207 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -28.886642 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -31.172709 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -33.874546 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -36.160419 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -38.031849 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -41.563133 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -44.264969 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -46.759007 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -49.669575 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -52.162285 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -55.695087 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -58.605854 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -61.513958 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -65.254745 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -67.748787 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -73.152084 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -75.857346 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -79.178543 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -81.672966 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -84.374802 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -86.660484 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -89.157951 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -91.855789 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -94.764847 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -97.466682 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -100.168320 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -102.456299 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -105.156036 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -107.650642 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -110.976028 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -113.468353 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -116.378159 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -118.872955 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -121.781639 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -124.485367 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -127.186058 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -129.678391 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -132.172989 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -134.665909 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -137.160873 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -139.861938 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -142.564713 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -145.265793 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -148.175018 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -151.500778 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -154.409058 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -157.110901 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -159.605530 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -162.306992 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -164.799911 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -168.125290 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -171.035263 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -174.567841 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -177.062088 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -179.970978 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -183.297668 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -185.997803 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -191.401260 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -194.103470 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -196.596939 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -199.091187 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -201.382385 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -204.077606 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -206.572388 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -208.858063 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -212.183289 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -214.261368 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -216.962814 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -219.664505 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -222.158386 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -225.067841 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -227.978210 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -231.094467 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -233.795883 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -237.329269 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -240.031097 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -243.771301 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-12.562883 -246.681122 -181.512375</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+</Scene>

@@ -614,6 +614,18 @@ void Editor::input_scroll(const double kdDelta)
 // Void: Updates the Editor with elapsed time
 void Editor::update(const float kfTimeElapsed)
 {
+	/////////////////// AUTOSAVING ///////////////////
+	// Decrements autosave timeout by time
+	m_fAutosaveTimer += kfTimeElapsed;
+	if (m_fAutosaveTimer >= 180.0f)
+	{
+		// Resets autosave timer
+		m_fAutosaveTimer = 0.0f;
+
+		// Saves Scene to XML
+		save("assets/scenes/autosave.xml");
+	}
+
 	/////////////////// USER DISPLAY PROCESSING ///////////////////
 	// Calculates the mouse movement
 	sf::Vector2f delta(m_mousePos - m_lastMousePos);

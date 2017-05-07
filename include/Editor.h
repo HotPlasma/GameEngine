@@ -83,7 +83,8 @@ class Editor : public Scene
 private:
 	
 	std::string m_sFilePath = "assets/scenes/editorScene.xml"; //!< Scene file path TEMPORARY default
-
+	float m_fAutosaveTimer = 0.0f;
+	
 	std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
 	Selection m_selection; //!< User's 'hand'
