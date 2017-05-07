@@ -244,8 +244,29 @@ void World::update(const float kfTimeElapsed)
 				loopSound = true;
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
+
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5.8)
+			{
+				if (m_scream.getStatus() != sf::Sound::Playing && loopSound == true)
+				{
+					// Play scream
+					m_scream.setBuffer(m_aiScream);
+					m_scream.setVolume(100.0f);
+					m_scream.play();
+					loopSound = false;
+					m_intention = TO_MENU;
+
+				}
+
+
+				m_sTime = "You've been caught, Game over!";
+				m_aiSpeed = glm::vec3(0, 0, 0);
+			}
+			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
+			m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() + m_aiSpeed);
 		}
 	}
+
 
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	m_collHeight.update(COLLECTABLE_SPEED*kfTimeElapsed);
