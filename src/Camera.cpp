@@ -80,23 +80,25 @@ void Camera::updateView()
 glm::vec3 Camera::getDirection()
 {
 	//Extract camera orientation and convert to Euler angles
-	/*glm::vec3 eulerFromQuat;
-	eulerFromQuat = glm::eulerAngles(m_orientation);
+	//glm::vec3 eulerFromQuat;
+	//eulerFromQuat = glm::eulerAngles(m_orientation);
 
 
 
-	glm::vec3 cameraLookAt = glm::vec3(glm::acos(glm::radians(eulerFromQuat.x)), glm::asin(glm::radians(eulerFromQuat.y)), glm::acos(glm::radians(eulerFromQuat.z)));
+	//glm::vec3 cameraLookAt = glm::vec3(glm::acos(glm::radians(eulerFromQuat.x)), glm::asin(glm::radians(eulerFromQuat.y)), glm::acos(glm::radians(eulerFromQuat.z)));
 
 
+	glm::vec3 cameraLookAt(0,0,0);
 
+	cameraLookAt = m_orientation * cameraLookAt;
 
-	return cameraLookAt;*/
+	return cameraLookAt;
 
-	glm::vec4 test(1.0f, 1.0f, 1.0f, 1.0f);
+	//glm::vec4 test(1.0f, 1.0f, 1.0f, 1.0f);
 
-	test = glm::vec4(test * m_view);
+	//test = glm::vec4(test * m_view);
 
-	glm::vec3 test2(test.x, test.y, test.z);
+	//glm::vec3 test2(test.x, test.y, test.z);
 
-	return test2;
+	//return test2;
 }

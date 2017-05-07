@@ -50,6 +50,7 @@ struct EditorHUD
 	std::shared_ptr<ToggleButton> m_pScaleMode; //!< Scale mode button
 
 	std::shared_ptr<Button> m_pSave; //!< Button to save Scene to file
+	std::shared_ptr<Button> m_pLoad; //!< Button to load Scene from file
 };
 
 struct ModelMenu
@@ -77,12 +78,27 @@ struct ModelMenu
 	}
 };
 
+struct FileMenu
+{
+	unsigned int m_uiBGIndex; //!< Background imageplane index
+
+	std::shared_ptr<TextBox> m_pFileField; //!< Text box for file path
+
+	std::shared_ptr<Button> m_pEnter; //!< Enter filepath button
+	std::shared_ptr<Button> m_pCancel; //!< Cancel button
+
+	void reset() //!< Resets field data and active field
+	{
+		// Clears menu fields
+		m_pFileField->setStr("");
+	}
+};
+
 //!< Scene subclass for creating levels
 class Editor : public Scene
 {
 private:
 	
-	std::string m_sFilePath = "assets/scenes/editorScene.xml"; //!< Scene file path TEMPORARY default
 	float m_fAutosaveTimer = 0.0f;
 	
 	std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
@@ -96,12 +112,21 @@ private:
 
 	EditorHUD m_buttons; //!< Editor option buttons
 
-	bool m_bMenuOpen = false; //!< Whether Model menu is active
+	enum EditorState { EDITOR, MENU_SELECT, MENU_SAVE, MENU_LOAD }; //!< Enum for which state the Editor is in
+	EditorState m_state = EDITOR; //!< Editor's current state
+
 	ModelMenu m_menu; //!< Model selection menu
+	FileMenu m_save; //!< File save menu
+	FileMenu m_load; //!< File load menu
 	
+	void menu_select(); //!< ModelSelection button action
+	void menu_save(); //!< SaveScene button action
+	void menu_load(); //!< LoadScene button action
+
 	Bouncer m_collFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
 	Bouncer m_aiFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
 
+	std::shared_ptr<Model> m_pSpawn; //!< Spawn indicator Model
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
 
 	void save(const std::string ksFilePath); //!< Saves the Scene to XML file

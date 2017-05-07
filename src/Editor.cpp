@@ -27,8 +27,7 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 	// Sets Camera initital position 
 	m_camera.setPosition(glm::vec3(0.0f, 15.0f, 40.0f));
 
-	// TEMPORARY - Need to read in a list of models to use
-	// Creates a tree Model
+	// Creates a default selected Model
 	std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
 	pModel->setName("Tree");
 	pModel->setFileLocation("assets/models/deadtree.obj");
@@ -42,6 +41,21 @@ Editor::Editor(GLFWwindow *pWindow, const sf::Vector2i kWindowSize)
 
 	// Sets the first Model in the selection to selected
 	m_selection.m_pModel = pModel;
+
+	// Creates a spawn indicator
+	m_pSpawn = std::shared_ptr<Model>(new Model());
+	m_pSpawn->setName("Spawn");
+	m_pSpawn->setFileLocation("assets/models/pole.obj");
+	m_pSpawn->setTextureLocation("assets/textures/pole.bmp");
+	m_pSpawn->setPosition(glm::vec3(0.0f, 0.0f, 0.0f));
+	m_pSpawn->setRotation(glm::vec3(0.0f, 0.0f, 0.0f));
+	m_pSpawn->setScale(glm::vec3(3.0f, 3.0f, 3.0f));
+	pModel->setMaterial(1);
+
+	// Loads Model so it's ready for drawing
+	m_pSpawn->loadModel();
+	// Initialises Model
+	m_pSpawn->initModel();
 
 	// Creates a skybox
 	m_pSkybox = std::shared_ptr<Model>(new Model());
@@ -126,7 +140,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.466f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.486f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/CollectableTrue.png",
 					"assets/UI/Editor/CollectableTrueHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -137,7 +151,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.466f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.486f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/CollectableFalse.png",
 					"assets/UI/Editor/CollectableFalseHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -157,7 +171,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.406f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.426f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/AITrue.png",
 					"assets/UI/Editor/AITrueHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -168,7 +182,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(	
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.406f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.426f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/AIFalse.png",
 					"assets/UI/Editor/AIFalseHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -188,7 +202,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.266f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.306f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/TranslateTrue.png",
 					"assets/UI/Editor/TranslateTrueHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -199,7 +213,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.266f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.306f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/TranslateFalse.png",
 					"assets/UI/Editor/TranslateFalseHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -219,7 +233,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.206f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.246f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/RotateTrue.png",
 					"assets/UI/Editor/RotateTrueHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -230,7 +244,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(	
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.206f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.246f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/RotateFalse.png",
 					"assets/UI/Editor/RotateFalseHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -250,7 +264,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.146f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.186f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/ScaleTrue.png",
 					"assets/UI/Editor/ScaleTrueHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -261,7 +275,7 @@ void Editor::initScene(Freetype* pOverlay)
 			(
 				new Button
 				(
-					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.146f + buttonSize_Small.y*0.5f),
+					glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.186f + buttonSize_Small.y*0.5f),
 					"assets/UI/Editor/ScaleFalse.png",
 					"assets/UI/Editor/ScaleFalseHover.png",
 					glm::vec3(buttonSize_Small, 1.0f),
@@ -271,14 +285,27 @@ void Editor::initScene(Freetype* pOverlay)
 		)
 	);
 	
+	// Defines Load button
+	m_buttons.m_pLoad = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.066f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/LoadScene.png",
+			"assets/UI/Editor/LoadSceneHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+
 	// Defines Save button
 	m_buttons.m_pSave = std::shared_ptr<Button>
 	(
 		new Button
 		(
 			glm::vec2(buttonPosX + buttonSize_Small.x*0.5f, m_windowSize.y*0.006f + buttonSize_Small.y*0.5f), 
-			"assets/UI/Editor/Save.png", 
-			"assets/UI/Editor/SaveHover.png", 
+			"assets/UI/Editor/SaveScene.png", 
+			"assets/UI/Editor/SaveSceneHover.png", 
 			glm::vec3(buttonSize_Small, 1.0f), 
 			pOverlay
 		)
@@ -316,6 +343,64 @@ void Editor::initScene(Freetype* pOverlay)
 		)
 	);
 
+	// Editor Save Menu Setup
+	m_save.m_pFileField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.55f)));
+
+	m_save.m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
+	m_pHUD->addImage("assets/UI/Editor/SaveMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
+
+	m_save.m_pEnter = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(m_windowSize.x*0.6f, m_windowSize.y*0.3f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/SaveXML.png",
+			"assets/UI/Editor/SaveXMLHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+	m_save.m_pCancel = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(m_windowSize.x*0.4f, m_windowSize.y*0.3f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/Cancel.png",
+			"assets/UI/Editor/CancelHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+
+	// Editor Load Menu Setup
+	m_load.m_pFileField = std::shared_ptr<TextBox>(new TextBox(glm::vec2(m_windowSize.x*0.3f, m_windowSize.y*0.55f)));
+
+	m_load.m_uiBGIndex = (unsigned int)m_pHUD->m_imagePlane.size();
+	m_pHUD->addImage("assets/UI/Editor/LoadMenuBG.png", vec3(m_windowSize.x*0.5f, m_windowSize.y*0.5f, 1.0f), 0, glm::vec3(m_windowSize.x*0.5, m_windowSize.y*0.5, 1.0f), false);
+
+	m_load.m_pEnter = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(m_windowSize.x*0.6f, m_windowSize.y*0.3f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/LoadXML.png",
+			"assets/UI/Editor/LoadXMLHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+	m_load.m_pCancel = std::shared_ptr<Button>
+	(
+		new Button
+		(
+			glm::vec2(m_windowSize.x*0.4f, m_windowSize.y*0.3f + buttonSize_Small.y*0.5f),
+			"assets/UI/Editor/Cancel.png",
+			"assets/UI/Editor/CancelHover.png",
+			glm::vec3(buttonSize_Small, 1.0f),
+			pOverlay
+		)
+	);
+
 	// Updates camera vision
 	m_camera.updateView();
 
@@ -329,33 +414,38 @@ void Editor::input_key(const int kiKey, const int kiAction)
 	if (kiAction == GLFW_PRESS)
 	{
 		// If Esc key pressed
-		if (kiKey == GLFW_KEY_ESCAPE) m_intention = TO_MENU; // Switch to Menu Scene
-
-		if (m_bMenuOpen)
+		if (kiKey == GLFW_KEY_ESCAPE)
 		{
-			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
+			// If in Editor state
+			if (m_state == EDITOR) m_intention = TO_MENU; // Switch to Menu Scene
+
+			// If in Model selection menu
+			else if (m_state == MENU_SELECT)
 			{
-				// Removes last letter in active textbox
-				m_menu.m_pActiveField->removeLetter();
+				// Closes menu
+				m_state = EDITOR;
+				m_menu.reset();
 			}
-
-			// TEMPORARY Field Selection
-			if (kiKey == GLFW_KEY_TAB)
+			// If in save menu
+			else if (m_state == MENU_SAVE)
 			{
-				// If name field active - Wwitch to obj field
-				if (m_menu.m_pActiveField == m_menu.m_pNameField) m_menu.m_pActiveField = m_menu.m_pObjField;
-
-				// If obj field active - Wwitch to tex field
-				else if (m_menu.m_pActiveField == m_menu.m_pObjField) m_menu.m_pActiveField = m_menu.m_pTexField;
-
-				// If tex field active - Wwitch to name field
-				else if (m_menu.m_pActiveField == m_menu.m_pTexField) m_menu.m_pActiveField = m_menu.m_pNameField;
+				// Closes menu
+				m_state = EDITOR;
+				m_save.reset();
+			}
+			// If in load menu
+			else if (m_state == MENU_LOAD)
+			{
+				// Closes menu
+				m_state = EDITOR;
+				m_load.reset();
 			}
 		}
-		else
+
+		if (kiKey == GLFW_KEY_ENTER)
 		{
-			// If Enter is pressed
-			if (kiKey == GLFW_KEY_ENTER)
+			// If in Editor state
+			if (m_state == EDITOR)
 			{
 				// Model is added to a vector of placed Models
 				m_pModels.push_back(std::shared_ptr<Model>(new Model(*m_selection.m_pModel.get())));
@@ -363,6 +453,26 @@ void Editor::input_key(const int kiKey, const int kiAction)
 				m_selection.m_pRedoList.clear();
 			}
 
+			// If in Model selection menu
+			else if (m_state == MENU_SELECT)
+			{
+				menu_select();
+			}
+			// If in save menu
+			else if (m_state == MENU_SAVE)
+			{
+				menu_save();
+			}
+			// If in load menu
+			else if (m_state == MENU_LOAD)
+			{
+				menu_load();
+			}
+		}
+
+		// If in Editor state
+		if (m_state == EDITOR)
+		{
 			// If R key is pressed
 			if (kiKey == GLFW_KEY_R)
 			{
@@ -387,12 +497,47 @@ void Editor::input_key(const int kiKey, const int kiAction)
 					m_selection.m_scale = glm::vec3(1.0f, 1.0f, 1.0f);
 				}
 			}
+		}
 
-			// TEMPORARY LOAD FILE
-			// If L is pressed
-			if (kiKey == GLFW_KEY_L)
+		// If in selection menu state
+		else if (m_state == MENU_SELECT)
+		{
+			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
 			{
-				load(m_sFilePath);
+				// Removes last letter in active textbox
+				m_menu.m_pActiveField->removeLetter();
+			}
+
+			// TEMPORARY Field Selection
+			if (kiKey == GLFW_KEY_TAB)
+			{
+				// If name field active - Wwitch to obj field
+				if (m_menu.m_pActiveField == m_menu.m_pNameField) m_menu.m_pActiveField = m_menu.m_pObjField;
+
+				// If obj field active - Wwitch to tex field
+				else if (m_menu.m_pActiveField == m_menu.m_pObjField) m_menu.m_pActiveField = m_menu.m_pTexField;
+
+				// If tex field active - Wwitch to name field
+				else if (m_menu.m_pActiveField == m_menu.m_pTexField) m_menu.m_pActiveField = m_menu.m_pNameField;
+			}
+		}
+
+		// If in save menu state
+		else if (m_state == MENU_SAVE)
+		{
+			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
+			{
+				// Removes last letter in file textbox
+				m_save.m_pFileField->removeLetter();
+			}
+		}
+		// If in load menu state
+		else if (m_state == MENU_LOAD)
+		{
+			if (kiKey == GLFW_KEY_BACKSPACE) // Backspace
+			{
+				// Removes last letter in file textbox
+				m_load.m_pFileField->removeLetter();
 			}
 		}
 	}
@@ -401,8 +546,8 @@ void Editor::input_key(const int kiKey, const int kiAction)
 // Void: Called on char input event
 void Editor::input_char(const unsigned int kuiUnicode)
 {
-	// If Model selection menu is open
-	if (m_bMenuOpen)
+	// If a menu is open
+	if ((m_state == MENU_SELECT) || (m_state == MENU_SAVE) || (m_state == MENU_LOAD))
 	{
 		if 
 		(
@@ -436,8 +581,21 @@ void Editor::input_char(const unsigned int kuiUnicode)
 			(kuiUnicode == 126) // ~
 		)
 		{
-			// Adds input to active textbox
-			m_menu.m_pActiveField->addLetter(kuiUnicode);
+			if (m_state == MENU_SELECT)
+			{
+				// Adds input to active textbox
+				m_menu.m_pActiveField->addLetter(kuiUnicode);
+			}
+			else if (m_state == MENU_SAVE)
+			{
+				// Adds input to active textbox
+				m_save.m_pFileField->addLetter(kuiUnicode);
+			}
+			else if (m_state == MENU_LOAD)
+			{
+				// Adds input to active textbox
+				m_load.m_pFileField->addLetter(kuiUnicode);
+			}
 		}
 	}
 }
@@ -451,64 +609,26 @@ void Editor::input_button(const int kiButton, const int kiAction)
 		// If left mouse button is clicked
 		if (kiButton == GLFW_MOUSE_BUTTON_LEFT)
 		{
-			// If Model selection menu is open
-			if (m_bMenuOpen)
-			{
-				// If menu load button is clicked
-				if (m_menu.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y))
-				{
-					// If obj file doesn't exist
-					if (!fileExists("assets/models/" + m_menu.m_pObjField->getStr() + ".obj"))
-					{
-						std::cerr << "[EDITOR] ERROR - OBJ FILE DOESN'T EXIST: " << ("assets/models/" + m_menu.m_pObjField->getStr() + ".obj") << std::endl;
-					}
-					// Else - obj exists
-					else
-					{
-						// If texture file doesn't exist
-						if (!fileExists("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp"))
-						{
-							std::cerr << "[EDITOR] ERROR - BMP FILE DOESN'T EXIST: " << ("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp") << std::endl;
-						}
-						// Else - texture exists
-						else
-						{
-							// Creates Model
-							std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
-							pModel->setName(m_menu.m_pNameField->getStr());
-							pModel->setFileLocation("assets/models/" + m_menu.m_pObjField->getStr() + ".obj");
-							pModel->setTextureLocation("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp");
-							pModel->setMaterial(1);
-
-							// Loads Model so it's ready for drawing
-							pModel->loadModel();
-							// Initialises Model
-							pModel->initModel();
-
-							// Sets Model in hand to this new Model
-							m_selection.m_pModel = pModel;
-
-							// Closes menu
-							m_bMenuOpen = false;
-							m_menu.reset();
-						}
-					}
-				}
-				// If menu cancel button is clicked
-				if (m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
-				{
-					// Closes menu
-					m_bMenuOpen = false;
-					m_menu.reset();
-				}
-			}
-			else
+			// If Editor in editing state
+			if (m_state == EDITOR)
 			{
 				// If Model button is clicked
 				if (m_buttons.m_pModel->mouseOver(m_mousePos, (float)m_windowSize.y))
 				{
 					// Enter Model selection menu
-					m_bMenuOpen = true;
+					m_state = MENU_SELECT;
+				}
+				// If save button is clicked
+				if (m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// Enter Model selection menu
+					m_state = MENU_SAVE;
+				}
+				// If load button is clicked
+				if (m_buttons.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// Enter Model selection menu
+					m_state = MENU_LOAD;
 				}
 
 				// If undo button is clicked
@@ -588,12 +708,58 @@ void Editor::input_button(const int kiButton, const int kiAction)
 					m_buttons.m_pRotateMode->setToggled(false);
 					m_buttons.m_pScaleMode->setToggled(true);
 				}
+			}
 
-				// If Save button is clicked
-				if (m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y))
+			// If Model selection menu is open
+			else if (m_state == MENU_SELECT)
+			{
+				// If menu load button is clicked
+				if (m_menu.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y))
 				{
-					// Saves Scene to file
-					save(m_sFilePath);
+					menu_select();
+				}
+				// If menu cancel button is clicked
+				if (m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// Closes menu
+					m_state = EDITOR;
+					m_menu.reset();
+				}
+			}
+			
+			// If Model save menu is open
+			else if (m_state == MENU_SAVE)
+			{
+				// If save button is clicked
+				if (m_save.m_pEnter->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					menu_save();
+				}
+
+				// If menu cancel button is clicked
+				if (m_save.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// Closes menu
+					m_state = EDITOR;
+					m_save.reset();
+				}
+			}
+			
+			// If Model load menu is open
+			else if (m_state == MENU_LOAD)
+			{
+				// If load button is clicked
+				if (m_load.m_pEnter->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					menu_load();
+				}
+
+				// If menu cancel button is clicked
+				if (m_load.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y))
+				{
+					// Closes menu
+					m_state = EDITOR;
+					m_load.reset();
 				}
 			}
 		}
@@ -603,8 +769,8 @@ void Editor::input_button(const int kiButton, const int kiAction)
 // Void: Called on mouseScroll input event
 void Editor::input_scroll(const double kdDelta)
 {
-	// If Model selection menu is not open
-	if (!m_bMenuOpen)
+	// If in Editor state
+	if (m_state == EDITOR)
 	{
 		// Move in the Z axis 
 		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_ZOOM*kdDelta));
@@ -636,8 +802,8 @@ void Editor::update(const float kfTimeElapsed)
 	m_aiFlash.update(FLASH_SPEED*kfTimeElapsed);
 
 	/////////////////// USER CONTROLS ///////////////////
-	// If Model selection menu is not open
-	if (!m_bMenuOpen)
+	// If editing state
+	if (m_state == EDITOR)
 	{
 		// If LMButton is down
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
@@ -755,14 +921,8 @@ void Editor::update(const float kfTimeElapsed)
 	// Sets last cursor position
 	m_lastMousePos = m_mousePos;
 
-	// If Model selection menu is open
-	if (m_bMenuOpen)
-	{
-		// Checks whether buttons are hovered
-		m_menu.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y);
-		m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y);
-	}
-	else
+	// If in Editor state
+	if (m_state == EDITOR)
 	{
 		// Checks whether HUD buttons are hovered
 		m_buttons.m_pModel->mouseOver(m_mousePos, (float)m_windowSize.y);
@@ -773,7 +933,29 @@ void Editor::update(const float kfTimeElapsed)
 		m_buttons.m_pTranslateMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pRotateMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pScaleMode->getButton()->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_buttons.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y);
 		m_buttons.m_pSave->mouseOver(m_mousePos, (float)m_windowSize.y);
+	}
+	// If Model selection menu is open
+	else if (m_state == MENU_SELECT)
+	{
+		// Checks whether buttons are hovered
+		m_menu.m_pLoad->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_menu.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y);
+	}
+	// If save menu is open
+	else if (m_state == MENU_SAVE)
+	{
+		// Checks whether buttons are hovered
+		m_save.m_pEnter->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_save.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y);
+	}
+	// If load menu is open
+	else if (m_state == MENU_LOAD)
+	{
+		// Checks whether buttons are hovered
+		m_load.m_pEnter->mouseOver(m_mousePos, (float)m_windowSize.y);
+		m_load.m_pCancel->mouseOver(m_mousePos, (float)m_windowSize.y);
 	}
 }
 
@@ -843,6 +1025,9 @@ void Editor::render()
 	// Renders Skybox
 	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
 
+	// Renders Spawn indicator
+	m_pSpawn->render(&m_textureShader, glm::mat4(1.0f));
+
 	// Draws HUD buttons
 	m_buttons.m_pModel->render(&m_imageType, m_windowSize);
 	m_buttons.m_pUndo->render(&m_imageType, m_windowSize);
@@ -852,10 +1037,11 @@ void Editor::render()
 	m_buttons.m_pTranslateMode->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pRotateMode->getButton()->render(&m_imageType, m_windowSize);
 	m_buttons.m_pScaleMode->getButton()->render(&m_imageType, m_windowSize);
+	m_buttons.m_pLoad->render(&m_imageType, m_windowSize);
 	m_buttons.m_pSave->render(&m_imageType, m_windowSize);
 	
 	// If Model selection menu is open
-	if (m_bMenuOpen)
+	if (m_state == MENU_SELECT)
 	{
 		// Draws menu buttons
 		m_menu.m_pLoad->render(&m_imageType, m_windowSize);
@@ -897,7 +1083,51 @@ void Editor::render()
 		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
 		//m_pHUD->renderImage(&m_imageType, m_menu.m_uiBGIndex);
 	}
-  
+
+	// If save menu is open
+	else if (m_state == MENU_SAVE)
+	{
+		// Draws menu buttons
+		m_save.m_pEnter->render(&m_imageType, m_windowSize);
+		m_save.m_pCancel->render(&m_imageType, m_windowSize);
+
+		// Renders text box
+		// Obj field
+		std::shared_ptr<TextBox> pFileField = std::shared_ptr<TextBox>(new TextBox(*m_save.m_pFileField.get()));
+		std::string sFileStr; sFileStr += "XML File: assets/scenes/"; sFileStr += m_save.m_pFileField->getStr(); sFileStr += ".xml";
+		pFileField->setStr(sFileStr);
+		pFileField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y), glm::vec3(1.0f, 0.0f, 0.0f));
+
+		// Activates ImageType shader
+		//m_imageType.use();
+		//// Draws background
+		//m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_save.m_uiBGIndex).getM());
+		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
+		//m_pHUD->renderImage(&m_imageType, m_save.m_uiBGIndex);
+	}
+
+	// If save menu is open
+	else if (m_state == MENU_LOAD)
+	{
+		// Draws menu buttons
+		m_load.m_pEnter->render(&m_imageType, m_windowSize);
+		m_load.m_pCancel->render(&m_imageType, m_windowSize);
+
+		// Renders text box
+		// Obj field
+		std::shared_ptr<TextBox> pFileField = std::shared_ptr<TextBox>(new TextBox(*m_load.m_pFileField.get()));
+		std::string sFileStr; sFileStr += "XML File: assets/scenes/"; sFileStr += m_load.m_pFileField->getStr(); sFileStr += ".xml";
+		pFileField->setStr(sFileStr);
+		pFileField->render(&m_freeType, m_pHUD, glm::vec2(m_windowSize.x, m_windowSize.y), glm::vec3(1.0f, 0.0f, 0.0f));
+
+		// Activates ImageType shader
+		//m_imageType.use();
+		//// Draws background
+		//m_imageType.setUniform("M", m_pHUD->m_imagePlane.at(m_load.m_uiBGIndex).getM());
+		//m_imageType.setUniform("P", glm::ortho(0.0f, (float)m_windowSize.x, 0.f, (float)m_windowSize.y));
+		//m_pHUD->renderImage(&m_imageType, m_load.m_uiBGIndex);
+	}
+
 	// Activates FreeType shader
 	m_freeType.use();
 	// Configures projection
@@ -1014,6 +1244,9 @@ void Editor::save(const std::string ksFilePath)
 	// Saves the document
 	document.SaveFile(ksFilePath.c_str());
 
+	// Resets autosave timer
+	m_fAutosaveTimer = 0.0f;
+
 	std::cerr << "[EDITOR] File saved." << std::endl;
 }
 
@@ -1021,6 +1254,12 @@ void Editor::save(const std::string ksFilePath)
 void Editor::load(const std::string ksFilePath)
 {
 	std::cerr << "[EDITOR] Loading from file..." << std::endl;
+
+	// Clears current Scene
+	while (!m_pModels.empty())
+	{
+		m_pModels.pop_back();
+	}
 
 	// Creates a SceneReader that loads the file into a vector
 	SceneReader reader = SceneReader(ksFilePath);
@@ -1038,5 +1277,80 @@ void Editor::load(const std::string ksFilePath)
 		loadedModels.pop_back();
 	}
 
+	// Resets autosave timer
+	m_fAutosaveTimer = 0.0f;
+
 	std::cerr << "[EDITOR] File loaded." << std::endl;
+}
+
+// Void: ModelSelection button action
+void Editor::menu_select()
+{
+	// If obj file doesn't exist
+	if (!fileExists("assets/models/" + m_menu.m_pObjField->getStr() + ".obj"))
+	{
+		std::cerr << "[EDITOR] ERROR - OBJ FILE DOESN'T EXIST: " << ("assets/models/" + m_menu.m_pObjField->getStr() + ".obj") << std::endl;
+	}
+	// Else - obj exists
+	else
+	{
+		// If texture file doesn't exist
+		if (!fileExists("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp"))
+		{
+			std::cerr << "[EDITOR] ERROR - BMP FILE DOESN'T EXIST: " << ("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp") << std::endl;
+		}
+		// Else - texture exists
+		else
+		{
+			// Creates Model
+			std::shared_ptr<Model> pModel = std::shared_ptr<Model>(new Model());
+			pModel->setName(m_menu.m_pNameField->getStr());
+			pModel->setFileLocation("assets/models/" + m_menu.m_pObjField->getStr() + ".obj");
+			pModel->setTextureLocation("assets/textures/" + m_menu.m_pTexField->getStr() + ".bmp");
+			pModel->setMaterial(1);
+
+			// Loads Model so it's ready for drawing
+			pModel->loadModel();
+			// Initialises Model
+			pModel->initModel();
+
+			// Sets Model in hand to this new Model
+			m_selection.m_pModel = pModel;
+
+			// Closes menu
+			m_state = EDITOR;
+			m_menu.reset();
+		}
+	}
+}
+
+// Void: SaveScene button action
+void Editor::menu_save()
+{
+	// Saves to file
+	save("assets/scenes/" + m_save.m_pFileField->getStr() + ".xml");
+
+	// Closes menu
+	m_state = EDITOR;
+	m_save.reset();
+}
+
+// Void: LoadScene button action
+void Editor::menu_load()
+{
+	// If xml file doesn't exist
+	if (!fileExists("assets/scenes/" + m_load.m_pFileField->getStr() + ".xml"))
+	{
+		std::cerr << "[EDITOR] ERROR - XML FILE DOESN'T EXIST: " << ("assets/scenes/" + m_load.m_pFileField->getStr() + ".xml") << std::endl;
+	}
+	// Else - xml exists
+	else
+	{
+		// Loads file
+		load("assets/scenes/" + m_load.m_pFileField->getStr() + ".xml");
+	}
+
+	// Closes menu
+	m_state = EDITOR;
+	m_load.reset();
 }

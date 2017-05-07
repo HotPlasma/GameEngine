@@ -1,0 +1,101 @@
+<Scene>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-5.091840 0.000000 -7.985028</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-2.667185 0.000000 -10.158257</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>-0.457958 0.000000 -10.773250</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>1.551512 0.000000 -11.332633</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>3.802777 0.000000 -10.245428</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>Tree</Name>
+        <OBJLocation>assets/models/deadtree.obj</OBJLocation>
+        <TexLocation>assets/textures/bark.bmp</TexLocation>
+        <Translation>6.238075 0.000000 -1.497131</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>1.000000 1.000000 1.000000</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>plane</Name>
+        <OBJLocation>assets/models/plane.obj</OBJLocation>
+        <TexLocation>assets/textures/plane.bmp</TexLocation>
+        <Translation>-2.811327 0.000000 -9.904903</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>13.009830 1.000000 14.719683</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>deer</Name>
+        <OBJLocation>assets/models/deer.obj</OBJLocation>
+        <TexLocation>assets/textures/deer.bmp</TexLocation>
+        <Translation>-28.125101 -0.825008 9.569652</Translation>
+        <Rotation>0.000000 0.000000 0.000000</Rotation>
+        <Scale>13.009830 1.000000 14.719683</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+    <Object>
+        <Name>deer</Name>
+        <OBJLocation>assets/models/deer.obj</OBJLocation>
+        <TexLocation>assets/textures/deer.bmp</TexLocation>
+        <Translation>-46.765465 1.031946 -34.089279</Translation>
+        <Rotation>0.000000 -34.546509 0.000000</Rotation>
+        <Scale>13.009830 10.591866 14.719683</Scale>
+        <Material>1</Material>
+        <Collectable>false</Collectable>
+        <AI>false</AI>
+    </Object>
+</Scene>

@@ -40,7 +40,7 @@ void main()
 	// Calculate the light vector
 	vec3 L = normalize(Light.Position - vs_out.FragmentPosition);
 	// Calculates Dist from light to vertex
-	float D = length(L);
+	float D = length(L); //L
 	
 	// Calculate Ambient Term
 	vec4 ambientTerm = vec4(Light.Intensity * colour, 1.0f);
