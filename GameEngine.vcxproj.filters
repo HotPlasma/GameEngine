@@ -99,9 +99,6 @@
     <ClCompile Include="src\Editor.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\Menu.cpp">
-      <Filter>Source Files\Scene\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\Freetype.cpp">
       <Filter>Source Files\Scene\UI</Filter>
     </ClCompile>
@@ -110,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="src\TextBox.cpp">
       <Filter>Source Files\Scene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source Files\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,9 +158,6 @@
     <ClInclude Include="include\Editor.h">
       <Filter>Header Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="include\Menu.h">
-      <Filter>Header Files\Scene\UI</Filter>
-    </ClInclude>
     <ClInclude Include="include\Freetype.h">
       <Filter>Header Files\Scene\UI</Filter>
     </ClInclude>
@@ -172,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="include\Utilities.h">
       <Filter>Header Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu.h">
+      <Filter>Header Files\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

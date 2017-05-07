@@ -42,17 +42,6 @@ void Menu::initScene(Freetype * pOverlay)
 			pOverlay
 		)
 	);
-	m_buttons.m_pOptions = std::shared_ptr<Button>
-	(
-		new Button
-		(
-			glm::vec2((float)m_windowSize.x*0.5f, (float)m_windowSize.y*0.45f),
-			"assets/UI/Options.png", 
-			"assets/UI/OptionsHover.png",
-			glm::vec3(126.f, 46.f, 1.f),
-			pOverlay
-		)
-	);
 	m_buttons.m_pExit = std::shared_ptr<Button>
 	(
 		new Button
@@ -106,12 +95,6 @@ void Menu::input_button(const int kiButton, const int kiAction)
 				m_intention = TO_EDITOR;
 			}
 
-			// If menu options button is clicked
-			if (m_buttons.m_pOptions->mouseOver(m_mousePos, (float)m_windowSize.y))
-			{
-				// TEMPORARY NOTHING
-			}
-
 			// If menu exit button is clicked
 			if (m_buttons.m_pExit->mouseOver(m_mousePos, (float)m_windowSize.y))
 			{
@@ -135,7 +118,6 @@ void Menu::update(const float kfTimeElapsed)
 	// Checks whether HUD buttons are hovered
 	m_buttons.m_pPlay->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pEditor->mouseOver(m_mousePos, (float)m_windowSize.y);
-	m_buttons.m_pOptions->mouseOver(m_mousePos, (float)m_windowSize.y);
 	m_buttons.m_pExit->mouseOver(m_mousePos, (float)m_windowSize.y);
 }
 
@@ -147,7 +129,6 @@ void Menu::render()
 	// Draws HUD buttons
 	m_buttons.m_pPlay->render(&m_imageType, m_windowSize);
 	m_buttons.m_pEditor->render(&m_imageType, m_windowSize);
-	m_buttons.m_pOptions->render(&m_imageType, m_windowSize);
 	m_buttons.m_pExit->render(&m_imageType, m_windowSize);
 	
 	//Draws Background		

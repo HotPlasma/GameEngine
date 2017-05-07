@@ -16,7 +16,6 @@ struct MenuHUD
 {
 	std::shared_ptr<Button> m_pPlay;
 	std::shared_ptr<Button> m_pEditor;
-	std::shared_ptr<Button> m_pOptions;
 	std::shared_ptr<Button> m_pExit;
 };
 
