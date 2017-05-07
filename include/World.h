@@ -35,6 +35,12 @@ class World : public Scene
 
 		void setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection);
 
+		bool m_bCollisionInit = false;
+
+		rp3d::BoxShape* TheBoxShape;
+
+		rp3d::BoxShape* TheBoxShape2;
+
 	/*	rp3d::CollisionWorld m_CollisonWorld;
 
 		rp3d::CollisionBody * CameraBody;*/
@@ -44,6 +50,14 @@ class World : public Scene
 		rp3d::CollisionWorld m_collisionWorld;
 
 		vector<rp3d::CollisionBody*> m_collisionBodies;
+
+		rp3d::CollisionBody * PlayerBody;
+
+		rp3d::CollisionBody * StumpBody;
+
+		rp3d::CollisionCallback * CollisionCB;
+
+		//rp3d::ContactPointInfo * collisionInfo;
 
 
 		//vector<rp3d::CollisionBody*> ModelBodies;

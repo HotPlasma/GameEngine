@@ -65,6 +65,8 @@ using std::ifstream;
 
 World::World(GLFWwindow *pWindow, sf::Vector2i windowSize)
 {
+
+
 	m_pWindow = pWindow;
 
 	m_windowSize = windowSize;
@@ -101,17 +103,40 @@ void World::initScene(Freetype* pOverlay)
 	//m_Player.setVisable(true);
 
 	// Initial position and orientation of the collision body
-	rp3d::Vector3 initPosition(0.0, 0.0, 0.0);
+	rp3d::Vector3 initPosition(0, 0, 0);
 	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
 	rp3d::Transform transform(initPosition, initOrientation);
 	// Create a collision body in the world
-	rp3d::CollisionBody * body;
-
-	m_collisionBodies.at(0) = m_collisionWorld.createCollisionBody(transform);
-	rp3d::ConvexMeshShape shape(&m_Player.m_positionData[0], m_Player.m_positionData.size(), 3 * sizeof(float));
-	body->addCollisionShape(&shape, rp3d::Transform::identity());
-	m_collisionBodies.push_back(body);
 	
+
+	PlayerBody = m_collisionWorld.createCollisionBody(transform);
+
+	rp3d::BoxShape* TheBoxShape = new rp3d::BoxShape(rp3d::Vector3(3.15,6.76,3.15));
+	//rp3d::ConvexMeshShape* TheBoxShape = new rp3d::ConvexMeshShape(m_Player.m_positionData.data(), m_Player.m_positionData.size(), sizeof(float) / 3);
+//	TheBoxShape = &shape;
+	
+	PlayerBody->addCollisionShape(TheBoxShape, transform);
+
+	// Initial position and orientation of the collision body
+	rp3d::Vector3 initPosition2(m_sceneReader.m_modelList.at(3).getPosition().x , m_sceneReader.m_modelList.at(3).getPosition().y, m_sceneReader.m_modelList.at(3).getPosition().z);
+	rp3d::Quaternion initOrientation2 = rp3d::Quaternion::identity();
+	rp3d::Transform transform2(initPosition2, initOrientation2);
+	// Create a collision body in the world
+
+
+	StumpBody = m_collisionWorld.createCollisionBody(transform2);
+
+	rp3d::BoxShape* TheBoxShape2 = new rp3d::BoxShape(rp3d::Vector3(2.8,2.8,2.8));
+
+	//rp3d::ConvexMeshShape* TheBoxShape2 = new rp3d::ConvexMeshShape(m_sceneReader.m_modelList.at(3).m_positionData.data(), m_sceneReader.m_modelList.at(3).m_positionData.size(), sizeof(float) / 3);
+
+	//	TheBoxShape = &shape;
+	StumpBody->addCollisionShape(TheBoxShape2, transform2);
+	
+	//m_collisionBodies.push_back(PlayerBody);
+
+
+
 
 
 	////Physics
@@ -233,12 +258,36 @@ void World::update(const float kfTimeElapsed)
 		m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
 	}
 
+
+
 	// New position and orientation of the collision body
-	rp3d::Vector3 position(10.0, 3.0, 0.0);
+	rp3d::Vector3 position(m_camera.getPosition().x, m_camera.getPosition().y - 5, m_camera.getPosition().z);
 	rp3d::Quaternion orientation = rp3d::Quaternion::identity();
 	rp3d::Transform newTransform(position, orientation);
-	// Move the collision body
-	m_collisionBodies.at(0)->setTransform(newTransform);
+
+
+
+	PlayerBody->setTransform(newTransform);
+
+	//cout << PlayerBody->getTransform().getPosition().x << " " << PlayerBody->getTransform().getPosition().y << " " << PlayerBody->getTransform().getPosition().z << endl;
+
+	//if (m_collisionWorld.testAABBOverlap(PlayerBody, StumpBody))
+	//{
+	//	cout << "Colliding" << endl;
+	//}
+	//else
+	//{
+	//	cout << "Not Colliding" << endl;
+	//}
+
+	//system("CLS");
+	//m_collisionWorld.testCollision(PlayerBody, StumpBody, CollisionCB);
+
+	//CollisionCB->notifyContact(*collisionInfo);
+
+	//collisionInfo->
+
+//	m_collisionWorld.testCollision()
 
 	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 	{
@@ -262,8 +311,8 @@ void World::update(const float kfTimeElapsed)
 	//m_collisionWorld->stepSimulation(kfTimeElapsed);
 
 	//std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
-	
-	
+
+
 
 	//m_collisionWorld->contactPairTest(m_CollisionBodies.at(1), m_CollisionBodies.at(2), )
 
@@ -271,19 +320,19 @@ void World::update(const float kfTimeElapsed)
 
 	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z));
-	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5, m_camera.getPosition().z));
+	m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5.f, m_camera.getPosition().z));
 
-//	CameraBody->setTransform(rp3d::Transform(rp3d::Vector3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z), rp3d::Quaternion::identity()));
+	//	CameraBody->setTransform(rp3d::Transform(rp3d::Vector3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z), rp3d::Quaternion::identity()));
 
-	//rp3d::Vector3 position(m_camera.getPosition().x, 0, m_camera.getPosition().z);
-	//rp3d::Quaternion orientation = rp3d::Quaternion::identity();
-	//rp3d::Transform newTransform(position, orientation);
-	// Move the collision body
-	//CameraBody->setTransform(newTransform);
-	
+		//rp3d::Vector3 position(m_camera.getPosition().x, 0, m_camera.getPosition().z);
+		//rp3d::Quaternion orientation = rp3d::Quaternion::identity();
+		//rp3d::Transform newTransform(position, orientation);
+		// Move the collision body
+		//CameraBody->setTransform(newTransform);
 
-	/////////////////// COLLECTABLE BOBBING ///////////////////
-	// If collectables are moving up and offset is greater than upper bound
+
+		/////////////////// COLLECTABLE BOBBING ///////////////////
+		// If collectables are moving up and offset is greater than upper bound
 	if (m_collectGoingUp && m_collectYOffset >= m_collectBounds.upper())
 	{
 		// Move collectable down
@@ -315,12 +364,12 @@ void World::update(const float kfTimeElapsed)
 			{
 				// Rotates collectable
 				m_sceneReader.m_modelList.at(i).setRotation(glm::vec3(0, m_sceneReader.m_modelList.at(i).getRotation().y + (COLLECTABLE_ROTATION*kfTimeElapsed), m_sceneReader.m_modelList.at(i).getRotation().z));
-				
+
 				// Get distance between player and collectable
 				glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between robot and a collectable
 
 				// If collision with a collectable
-				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
+				if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5)
 				{
 					// Marks it as collected
 					m_sceneReader.m_modelList.at(i).setCollected(true);
@@ -328,63 +377,63 @@ void World::update(const float kfTimeElapsed)
 			}
 		}
 	}
-	
 
 
-
-	//for (int j = 5; j < m_sceneReader.m_modelList.size(); j++)
-	//{
-	//	if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
-	//		m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
-	//		m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
-	//		m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
-	//		m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
-	//		m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
-	//	{
-	//		cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
-	//		
-	//		glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
-	//		Distance = glm::normalize(Distance);
-	//		//Diff in X to move out
-
-	//		glm::vec3 Diff(
-	//			abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
-	//				m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
-	//			abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
-	//				m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top )),
-	//			abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
-	//				m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
-	//		);
-
-	//		//if (Diff.x <= Diff.y && Diff.x <= Diff.z)
-	//		//{
-	//		//	//Set pos in x by doing Diff * (unitVect(Distance))
-	//		//	m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5),0,0));
-	//		//}
-	//		//else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
-	//		//{
-	//		//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,Distance.y * Diff.y,0));
-	//		//}
-	//		//else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
-	//		//{
-	//		//	m_camera.setPosition(m_Player.getPosition() + glm::vec3(0,0,Distance.z * Diff.z));
-	//		//}
-
-
-
-	//		//m_camera.setPosition(m_Player.getPosition());
-	//	}
-	//}
-
-	/*if (m_CollisionBodies[0->checkCollideWith(rigidBody))
+	for (int j = 3; j < m_sceneReader.m_modelList.size(); j++)
 	{
-		std::cout << "Colliding" << std::endl;
+		if (m_Player.getCollisionBox().right > m_sceneReader.m_modelList.at(j).getCollisionBox().left &&
+			m_Player.getCollisionBox().left < m_sceneReader.m_modelList.at(j).getCollisionBox().right &&
+			m_Player.getCollisionBox().top > m_sceneReader.m_modelList.at(j).getCollisionBox().bottom &&
+			m_Player.getCollisionBox().bottom < m_sceneReader.m_modelList.at(j).getCollisionBox().top &&
+			m_Player.getCollisionBox().back > m_sceneReader.m_modelList.at(j).getCollisionBox().front &&
+			m_Player.getCollisionBox().front < m_sceneReader.m_modelList.at(j).getCollisionBox().back)
+		{
+			cout << "Collision with " << m_sceneReader.m_modelList.at(j).getName() << endl;
+
+			glm::vec3 Distance(m_sceneReader.m_modelList.at(j).getPosition() - m_Player.getPosition());
+			Distance = glm::normalize(Distance);
+			//Diff in X to move out
+
+			glm::vec3 Diff(
+				abs(std::min(m_Player.getCollisionBox().right - m_sceneReader.m_modelList.at(j).getCollisionBox().left,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().right - m_Player.getCollisionBox().left)),
+				abs(std::min(m_Player.getCollisionBox().bottom - m_sceneReader.m_modelList.at(j).getCollisionBox().top,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().bottom - m_Player.getCollisionBox().top)),
+				abs(std::min(m_Player.getCollisionBox().back - m_sceneReader.m_modelList.at(j).getCollisionBox().front,
+					m_sceneReader.m_modelList.at(j).getCollisionBox().back - m_Player.getCollisionBox().front))
+			);
+
+			if (Diff.x <= Diff.y && Diff.x <= Diff.z)
+			{
+				//Set pos in x by doing Diff * (unitVect(Distance))
+				m_camera.setPosition(m_camera.getPosition() + glm::vec3(Distance.x * (Diff.x + 5), 0, 0));
+			}
+			else if (Diff.y <= Diff.x && Diff.y <= Diff.z)
+			{
+				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0, (Distance.y + 5) * Diff.y, 0));
+			}
+			else if (Diff.z <= Diff.x && Diff.z <= Diff.y)
+			{
+				m_camera.setPosition(m_Player.getPosition() + glm::vec3(0, 0, (Distance.z + 5) * Diff.z));
+			}
+
+
+
+			//		//m_camera.setPosition(m_Player.getPosition());
+			//	}
+			//}
+
+			/*if (m_CollisionBodies[0->checkCollideWith(rigidBody))
+			{
+				std::cout << "Colliding" << std::endl;
+			}
+			else
+			{
+				std::cout << "Not Colliding" << std::endl;
+			}*/
+
+		}
 	}
-	else
-	{
-		std::cout << "Not Colliding" << std::endl;
-	}*/
-	
 }
 
 void World::render()
