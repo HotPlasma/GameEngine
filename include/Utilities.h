@@ -38,7 +38,7 @@ public:
 
 	float value() { return m_fCurrValue; } // Returns value
 
-	void update(const float kfMovement) // Returns lower bound
+	void update(const float kfMovement) // Updates Bouncer with a set value change
 	{ 
 		// If value is moving up and value is greater than upper bound
 		if (m_goingUp && m_fCurrValue >= m_bounds.upper())
@@ -68,6 +68,45 @@ private:
 	bool m_goingUp = true; // Whether the value is going up
 	float m_fCurrValue = 0.0f; // Current value
 	Bounds m_bounds = Bounds(0.0f, 1.0f); // Upper and lower bounds for value bounce
+};
+
+// Class for timed text display
+class PopUp
+{
+public:
+
+	PopUp() {}
+
+	// Decrements the countdown with input
+	void countdown(const float kfTimeElapsed) 
+	{ 
+		m_fCountdown -= kfTimeElapsed;
+		if (m_fCountdown <= 0.0f) { m_fCountdown = 0.0f; } // Clamps to 0 or higher
+	}
+
+	// Creates a pop up
+	void newPopUp(const std::string ksText, const float kfDuration)
+	{
+		m_sText = ksText;
+		m_fCountdown = kfDuration;
+	}
+
+	// Sets countdown
+	void setCountdown(const float kfCountdown) { m_fCountdown = kfCountdown; }
+	// Returns countdown
+	float getCountdown() { return m_fCountdown; }
+
+	// Sets Text
+	void setText(const std::string ksText) { m_sText = ksText; }
+	// Returns Text
+	std::string getText() { return m_sText; }
+
+private:
+
+	// Float countdown value
+	float m_fCountdown = 0.0;
+	// String text value
+	std::string m_sText = "";
 };
 
 static void closeProgram()

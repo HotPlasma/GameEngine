@@ -99,7 +99,7 @@ class Editor : public Scene
 {
 private:
 	
-	float m_fAutosaveTimer = 0.0f;
+	float m_fAutosaveTimer = 0.0f; //!< Counts up in seconds - triggers autosaving
 	
 	std::vector<std::shared_ptr<Model>> m_pModels; //!< Scene Model object ptrs
 
@@ -110,24 +110,26 @@ private:
 	enum TransformationMode { TRANSLATE, ROTATE, SCALE }; //!< Enum for which transformation mode the Editor is in
 	TransformationMode m_transformMode = TRANSLATE; //!< Editor's current transformation mode
 
-	EditorHUD m_buttons; //!< Editor option buttons
-
-	enum EditorState { EDITOR, MENU_SELECT, MENU_SAVE, MENU_LOAD }; //!< Enum for which state the Editor is in
-	EditorState m_state = EDITOR; //!< Editor's current state
-
-	ModelMenu m_menu; //!< Model selection menu
-	FileMenu m_save; //!< File save menu
-	FileMenu m_load; //!< File load menu
-	
-	void menu_select(); //!< ModelSelection button action
-	void menu_save(); //!< SaveScene button action
-	void menu_load(); //!< LoadScene button action
-
 	Bouncer m_collFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
 	Bouncer m_aiFlash = Bouncer(Bounds(0.4f, 0.0f)); //!< Bouncing value for collectable light intensity
 
 	std::shared_ptr<Model> m_pSpawn; //!< Spawn indicator Model
 	std::shared_ptr<Model> m_pSkybox; //!< World skybox Model
+
+	PopUp m_popUp; //!< PopUp for HUD display messages
+
+	EditorHUD m_buttons; //!< Editor option buttons
+
+	enum EditorState { EDITOR, MENU_SELECT, MENU_SAVE, MENU_LOAD }; //!< Enum for which state the Editor is in
+	EditorState m_state = EDITOR; //!< Editor's current state
+
+	ModelMenu m_select; //!< Model selection menu
+	FileMenu m_save; //!< File save menu
+	FileMenu m_load; //!< File load menu
+	
+	void button_select(); //!< ModelSelection button action
+	void button_save(); //!< SaveScene button action
+	void button_load(); //!< LoadScene button action
 
 	void save(const std::string ksFilePath); //!< Saves the Scene to XML file
 	void load(const std::string ksFilePath); //!< Loads a Scene into the Editor
