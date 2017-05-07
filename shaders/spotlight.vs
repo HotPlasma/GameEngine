@@ -17,7 +17,7 @@ uniform mat4 P;
 
 void main()
 {
-    vs_out.FragmentPosition = vec3(V * M * vec4(VertexPosition, 1.0f)).xyz;
+    vs_out.FragmentPosition = vec3(M * vec4(VertexPosition, 1.0f)).xyz;
 	
 	mat3 normalMatrix = transpose(inverse(mat3(M)));
     vs_out.Normal = normalize(normalMatrix * VertexNormal);

@@ -276,7 +276,8 @@ void setLightParams(GLSLProgram *pShader, Camera *camera)
 	pShader->setUniform("Light.Intensity", glm::vec3(0.1f, 0.1f, 0.1f));
 	pShader->setUniform("Light.Position", camera->getPosition());
 
-	pShader->setUniform("Spotlight.Direction", camera->getPosition() + camera->getDirection());
+	pShader->setUniform("Spotlight.Direction", camera->getPosition() /*glm::vec3(0.0f, 5.0f, -60.0f)*/ + camera->getDirection());
+	//std::cout << camera->getPosition().x << " " << camera->getPosition().z << std::endl;
 	pShader->setUniform("Spotlight.CutOff", glm::cos(glm::radians(15.0f)));
 	pShader->setUniform("Spotlight.OuterCutOff", glm::cos(glm::radians(22.5f)));
 
@@ -376,7 +377,7 @@ void World::render()
 	// Updates Skybox position
 	m_pSkybox->setPosition(m_camera.getPosition());
 	// Renders Skybox
-	m_pSkybox->render(&m_textureShader, glm::mat4(1.0f));
+	m_pSkybox->render(&m_spotlightShader, glm::mat4(1.0f));
 
 	// Activates FreeType shader
 	m_freeType.use();
