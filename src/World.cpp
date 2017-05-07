@@ -96,52 +96,23 @@ void World::update(const float kfTimeElapsed)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-		{
-			m_camera.move(glm::vec3(0.0f, 0.0f, (-CAMERA_SPEED* 2)*kfTimeElapsed));
-		}
-		else
-		{
-			m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
-		}
+		m_camera.move(glm::vec3(0.0f, 0.0f, -CAMERA_SPEED*kfTimeElapsed));
 	}
 	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-		{
-			m_camera.move(glm::vec3((-CAMERA_SPEED* 2)*kfTimeElapsed, 0.0f, 0.0f));
-		}
-		else
-		{
 			m_camera.move(glm::vec3(-CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 	{
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-		{
-			m_camera.move(glm::vec3(0.0f, 0.0f, (CAMERA_SPEED * 2)*kfTimeElapsed));
-		}
-		else
-		{
 			m_camera.move(glm::vec3(0.0f, 0.0f, CAMERA_SPEED*kfTimeElapsed));
-		}
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 	{
-		
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::LShift))
-		{
-			m_camera.move(glm::vec3((CAMERA_SPEED * 2)*kfTimeElapsed, 0.0f, 0.0f));
-		}
-		else
-		{
 			m_camera.move(glm::vec3(CAMERA_SPEED*kfTimeElapsed, 0.0f, 0.0f));
-		}
 	}
 
 
@@ -165,7 +136,6 @@ void World::update(const float kfTimeElapsed)
 	sf::Time levelTimer = m_levelTimer.getElapsedTime();
 	sf::Time aiTimer = aiWander.getElapsedTime();
 
-	//cout << bTimer.asSeconds() << endl;
 	if (levelTimer.asSeconds() >= 1)
 	{
 		if (m_iBatteryLife >= 1)
@@ -173,14 +143,16 @@ void World::update(const float kfTimeElapsed)
 			m_iBatteryLife -= 1;
 			std::cout << "battery life = " << m_iBatteryLife << "%" << std::endl;
 		}
-		else
-		{
-			std::cout << "it was too dark, you lose" << std::endl;
-		}
 		m_batteryTimer.restart();
 	}
 
-	//cout << lTimer.asSeconds() << endl;
+	if (m_iBatteryLife == 0)
+	{
+		m_sTime = "You ran out of battery, Game over!";
+		m_intention = TO_MENU;
+		//gameover
+	}
+
 	if (levelTimer.asSeconds() >= 1)
 	{
 		if (m_iCountdown >= 1)
@@ -190,21 +162,14 @@ void World::update(const float kfTimeElapsed)
 		}
 		else
 		{ 
-			//std::cout << "you survived!" << std::endl;
 			m_sTime = "You Survived!";
-			//victory!}
+			m_intention = TO_MENU;
+			//gameover
 	    }
 		m_levelTimer.restart();
 	}
 
-
-
-	if (aiTimer.asSeconds() >= 2)
-	{
-		aiSearching = false;
-		aiWander.restart();
-
-	}
+	//AI SECTION
 	for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
 	{
 		glm::vec3 distance = m_camera.getPosition() - m_sceneReader.m_modelList.at(i).getPosition(); // Work out distance between player and object
@@ -214,37 +179,43 @@ void World::update(const float kfTimeElapsed)
 		{
 			m_aiRotation = glm::vec3(0, rotationAngle - 90, 0);
 		
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is out of the chase range
+			if (aiTimer.asSeconds() >= 15)
 			{
 				aiSpawn = rand() % 4 + 1;
 				if (aiSpawn == 1)
 				{
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
+					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(30, 0, 0) - glm::vec3(0, 5, 0));
 				}
 				if (aiSpawn == 2)
 				{
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
+					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(-30, 0, 0) - glm::vec3(0, 5, 0));
 				}
 				if (aiSpawn == 3)
 				{
-			    m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
+					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, 30) - glm::vec3(0, 5, 0));
 				}
 				if (aiSpawn == 4)
 				{
-				m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
-				}	
+					m_sceneReader.m_modelList.at(i).setPosition(m_sceneReader.m_modelList.at(i).getPosition() = m_camera.getPosition() + glm::vec3(0, 0, -30) - glm::vec3(0, 5, 0));
+				}
+				aiWander.restart();
+
 			}
-			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 30 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5) // if ai is in chase range
+			if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 1000 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 70)
 			{
-				//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
-				//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
+				m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI;
+				m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; 
+			}
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 70 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 5) // if ai is in chase range
+			{
 				m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 			}
 
-			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) // if ai catches player
+			else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 5) 
 			{
-			   //endgame 
-				std::cout << "gameover" << std::endl;
+			   //gameover
+				m_intention = TO_MENU;
+				m_sTime = "You've been caught, Game over!";
 				m_aiSpeed = glm::vec3(0, 0, 0);
 			}
 			m_sceneReader.m_modelList.at(i).setRotation(m_aiRotation);
@@ -252,27 +223,6 @@ void World::update(const float kfTimeElapsed)
 		}
 	}
 
-	//if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 60) // if ai is out of the chase
-	//{
-	//	m_aiRotation += glm::vec3(0, rotationAngle - 90, 0);
-	//	//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
-	//}
-
-	//else if (sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) < 60 && sqrtf(powf(distance.x, 2.0f) + powf(distance.z, 2.0f)) >= 30) // if ai is in the wander range
-	//{
-	//	if (aiSearching == true)
-	//	{
-	//		//m_aiSpeed.x = ((float)cosf(-m_aiRotation.y) - sinf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
-	//		//m_aiSpeed.z = ((float)sinf(-m_aiRotation.y) + cosf(-m_aiRotation.y)) * movementSpeed * 180 / M_PI; //so the ai moves forward relative to its rotation
-	//	}
-	//	if (aiSearching == false)
-	//	{
-	//		m_aiSpeed = glm::vec3(0, 0, 0);
-	//		m_aiRotation.y = rand() % 360 + 1;
-	//		aiSearching = true;
-	//	}
-	//}
-	//m_aiSpeed = glm::vec3(0.02f, 0, 0.02f) * distance;
 	/////////////////// COLLECTABLE BOBBING ///////////////////
 	m_collHeight.update(COLLECTABLE_SPEED*kfTimeElapsed);
 
@@ -321,7 +271,7 @@ void setLightParams(GLSLProgram *pShader, Camera *camera)
 {
 	pShader->setUniform("Material.Ka", glm::vec3(0.2f, 0.2f, 0.2f));
 	pShader->setUniform("Material.Kd", glm::vec3(0.5f, 0.5f, 0.5f));
-	pShader->setUniform("Material.Ks", glm::vec3(1.0f, 1.0f, 1.0f));
+	pShader->setUniform("Material.Ks", glm::vec3(0.2f, 0.2f, 0.2f));
 	pShader->setUniform("Material.Shininess", 20.0f);
 
 	pShader->setUniform("Light.Intensity", glm::vec3(0.2f, 0.2f, 0.2f));
@@ -445,6 +395,7 @@ void World::render()
 	// Renders batteryLife to HUD
 	m_pHUD->renderText(m_freeType.getHandle(), sBatteryLife, 1610.f, 70.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 
+	m_pHUD->renderText(m_freeType.getHandle(), "Time remaining-", 10.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 	// Renders level time to HUD
-	m_pHUD->renderText(m_freeType.getHandle(), m_sTime, 1600.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+	m_pHUD->renderText(m_freeType.getHandle(), m_sTime, 250.f, 1000.f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 }
