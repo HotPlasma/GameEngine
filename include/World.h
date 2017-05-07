@@ -32,6 +32,10 @@ private:
 	float aiSpawn = 0;
 	glm::vec3 m_aiSpeed; //ai movement speed
 	glm::vec3 m_aiRotation; //ai rotation
+	sf::SoundBuffer m_aiFootsteps;
+	sf::SoundBuffer m_ambientMusic;
+	sf::SoundBuffer m_aiScream;
+	bool loopSound = true;
 	bool aiSearching = true;
 	double rotationAngle;
 	float movementSpeed = 0.002;
