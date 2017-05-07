@@ -1022,6 +1022,12 @@ void Editor::load(const std::string ksFilePath)
 {
 	std::cerr << "[EDITOR] Loading from file..." << std::endl;
 
+	// Clears current Scene
+	while (!m_pModels.empty())
+	{
+		m_pModels.pop_back();
+	}
+
 	// Creates a SceneReader that loads the file into a vector
 	SceneReader reader = SceneReader(ksFilePath);
 	std::vector<Model> loadedModels = reader.m_modelList;
