@@ -102,120 +102,7 @@ void World::initScene(Freetype* pOverlay)
 	//m_Player.setVisable(true);
 
 
-//	// Initial position and orientation of the collision body
-//	rp3d::Vector3 initPosition(0, 0, 0);
-//	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
-//	rp3d::Transform transform(initPosition, initOrientation);
-//	// Create a collision body in the world
-//	
-//
-//	PlayerBody = m_collisionWorld.createCollisionBody(transform);
-//
-//	rp3d::BoxShape* TheBoxShape = new rp3d::BoxShape(rp3d::Vector3(3.15,6.76,3.15));
-//	//rp3d::ConvexMeshShape* TheBoxShape = new rp3d::ConvexMeshShape(m_Player.m_positionData.data(), m_Player.m_positionData.size(), sizeof(float) / 3);
-////	TheBoxShape = &shape;
-//	
-//	PlayerBody->addCollisionShape(TheBoxShape, transform);
-//
-//	// Initial position and orientation of the collision body
-//	rp3d::Vector3 initPosition2(m_sceneReader.m_modelList.at(4).getPosition().x , m_sceneReader.m_modelList.at(4).getPosition().y, m_sceneReader.m_modelList.at(4).getPosition().z);
-//	rp3d::Quaternion initOrientation2 = rp3d::Quaternion::identity();
-//	rp3d::Transform transform2(initPosition2, initOrientation2);
-//	// Create a collision body in the world
-//
-//
-//	StumpBody = m_collisionWorld.createCollisionBody(transform2);
-//
-//	rp3d::BoxShape* TheBoxShape2 = new rp3d::BoxShape(rp3d::Vector3(2.8,2.8,2.8));
-//
-//	//rp3d::ConvexMeshShape* TheBoxShape2 = new rp3d::ConvexMeshShape(m_sceneReader.m_modelList.at(3).m_positionData.data(), m_sceneReader.m_modelList.at(3).m_positionData.size(), sizeof(float) / 3);
-//
-//	//	TheBoxShape = &shape;
-//	StumpBody->addCollisionShape(TheBoxShape2, transform2);
-	
-	//m_collisionBodies.push_back(PlayerBody);
 
-
-
-
-
-	////Physics
-	//m_collisionCofig = new btDefaultCollisionConfiguration();
-	//m_dispatcher = new btCollisionDispatcher(m_collisionCofig);
-	//m_broadphase = new btDbvtBroadphase();
-	//m_constraintSolver = new btSequentialImpulseConstraintSolver();
-
-	//m_collisionWorld = new btDiscreteDynamicsWorld(m_dispatcher, m_broadphase, m_constraintSolver, m_collisionCofig);
-	//m_collisionWorld->setGravity(btVector3(0, 0, 0));
-
-	//btTransform t;
-	//t.setIdentity();
-	//t.setOrigin(btVector3(m_sceneReader.m_modelList.at(3).getPosition().x, m_sceneReader.m_modelList.at(3).getPosition().y, m_sceneReader.m_modelList.at(3).getPosition().z));
-
-	//btBoxShape * stump = new btBoxShape(btVector3(20,20,20));
-
-	//btMotionState * motion = new btDefaultMotionState(t);
-
-	//btRigidBody::btRigidBodyConstructionInfo info(0, motion, stump);
-
-	//btRigidBody * StumpBody = new btRigidBody(info);
-
-	//StumpBody->setCollisionFlags(StumpBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-
-	//m_CollisionBodies.push_back(StumpBody);
-	//m_collisionWorld->addRigidBody(m_CollisionBodies.at(0));
-	//StumpBody->setUserPointer(m_CollisionBodies.at(0));
-
-
-	//btTransform tP;
-	//tP.setIdentity();
-	//tP.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
-
-	//btBoxShape * PBox = new btBoxShape(btVector3(20, 20, 20));
-
-	//btMotionState * PMotion = new btDefaultMotionState(tP);
-
-	//btRigidBody::btRigidBodyConstructionInfo PlayerInfo(0, PMotion, PBox);
-
-	//btRigidBody * PlayBody = new btRigidBody(PlayerInfo);
-
-	//StumpBody->setCollisionFlags(PlayBody->getCollisionFlags() || btCollisionObject::CF_CUSTOM_MATERIAL_CALLBACK);
-
-	//m_CollisionBodies.push_back(PlayBody);
-
-	//m_collisionWorld->addRigidBody(m_CollisionBodies.at(1));
-	//PlayBody->setUserPointer(m_CollisionBodies.at(1));
-
-	
-
-	// Initial position and orientation of the collision body
-	/*rp3d::Vector3 initPosition(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
-	rp3d::Quaternion initOrientation = rp3d::Quaternion::identity();
-	rp3d::Transform transform(initPosition, initOrientation);*/
-	// Create a collision body in the world
-
-	//CameraBody = m_CollisonWorld.createCollisionBody(transform);
-
-	//rp3d::CylinderShape cylinderShape(1.0, 3.0);
-
-	//CameraBody->addCollisionShape(&cylinderShape, rp3d::Transform::identity());
-
-	//for (int i = 0; i < m_sceneReader.m_modelList.size(); i++)
-	//{
-
-	//	rp3d::ConcaveMeshShape MeshShape = new rp3d::ConcaveMeshShape(&mPhysicsTriangleMesh);
-	//	ModelBodies.resize(ModelBodies.size() + 1);
-	//	ModelBodies.at(i) = m_CollisonWorld.createCollisionBody(rp3d::Transform(rp3d::Vector3(m_sceneReader.m_modelList.at(i).getPosition().x, m_sceneReader.m_modelList.at(i).getPosition().y, m_sceneReader.m_modelList.at(i).getPosition().z), rp3d::Quaternion::identity()));
-	//	ModelBodies.at(i)->addCollisionShape(&MeshShape, rp3d::Transform::identity());
-	//}
-
-	//m_CollisonWorld.testCollision(CameraBody, CameraCallback);
-
-	
-
-
-	//m_CollisonWorld.
-//	HUD->LoadHUDImage("assets/textures/Flag_of_Wales.png", 500.f, 500.f, -90, 30.0f);
 }
 
 void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kView, const mat4 kProjection)
@@ -230,65 +117,9 @@ void World::setMatrices(GLSLProgram * pShader, const mat4 kModel, const mat4 kVi
 	pShader->setUniform("P", kProjection);
 }
 
-bool World::TestCollision(Model CollisionShape1, Model CollisionShape2, CollisionInfo &CollisionResult)
-{
-	//float mtvDistance = 999999999.f;
-	//glm::vec3 mtvAxis;
 
-	//if (!TestCollisionAxis(glm::vec3(1, 0, 0), CollisionShape1.getCollisionBox().min.x, CollisionShape1.getCollisionBox().max.x, CollisionShape2.getCollisionBox().min.x, CollisionShape2.getCollisionBox().max.x, mtvAxis, mtvDistance))
-	//{
-	//	return false;
-	//}
 
-	//if (!TestCollisionAxis(glm::vec3(0, 1, 0), CollisionShape1.getCollisionBox().min.y, CollisionShape1.getCollisionBox().max.y, CollisionShape2.getCollisionBox().min.y, CollisionShape2.getCollisionBox().max.y, mtvAxis, mtvDistance))
-	//{
-	//	return false;
-	//}
 
-	//if (!TestCollisionAxis(glm::vec3(0, 0, 1), CollisionShape1.getCollisionBox().min.z, CollisionShape1.getCollisionBox().max.z, CollisionShape2.getCollisionBox().min.z, CollisionShape2.getCollisionBox().max.z, mtvAxis, mtvDistance))
-	//{
-	//	return false;
-	//}
-	//
-	//CollisionResult.isIntersecting = true;
-
-	//CollisionResult.minTranslateVec = glm::vec3(glm::normalize(mtvAxis));
-
-	//CollisionResult.penetration = (float)glm::sqrt(mtvDistance) * 1.001f;
-}
-
-bool World::TestCollisionAxis(glm::vec3 axis, float minA, float maxA, float minB, float maxB, glm::vec3 &mtvAxis, float &mtvDistance)
-{
-	//float axisLengthSquared = glm::dot(axis, axis);
-
-	//if (axisLengthSquared < 1.0e-8f)
-	//{
-	//	return true;
-	//}
-
-	//float d0 = (maxB - minA);   // 'Left' side
-	//float d1 = (maxA - minB);   // 'Right' side
-
-	//if (d0 <= 0.0f || d1 <= 0.0f)
-	//{
-	//	return false;
-	//}
-
-	//float overlap = (d0 < d1) ? d0 : -d1;
-
-	//glm::vec3 sep = axis * (overlap / axisLengthSquared);
-
-	//float sepLengthSquared = glm::dot(sep, sep);
-
-	//if (sepLengthSquared < mtvDistance)
-	//{
-	//	mtvDistance = sepLengthSquared;
-	//	mtvAxis = sep;
-	//}
-
-	//return true;
-
-}
 
 void World::update(const float kfTimeElapsed)
 {
@@ -324,76 +155,9 @@ void World::update(const float kfTimeElapsed)
 
 
 
-	//// New position and orientation of the collision body
-	//rp3d::Vector3 position(m_camera.getPosition().x, m_camera.getPosition().y - 5, m_camera.getPosition().z);
-	//rp3d::Quaternion orientation = rp3d::Quaternion::identity();
-	//rp3d::Transform newTransform(position, orientation);
 
-
-
-	//PlayerBody->setTransform(newTransform);
-
-	//cout << PlayerBody->getTransform().getPosition().x << " " << PlayerBody->getTransform().getPosition().y << " " << PlayerBody->getTransform().getPosition().z << endl;
-
-	//if (m_collisionWorld.testAABBOverlap(PlayerBody, StumpBody))
-	//{
-	//	cout << "Colliding" << endl;
-	//}
-	//else
-	//{
-	//	cout << "Not Colliding" << endl;
-	//}
-
-	//system("CLS");
-	//m_collisionWorld.testCollision(PlayerBody, StumpBody, CollisionCB);
-
-	//CollisionCB->notifyContact(*collisionInfo);
-
-	//collisionInfo->
-
-//	m_collisionWorld.testCollision()
-
-	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-	{
-		btRigidBody* sphere = m_CollisionBodies.at(1);
-		btVector3 look(m_camera.getPosition().x, m_camera.getPosition().y, m_camera.getPosition().z);
-		sphere->setLinearVelocity(look);
-		m_sceneReader.m_modelList.at(3).setPosition(glm::vec3(sphere->getLinearVelocity().x, sphere->getLinearVelocity().y, sphere->getLinearVelocity().z));
-	}*/
-
-	//btTransform trans, trans2;
-
-	//m_CollisionBodies.at(1)->getMotionState()->getWorldTransform(trans);
-
-	//m_CollisionBodies.at(0)->getMotionState()->getWorldTransform(trans2);
-
-	//trans.setOrigin(btVector3(m_Player.getPosition().x, m_Player.getPosition().y, m_Player.getPosition().z));
-
-	//m_CollisionBodies.at(1)->setWorldTransform(trans);
-
-
-	//m_collisionWorld->stepSimulation(kfTimeElapsed);
-
-	//std::cout << "Play Pos: " << trans.getOrigin().getX() << " " << trans.getOrigin().getY() << " " << trans.getOrigin().getZ() << std::endl; std::cout << "Stump Pos: " << trans2.getOrigin().getX() << " " << trans2.getOrigin().getY() << " " << trans2.getOrigin().getZ() << std::endl;
-
-
-
-	//m_collisionWorld->contactPairTest(m_CollisionBodies.at(1), m_CollisionBodies.at(2), )
-
-	//system("CLS");
-
-	// Sticks the camera to y 0.0
 	m_camera.setPosition(glm::vec3(m_Player.getPosition().x, 0.0f, m_Player.getPosition().z));
-	//m_Player.setPosition(glm::vec3(m_camera.getPosition().x, -5.f, m_camera.getPosition().z));
-
-	//	CameraBody->setTransform(rp3d::Transform(rp3d::Vector3(m_camera.getPosition().x, 0.0f, m_camera.getPosition().z), rp3d::Quaternion::identity()));
-
-		//rp3d::Vector3 position(m_camera.getPosition().x, 0, m_camera.getPosition().z);
-		//rp3d::Quaternion orientation = rp3d::Quaternion::identity();
-		//rp3d::Transform newTransform(position, orientation);
-		// Move the collision body
-		//CameraBody->setTransform(newTransform);
-
+	
 
 		/////////////////// COLLECTABLE BOBBING ///////////////////
 		// If collectables are moving up and offset is greater than upper bound

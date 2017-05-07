@@ -4,8 +4,6 @@
 
 #include "ModelReader.h"
 
-#include "reactphysics3d.h"
-
 using namespace std;
 
 

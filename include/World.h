@@ -10,18 +10,7 @@
 #include "glslprogram.h"
 #include "Freetype.h"
 #include "Utilities.h"
-#include "reactphysics3d.h"
-//#include "btBulletDynamicsCommon.h"
-//#include "BulletCollision\Gimpact\btGImpactCollisionAlgorithm.h"
-//#include "LinearMath\btIDebugDraw.h"
 
-//struct bulletObject
-//{
-//	int id;
-//	bool hit;
-//	btRigidBody * body;
-//	
-//};
 
 struct CollisionInfo
 {
@@ -54,52 +43,6 @@ class World : public Scene
 
 		Model m_Player;
 
-		CollisionInfo CInfo;
-
-		//rp3d::CollisionWorld m_collisionWorld;
-
-		//vector<rp3d::CollisionBody*> m_collisionBodies;
-
-		//rp3d::CollisionBody * PlayerBody;
-
-		//rp3d::CollisionBody * StumpBody;
-
-		//rp3d::CollisionCallback * CollisionCB;
-
-		//rp3d::ContactPointInfo * collisionInfo;
-
-		bool TestCollision(Model CollisionShape1, Model CollisionShape2, CollisionInfo &CollisionResult);
-
-		bool TestCollisionAxis(glm::vec3 axis, float minA, float maxA, float minB, float maxB, glm::vec3 &mtvAxis, float &mtvDistance);
-
-		//vector<rp3d::CollisionBody*> ModelBodies;
-		//rp3d::CollisionCallback * CameraCallback;
-
-		//btBroadphaseInterface* broadphase;
-
-		//btDynamicsWorld * m_collisionWorld;
-		//btDispatcher * m_dispatcher;
-		//btCollisionConfiguration * m_collisionCofig; 
-		//btBroadphaseInterface * m_broadphase;
-		//btConstraintSolver * m_constraintSolver;
-
-		//btRigidBody *CameraRigidBody;
-		//btRigidBody *rigidBody;
-
-		//vector<btRigidBody*> m_CollisionBodies;
-		
-		//btIDebugDraw DebugDrawer;
-
-		//void initPhysics();
-
-
-
-	//	btRigidBody* addSphere(float rad, float x, float y, float z, float mass);
-
-		/*void renderSphere(btRigidBody * sphere);
-		void renderPlane(btRigidBody * Plane);*/
-
-		//Model tester;
 	public:
 
 		World(GLFWwindow *pWindow, const sf::Vector2i kWindowSize);
