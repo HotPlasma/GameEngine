@@ -26,7 +26,7 @@ private:
 	sf::Clock aiWander;
 	int m_iSpareBatteries = 0;
 	int m_iBatteryLife = 100;
-	int m_iCountdown = 10;
+	int m_iCountdown = 200;
 	string m_sLife;
 	string m_sTime;
 	float aiSpawn = 0;
@@ -34,7 +34,7 @@ private:
 	glm::vec3 m_aiRotation; //ai rotation
 	bool aiSearching = true;
 	double rotationAngle;
-	float movementSpeed = 0.003;
+	float movementSpeed = 0.002;
 
 public:
 
